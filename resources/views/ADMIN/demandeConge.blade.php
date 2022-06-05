@@ -51,23 +51,10 @@ $month = date('m');
 @php
     $col_count=1;
     @endphp
-    @if($month_num == $month)
+    @if($month_num == $month and $day_name=="Sunday" or $day_name=="Saturday")
+    <th id="hehe" style="background-color:gray;" onclick="showDay('{{ $day }}')">{{ $day }}</th>
+    @else
     <th id="hehe" onclick="showDay('{{ $day }}')">{{ $day }}</th>
-      @foreach($conge as $value)
-      @if($value->dateDebut > $date and $value->dateFin < $date)
-        <style>
-          table.table-bordered td{  background-color: black}
-        </style>
-        @else
-        <script>
-          const url_table = document.getElementById("MyTable").rows
-          var post_urls = [];
-          for (let i = 0; i < url_table.length; i++) {
-              post_urls.push(url_table[i].cells[0].innerText);
-          }
-        </script>
-        @endif
-      @endforeach
     @endif
      @php
       $row_count++; 
@@ -78,22 +65,53 @@ $month = date('m');
 
   </thead>
   <tbody>
+@php
+function dateDiffInDays($date1, $date2) 
+  {
+      // Calculating the difference in timestamps
+      $diff = strtotime($date2) - strtotime($date1);
+  
+      // 1 day = 24 hours
+      // 24 * 60 * 60 = 86400 seconds
+      return abs(round($diff / 86400));
+  }
+$day_num = date('j', strtotime($date));//Day number
+$month_num = date('m', strtotime($date));
+$day_name = date('l', strtotime($date));
+$year = date('y', strtotime($date));
+$day_abrev = date('S', strtotime($date));
+$day = "$day_num";  
+$date = date("Y-m-d", strtotime($date));
+$month = date('m');
+
+@endphp
   @foreach( $EmpSer as $emp )
+  @foreach($getDemande as $value)
+      @php
+      $dayNum = date('j', strtotime($value->dateDebut));
+      $dateDiff = dateDiffInDays($value->dateDebut, $value->dateFin);
+      echo $dateDiff;
+      @endphp
     <tr>
       <td>{{ $emp->nom }} {{ $emp->prenom }}</td>
       @for ($i = 1; $i <= $m; $i++)
-        <td></td>
+      @if($i==$dayNum and $value->demandeur==$emp->nom)
+      <td id="hehe" style="background-color:lightblue;">CP</th>
+      @else
+      <td id="hehe"></th>
+      @endif
         @endfor
     </tr>
     @endforeach
+    @endforeach
     <tr>
       <td>TOTAL :</td>
-      @for ($i = 1; $i <= $m; $i++)
+      @for ($i = 1; $i < $m; $i++)
         <td></td>
         @endfor
-    </tr>
-
+    </tr> 
   </tbody>
+
 </table>
     </div>
     <script type="text/javascript" src="{{ URL::asset('js/modifier_popup.js') }}"></script>

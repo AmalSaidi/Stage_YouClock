@@ -14,6 +14,8 @@ class DemandeCongeAdmin extends Controller
     public function index(){
         $employes = DB::select('select * from employes where id = ?', [1]);
         $EmpSer = DB::select('select * FROM employes where intitule="compta" or intitule="Paie"');
+        $getDemande = DB::select('select * FROM demandeconge WHERE EXISTS 
+                                ( select id FROM employes WHERE nom = demandeur)');
         $conge =  DB::table('demandeconge')->get();
         $date = date('F Y');//Current Month Year
         $row_count=0;
@@ -22,6 +24,15 @@ class DemandeCongeAdmin extends Controller
         $month = date('n');
         $year = date('Y');
         $m= date("t");
+        function dateDiffInDays($date1, $date2) 
+        {
+            // Calculating the difference in timestamps
+            $diff = strtotime($date2) - strtotime($date1);
+        
+            // 1 day = 24 hours
+            // 24 * 60 * 60 = 86400 seconds
+            return abs(round($diff / 86400));
+        }
 
         switch ($month) {
             case 1:
@@ -71,6 +82,7 @@ class DemandeCongeAdmin extends Controller
             'year'=>$year,
             'EmpSer'=>$EmpSer,
             'm'=>$m,
+            'getDemande'=>$getDemande,
         ]);
     }
 
