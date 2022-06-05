@@ -1,0 +1,177 @@
+body{
+    font-family: cursive !important;
+}
+
+#acti{
+    background-color: white;
+    width: 75%;
+    MARGIN-LEFT: 22%;
+    margin-top: 30;
+    height: fit-content;
+    padding: 2% 2% 9% 2% !important;
+}
+
+#fa-titre{
+    margin-top: 2.5%;
+    font-weight: 600;
+}
+
+#hidden{
+    background-color: white;
+    border: none;
+}
+#button-list{
+    margin-left: 80%;
+    margin-bottom: 1%;
+    margin-top: -11%;
+    font-size: small;
+}
+#hidden-cases{
+    border: none;
+}
+
+#thead-dark{
+    background-color: #1d5791;
+}
+
+#timediv{
+    background-color: #f0f4f5;
+    width: fit-content;
+    height: fit-content;
+    PADDING: 3 9 3 9;
+    margin-left: 32%;
+    margin-top: -4%;
+}
+#mindiv{
+    background-color: #f0f4f5;
+    width: fit-content;
+    height: fit-content;
+    PADDING: 3 9 3 9;
+    margin-left: 31.7%;
+    margin-top: -2.8%;
+}
+
+#modifier{
+margin-top: 2%;
+}
+
+#logo-reglages{
+    width: 15px;
+}
+
+.table-bordered{
+    width:50% !important;
+    border: 2px black !important;
+}
+.table-bordered thead th{
+    padding: 0.4rem 0.4rem 0.4rem 0.9rem!important;
+}
+
+.table-bordered td, .table th {
+    padding: 0.4rem 0.4rem 0.4rem 0.9rem!important;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+
+#head-table{
+    background-color:#2b5a92 !important;
+    color: white;
+    padding-top: 10% !important;
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    width: 50% !important;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888; 
+  }
+  
+  /* The Close Button */
+  .close {
+    width: fit-content;
+    float: right;
+    BACKGROUND-COLOR: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5;
+    margin-left: 100%;
+    margin-top: -2.7%;
+  }
+
+  #modifier{
+      margin-top:2%;
+      border: none;
+      padding: 0.5% 1% 0.5% 1%;
+      font-family: cursive;
+      background-color: #7ab3d8;
+      color: white;
+  }
+
+  #modifier:hover{
+    background-color: #6393b2;
+}
+
+
+  #ajouter-button{
+    background-color: #2b5a92 !important;
+    margin-left: 42%;
+    MARGIN-TOP: 4%;
+  }
+  
+  .close:hover,.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  input{
+    width: 9% !important;
+  }
+
+  #min{
+    margin-left: 8%;
+    margin-top: -5.3%;
+  }
+
+    
+#export{
+    border: none;
+    padding: 1.1% 4% 1.1% 4%;
+    font-family: cursive;
+}
+
+#export:hover{
+    background-color: #bcbfc2a8;
+}
+  
+#export{
+    border: none;
+    padding: 1.1% 4% 1.1% 4%;
+    font-family: cursive;
+}
+
+#heuree{
+    float: left;
+}
+
+#pause{
+    width: 50%;
+}

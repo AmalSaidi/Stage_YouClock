@@ -1,0 +1,79 @@
+#logo-FS{
+    height: 310px;
+    width: fit-content;
+    margin-left: 20%;
+    MARGIN-TOP: 7%;
+}
+#logo-YC{
+    WIDTH: 30%;
+    MARGIN-LEFT: 16%;
+}
+
+body{
+    BACKGROUND-COLOR: #fafbfc !important;
+}
+
+#form-connection{
+    background-color: white;
+    width: 20%;
+    margin-top: -28%;
+    margin-left: 52%;
+    width: 39%;
+    padding-top: 3%;
+    PADDING-LEFT: 5%;
+    PADDING-RIGHT: 5%;
+    padding-bottom: 3%;
+}
+
+#bonjour{
+    font-family: Trebuchet MS;
+    font-size: 40 !important;
+    font-weight: 640;
+    color: #28709b;
+}
+
+#text-con{
+    font-family: Trebuchet MS;
+    font-size: 17;
+    color: #28709b;
+}
+
+#button-con{
+    WIDTH: 70%;
+    BACKGROUND-COLOR: #205e84;
+    PADDING: 3%;
+    margin-top: 3%;
+}
+
+a{
+    color: #566370 !important;
+}
+
+#input-id{
+    width: 70%;
+    BACKGROUND-COLOR: #fafbfc;
+    border-top: none;
+    border-bottom: none;
+    border-right: none;
+    border-left-width: thick;
+    padding: 6%;
+    /* border-left: beige; */
+    border-color: #205e84;
+}
+
+#input-pass{
+    width: 70%;
+    BACKGROUND-COLOR: #fafbfc;
+    border-top: none;
+    border-bottom: none;
+    border-right: none;
+    border-left-width: thick;
+    padding: 6%;
+    /* border-left: beige; */
+    border-color: #205e84;
+    margin-bottom: 3%;
+}
+
+#mdp-oublie{
+    margin-left: 42%;
+}

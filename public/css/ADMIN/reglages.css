@@ -1,0 +1,32 @@
+#menu-reg{
+    BACKGROUND-COLOR: WHITE;
+    WIDTH: 19%;
+        PADDING: 4%;
+        margin-left: 2%;
+        margin-top: 2%;
+        float: left;
+    }
+    #reglages{
+        font-weight: 700;
+        font-family: fangsong;
+    }
+    
+    li{
+        margin-right: 10%;
+    }
+    
+    a{
+        width: max-content;
+    }
+
+    .nav-link{
+        color: black;
+    }
+
+    .reg:hover{
+            border-top: none;
+            border-left-color: #24659f;
+            border-left-style: solid;
+    }
+    
+    

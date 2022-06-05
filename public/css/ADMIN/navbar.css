@@ -1,0 +1,72 @@
+
+ #logo-YC{
+    width: 14%;
+    MARGIN-RIGHT: 7%;
+    width: 15% !important;
+ }
+
+ li {
+    margin-right: 10%;
+}
+
+a{
+    width: max-content;
+}
+
+.nav-link{
+    color: black;
+}
+
+ .navbar-light .navbar-nav .nav-link {
+    color: black;
+    font-family: cursive;
+}
+body{
+    background-color:#e3f0f473 !important;
+}
+.navbar-light .navbar-nav .nav-link:hover {
+    color: #24659f !important;
+}
+
+.nav-item:hover{
+    border-top: none;
+    border-left: #001bff;
+    border-bottom-color: #24659f;
+    border-bottom-style: solid;
+}
+.dropbtn {
+    background-color: transparent;
+    color: black;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  .dropdown-content a {
+    color: black;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown-content a:hover {background-color: transparent}
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  .dropdown:hover .dropbtn {
+    background-color: #41474152;
+  }

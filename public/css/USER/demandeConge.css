@@ -1,0 +1,215 @@
+#acti{
+    background-color: white;
+    width: 75%;
+    MARGIN-LEFT: 22%;
+    height: fit-content;
+    padding: 2% 2% 5% 2% !important;
+    margin-top: 30;
+}
+
+#fa-titre{
+    margin-top: 2.5%;
+    font-weight: 600;
+
+}
+
+#hidden{
+    background-color: white;
+    border: none;
+}
+#button-list{
+    margin-left: 60%;
+    margin-bottom: 1%;
+    margin-top: -6%;
+    font-size: small;
+}
+#hidden-cases{
+    border: none;
+}
+
+#info-user{
+    text-align: center;
+}
+
+#logo-reglages{
+    width: 15px;
+}
+
+ #logo-icon{
+    WIDTH: 30%;
+    margin-top: 12%;
+ }
+
+ #current-month{
+    margin-bottom: 0rem !important;
+ }
+
+.table-borderless{
+    margin: 0 auto;
+    width: 100px;
+    width: fit-content;
+    margin-top: 10%;
+    margin-bottom: 20%;
+}
+
+.table-bordered{
+    width:100% !important;
+    border: 2px black !important;
+}
+.table-bordered thead th{
+    padding: 1rem 1rem 1rem 1rem!important;
+    text-align: center;
+}
+.table-bordered td{
+    padding: 0.4rem 0.4rem 0.4rem 0.9rem!important;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+    text-align: center;
+}
+
+.table-bordered td, .table th {
+    padding: 1rem 1rem 1rem 1rem!important;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+    text-align: center;
+}
+
+#head-table {
+    background-color: #ebebeb !important;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    font-size: x-large;
+}
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    width: 50% !important;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888; 
+    margin-left: 50%;
+    margin-top: 30px;
+  }
+  
+  /* The Close Button */
+  .close {
+    width: fit-content;
+    float: right;
+    BACKGROUND-COLOR: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5;
+    margin-left: 100%;
+    margin-top: -2.7%;
+  }
+
+  #ajouter-button{
+    background-color: #6c99cf !important;
+    margin-left: 42%;
+    MARGIN-TOP: 4%;
+    margin-left: 47%;
+    BORDER: none;
+  }
+  
+  .close:hover,.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  
+#export{
+    border: none;
+    padding: 1.1% 4% 1.1% 4%;
+    font-family: cursive;
+}
+
+#ajouter{
+    border: none;
+    padding: 1.1% 4% 1.1% 4%;
+    font-family: cursive;
+    background-color: #7ab3d8;
+    color: white;
+    MARGIN-LEFT: 3%;
+    float: right;
+    
+}
+
+#ajouter:hover{
+    background-color: #6393b2;
+}
+#typeConge{
+    background-color: #29497a; 
+    color: white;
+    padding: 2 12 2 12;
+}
+
+#export:hover{
+    background-color: #bcbfc2a8;
+}
+
+body{
+    font-family: cursive !important; 
+}
+
+#mod{
+    background-color: #ffffff00;
+    border: none;
+}
+
+#calendar{
+    margin-top: 5%;
+}
+
+hr {
+    margin-top: 0.8rem !important;
+    margin-bottom: 1.5rem !important;
+    WIDTH: -webkit-fill-available;
+    border-top: 3px solid rgb(201 201 201) !important;
+}
+
+.form-group1{
+    margin-right: 25%;
+}
+
+.form-group2{
+    MARGIN-BOTTOM: 5%;
+}
+
+#start{
+    background-color: #eceaea9e;
+    BORDER: NONE;
+    TEXT-ALIGN: CENTER;
+    padding: 3 12 3 12;
+}
+
+#fin{
+    background-color: #eceaea9e;
+    BORDER: NONE;
+    TEXT-ALIGN: CENTER;
+    padding: 3 12 3 12;
+}
+
+#retour{
+    background-color: #eceaea9e;
+    BORDER: NONE;
+    TEXT-ALIGN: CENTER;
+    padding: 3 12 3 12;
+    MARGIN-BOTTOM: 3%;
+}

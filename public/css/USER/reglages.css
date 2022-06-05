@@ -1,0 +1,44 @@
+#menu-reg{
+    BACKGROUND-COLOR: WHITE;
+    WIDTH: 19%;
+        margin-left: 2%;
+        margin-top: 2%;
+        float: left;
+        text-align: center;
+    }
+    #reglages{
+        font-weight: 700;
+        font-family: fangsong;
+    }
+
+    #stru-user{
+        text-align: center;
+    background-color: #3b698d;
+    padding: 4 5 4 5;
+    border: black;
+    border-radius: 5px;
+    font-size: small;
+    color: white;
+    margin: 0 auto;
+    width: 100px;
+        }
+    
+    li{
+        margin-right: 10%;
+    }
+    
+    a{
+        width: max-content;
+    }
+
+    .nav-link{
+        color: black;
+    }
+
+    .reg:hover{
+            border-top: none;
+            border-left-color: #24659f;
+            border-left-style: solid;
+    }
+    
+    
