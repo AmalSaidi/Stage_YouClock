@@ -8,6 +8,8 @@ use App\Http\Controllers\PageEmployesController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\StructuresController;
 use App\Http\Controllers\DemandeCongeUser;
+use App\Http\Controllers\DemandeCongeAdmin;
+
 use App\Models\structures;
 
 /*
@@ -62,7 +64,7 @@ Route::get('/FicheHoraire/{id}', [PageEmployesController::class, 'showFiche']);
 
 /*
 |--------------------------------------------------------------------------
-| User :
+| DemandeConge User :
 |--------------------------------------------------------------------------
 */
 
@@ -70,6 +72,10 @@ Route::get('/user/demandeConge', [DemandeCongeUser::class, 'index']);
 Route::post('/demandeConge', [DemandeCongeUser::class, 'store']);
 Route::get('/demandeConge', [DemandeCongeUser::class, 'verify']);
 Route::get('/demandeConge', [DemandeCongeUser::class, 'verifyDate']);
+
+
+Route::get('/mesConges', [DemandeCongeAdmin::class, 'index']);
+Route::post('/demandeConge', [DemandeCongeAdmin::class, 'store']);
 
 /*
 |--------------------------------------------------------------------------
