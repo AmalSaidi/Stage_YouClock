@@ -22,6 +22,21 @@
                 <a class="nav-link" href="">Demande de congé</a>
               </li>
           </ul>
+          <div style="margin-left: 55%;">
+          <div class="dropdown">
+  <button class="dropbtn">{{ Auth::user()->name }}</button>
+  <div class="dropdown-content">
+  <form method="POST" action="{{ route('logout') }}">
+@csrf
+<x-responsive-nav-link :href="route('logout')"
+              onclick="event.preventDefault();
+                          this.closest('form').submit();">
+          {{ __('Déconnexion') }}
+      </x-responsive-nav-link>
+</form>
+  </div>
+</div>
+          </div>
         </div>
       </nav>
         @yield('content')
