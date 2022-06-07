@@ -59,8 +59,12 @@ body{
     padding-bottom: 2%;
     padding-top: 2%;
     font-size: 15px;
+    
 }
-
+.table-bordered td, .table-bordered th {
+    border: 1px solid #dee2e6;
+    padding: 10 5 10 5;
+}
 #buttons{
     color: black !important;
     MARGIN-TOP: 2%;
@@ -265,16 +269,6 @@ body{
 }
 
 
-#ajouter{
-    border: none;
-    padding: 0% 1% 0% 1%;
-    font-family: cursive;
-    background-color: #008be6;
-    color: white;
-    MARGIN-LEFT: 73.1%;
-    font-size: small;
-}
-
 #ajouter:hover{
     background-color: #6393b2;
 }
@@ -389,5 +383,21 @@ margin-right: 20px;
     float: left;}
 
 #hehe{
-    padding: 0 5 0 5;
+    padding: 2 5 2 5;
+}
+
+#confirmer{
+    background-color: #69d169;
+}
+
+#confirmer:hover{
+    background-color: rgb(51, 126, 61);
+}
+
+#refuser{
+    background-color: rgb(207, 121, 121);
+}
+
+#refuser:hover{
+    background-color: rgb(126, 45, 45);
 }

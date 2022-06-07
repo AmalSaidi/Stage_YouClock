@@ -106,4 +106,26 @@ class DemandeCongeAdmin extends Controller
         ]);
 
     }
+    public function show($id) {
+        $demande = DB::select('select * from demandeconge where id = ?',[$id]);
+        $EmpSer = DB::select('select * FROM employes where intitule="compta" or intitule="Paie"');
+        return view('Admin.CongeEdit',['demande'=>$demande,'EmpSer'=>$EmpSer,]);
+        }
+
+    public function confirm($id) {
+        /*$data=array('first_name'=>$first_name,"last_name"=>$last_name,"city_name"=>$city_name,"email"=>$email);*/
+        /*DB::table('student')->update($data);*/
+        /* DB::table('student')->whereIn('id', $id)->update($request->all());*/
+        DB::update('update demandeconge set statut="Valide" where id = ?',[$id]);
+        return redirect('mesConges');
+        }
+    public function refuse($id) {
+            /*$data=array('first_name'=>$first_name,"last_name"=>$last_name,"city_name"=>$city_name,"email"=>$email);*/
+            /*DB::table('student')->update($data);*/
+            /* DB::table('student')->whereIn('id', $id)->update($request->all());*/
+            DB::update('update demandeconge set statut="Refuse" where id = ?',[$id]);
+            return redirect('mesConges');
+            }
+
+    
 }

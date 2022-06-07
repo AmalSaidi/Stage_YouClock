@@ -10,11 +10,6 @@
   <div class="form-outline">
     <input type="search" id="form1" class="form-control" placeholder="Rechercher" />
   </div>
-  <!-- <button type="button" class="btn btn-primary">
-    <i class="fas fa-search"></i>
-  </button> -->
-  <button id="ajouter"> ajouter un employé
-</button>
 </div>
 </div>  
 <div id="menu-reg">
@@ -91,17 +86,44 @@ $month = date('m');
       $dayNum = date('j', strtotime($value->dateDebut));
       $dateDiff = dateDiffInDays($value->dateDebut, $value->dateFin);
       echo $dateDiff;
+      $day_name = date('l', strtotime($value->dateDebut));
+      echo $day_name;
       @endphp
     <tr>
       <td>{{ $emp->nom }} {{ $emp->prenom }}</td>
       @for ($i = 1; $i <= $m; $i++)
       @if($i==$dayNum and $value->demandeur==$emp->nom)
-      <td id="hehe" style="background-color:lightblue;">CP</th>
+      @for ($i = 0; $i <= $dateDiff; $i++)
+      @if($day_name=="Sunday" or $day_name=="Saturday")
+      <td id="ajouter" style="background-color:gray;"></th>
       @else
-      <td id="hehe"></th>
+      @if($value->statut=="EnCours")
+      <td id="ajouter" style="background-color:lightblue;"><a href = 'mesConges/edit/{{ $value->id }}'>CP</a></td>
+      @elseif($value->statut=="Valide")
+      <td id="ajouter" style="background-color:lightgreen;" >CP</th>
+      @elseif($value->statut=="Refuse")
+      <td id="ajouter" style="background-color:red;">CP</th>
+      @endif
+      @endif
+      @endfor
+      @else
+      <td id="ajouter"></td>
       @endif
         @endfor
     </tr>
+    <div id="modal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close" onclick="closeForm()">&times;</span>
+    <form action="/employes" method="POST">
+    {{ csrf_field() }}
+    <p>{{ $emp->nom }} {{ $emp->prenom }}</p>
+    <button type="submit" class="btn btn-primary" id="ajouter-button">AJOUTER</button>
+</form>
+  </div>
+
+</div>
     @endforeach
     @endforeach
     <tr>
@@ -111,12 +133,15 @@ $month = date('m');
         @endfor
     </tr> 
   </tbody>
-
+  
 </table>
-    </div>
-    <script type="text/javascript" src="{{ URL::asset('js/modifier_popup.js') }}"></script>
-    <script type="text/javascript" src="{{ URL::asset('js/ajouter_popup.js') }}"></script>
-    <script type="text/javascript" src="{{ URL::asset('js/afficher-form-modifier.js') }}">
+     <script>
+      function openForm() {
+      document.getElementById("modal").style.display = "block";
+      }
+      function closeForm() {
+      document.getElementById("modal").style.display = "none";
+      }
     </script>
   
   @endsection
