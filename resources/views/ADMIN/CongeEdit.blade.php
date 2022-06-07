@@ -61,9 +61,12 @@
         echo "jours";
         @endphp
     </p>
-    <form action = "/mesConges/edit/<?php echo $demande[0]->id; ?>" method = "post">
+    <form action = "/mesConges/confirm/<?php echo $demande[0]->id; ?>" method = "post">
     <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
     <button type="submit" class="btn btn-success" id="confirmer">Confirmer</button>
+    </form>
+    <form action = "/mesConges/refuse/<?php echo $demande[0]->id; ?>" method = "post">
+    <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
     <button type="submit" class="btn btn-danger" id="Refuser">Refuser</button>
     </form>
   </div>

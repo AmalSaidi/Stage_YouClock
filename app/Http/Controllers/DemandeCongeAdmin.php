@@ -119,13 +119,11 @@ class DemandeCongeAdmin extends Controller
         DB::update('update demandeconge set statut="Valide" where id = ?',[$id]);
         return redirect('mesConges');
         }
-    public function refuse($id) {
-            /*$data=array('first_name'=>$first_name,"last_name"=>$last_name,"city_name"=>$city_name,"email"=>$email);*/
-            /*DB::table('student')->update($data);*/
-            /* DB::table('student')->whereIn('id', $id)->update($request->all());*/
-            DB::update('update demandeconge set statut="Refuse" where id = ?',[$id]);
-            return redirect('mesConges');
-            }
+
+        public function refuse($id) {
+        DB::update('update demandeconge set statut="Refuse" where id = ?',[$id]);
+        return redirect('mesConges');
+        }
 
     
 }

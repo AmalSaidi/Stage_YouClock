@@ -47,7 +47,7 @@ $month = date('m');
     $col_count=1;
     @endphp
     @if($month_num == $month and $day_name=="Sunday" or $day_name=="Saturday")
-    <th id="hehe" style="background-color:gray;" onclick="showDay('{{ $day }}')">{{ $day }}</th>
+    <th id="hehe" style="background-color:#ccc6c6;" onclick="showDay('{{ $day }}')">{{ $day }}</th>
     @else
     <th id="hehe" onclick="showDay('{{ $day }}')">{{ $day }}</th>
     @endif
@@ -98,9 +98,9 @@ $month = date('m');
       <td id="ajouter" style="background-color:gray;"></th>
       @else
       @if($value->statut=="EnCours")
-      <td id="ajouter" style="background-color:lightblue;"><a href = 'mesConges/edit/{{ $value->id }}'>CP</a></td>
+      <td id="ajouter" style="background-color:lightblue;"><a style="color:black" href = 'mesConges/edit/{{ $value->id }}'>CP</a></td>
       @elseif($value->statut=="Valide")
-      <td id="ajouter" style="background-color:lightgreen;" >CP</th>
+      <td id="ajouter" style="background-color:lightgreen;" onclick="openForm()" >CP</th>
       @elseif($value->statut=="Refuse")
       <td id="ajouter" style="background-color:red;">CP</th>
       @endif

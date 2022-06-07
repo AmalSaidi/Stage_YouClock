@@ -83,8 +83,8 @@ Route::get('/demandeConge', [DemandeCongeUser::class, 'verifyDate']);
 Route::get('/mesConges', [DemandeCongeAdmin::class, 'index']);
 Route::post('/demandeConge', [DemandeCongeAdmin::class, 'store']);
 Route::get('/mesConges/edit/{id}',[DemandeCongeAdmin::class, 'show']);
-Route::post('/mesConges/edit/{id}',[DemandeCongeAdmin::class, 'confirm']);
-Route::post('/mesConges/edit/{id}',[DemandeCongeAdmin::class, 'refuse']);
+Route::post('/mesConges/refuse/{id}',[DemandeCongeAdmin::class, 'refuse']);
+Route::post('/mesConges/confirm/{id}',[DemandeCongeAdmin::class, 'confirm']);
 /*
 |--------------------------------------------------------------------------
 | Autres :
