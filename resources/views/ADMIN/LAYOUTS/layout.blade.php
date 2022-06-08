@@ -16,26 +16,26 @@
               <a class="nav-link" href="#">Statistiques</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="http://localhost:8000/PagesEmployes">Employés</a>
+                <a class="nav-link" href="/employes">Employés</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="http://localhost:8000/demandeConge">Demande de congé</a>
+                <a class="nav-link" href="/mesConges">Demande de congé</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="http://localhost:8000/depassementHoraire">Dépassement horaire</a>
+                <a class="nav-link" href="/depassementHoraire">Dépassement horaire</a>
               </li>
           </ul>
-          <div style="margin-left: 40%;">
+          <div style="margin-left: 40%; height:fit-content;">
           <div class="dropdown">
   <button class="dropbtn">{{ Auth::user()->name }}</button>
   <div class="dropdown-content">
   <form method="POST" action="{{ route('logout') }}">
 @csrf
-<x-responsive-nav-link :href="route('logout')"
+<button id="deco"><x-responsive-nav-link :href="route('logout')"
               onclick="event.preventDefault();
                           this.closest('form').submit();">
           {{ __('Déconnexion') }}
-      </x-responsive-nav-link>
+      </x-responsive-nav-link></button>
 </form>
   </div>
 </div>

@@ -9,7 +9,7 @@ use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\StructuresController;
 use App\Http\Controllers\DemandeCongeUser;
 use App\Http\Controllers\DemandeCongeAdmin;
-
+use App\Http\Controllers\depHorController;
 use App\Models\structures;
 
 /*
@@ -85,6 +85,15 @@ Route::post('/demandeConge', [DemandeCongeAdmin::class, 'store']);
 Route::get('/mesConges/edit/{id}',[DemandeCongeAdmin::class, 'show']);
 Route::post('/mesConges/refuse/{id}',[DemandeCongeAdmin::class, 'refuse']);
 Route::post('/mesConges/confirm/{id}',[DemandeCongeAdmin::class, 'confirm']);
+
+/*
+|--------------------------------------------------------------------------
+| Depassement horaire admin :
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/depassementHoraire', [depHorController::class, 'index']);
+
 /*
 |--------------------------------------------------------------------------
 | Autres :

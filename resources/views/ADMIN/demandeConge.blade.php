@@ -1,4 +1,5 @@
 
+
 @extends('ADMIN.LAYOUTS.layout')
 <link rel="stylesheet" type="text/css" href="{{ url('/css/ADMIN/navbar.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ url('/css/ADMIN/demandeConge.css') }}" />
@@ -41,7 +42,6 @@ $day_abrev = date('S', strtotime($date));
 $day = "$day_num";  
 $date = date("Y-m-d", strtotime($date));
 $month = date('m');
-
 @endphp
 @php
     $col_count=1;
@@ -78,16 +78,13 @@ $day_abrev = date('S', strtotime($date));
 $day = "$day_num";  
 $date = date("Y-m-d", strtotime($date));
 $month = date('m');
-
 @endphp
   @foreach( $EmpSer as $emp )
   @foreach($getDemande as $value)
       @php
       $dayNum = date('j', strtotime($value->dateDebut));
       $dateDiff = dateDiffInDays($value->dateDebut, $value->dateFin);
-      echo $dateDiff;
       $day_name = date('l', strtotime($value->dateDebut));
-      echo $day_name;
       @endphp
     <tr>
       <td>{{ $emp->nom }} {{ $emp->prenom }}</td>
@@ -145,4 +142,3 @@ $month = date('m');
     </script>
   
   @endsection
-
