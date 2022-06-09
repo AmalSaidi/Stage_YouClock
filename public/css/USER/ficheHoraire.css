@@ -70,10 +70,11 @@
 }
 
 .table-bordered td, .table th {
-    padding: 1rem 1rem 1rem 1rem!important;
     vertical-align: top;
     border-top: 1px solid #dee2e6;
     text-align: center;
+    border: 1px solid #dee2e6;
+    font-size: small;
 }
 
 #head-table {

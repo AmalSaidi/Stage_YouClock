@@ -58,7 +58,7 @@ $userNom=Auth::user()->name;
   <tbody>
   @php
     @endphp
-    @for($i=1;$i < 8; $i++)
+    @for($i=1;$i <= $dateF; $i++)
     @php
       $date = date("Y-m-$i", strtotime("+1 day", strtotime($date)));
       $day_name = date('l', strtotime($date));
@@ -94,10 +94,97 @@ $userNom=Auth::user()->name;
     $day_name="Mar"
     @endphp
     @endif
-
-    
+    @foreach( $employes as $employe )
+    @if($employe->nom==$userNom)
       <tr>
-      <td> {{ $day_name }} {{ $day_num}}  <td>
+      <td> {{ $day_name }} {{ $day_num}} {{ $month }}</td>
+      @if($day_name=="Lun")
+      @foreach( $lundi as $lundii )
+      @php
+      $hourdiffMat = round((strtotime($lundii->FinMat) - strtotime($lundii->DebutMat))/3600, 1);
+      $hourdiffAprem = round((strtotime($lundii->FinAprem) - strtotime($lundii->DebutAprem))/3600, 1);
+      $hourdone= $hourdiffMat + $hourdiffAprem;
+      @endphp
+        <td>T</td>
+        <td>{{\Carbon\Carbon::createFromFormat('H:i:s',$lundii->DebutMat)->format('H:i')}} - {{\Carbon\Carbon::createFromFormat('H:i:s',$lundii->FinMat)->format('H:i')}} </td>
+        <td>T</td>
+        <td>{{\Carbon\Carbon::createFromFormat('H:i:s',$lundii->DebutAprem)->format('H:i')}} - {{\Carbon\Carbon::createFromFormat('H:i:s',$lundii->FinAprem)->format('H:i')}}</td>
+        <td>T</td>
+        <td></td>
+        <td>7</td>
+        <td>{{ $hourdone }}</td>
+        <td></td>
+        @endforeach
+        @elseif($day_name=="Mar")
+      @foreach( $mardi as $mardii )
+      @php
+      $hourdiffMat = round((strtotime($mardii->FinMat) - strtotime($mardii->DebutMat))/3600, 1);
+      $hourdiffAprem = round((strtotime($mardii->FinAprem) - strtotime($mardii->DebutAprem))/3600, 1);
+      $hourdone= $hourdiffMat + $hourdiffAprem;
+      @endphp
+        <td>T</td>
+        <td>{{\Carbon\Carbon::createFromFormat('H:i:s',$mardii->DebutMat)->format('H:i')}} - {{\Carbon\Carbon::createFromFormat('H:i:s',$mardii->FinMat)->format('H:i')}} </td>
+        <td>T</td>
+        <td>{{\Carbon\Carbon::createFromFormat('H:i:s',$mardii->DebutAprem)->format('H:i')}} - {{\Carbon\Carbon::createFromFormat('H:i:s',$mardii->FinAprem)->format('H:i')}}</td>
+        <td>T</td>
+        <td></td>
+        <td>7</td>
+        <td>{{ $hourdone }}</td>
+        <td></td>
+        @endforeach
+        @elseif($day_name=="Mer")
+      @foreach( $mercredi as $mer )
+      @php
+      $hourdiffMat = round((strtotime($mer->FinMat) - strtotime($mer->DebutMat))/3600, 1);
+      $hourdiffAprem = round((strtotime($mer->FinAprem) - strtotime($mer->DebutAprem))/3600, 1);
+      $hourdone= $hourdiffMat + $hourdiffAprem;
+      $ecartJour = $hourdone - {{}}
+      @endphp
+        <td>T</td>
+        <td>{{\Carbon\Carbon::createFromFormat('H:i:s',$mer->DebutMat)->format('H:i')}} - {{\Carbon\Carbon::createFromFormat('H:i:s',$mer->FinMat)->format('H:i')}} </td>
+        <td>T</td>
+        <td>{{\Carbon\Carbon::createFromFormat('H:i:s',$mer->DebutAprem)->format('H:i')}} - {{\Carbon\Carbon::createFromFormat('H:i:s',$mer->FinAprem)->format('H:i')}}</td>
+        <td>T</td>
+        <td></td>
+        <td>5</td>
+        <td>{{ $hourdone }}</td>
+        <td></td>
+        @endforeach
+        @elseif($day_name=="Jeu")
+      @foreach( $jeudi as $jeu )
+      @php
+      $hourdiffMat = round((strtotime($jeu->FinMat) - strtotime($jeu->DebutMat))/3600, 1);
+      $hourdiffAprem = round((strtotime($jeu->FinAprem) - strtotime($jeu->DebutAprem))/3600, 1);
+      $hourdone= $hourdiffMat + $hourdiffAprem;
+      @endphp
+        <td>T</td>
+        <td>{{\Carbon\Carbon::createFromFormat('H:i:s',$jeu->DebutMat)->format('H:i')}} - {{\Carbon\Carbon::createFromFormat('H:i:s',$jeu->FinMat)->format('H:i')}} </td>
+        <td>T</td>
+        <td>{{\Carbon\Carbon::createFromFormat('H:i:s',$jeu->DebutAprem)->format('H:i')}} - {{\Carbon\Carbon::createFromFormat('H:i:s',$jeu->FinAprem)->format('H:i')}}</td>
+        <td>T</td>
+        <td></td>
+        <td>7</td>
+        <td>{{ $hourdone }}</td>
+        <td></td>
+        @endforeach
+        @elseif($day_name=="Ven")
+      @foreach( $vendredi as $ven )
+      @php
+      $hourdiffMat = round((strtotime($ven->FinMat) - strtotime($ven->DebutMat))/3600, 1);
+      $hourdiffAprem = round((strtotime($ven->FinAprem) - strtotime($ven->DebutAprem))/3600, 1);
+      $hourdone= $hourdiffMat + $hourdiffAprem;
+      @endphp
+        <td>T</td>
+        <td>{{\Carbon\Carbon::createFromFormat('H:i:s',$ven->DebutMat)->format('H:i')}} - {{\Carbon\Carbon::createFromFormat('H:i:s',$ven->FinMat)->format('H:i')}} </td>
+        <td>T</td>
+        <td>{{\Carbon\Carbon::createFromFormat('H:i:s',$ven->DebutAprem)->format('H:i')}} - {{\Carbon\Carbon::createFromFormat('H:i:s',$ven->FinAprem)->format('H:i')}}</td>
+        <td>T</td>
+        <td></td>
+        <td>7</td>
+        <td>{{ $hourdone }}</td>
+        <td></td>
+        @endforeach
+        @elseif($day_name=="Sam")
         <td></td>
         <td></td>
         <td></td>
@@ -106,7 +193,21 @@ $userNom=Auth::user()->name;
         <td></td>
         <td></td>
         <td></td>
+        <td></td>
+        @elseif($day_name=="Dim")
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        @endif
       </tr>
+      @endif
+      @endforeach
     @endfor
   </tbody>
 </table>
