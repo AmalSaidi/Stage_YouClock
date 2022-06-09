@@ -151,7 +151,7 @@
     <tr id="head-table">
       <th scope="col">Lun</th>
       <th scope="col">mar</th>
-      <th scope="col">merd</th>
+      <th scope="col">merc</th>
       <th scope="col">jeu</th>
       <th scope="col">ven</th>
       <th scope="col">sam</th>
@@ -160,15 +160,17 @@
   </thead>
   <tbody>
     <tr>
+      @for($i=0;$i < 5; $i++)
     <td>
-<div id="debutMat"></div>
+<div id="debutMat">09:00</div>
 <div style="FONT-SIZE: x-large;COLOR: GRAY;">|</div>
-<div id="finMat"></div>
+<div id="finMat">12:30</div>
 <div>Déjeuner</div>
-<div id="debutAprem"></div>
+<div id="debutAprem">13:30</div>
 <div style="FONT-SIZE: x-large;COLOR: GRAY;">|</div>
-<div id="finAprem"></div>
+<div id="finAprem">17:00</div>
 </td>
+@endfor
 <td id="weekend">
       <div></div>
     </td>

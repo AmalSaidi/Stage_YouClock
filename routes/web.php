@@ -10,6 +10,7 @@ use App\Http\Controllers\StructuresController;
 use App\Http\Controllers\DemandeCongeUser;
 use App\Http\Controllers\DemandeCongeAdmin;
 use App\Http\Controllers\depHorController;
+use App\Http\Controllers\FicheHoraireUserController;
 use App\Models\structures;
 
 /*
@@ -75,6 +76,17 @@ Route::get('/demandeConge', [DemandeCongeUser::class, 'verifyDate']);
 
 /*
 |--------------------------------------------------------------------------
+| Fiche horaire admin :
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/FicheHoraire', [FicheHoraireUserController::class, 'index']);
+
+
+
+
+/*
+|--------------------------------------------------------------------------
 | DemandeCongeAdmin :
 |--------------------------------------------------------------------------
 */
@@ -93,6 +105,8 @@ Route::post('/mesConges/confirm/{id}',[DemandeCongeAdmin::class, 'confirm']);
 */
 
 Route::get('/depassementHoraire', [depHorController::class, 'index']);
+
+
 
 /*
 |--------------------------------------------------------------------------

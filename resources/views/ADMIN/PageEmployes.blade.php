@@ -39,7 +39,7 @@
      
 <tr>
       <td id="checkbox"><input type="checkbox" id="scales" name="scales"></td>
-      <td><a href = 'employes/{{ $employe->id }}'><img id="logo-icon" src="https://cdn.discordapp.com/attachments/936584358654005321/974610254220378112/user.png">{{ $employe->nom }} {{ $employe->prenom }}</a></td>
+      <td><a id="link-nom" href = 'employes/{{ $employe->id }}'><img id="logo-icon" src="https://cdn.discordapp.com/attachments/936584358654005321/974610254220378112/user.png">{{ $employe->nom }} {{ $employe->prenom }}</a></td>
       <td><div id="stru">{{ $employe->structure }}</div></td>
       <td>{{ $employe->dateEmbauche }}</td>
       <td>{{ $employe->dateFin }}</td>
