@@ -20,7 +20,10 @@ class FicheHoraireUserController extends Controller
 
         $fiche = new fichehor();
 
+
         $fiche->Date = request('date');
+        global $f;
+        $f=$fiche->Date;
         $fiche->activite1 = request('typeM');
         $fiche->matin = request('matin');
         $fiche->activite2 = request('typeAP');
@@ -33,9 +36,13 @@ class FicheHoraireUserController extends Controller
         $fiche->idfiche = request('idfiche');
         $fiche->idUser = request('idUser');
         $fiche->save();
-
-        return redirect('/ficheHoraire');
+        return $this->show($f);
     }
+
+    public function show($f) {
+        $fiche = DB::select('select * from fichehors where Date = ?',[$f]);
+        return view('USER/ficheHoraireUpdate',['fiche'=>$fiche]);
+        }
 
     public function index(){
         $employes = DB::select('select * from employes');

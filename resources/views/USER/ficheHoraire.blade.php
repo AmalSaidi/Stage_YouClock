@@ -66,8 +66,6 @@ $userId=Auth::user()->id;
       $day_name = date('l', strtotime($date));
       $day_num = date('d', strtotime($date));
       $year_num = date('Y', strtotime($date));
-      echo $year_num;
-
     @endphp
     @if($day_name=="Wednesday")
     @php
@@ -103,7 +101,7 @@ $userId=Auth::user()->id;
       <tr>
       <form action="/FicheHoraire" method="POST">
       {{ csrf_field() }}
-      <td><input name="date" type="hidden"> {{ $day_name }} {{ $day_num}} {{ $month }}</input></td>
+      <td><input name="date" type="hidden" value="{{ $day_name }} {{ $day_num}} {{ $month }}"> {{ $day_name }} {{ $day_num}} {{ $month }}</input></td>
       @if($day_name=="Lun")
       @foreach( $lundi as $lundii )
       @php
@@ -122,7 +120,7 @@ $userId=Auth::user()->id;
         <td><input name="heuresEffec" type="hidden">7</input></td>
         <td><input name="poids" type="hidden" value="{{ $hourdone }}">{{ $hourdone }}</input></td>
         <td><input name="ecartJour" type="hidden"></input></td>
-        <td><button type="submit">Pointer</button></td>
+        <td><button type="submit">>Pointer</button></td>
       </form>
         @endforeach
         @elseif($day_name=="Mar")
