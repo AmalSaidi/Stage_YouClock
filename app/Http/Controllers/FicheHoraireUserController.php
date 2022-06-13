@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
+use App\Models\fichehor;
+
 
 
 class FicheHoraireUserController extends Controller
@@ -14,27 +16,48 @@ class FicheHoraireUserController extends Controller
         $this->middleware('auth');
     }
 
+    public function store(){
+
+        $fiche = new fichehor();
+
+        $fiche->Date = request('date');
+        $fiche->activite1 = request('typeM');
+        $fiche->matin = request('matin');
+        $fiche->activite2 = request('typeAP');
+        $fiche->aprem = request('aprem');
+        $fiche->activite3 = request('typeS');
+        $fiche->soir = request('soir');
+        $fiche->heuresEffectu = request('heuresEffec');
+        $fiche->Poids = request('poids');
+        $fiche->ecart = request('ecartJour');
+        $fiche->idfiche = request('idfiche');
+        $fiche->idUser = request('idUser');
+        $fiche->save();
+
+        return redirect('/ficheHoraire');
+    }
+
     public function index(){
         $employes = DB::select('select * from employes');
-        $lundi = DB::select('SELECT nom, prenom, DebutMat, FinMat, DebutAprem, FinAprem
+        $lundi = DB::select('SELECT nom, prenom, DebutMat, FinMat, DebutAprem, FinAprem , typeM, typeAP, typeS
                              FROM horairesemaines INNER JOIN employes
                              ON employes.idS = horairesemaines.idSem and horairesemaines.id=1;');
-        $mardi = DB::select('SELECT nom, prenom, DebutMat, FinMat, DebutAprem, FinAprem
+        $mardi = DB::select('SELECT nom, prenom, DebutMat, FinMat, DebutAprem, FinAprem , typeM, typeAP, typeS
                              FROM horairesemaines INNER JOIN employes
                              ON employes.idS = horairesemaines.idSem and horairesemaines.id=2;');
-         $mercredi = DB::select('SELECT nom, prenom, DebutMat, FinMat, DebutAprem, FinAprem
+        $mercredi = DB::select('SELECT nom, prenom, DebutMat, FinMat, DebutAprem, FinAprem , typeM, typeAP, typeS
                             FROM horairesemaines INNER JOIN employes
                             ON employes.idS = horairesemaines.idSem and horairesemaines.id=3;');
-         $jeudi = DB::select('SELECT nom, prenom, DebutMat, FinMat, DebutAprem, FinAprem
+        $jeudi = DB::select('SELECT nom, prenom, DebutMat, FinMat, DebutAprem, FinAprem , typeM, typeAP, typeS
                             FROM horairesemaines INNER JOIN employes
                             ON employes.idS = horairesemaines.idSem and horairesemaines.id=4;');
-         $vendredi = DB::select('SELECT nom, prenom, DebutMat, FinMat, DebutAprem, FinAprem
+        $vendredi = DB::select('SELECT nom, prenom, DebutMat, FinMat, DebutAprem, FinAprem , typeM, typeAP, typeS
                             FROM horairesemaines INNER JOIN employes
                             ON employes.idS = horairesemaines.idSem and horairesemaines.id=5;');
-          $samedi = DB::select('SELECT nom, prenom, DebutMat, FinMat, DebutAprem, FinAprem
+        $samedi = DB::select('SELECT nom, prenom, DebutMat, FinMat, DebutAprem, FinAprem , typeM, typeAP, typeS
                             FROM horairesemaines INNER JOIN employes
                             ON employes.idS = horairesemaines.idSem and horairesemaines.id=6;');
-           $dimanche = DB::select('SELECT nom, prenom, DebutMat, FinMat, DebutAprem, FinAprem
+        $dimanche = DB::select('SELECT nom, prenom, DebutMat, FinMat, DebutAprem, FinAprem , typeM, typeAP, typeS
                             FROM horairesemaines INNER JOIN employes
                             ON employes.idS = horairesemaines.idSem and horairesemaines.id=7;');
         $date = date('Y-m-01', strtotime("first day of this month"));

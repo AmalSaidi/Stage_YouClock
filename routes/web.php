@@ -81,6 +81,7 @@ Route::get('/demandeConge', [DemandeCongeUser::class, 'verifyDate']);
 */
 
 Route::get('/FicheHoraire', [FicheHoraireUserController::class, 'index']);
+Route::post('FicheHoraire', [FicheHoraireUserController::class, 'store']);
 
 
 
