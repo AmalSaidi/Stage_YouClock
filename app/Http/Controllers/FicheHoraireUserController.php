@@ -17,10 +17,7 @@ class FicheHoraireUserController extends Controller
     }
 
     public function store(){
-
         $fiche = new fichehor();
-
-
         $fiche->Date = request('date');
         global $f;
         $f=$fiche->Date;
@@ -35,8 +32,16 @@ class FicheHoraireUserController extends Controller
         $fiche->ecart = request('ecartJour');
         $fiche->idfiche = request('idfiche');
         $fiche->idUser = request('idUser');
-        $fiche->save();
-        return $this->show($f);
+        $condition = DB::select('select * from fichehors where EXISTS (select * from ficheHors where Date = ?)',[$fiche->Date]);
+        if($condition) {
+            return $this->show($f);
+        }
+        else
+        {
+            $fiche->save();
+            return $this->show($f);
+        }
+        return redirect()->back();
     }
 
     public function show($f) {
@@ -46,6 +51,7 @@ class FicheHoraireUserController extends Controller
 
     public function index(){
         $employes = DB::select('select * from employes');
+        $affichage = DB::select('select * from fichehors');
         $lundi = DB::select('SELECT nom, prenom, DebutMat, FinMat, DebutAprem, FinAprem , typeM, typeAP, typeS
                              FROM horairesemaines INNER JOIN employes
                              ON employes.idS = horairesemaines.idSem and horairesemaines.id=1;');
@@ -113,7 +119,7 @@ class FicheHoraireUserController extends Controller
         }
         return view('USER.ficheHoraire',[ 'employes' =>$employes,'date' =>$date,'date2' =>$date2,'dateF' =>$dateF,'month' =>$month,
         'lundi' =>$lundi,'mardi' =>$mardi,'mercredi' =>$mercredi,'jeudi' =>$jeudi,'vendredi' =>$vendredi,'samedi' =>$samedi,
-        'dimanche' =>$dimanche,
+        'dimanche' =>$dimanche,'affichage' => $affichage,
         ]);
     }
 }

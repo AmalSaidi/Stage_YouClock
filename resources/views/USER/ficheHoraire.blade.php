@@ -103,25 +103,26 @@ $userId=Auth::user()->id;
       {{ csrf_field() }}
       <td><input name="date" type="hidden" value="{{ $day_name }} {{ $day_num}} {{ $month }}"> {{ $day_name }} {{ $day_num}} {{ $month }}</input></td>
       @if($day_name=="Lun")
-      @foreach( $lundi as $lundii )
       @php
-      $hourdiffMat = round((strtotime($lundii->FinMat) - strtotime($lundii->DebutMat))/3600, 1);
-      $hourdiffAprem = round((strtotime($lundii->FinAprem) - strtotime($lundii->DebutAprem))/3600, 1);
       $hourdone= $hourdiffMat + $hourdiffAprem;
+      $date_actu= "$day_name $day_num $month";
+      echo $date_actu;
       @endphp
-        <input name="idfiche" type="hidden" value="{{ $year_num }} - {{$month}}"></input>
-        <input name="idUser" type="hidden" value="{{ $userId }}"></input>
-        <td><input name="typeM" type="hidden" value="{{$lundii->typeM}}">{{$lundii->typeM}}</input></td>
-        <td><input name="matin" type="hidden" value ="{{\Carbon\Carbon::createFromFormat('H:i:s',$lundii->DebutMat)->format('H:i')}} - {{\Carbon\Carbon::createFromFormat('H:i:s',$lundii->FinMat)->format('H:i')}}">{{\Carbon\Carbon::createFromFormat('H:i:s',$lundii->DebutMat)->format('H:i')}} - {{\Carbon\Carbon::createFromFormat('H:i:s',$lundii->FinMat)->format('H:i')}} </input></td>
-        <td><input name="typeAP" type="hidden" value="{{$lundii->typeAP}}">{{$lundii->typeAP}}</input></td>
-        <td><input name="aprem" type="hidden" value="{{\Carbon\Carbon::createFromFormat('H:i:s',$lundii->DebutAprem)->format('H:i')}} - {{\Carbon\Carbon::createFromFormat('H:i:s',$lundii->FinAprem)->format('H:i')}}">{{\Carbon\Carbon::createFromFormat('H:i:s',$lundii->DebutAprem)->format('H:i')}} - {{\Carbon\Carbon::createFromFormat('H:i:s',$lundii->FinAprem)->format('H:i')}}</input></td>
-        <td><input name="typeS" type="hidden" value="{{$lundii->typeS}}">{{$lundii->typeS}}</input></td>
-        <td><input name="soir" type="hidden"></input></td>
-        <td><input name="heuresEffec" type="hidden">7</input></td>
-        <td><input name="poids" type="hidden" value="{{ $hourdone }}">{{ $hourdone }}</input></td>
-        <td><input name="ecartJour" type="hidden"></input></td>
+      @foreach($affichage as $aff)
+      @if($aff->Date == $date_actu)
+        <input name="idfiche" type="hidden" value="{{ $aff->idfiche }}"></input>
+        <input name="idUser" type="hidden" value="{{ $aff->idUser }}"></input>
+        <td><input name="typeM" type="hidden" value="{{ $aff->activite1 }}">{{ $aff->activite1 }}</input></td>
+        <td><input name="matin" type="hidden" value ="{{ $aff->matin }}">{{ $aff->matin }}</input></td>
+        <td><input name="typeAP" type="hidden" value="{{ $aff->activite2 }}">{{ $aff->activite2 }}</input></td>
+        <td><input name="aprem" type="hidden" value="{{ $aff->aprem }}">{{ $aff->aprem }}</input></td>
+        <td><input name="typeS" type="hidden" value="{{ $aff->activite3 }}">{{ $aff->activite3 }}</input></td>
+        <td><input name="soir" type="hidden"  value="{{ $aff->soir }}">{{ $aff->soir }}</input></td>
+        <td><input name="heuresEffec" type="hidden" value="{{ $aff->heuresEffectu }}">{{ $aff->heuresEffectu }}</input></td>
+        <td><input name="poids" type="hidden" value="{{ $aff->Poids }}">{{ $aff->Poids }}</input></td>
+        <td><input name="ecartJour" type="hidden" value="{{ $aff->ecart }}">{{ $aff->ecart }}</input></td>
         <td><button type="submit">>Pointer</button></td>
-      </form>
+        @endif
         @endforeach
         @elseif($day_name=="Mar")
       @foreach( $mardi as $mardii )
@@ -130,13 +131,15 @@ $userId=Auth::user()->id;
       $hourdiffAprem = round((strtotime($mardii->FinAprem) - strtotime($mardii->DebutAprem))/3600, 1);
       $hourdone= $hourdiffMat + $hourdiffAprem;
       @endphp
+      <input name="idfiche" type="hidden" value="{{ $year_num }} - {{$month}}"></input>
+        <input name="idUser" type="hidden" value="{{ $userId }}"></input>
         <td><input type="hidden">{{$mardii->typeM}}</input></td>
         <td><input type="hidden">{{\Carbon\Carbon::createFromFormat('H:i:s',$mardii->DebutMat)->format('H:i')}} - {{\Carbon\Carbon::createFromFormat('H:i:s',$mardii->FinMat)->format('H:i')}} </input></td>
         <td><input type="hidden">{{$mardii->typeAP}}</input></td>
         <td><input type="hidden">{{\Carbon\Carbon::createFromFormat('H:i:s',$mardii->DebutAprem)->format('H:i')}} - {{\Carbon\Carbon::createFromFormat('H:i:s',$mardii->FinAprem)->format('H:i')}}</input></td>
         <td><input type="hidden">{{$mardii->typeS}}</input></td>
         <td></td>
-        <td>7</td>
+        <td></td>
         <td><input type="hidden">{{ $hourdone }}</input></td>
         <td></td>
         <td><a href="">Pointer</a></td>
@@ -149,13 +152,15 @@ $userId=Auth::user()->id;
       $hourdone= $hourdiffMat + $hourdiffAprem;
       $ecartJour = $hourdone;
       @endphp
+      <input name="idfiche" type="hidden" value="{{ $year_num }} - {{$month}}"></input>
+        <input name="idUser" type="hidden" value="{{ $userId }}"></input>
         <td><input type="hidden">{{$mer->typeM}}</input></td>
         <td><input type="hidden">{{\Carbon\Carbon::createFromFormat('H:i:s',$mer->DebutMat)->format('H:i')}} - {{\Carbon\Carbon::createFromFormat('H:i:s',$mer->FinMat)->format('H:i')}} </input></td>
         <td><input type="hidden">{{$mer->typeAP}}</input></td>
         <td><input type="hidden">{{\Carbon\Carbon::createFromFormat('H:i:s',$mer->DebutAprem)->format('H:i')}} - {{\Carbon\Carbon::createFromFormat('H:i:s',$mer->FinAprem)->format('H:i')}}</input></td>
         <td><input type="hidden">{{$mer->typeS}}</input></td>
         <td></td>
-        <td>5</td>
+        <td></td>
         <td><input type="hidden">{{ $hourdone }}</input></td>
         <td></td>
         <td><a href="">Pointer</a></td>
@@ -167,13 +172,15 @@ $userId=Auth::user()->id;
       $hourdiffAprem = round((strtotime($jeu->FinAprem) - strtotime($jeu->DebutAprem))/3600, 1);
       $hourdone= $hourdiffMat + $hourdiffAprem;
       @endphp
+      <input name="idfiche" type="hidden" value="{{ $year_num }} - {{$month}}"></input>
+        <input name="idUser" type="hidden" value="{{ $userId }}"></input>
         <td><input type="hidden">{{$jeu->typeM}}</input></td>
         <td><input type="hidden">{{\Carbon\Carbon::createFromFormat('H:i:s',$jeu->DebutMat)->format('H:i')}} - {{\Carbon\Carbon::createFromFormat('H:i:s',$jeu->FinMat)->format('H:i')}}</input> </td>
         <td><input type="hidden">{{$jeu->typeAP}}</input></td>
         <td><input type="hidden">{{\Carbon\Carbon::createFromFormat('H:i:s',$jeu->DebutAprem)->format('H:i')}} - {{\Carbon\Carbon::createFromFormat('H:i:s',$jeu->FinAprem)->format('H:i')}}</input></td>
         <td><input type="hidden">{{$jeu->typeS}}</input></td>
         <td></td>
-        <td>7</td>
+        <td></td>
         <td><input type="hidden">{{ $hourdone }}</input></td>
         <td></td>
         <td><a href="">Pointer</a></td>
@@ -185,13 +192,15 @@ $userId=Auth::user()->id;
       $hourdiffAprem = round((strtotime($ven->FinAprem) - strtotime($ven->DebutAprem))/3600, 1);
       $hourdone= $hourdiffMat + $hourdiffAprem;
       @endphp
+      <input name="idfiche" type="hidden" value="{{ $year_num }} - {{$month}}"></input>
+        <input name="idUser" type="hidden" value="{{ $userId }}"></input>
         <td><input type="hidden">{{$ven->typeM}}</input></td>
         <td><input type="hidden">{{\Carbon\Carbon::createFromFormat('H:i:s',$ven->DebutMat)->format('H:i')}} - {{\Carbon\Carbon::createFromFormat('H:i:s',$ven->FinMat)->format('H:i')}}</input> </td>
         <td><input type="hidden">{{$ven->typeAP}}</input></td>
         <td><input type="hidden">{{\Carbon\Carbon::createFromFormat('H:i:s',$ven->DebutAprem)->format('H:i')}} - {{\Carbon\Carbon::createFromFormat('H:i:s',$ven->FinAprem)->format('H:i')}}</input></td>
         <td><input type="hidden">{{$ven->typeS}}</input></td>
         <td></td>
-        <td>7</td>
+        <td></td>
         <td><input type="hidden">{{ $hourdone }}</input></td>
         <td></td>
         <td><a href="">Pointer</a></td>
@@ -203,6 +212,8 @@ $userId=Auth::user()->id;
       $hourdiffAprem = round((strtotime($sam->FinAprem) - strtotime($sam->DebutAprem))/3600, 1);
       $hourdone= $hourdiffMat + $hourdiffAprem;
       @endphp
+      <input name="idfiche" type="hidden" value="{{ $year_num }} - {{$month}}"></input>
+        <input name="idUser" type="hidden" value="{{ $userId }}"></input>
         <td><input type="hidden">{{$sam->typeM}}</input></td>
         @if($sam->DebutMat!=null)
         <td><input type="hidden">{{\Carbon\Carbon::createFromFormat('H:i:s',$sam->DebutMat)->format('H:i')}} - {{\Carbon\Carbon::createFromFormat('H:i:s',$sam->FinMat)->format('H:i')}}</input> </td>
@@ -229,6 +240,8 @@ $userId=Auth::user()->id;
       $hourdiffAprem = round((strtotime($dim->FinAprem) - strtotime($dim->DebutAprem))/3600, 1);
       $hourdone= $hourdiffMat + $hourdiffAprem;
       @endphp
+      <input name="idfiche" type="hidden" value="{{ $year_num }} - {{$month}}"></input>
+        <input name="idUser" type="hidden" value="{{ $userId }}"></input>
         <td><input type="hidden">{{$dim->typeM}}</input></td>
         @if($dim->DebutMat!=null)
         <td><input type="hidden">{{\Carbon\Carbon::createFromFormat('H:i:s',$dim->DebutMat)->format('H:i')}} - {{\Carbon\Carbon::createFromFormat('H:i:s',$dim->FinMat)->format('H:i')}}</input> </td>
@@ -249,6 +262,7 @@ $userId=Auth::user()->id;
         <td><a href="">Pointer</a></td>
         @endforeach
         @endif
+        </form>
       </tr>
       @endif
       @endforeach

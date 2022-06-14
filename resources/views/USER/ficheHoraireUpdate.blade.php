@@ -28,7 +28,11 @@
   <form action = "" method = "post">
 <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
 <div class="form-group">
-  <label for="code">{{ $fiiche->Date }}</label>
+    <h3>{{ $fiiche->Date }}</h3>
+    <h3>{{ $fiiche->activite1 }}</h3>
+    <h3>{{ $fiiche->activite2 }}</h3>
+    <h3>{{ $fiiche->activite3 }}</h3>
+  <label for="code"></label>
   <input type="text" class="form-control" name = 'code' id="code" value = ''>
 </div>
 <button type="submit" class="btn btn-primary" id="ajouter-button">modifier</button>
