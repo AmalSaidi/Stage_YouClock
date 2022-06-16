@@ -2,45 +2,35 @@
 <link rel="stylesheet" type="text/css" href="{{ url('/css/ADMIN/navbar.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ url('/css/USER/ficheHoraire.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ url('/css/USER/reglages.css') }}" />
-<script>
-  
-</script>
+<style>
+#menu-reg {
+    BACKGROUND-COLOR: WHITE;
+    WIDTH: 19%;
+    margin-left: 2%;
+    margin-top: -94.2%;
+    float: left;
+    text-align: center;
+}
+</style>
+
 @section('content')
 @php
 $userNom=Auth::user()->name;
 $userId=Auth::user()->id;
+$NotStarted="notStarted";
+$EnCours="EnCours";
+$Valide="Valide";
 @endphp
-@foreach( $employes as $employe )
-
-@if($employe->nom==$userNom)
-<div id="menu-reg">
-    <img id="logo-icon" src="https://cdn.discordapp.com/attachments/936584358654005321/974610254220378112/user.png">
-    <BR>
-    <div id="info-user"><p>{{ $employe->nom }} {{ $employe->prenom }}</p></div>
-<div id="stru-user">{{ $employe->structure }}</div>
-<table class="table-borderless">
-  <tbody>
-
-  <tr>
-      <td>Total des heures effectués : </td>
-    </tr>
-    <tr>
-      <td>Total des heures à effectuer :</td>
-    </tr>
-    <tr>
-      <td>Ecart :</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-@endif
-@endforeach
 <div id="acti">
 <h3>Fiche Horaires</h3>
 <br>
 <div id="button-list">
-<button id="ajouter">Pointer
-</button>
+@if($affichage == null)
+    <form action="/FicheHoraire" method="POST">
+      {{ csrf_field() }}
+<button type="submit">Ajouter la fiche horaire</button>
+</form>
+@endif
 </div>  
 <div id="calendar">
   <table class="table-bordered" id="MyTable">
@@ -58,58 +48,11 @@ $userId=Auth::user()->id;
     <th>Pointer</th>
   </thead>
   <tbody>
-  @php
-    @endphp
-    @for($i=1;$i <= $dateF; $i++)
-    @php
-      $date = date("Y-m-$i", strtotime("+1 day", strtotime($date)));
-      $day_name = date('l', strtotime($date));
-      $day_num = date('d', strtotime($date));
-      $year_num = date('Y', strtotime($date));
-    @endphp
-    @if($day_name=="Wednesday")
-    @php
-    $day_name="Mer"
-    @endphp
-    @elseif($day_name=="Thursday")
-    @php
-    $day_name="Jeu"
-    @endphp
-    @elseif($day_name=="Friday")
-    @php
-    $day_name="Ven"
-    @endphp
-    @elseif($day_name=="Saturday")
-    @php
-    $day_name="Sam"
-    @endphp
-    @elseif($day_name=="Sunday")
-    @php
-    $day_name="Dim"
-    @endphp
-    @elseif($day_name=="Monday")
-    @php
-    $day_name="Lun"
-    @endphp
-    @elseif($day_name=="Tuesday")
-    @php
-    $day_name="Mar"
-    @endphp
-    @endif
-    @foreach( $employes as $employe )
+  @foreach( $employes as $employe )
+  @foreach( $affichage as $aff)
     @if($employe->nom==$userNom)
       <tr>
-      <form action="/FicheHoraire" method="POST">
-      {{ csrf_field() }}
-      <td><input name="date" type="hidden" value="{{ $day_name }} {{ $day_num}} {{ $month }}"> {{ $day_name }} {{ $day_num}} {{ $month }}</input></td>
-      @if($day_name=="Lun")
-      @php
-      $hourdone= $hourdiffMat + $hourdiffAprem;
-      $date_actu= "$day_name $day_num $month";
-      echo $date_actu;
-      @endphp
-      @foreach($affichage as $aff)
-      @if($aff->Date == $date_actu)
+      <td><input name="date" type="hidden" value="{{ $aff->Date }}"> {{ $aff->Date }}</input></td>
         <input name="idfiche" type="hidden" value="{{ $aff->idfiche }}"></input>
         <input name="idUser" type="hidden" value="{{ $aff->idUser }}"></input>
         <td><input name="typeM" type="hidden" value="{{ $aff->activite1 }}">{{ $aff->activite1 }}</input></td>
@@ -118,158 +61,23 @@ $userId=Auth::user()->id;
         <td><input name="aprem" type="hidden" value="{{ $aff->aprem }}">{{ $aff->aprem }}</input></td>
         <td><input name="typeS" type="hidden" value="{{ $aff->activite3 }}">{{ $aff->activite3 }}</input></td>
         <td><input name="soir" type="hidden"  value="{{ $aff->soir }}">{{ $aff->soir }}</input></td>
-        <td><input name="heuresEffec" type="hidden" value="{{ $aff->heuresEffectu }}">{{ $aff->heuresEffectu }}</input></td>
+        <td><input name="heuresEffec" type="hidden" value="{{ $aff->heuresEffectu }}">{{ $aff->heuresEffectu }} </input></td>
         <td><input name="poids" type="hidden" value="{{ $aff->Poids }}">{{ $aff->Poids }}</input></td>
         <td><input name="ecartJour" type="hidden" value="{{ $aff->ecart }}">{{ $aff->ecart }}</input></td>
-        <td><button type="submit">>Pointer</button></td>
-        @endif
-        @endforeach
-        @elseif($day_name=="Mar")
-      @foreach( $mardi as $mardii )
-      @php
-      $hourdiffMat = round((strtotime($mardii->FinMat) - strtotime($mardii->DebutMat))/3600, 1);
-      $hourdiffAprem = round((strtotime($mardii->FinAprem) - strtotime($mardii->DebutAprem))/3600, 1);
-      $hourdone= $hourdiffMat + $hourdiffAprem;
-      @endphp
-      <input name="idfiche" type="hidden" value="{{ $year_num }} - {{$month}}"></input>
-        <input name="idUser" type="hidden" value="{{ $userId }}"></input>
-        <td><input type="hidden">{{$mardii->typeM}}</input></td>
-        <td><input type="hidden">{{\Carbon\Carbon::createFromFormat('H:i:s',$mardii->DebutMat)->format('H:i')}} - {{\Carbon\Carbon::createFromFormat('H:i:s',$mardii->FinMat)->format('H:i')}} </input></td>
-        <td><input type="hidden">{{$mardii->typeAP}}</input></td>
-        <td><input type="hidden">{{\Carbon\Carbon::createFromFormat('H:i:s',$mardii->DebutAprem)->format('H:i')}} - {{\Carbon\Carbon::createFromFormat('H:i:s',$mardii->FinAprem)->format('H:i')}}</input></td>
-        <td><input type="hidden">{{$mardii->typeS}}</input></td>
-        <td></td>
-        <td></td>
-        <td><input type="hidden">{{ $hourdone }}</input></td>
-        <td></td>
-        <td><a href="">Pointer</a></td>
-        @endforeach
-        @elseif($day_name=="Mer")
-      @foreach( $mercredi as $mer )
-      @php
-      $hourdiffMat = round((strtotime($mer->FinMat) - strtotime($mer->DebutMat))/3600, 1);
-      $hourdiffAprem = round((strtotime($mer->FinAprem) - strtotime($mer->DebutAprem))/3600, 1);
-      $hourdone= $hourdiffMat + $hourdiffAprem;
-      $ecartJour = $hourdone;
-      @endphp
-      <input name="idfiche" type="hidden" value="{{ $year_num }} - {{$month}}"></input>
-        <input name="idUser" type="hidden" value="{{ $userId }}"></input>
-        <td><input type="hidden">{{$mer->typeM}}</input></td>
-        <td><input type="hidden">{{\Carbon\Carbon::createFromFormat('H:i:s',$mer->DebutMat)->format('H:i')}} - {{\Carbon\Carbon::createFromFormat('H:i:s',$mer->FinMat)->format('H:i')}} </input></td>
-        <td><input type="hidden">{{$mer->typeAP}}</input></td>
-        <td><input type="hidden">{{\Carbon\Carbon::createFromFormat('H:i:s',$mer->DebutAprem)->format('H:i')}} - {{\Carbon\Carbon::createFromFormat('H:i:s',$mer->FinAprem)->format('H:i')}}</input></td>
-        <td><input type="hidden">{{$mer->typeS}}</input></td>
-        <td></td>
-        <td></td>
-        <td><input type="hidden">{{ $hourdone }}</input></td>
-        <td></td>
-        <td><a href="">Pointer</a></td>
-        @endforeach
-        @elseif($day_name=="Jeu")
-      @foreach( $jeudi as $jeu )
-      @php
-      $hourdiffMat = round((strtotime($jeu->FinMat) - strtotime($jeu->DebutMat))/3600, 1);
-      $hourdiffAprem = round((strtotime($jeu->FinAprem) - strtotime($jeu->DebutAprem))/3600, 1);
-      $hourdone= $hourdiffMat + $hourdiffAprem;
-      @endphp
-      <input name="idfiche" type="hidden" value="{{ $year_num }} - {{$month}}"></input>
-        <input name="idUser" type="hidden" value="{{ $userId }}"></input>
-        <td><input type="hidden">{{$jeu->typeM}}</input></td>
-        <td><input type="hidden">{{\Carbon\Carbon::createFromFormat('H:i:s',$jeu->DebutMat)->format('H:i')}} - {{\Carbon\Carbon::createFromFormat('H:i:s',$jeu->FinMat)->format('H:i')}}</input> </td>
-        <td><input type="hidden">{{$jeu->typeAP}}</input></td>
-        <td><input type="hidden">{{\Carbon\Carbon::createFromFormat('H:i:s',$jeu->DebutAprem)->format('H:i')}} - {{\Carbon\Carbon::createFromFormat('H:i:s',$jeu->FinAprem)->format('H:i')}}</input></td>
-        <td><input type="hidden">{{$jeu->typeS}}</input></td>
-        <td></td>
-        <td></td>
-        <td><input type="hidden">{{ $hourdone }}</input></td>
-        <td></td>
-        <td><a href="">Pointer</a></td>
-        @endforeach
-        @elseif($day_name=="Ven")
-      @foreach( $vendredi as $ven )
-      @php
-      $hourdiffMat = round((strtotime($ven->FinMat) - strtotime($ven->DebutMat))/3600, 1);
-      $hourdiffAprem = round((strtotime($ven->FinAprem) - strtotime($ven->DebutAprem))/3600, 1);
-      $hourdone= $hourdiffMat + $hourdiffAprem;
-      @endphp
-      <input name="idfiche" type="hidden" value="{{ $year_num }} - {{$month}}"></input>
-        <input name="idUser" type="hidden" value="{{ $userId }}"></input>
-        <td><input type="hidden">{{$ven->typeM}}</input></td>
-        <td><input type="hidden">{{\Carbon\Carbon::createFromFormat('H:i:s',$ven->DebutMat)->format('H:i')}} - {{\Carbon\Carbon::createFromFormat('H:i:s',$ven->FinMat)->format('H:i')}}</input> </td>
-        <td><input type="hidden">{{$ven->typeAP}}</input></td>
-        <td><input type="hidden">{{\Carbon\Carbon::createFromFormat('H:i:s',$ven->DebutAprem)->format('H:i')}} - {{\Carbon\Carbon::createFromFormat('H:i:s',$ven->FinAprem)->format('H:i')}}</input></td>
-        <td><input type="hidden">{{$ven->typeS}}</input></td>
-        <td></td>
-        <td></td>
-        <td><input type="hidden">{{ $hourdone }}</input></td>
-        <td></td>
-        <td><a href="">Pointer</a></td>
-        @endforeach
-        @elseif($day_name=="Sam")
-      @foreach( $samedi as $sam )
-      @php
-      $hourdiffMat = round((strtotime($sam->FinMat) - strtotime($sam->DebutMat))/3600, 1);
-      $hourdiffAprem = round((strtotime($sam->FinAprem) - strtotime($sam->DebutAprem))/3600, 1);
-      $hourdone= $hourdiffMat + $hourdiffAprem;
-      @endphp
-      <input name="idfiche" type="hidden" value="{{ $year_num }} - {{$month}}"></input>
-        <input name="idUser" type="hidden" value="{{ $userId }}"></input>
-        <td><input type="hidden">{{$sam->typeM}}</input></td>
-        @if($sam->DebutMat!=null)
-        <td><input type="hidden">{{\Carbon\Carbon::createFromFormat('H:i:s',$sam->DebutMat)->format('H:i')}} - {{\Carbon\Carbon::createFromFormat('H:i:s',$sam->FinMat)->format('H:i')}}</input> </td>
-        @else
-        <td><input type="hidden"></input></td>
-        @endif
-        <td><input type="hidden">{{$sam->typeAP}}</input></td>
-        @if($sam->DebutAprem!=null)
-        <td><input type="hidden">{{\Carbon\Carbon::createFromFormat('H:i:s',$sam->DebutAprem)->format('H:i')}} - {{\Carbon\Carbon::createFromFormat('H:i:s',$sam->FinAprem)->format('H:i')}}</input></td>
-        @else
-        <td><input type="hidden"></input></td>
-        @endif
-        <td><input type="hidden">{{$sam->typeS}}</input></td>
-        <td></td>
-        <td>7</td>
-        <td><input type="hidden">{{ $hourdone }}</input></td>
-        <td></td>
-        <td><a href="">Pointer</a></td>
-        @endforeach
-        @elseif($day_name=="Dim")
-        @foreach( $dimanche as $dim )
-      @php
-      $hourdiffMat = round((strtotime($dim->FinMat) - strtotime($dim->DebutMat))/3600, 1);
-      $hourdiffAprem = round((strtotime($dim->FinAprem) - strtotime($dim->DebutAprem))/3600, 1);
-      $hourdone= $hourdiffMat + $hourdiffAprem;
-      @endphp
-      <input name="idfiche" type="hidden" value="{{ $year_num }} - {{$month}}"></input>
-        <input name="idUser" type="hidden" value="{{ $userId }}"></input>
-        <td><input type="hidden">{{$dim->typeM}}</input></td>
-        @if($dim->DebutMat!=null)
-        <td><input type="hidden">{{\Carbon\Carbon::createFromFormat('H:i:s',$dim->DebutMat)->format('H:i')}} - {{\Carbon\Carbon::createFromFormat('H:i:s',$dim->FinMat)->format('H:i')}}</input> </td>
-        @else
-        <td><input type="hidden"></input></td>
-        @endif
-        <td><input type="hidden">{{$dim->typeAP}}</input></td>
-        @if($dim->DebutAprem!=null)
-        <td><input type="hidden">{{\Carbon\Carbon::createFromFormat('H:i:s',$dim->DebutAprem)->format('H:i')}} - {{\Carbon\Carbon::createFromFormat('H:i:s',$dim->FinAprem)->format('H:i')}}</input></td>
-        @else
-        <td><input type="hidden"></input></td>
-        @endif
-        <td><input type="hidden">{{$dim->typeS}}</input></td>
-        <td></td>
-        <td>7</td>
-        <td><input type="hidden">{{ $hourdone }}</input></td>
-        <td></td>
-        <td><a href="">Pointer</a></td>
-        @endforeach
-        @endif
-        </form>
+        <td><a href = 'FicheHoraire/edit/{{ $aff->id }}'><button>Pointer</button></a></td>
       </tr>
-      @endif
-      @endforeach
-    @endfor
+      <input type="hidden" value="{{$p = $p + $aff->heuresEffectu }}">
+      <input type="hidden" value="{{$f = $f + $aff->Poids }}">
+      <input type="hidden" value="{{$totEcart = $totEcart + $aff->ecart }}">
+    @endif
+  @endforeach
+  @endforeach
+ 
   </tbody>
 </table>
-
+<div style="text-align:center;">
+<button id="Valider">Valider</button>
+</div>
 </div>
 
 <div>
@@ -338,6 +146,30 @@ $userId=Auth::user()->id;
   </div>
 </div>
     </div>
+    @foreach( $employes as $employe )
+@if($employe->nom==$userNom)
+<div id="menu-reg">
+    <img id="logo-icon" src="https://cdn.discordapp.com/attachments/936584358654005321/974610254220378112/user.png">
+    <BR>
+    <div id="info-user"><p>{{ $employe->nom }} {{ $employe->prenom }}</p></div>
+<div id="stru-user">{{ $employe->structure }}</div>
+<table class="table-borderless">
+  <tbody>
+
+  <tr>
+      <td>Total des heures effectués : {{$p}}</td>
+    </tr>
+    <tr>
+      <td>Total des heures à effectuer : {{$f}}</td>
+    </tr>
+    <tr>
+      <td>Ecart : {{$totEcart}}</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+@endif
+@endforeach
     <script>
 
       </script>
@@ -345,5 +177,6 @@ $userId=Auth::user()->id;
       <script type="text/javascript" src="{{ URL::asset('js/ajouter_popup.js') }}"></script>
        <script type="text/javascript" src="{{ URL::asset('js/afficher-form-modifier.js') }}">
       </script>
+      
 @endsection
   

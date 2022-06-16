@@ -9,5 +9,8 @@ class fichehor extends Model
 {
     use HasFactory;
     public $timestamps = false;
+    public function getTotalPriceAttribute() {
+        return $this->heuresEffectu;
+    }
 
 }

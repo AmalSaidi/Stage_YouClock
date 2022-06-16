@@ -153,6 +153,14 @@
     float: right;
     
 }
+#valider{
+    border: none;
+    padding: 1.1% 4% 1.1% 4%;
+    font-family: cursive;
+    background-color: #7ad750;
+    color: white;
+    margin-top: 20;
+}
 
 #ajouter:hover{
     background-color: #6393b2;
@@ -215,4 +223,27 @@ hr {
     TEXT-ALIGN: CENTER;
     padding: 3 12 3 12;
     MARGIN-BOTTOM: 3%;
+}
+
+#titlee{
+    margin-bottom: 2%;
+}
+
+#mat{
+    color: #1d4289;
+}
+
+#apr{
+    color: #1d4289;
+}
+
+#soir{
+    color: #1d4289;
+}
+
+#TM{
+    background-color: #1d428c;
+    COLOR: white;
+    padding: 3px;
+    font-size: smaller;
 }
