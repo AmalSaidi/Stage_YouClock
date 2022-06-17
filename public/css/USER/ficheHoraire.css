@@ -129,6 +129,9 @@
     margin-left: 47%;
     BORDER: none;
   }
+  #ajouter-button:hover{
+    background-color: #4d6e97 !important;
+  }
   
   .close:hover,.close:focus {
     color: black;

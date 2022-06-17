@@ -12,7 +12,13 @@
 </style>
 
 @section('content')
+
   <div id="acti">
+  @if (session('status'))
+    <div class="alert alert-danger">
+        {{ session('status') }}
+    </div>
+@endif
 <form action = "/FicheHoraire/edit/<?php echo $affichage[0]->id; ?>" method = "post">
 <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
 <h3 id="titlee">
@@ -77,7 +83,7 @@
     <input onblur="findTotal()" id="num" name="num" type="number" placeholder="" step="0.01" min="0" max="10"><br>
     <input onblur="findTotal()" id="num" name="num" type="number" placeholder="" step="0.01" min="0" max="10"><br>
     <input onblur="findTotal()" id="num" name="num" type="number" placeholder="" step="0.01" min="0" max="10"><br>
-    <input name="heureseffectu" onblur="findTotal()" type="hidden" name="total" id="total"/>
+    <input name="heureseffectu" onblur="findTotal()" type="hidden" name="total" id="total" max="10"/>
     </div>
 </div>
 <button type="submit" class="btn btn-primary" id="ajouter-button">Valider</button>
@@ -86,7 +92,7 @@
 @if($affichage[0]->id!=$lastt->id)
 <form action = "/FicheHoraire/ediit/<?php echo $affichage[0]->id; ?>" method = "post">
     <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
-    <button type="submit" class="btn btn-primary" id="jourS-button">Jour suivant</button>
+    <!--<button type="hidden" class="btn btn-primary" id="jourS-button">Jour suivant</button> -->
 </form>
 @endif
 @endforeach

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Session;
 use App\Models\fichehor;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class FicheHoraireUserController extends Controller
 {
@@ -244,13 +245,29 @@ class FicheHoraireUserController extends Controller
         $hourdiffMat = round((strtotime($matinF) - strtotime($matinD ))/3600, 1);
         $hourdiffAprem = round((strtotime($ApremF) - strtotime($ApremD))/3600, 1);
         $hourdiffSoir = round((strtotime($soirF) - strtotime($soirD))/3600, 1);
+        $pauseMidi = round((strtotime($ApremD) - strtotime($matinF ))/3600, 1);
         $poids= $hourdiffMat + $hourdiffAprem + $hourdiffSoir;
         $ecart= ($heuresEffectu-$poids);
+        echo $pauseMidi;
+        if($heuresEffectu!=$poids){
+            $message="u cant";
+        }
+        if(!isset($message))
+        {
+            if($pauseMidi>=0.8){
         DB::update('update fichehors set matinD = ?,matinF = ?,ApremD=?, ApremF = ?,
         soirD=?, soirF=?,matin=?,poids=?,heuresEffectu=?,activite1=?,aprem=?,soir=?,activite2=?,
         activite3=?,ecart=? where id = ?',
         [$matinD,$matinF,$ApremD,$ApremF,$soirD,$soirF,$matin,$poids,$heuresEffectu,$activite1,$aprem,
         $soir,$activite2,$activite3,$ecart,$id]);
-        return redirect('/FicheHoraire');
-    }
+        return redirect('/FicheHoraire');}
+        else{
+            return redirect()->back()->with('status', 'La durée de pause doit être supérieur à 45min');
+        }
+        }
+        else{
+            return redirect()->back()->with('status', 'Le nombre d\'heures effectués est invalide');
+        }
+
+}
 }
