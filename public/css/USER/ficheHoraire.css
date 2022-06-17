@@ -155,11 +155,15 @@
 }
 #valider{
     border: none;
-    padding: 1.1% 4% 1.1% 4%;
+    padding: 0.5% 2% 0.5% 2%;
     font-family: cursive;
     background-color: #7ad750;
     color: white;
     margin-top: 20;
+}
+
+#valider:hover{
+    background-color: darkgreen;
 }
 
 #ajouter:hover{
@@ -242,8 +246,87 @@ hr {
 }
 
 #TM{
-    background-color: #1d428c;
+    background-color: #4967a2;
     COLOR: white;
     padding: 3px;
     font-size: smaller;
+    margin-bottom: 1%;
+}
+
+#TAP{
+    background-color: #4967a2;
+    COLOR: white;
+    padding: 3px;
+    font-size: smaller;
+    margin-bottom: 1%;
+}
+
+#TS{
+    background-color: #4967a2;
+    COLOR: white;
+    padding: 3px;
+    font-size: smaller;
+    margin-bottom: 1%;
+}
+
+#DeMatDiv{
+    float:left;
+    margin-right: 10%;
+}
+
+#DeApremDiv{
+float:left;
+margin-right: 10%;
+} 
+
+#DeSoirDiv{
+    float:left;
+    margin-right: 10%;
+}
+
+p{
+    font-size: smaller;
+}
+
+#venti{
+    float:left;
+    margin-right: 10%;
+}
+
+#num{
+    margin-bottom: 1%;
+}
+
+#ven{
+    margin-bottom: 4%;
+}
+
+#ventilation-titre{
+    margin-bottom: 2%;
+}
+
+#pointer{
+    background-color: #8099c6;
+    color: white;
+    border-color: #96bcde;
+}
+
+#pointer:hover{
+    background-color: #2f384b;
+}
+
+#ajoutFiche{
+    float: none;
+    margin-left: 62%;
+    background-color: #e95353;
+    color: white;
+    border-color: crimson;
+}
+
+#ajoutFiche:hover{
+    background-color: #5c2121;
+}
+
+#total{
+    background-color: #dfdfdfc7;
 }

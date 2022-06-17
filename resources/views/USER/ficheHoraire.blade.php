@@ -7,7 +7,7 @@
     BACKGROUND-COLOR: WHITE;
     WIDTH: 19%;
     margin-left: 2%;
-    margin-top: -94.2%;
+    margin-top: -95.4%;
     float: left;
     text-align: center;
 }
@@ -25,10 +25,10 @@ $Valide="Valide";
 <h3>Fiche Horaires</h3>
 <br>
 <div id="button-list">
-@if($affichage == null)
+@if($ajout==0)
     <form action="/FicheHoraire" method="POST">
       {{ csrf_field() }}
-<button type="submit">Ajouter la fiche horaire</button>
+<button type="submit" id="ajoutFiche">Ajouter la fiche horaire</button>
 </form>
 @endif
 </div>  
@@ -64,7 +64,7 @@ $Valide="Valide";
         <td><input name="heuresEffec" type="hidden" value="{{ $aff->heuresEffectu }}">{{ $aff->heuresEffectu }} </input></td>
         <td><input name="poids" type="hidden" value="{{ $aff->Poids }}">{{ $aff->Poids }}</input></td>
         <td><input name="ecartJour" type="hidden" value="{{ $aff->ecart }}">{{ $aff->ecart }}</input></td>
-        <td><a href = 'FicheHoraire/edit/{{ $aff->id }}'><button>Pointer</button></a></td>
+        <td><a href = 'FicheHoraire/edit/{{ $aff->id }}'><button id="pointer">Pointer</button></a></td>
       </tr>
       <input type="hidden" value="{{$p = $p + $aff->heuresEffectu }}">
       <input type="hidden" value="{{$f = $f + $aff->Poids }}">
@@ -72,11 +72,25 @@ $Valide="Valide";
     @endif
   @endforeach
   @endforeach
- 
+ <tr id="total">
+   <td>Total</td>
+   <td></td>
+   <td></td>
+   <td></td>
+   <td></td>
+   <td></td>
+   <td></td>
+   <td>{{$p}}</td>
+   <td>{{$f}}</td>
+   <td>{{$totEcart}}</td>
+   <td></td>
+ </tr>
   </tbody>
 </table>
+@if($ajout==1)
 <div style="text-align:center;">
 <button id="Valider">Valider</button>
+@endif
 </div>
 </div>
 

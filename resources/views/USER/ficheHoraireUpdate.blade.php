@@ -12,23 +12,6 @@
 </style>
 
 @section('content')
-<div id="menu-reg">
-    <P id="reglages">Réglages</P>
-    <ul class="nav flex-column">
-    <li class="reg" >
-        <a class="nav-link" href="/activites">ACTIVITES</a>
-      </li>
-      <li class="reg" >
-        <a class="nav-link" href="/structures">STRUCTURES</a>
-      </li>
-      <li class="reg" >
-        <a class="nav-link" href="/services">SERVICES</a>
-      </li>
-      <li class="reg">
-        <a class="nav-link" href="/dureePause">DUREE DES PAUSES</a>
-      </li>
-    </ul>
-  </div>
   <div id="acti">
 <form action = "/FicheHoraire/edit/<?php echo $affichage[0]->id; ?>" method = "post">
 <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
@@ -42,36 +25,72 @@
     <option value=""> </option>
 </select></input>
 <br>
+<div id="DeMatDiv">
+<p>Heure de début</p>
 <input type="time" name="morningS" value="09:00"/>
+</div>
+<div id="FiMatDiv">
+<p>Heure de fin</p>
 <input type="time" name="morningF" value="12:30"/>
+</div>
 </div>
 <div class="form-group">
     <h5 id="apr">Après-midi</h5>
-    <input type="hidden" name="TAP"><select name="TAP" id="">
-    <option value="T">T</option>
+    <input type="hidden" name="TAP"><select id="TAP" name="TAP" id="">
+    <option value="T">Activité : T</option>
     <option value=""> </option>
 </select></input>
+<br>
+<div id="DeApremDiv">
+<p>Heure de début</p>
 <input type="time" name="ApremS" value="13:30"/>
+</div>
+<div>
+<p>Heure de fin</p>
 <input type="time" name="ApremF" value="17:00"/>
+</div>
 </div>
 <div class="form-group">
     <h5 id="soir">Soir</h5>
-<input type="hidden" name="TS"><select name="TS" id="">
+<input type="hidden" name="TS"><select name="TS" id="TS">
     <option value=""></option>
-    <option value="T">T</option>
+    <option value="T">Activité : T</option>
 </select></input>
+<br>
+<div id="DeSoirDiv">
+<p>Heure de début</p>
 <input type="time" name="soirS" value=" "/>
+</div>
+<div>
+<p>Heure de fin</p>
 <input type="time" name="soirF" value=" "/>
 </div>
-<div class="form-group">
-    <h5>Ventilation</h5>
-    <input onblur="findTotal()" name="num" type="number" placeholder="" step="0.01" min="0" max="10">
-    <input onblur="findTotal()" name="num" type="number" placeholder="" step="0.01" min="0" max="10">
-    <input onblur="findTotal()" name="num" type="number" placeholder="" step="0.01" min="0" max="10">
-    <input name="heureseffectu" onblur="findTotal()" type="text" name="total" id="total"/>
 </div>
-<button type="submit" class="btn btn-primary" id="ajouter-button">modifier</button>
+<div class="form-group">
+    <h5 id="ventilation-titre">Ventilation</h5>
+    <div id="venti">
+    <input id="ven" type="text" placeholder="ventilation1" ><br>
+    <input id="ven" type="text" placeholder="ventilation2" ><br>
+    <input id="ven" type="text" placeholder="ventilation3" ><br>
+    </div>
+    <div>
+    <input onblur="findTotal()" id="num" name="num" type="number" placeholder="" step="0.01" min="0" max="10"><br>
+    <input onblur="findTotal()" id="num" name="num" type="number" placeholder="" step="0.01" min="0" max="10"><br>
+    <input onblur="findTotal()" id="num" name="num" type="number" placeholder="" step="0.01" min="0" max="10"><br>
+    <input name="heureseffectu" onblur="findTotal()" type="hidden" name="total" id="total"/>
+    </div>
+</div>
+<button type="submit" class="btn btn-primary" id="ajouter-button">Valider</button>
 </form>
+@foreach($last as $lastt)
+@if($affichage[0]->id!=$lastt->id)
+<form action = "/FicheHoraire/ediit/<?php echo $affichage[0]->id; ?>" method = "post">
+    <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
+    <button type="submit" class="btn btn-primary" id="jourS-button">Jour suivant</button>
+</form>
+@endif
+@endforeach
+
 </div>
 <script type="text/javascript" src="{{ URL::asset('js/ajouter_popup.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/afficher-form-modifier.js') }}"></script>

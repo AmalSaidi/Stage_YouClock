@@ -76,7 +76,7 @@ Route::get('/demandeConge', [DemandeCongeUser::class, 'verifyDate']);
 
 /*
 |--------------------------------------------------------------------------
-| Fiche horaire admin :
+| Fiche horaire User :
 |--------------------------------------------------------------------------
 */
 
@@ -84,6 +84,7 @@ Route::get('/FicheHoraire', [FicheHoraireUserController::class, 'index']);
 Route::post('/FicheHoraire', [FicheHoraireUserController::class, 'addDays']);
 Route::get('/FicheHoraire/edit/{id}', [FicheHoraireUserController::class, 'show']);
 Route::post('/FicheHoraire/edit/{id}',[FicheHoraireUserController::class, 'edit']);
+Route::post('/FicheHoraire/ediit/{id}', [FicheHoraireUserController::class, 'nextD']);
 
 
 

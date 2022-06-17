@@ -35,7 +35,22 @@ class FicheHoraireUserController extends Controller
 
     public function show($id) {
         $affichage = DB::select('select * from fichehors where id = ?',[$id]);
-        return view('USER/ficheHoraireUpdate',['affichage'=>$affichage]);
+        $last = DB::select('select id from fichehors order by id DESC limit 1');
+        if ($last)
+        {
+            $lastt=1;
+        }
+        else{
+            $lastt=0;
+        }
+        return view('USER/ficheHoraireUpdate',['affichage'=>$affichage,'last'=>$last,'lastt'=>$lastt]);
+            }
+    
+    public function nextD($id) {
+        $id=$id+1;
+        $last = DB::select('select id from fichehors order by id DESC limit 1');
+        $affichage = DB::select('select * from fichehors where id = ?',[$id]);
+        return view('USER/ficheHoraireUpdate',['affichage'=>$affichage,'last'=>$last]);
             }
 
     public function addDays() {
@@ -158,6 +173,7 @@ class FicheHoraireUserController extends Controller
         $p=0;
         $f=0;
         $totEcart=0;
+        $ajout=0;
          switch ($month) {
             case 1:
                 $month="Janvier";
@@ -198,9 +214,16 @@ class FicheHoraireUserController extends Controller
         }
         $affichage = DB::table('fichehors')->where('idUser', $session_id)->where('idfiche', 'like', '%'.$month.'%')
         ->where('idfiche', 'like', '%'.$year.'%')->get();
+        if (!$affichage->isEmpty())
+        {
+            $ajout=1;
+        }
+        else{
+            $ajout=0;
+        }
         return view('USER.ficheHoraire',[ 'employes' =>$employes,'date' =>$date,'date2' =>$date2,'dateF' =>$dateF,'month' =>$month,
         'lundi' =>$lundi,'mardi' =>$mardi,'mercredi' =>$mercredi,'jeudi' =>$jeudi,'vendredi' =>$vendredi,'samedi' =>$samedi,
-        'dimanche' =>$dimanche,'affichage' => $affichage,'p'=>$p,'f'=>$f,'totEcart'=>$totEcart,
+        'dimanche' =>$dimanche,'affichage' => $affichage,'p'=>$p,'f'=>$f,'totEcart'=>$totEcart,'ajout'=>$ajout,
         ]);
     }
 
