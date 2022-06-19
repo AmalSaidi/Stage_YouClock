@@ -64,8 +64,6 @@ Route::get('/FicheHoraire/{id}', [PageEmployesController::class, 'showFiche']);
 Route::get('/FicheHoraire/Details/{id}/{idfiche}', [PageEmployesController::class, 'showFicheComplete']);
 
 
-
-
 /*
 |--------------------------------------------------------------------------
 | DemandeConge User :
