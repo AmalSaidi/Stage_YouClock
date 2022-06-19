@@ -54,7 +54,7 @@ $Valide="Valide";
       <tr>
       <td><input name="date" type="hidden" value="{{ $aff->Date }}"> {{ $aff->Date }}</input></td>
         <input name="idfiche" type="hidden" value="{{ $aff->idfiche }}"></input>
-        <input name="idUser" type="hidden" value="{{ $aff->idUser }}"></input>
+        <input name="idUser" type="hidden" value="{{ $employe->id }}"></input>
         <td><input name="typeM" type="hidden" value="{{ $aff->activite1 }}">{{ $aff->activite1 }}</input></td>
         <td><input name="matin" type="hidden" value ="{{ $aff->matin }}">{{ $aff->matin }}</input></td>
         <td><input name="typeAP" type="hidden" value="{{ $aff->activite2 }}">{{ $aff->activite2 }}</input></td>

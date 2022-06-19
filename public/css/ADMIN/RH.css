@@ -62,16 +62,11 @@ PADDING: 2;
 .table-borderless{
     width: -webkit-fill-available;
 }
-a{
-    color: #355ba2 !important;
-    text-decoration: none;
-    background-color: transparent;
-}
 
 .table-borderless td {
     vertical-align: top;
     border-top: 1px solid #dee2e6;
-    padding-bottom: 2%;
+    padding-bottom: 9%;
     padding-top: 2%;
     font-size: small;
 }
@@ -640,5 +635,14 @@ margin-right: 20px;
     width: 50;
     /* margin-right: 27; */
     margin-right: 33;
+}
+
+#menu-reg {
+    BACKGROUND-COLOR: WHITE;
+    WIDTH: 19%;
+    PADDING: 3% !important;
+    margin-left: 2% !important;
+    margin-top: 0 !important;
+    float: left !important;
 }
 

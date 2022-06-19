@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\employes;
 use App\Models\horairesemaine;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class PageEmployesController extends Controller
 {
@@ -15,9 +16,11 @@ class PageEmployesController extends Controller
     }
 
     public function index(){
-        $employes = employes::all();
+        $user=Auth::user();
+        $session_str = $user->structure;
+        $employes = DB::table('employes')->where('structure', 'like', '%'.$session_str.'%')->where('admin',0)->get();
         return view('ADMIN/PageEmployes',[
-            'employes' =>$employes, 
+            'employes' =>$employes,
         ]);
     }
 
@@ -42,17 +45,36 @@ class PageEmployesController extends Controller
 
     public function show($id) {
         $employes = DB::select('select * from employes where id = ?',[$id]);
-        return view('ADMIN/infoperso',['employes'=>$employes]);
+        $user=Auth::user();
+        $session_str = $user->structure;
+        $employees = DB::table('employes')->where('structure', 'like', '%'.$session_str.'%')->where('admin',0)->get();
+        return view('ADMIN/infoperso',['employes'=>$employes,'employees'=>$employees]);
         }
 
     public function showRH($id) {
+        $user=Auth::user();
+        $session_str = $user->structure;
+        $employees = DB::table('employes')->where('structure', 'like', '%'.$session_str.'%')->where('admin',0)->get();
         $employes = DB::select('select * from employes where id = ?',[$id]);
-        return view('ADMIN/RH',['employes'=>$employes]);
+        return view('ADMIN/RH',['employes'=>$employes,'employees'=>$employees]);
         }
 
     public function showFiche($id) {
+        $user=Auth::user();
+        $session_str = $user->structure;
+        $employees = DB::table('employes')->where('structure', 'like', '%'.$session_str.'%')->where('admin',0)->get();
         $employes = DB::select('select * from employes where id = ?',[$id]);
-        return view('ADMIN/ficheHoraire',['employes'=>$employes]);
+        $fiche = DB::select('select DISTINCT idfiche,statutF from fichehors where idUser = (select identifiant from employes where id = ?)',[$id]);
+        return view('ADMIN/ficheHoraire',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees]);
+        }
+
+    public function showFicheComplete($id,$idfiche) {
+        $user=Auth::user();
+        $session_str = $user->structure;
+        $employees = DB::table('employes')->where('structure', 'like', '%'.$session_str.'%')->where('admin',0)->get();
+        $employes = DB::select('select * from employes where id = ?',[$id]);
+        $fiche = DB::select('select * from fichehors where idfiche =? AND idUser = (select identifiant from employes where id = ?)',[$idfiche,$id]);
+        return view('ADMIN/FicheHoraireDetails',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees]);
         }
 
 }

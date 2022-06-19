@@ -59,7 +59,7 @@ class FicheHoraireUserController extends Controller
         $fiche->Date = request('date1');
         $fiche->idfiche = request('idfiche');
         $user=Auth::user();
-        $session_id = $user->id;
+        $session_id = $user->identifiant;
         $date = date('Y-m-01', strtotime("first day of this month"));
         $dateF = date('d', strtotime("last day of this month"));
         $date2 = date('l', strtotime($date));
@@ -143,7 +143,7 @@ class FicheHoraireUserController extends Controller
 
     public function index(){
         $user=Auth::user();
-        $session_id = $user->id;
+        $session_id = $user->identifiant;
         $employes = DB::select('select * from employes');
         $lundi = DB::select('SELECT nom, prenom, DebutMat, FinMat, DebutAprem, FinAprem , typeM, typeAP, typeS
                              FROM horairesemaines INNER JOIN employes

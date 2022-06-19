@@ -426,3 +426,31 @@ margin-right: 20px;
     margin-top: 0 !important;
     float: left !important;
 }
+#tableFiche{
+    width: 80% !important;
+    text-align: center;
+    margin-top: 3%;
+    font-family: cursive !important;
+    font-size: smaller;
+}
+
+#headFiche{
+    background-color: #e8ecf4;
+}
+
+.table td, .table th {
+    padding: 2 !important;
+    vertical-align: top !important;
+}
+
+#depass{
+    background-color:#bababa;
+    color: white;
+    text-align: left;
+}
+
+#container {
+    column-count:2;
+    -moz-column-count:2;
+    -webkit-column-count:2;
+}

@@ -11,6 +11,7 @@ use App\Http\Controllers\DemandeCongeUser;
 use App\Http\Controllers\DemandeCongeAdmin;
 use App\Http\Controllers\depHorController;
 use App\Http\Controllers\FicheHoraireUserController;
+use App\Http\Controllers\FicheHoraireAdminController;
 use App\Models\structures;
 
 /*
@@ -60,6 +61,8 @@ Route::get('/employes/ajouter',[PageEmployesController::class, 'store']);
 Route::get('/employes/ajouter',[PageEmployesController::class, 'store']);
 Route::get('/RH/{id}', [PageEmployesController::class, 'showRH']);
 Route::get('/FicheHoraire/{id}', [PageEmployesController::class, 'showFiche']);
+Route::get('/FicheHoraire/Details/{id}/{idfiche}', [PageEmployesController::class, 'showFicheComplete']);
+
 
 
 
@@ -86,7 +89,11 @@ Route::get('/FicheHoraire/edit/{id}', [FicheHoraireUserController::class, 'show'
 Route::post('/FicheHoraire/edit/{id}',[FicheHoraireUserController::class, 'edit']);
 Route::post('/FicheHoraire/ediit/{id}', [FicheHoraireUserController::class, 'nextD']);
 
-
+/*
+|--------------------------------------------------------------------------
+| Fiche horaire Admin :
+|--------------------------------------------------------------------------
+*/
 
 /*
 |--------------------------------------------------------------------------

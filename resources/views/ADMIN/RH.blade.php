@@ -17,6 +17,19 @@
 </button>
 </div>
 </div>  
+<div id="menu-reg">
+<table class="table-borderless">
+  <tbody>
+  @foreach( $employees as $emp )
+    <tr>
+      <td><a id="link-nom" href = '/employes/{{ $emp->id }}'>{{ $emp->nom }} {{ $emp->prenom }} </a><br>
+        <small>{{ $emp->structure }}</small>
+      </td>
+    </tr>
+    @endforeach
+  </tbody>
+</table>
+</div>
     <div id="acti">
 
     @foreach( $employes as $employe )
@@ -34,7 +47,7 @@
 <div id="buttons">
 <button id="info"><a href='/employes/{{ $employe->id }}'>Informations personnelles</a></button>
 <button id="RH" disabled>Dossier RH</button>
-<button id="horaire"><a href="">Fiche Horaire</a></button>
+<button id="horaire"><a href="/FicheHoraire/{{ $employe->id }}">Fiche Horaire</a></button>
 <button id="ventilation"><a href="">Ventilation</a></button>
 <button id="stat"><a href="">Statistiques</a></button>
 

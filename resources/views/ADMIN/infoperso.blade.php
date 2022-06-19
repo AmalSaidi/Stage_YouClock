@@ -5,20 +5,32 @@
 <link rel="stylesheet" type="text/css" href="{{ url('/css/ADMIN/reglages.css') }}" />
 
 @section('content')
-    <div id="button-list">
+<div id="button-list">
     
-<div class="input-group mb-3">
-  <div class="form-outline">
-    <input type="search" id="form1" class="form-control" placeholder="Rechercher" />
-  </div>
-  <!-- <button type="button" class="btn btn-primary">
-    <i class="fas fa-search"></i>
-  </button> -->
-  <button id="ajouter"> ajouter un employé
-</button>
+    <div class="input-group mb-3">
+      <div class="form-outline">
+        <input type="search" id="form1" class="form-control" placeholder="Rechercher" />
+      </div>
+      <!-- <button type="button" class="btn btn-primary">
+        <i class="fas fa-search"></i>
+      </button> -->
+      <button id="ajouter"> ajouter un employé
+    </button>
+    </div>
+    </div>  
+<div id="menu-reg">
+<table class="table-borderless">
+  <tbody>
+  @foreach( $employees as $emp )
+    <tr>
+      <td><a id="link-nom" href = '/employes/{{ $emp->id }}'>{{ $emp->nom }} {{ $emp->prenom }} </a><br>
+        <small>{{ $emp->structure }}</small>
+      </td>
+    </tr>
+    @endforeach
+  </tbody>
+</table>
 </div>
-</div>  
-
     <div id="acti">
     @foreach( $employes as $employe )
 
@@ -33,7 +45,7 @@
 <div id="buttons">
 <button id="info" disabled>informations personnelles</button>
 <button id="RH"><a href ='/RH/{{ $employe->id }}'>Dossier RH</a</button>
-<button id="horaire"><a href="">Fiche Horaire</a></button>
+<button id="horaire"><a href="/FicheHoraire/{{ $employe->id }}">Fiche Horaire</a></button>
 <button id="ventilation"><a href="">Ventilation</a></button>
 <button id="stat"><a href="">Statistiques</a></button>
 

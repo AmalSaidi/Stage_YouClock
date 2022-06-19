@@ -56,7 +56,7 @@ body{
 .table-borderless td {
     vertical-align: top;
     border-top: 1px solid #dee2e6;
-    padding-bottom: 2%;
+    padding-bottom: 9%;
     padding-top: 2%;
     font-size: small;
 }
@@ -379,3 +379,12 @@ margin-right: 20px;
     text-decoration: none;
     cursor: pointer;
   }
+
+  #menu-reg {
+    BACKGROUND-COLOR: WHITE;
+    WIDTH: 19%;
+    PADDING: 3% !important;
+    margin-left: 2%;
+    margin-top: 0 !important;
+    float: left;
+}
