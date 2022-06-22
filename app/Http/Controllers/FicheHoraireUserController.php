@@ -134,9 +134,26 @@ class FicheHoraireUserController extends Controller
                {
                 $day_name="Mar";
                }
+            if($i <= 7){
+                $week = "semaine 1";
+            }
+            elseif($i>7 and $i<=14){
+                $week = "semaine 2";
+            }
+            elseif($i>14 and $i<=21){
+                $week = "semaine 3";
+            }
+            elseif($i>21 and $i<=28){
+                $week = "semaine 4";
+            }
+            elseif($i>28){
+                $week = "semaine 5";
+            }
+
             $idF=  $year_num." - ".$month;
             $dateBD= $day_name." ".$day_num." ".$month;
-            DB::insert('insert into fichehors (idfiche,Date,idUser) values (?,?,?)', [$idF,$dateBD,$session_id]);
+
+            DB::insert('insert into fichehors (idfiche,Date,idUser,semaine) values (?,?,?,?)', [$idF,$dateBD,$session_id,$week]);
         }
         return redirect()->back();
         }

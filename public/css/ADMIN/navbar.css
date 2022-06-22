@@ -61,9 +61,18 @@ body{
     color: black;
     text-decoration: none;
     display: block;
+    font-family:ui-monospace;
   }
+
+  .dropdown-content a:link {text-decoration: none;}
+
+  .dropdown-content a:hover {background-color: transparent;color:black;text-decoration: none;}
+
   
-  .dropdown-content a:hover {background-color: transparent;color:black;}
+  .dropdown-content a:visited {text-decoration: none;}
+
+  
+  .dropdown-content a:active {text-decoration: none;}
 
 
 

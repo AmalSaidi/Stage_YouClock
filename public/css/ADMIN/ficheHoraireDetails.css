@@ -88,7 +88,7 @@ body{
 }
 
 #horaire{
-    background-color: #355ba2;
+    background-color: #355ba2 !important;
     border: none;
     color: white !important;
     font-family: system-ui;
@@ -338,10 +338,6 @@ padding-left: 20px;
 margin-right: 20px;
 }
 
-.btn-primary {
-    background-color: #ffffff !important;
-    border-color: white !important;
-}
 
 .btn {
     border-radius: 0 0 0 0 !important;
@@ -569,3 +565,37 @@ margin-right: 20px;
     font-size: small !important;
 }
 
+#link-nom{
+    color: #8537bd !important;
+}
+
+.valider{
+    background: #86ea86 !important;
+    font-size: x-small;
+    border: 1px solid;
+    PADDING: 4 8 4 8;
+    border-radius: 50%;
+    border-color: darkolivegreen;
+}
+
+.valider:hover{
+    background: #67b367 !important;
+}
+
+.refuser{
+    background: #f84747 !important;
+    font-size: x-small;
+    border: 1px solid;
+    PADDING: 4 8 4 8;
+    border-radius: 50%;
+    border-color: darkred;
+}
+
+.refuser:hover{
+    background: #d13939 !important;
+}
+
+button:disabled {
+background-color: rgba(238, 237, 237, 0.589) !important;
+border-color: white;
+}

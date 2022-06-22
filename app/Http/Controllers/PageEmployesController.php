@@ -74,7 +74,26 @@ class PageEmployesController extends Controller
         $session_str = $user->structure;
         $employees = DB::table('employes')->where('structure', 'like', '%'.$session_str.'%')->where('admin',0)->get();
         $employes = DB::select('select * from employes where id = ?',[$id]);
+        $depassement = DB::select('select * from depassements where idfiche =? AND identifiant = (select identifiant from employes where id = ?)',[$idfiche,$id]);
         $fiche = DB::select('select * from fichehors where idfiche =? AND idUser = (select identifiant from employes where id = ?)',[$idfiche,$id]);
-        return view('ADMIN/FicheHoraireDetails',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees]);
+        return view('ADMIN/FicheHoraireDetails',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees
+        ,'depassement'=>$depassement]);
         }
-}
+        public function refuse(Request $request) {
+            $idf = $request->id;
+            $fiche = fichehor::find($idf);
+            $id = $fiche->id;
+            DB::update('update fichehors set state ="RR" where id=?',[$id]);
+            return view('ADMIN/FicheHoraireDetails',['id'=>$id]);
+        }
+        public function confirm(Request $request) {
+            $idf = $request->id;
+            $fiche = fichehor::find($idf);
+            $id = $fiche->id;
+            DB::update('update fichehors set state ="VR" where id=?',[$id]);
+            return view('ADMIN/FicheHoraireDetails',['id'=>$id]);
+        }
+
+    
+
+    }

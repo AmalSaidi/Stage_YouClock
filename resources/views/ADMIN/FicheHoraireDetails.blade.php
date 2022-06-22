@@ -3,12 +3,15 @@
 <link rel="stylesheet" type="text/css" href="{{ url('/css/ADMIN/navbar.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ url('/css/ADMIN/ficheHoraireDetails.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ url('/css/ADMIN/reglages.css') }}" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 @section('content')
 @php
 $T=0;
 $P=0;
 $F=0;
 $DIF=0;
+$DEP=0;
 @endphp
 <div id="button-list">
     
@@ -38,7 +41,6 @@ $DIF=0;
 </div>
     @foreach( $employes as $employe )
         <div id="acti">
-            
           <div id="pic"><img id="logo-icon" src="https://cdn.discordapp.com/attachments/936584358654005321/974610254220378112/user.png"></div>
       <div id="info-bas">{{ $employe->prenom }} {{ $employe->nom }} <br>
       <div id="struc">{{ $employe->structure }}</div> 
@@ -60,8 +62,8 @@ $DIF=0;
             <th>Nb heures</th>
             <th>Poids</th>
             <th>Ecart</th>
-            <th style="background-color:#b1eab1;">Valider</th>
-            <th style="background-color:#eab1b3;">Refuser</th>
+            <th></th>
+            <th></th>
         </thead>
     <tbody>
     @foreach($fiche as $f)
@@ -70,31 +72,79 @@ $DIF=0;
     $T=$T+1 
     @endphp
     @endif
-    <tr>
+<tr id="trTab">
+        
             <td>{{ $f->Date }}</td>
             <td>{{ $f->activite1 }}</td>
             <td>{{ $f->heuresEffectu }}</td>
             <td>{{ $f->Poids }}</td>
             <td>{{ $f->ecart }}</td>
-            <td>
-            <input type="checkbox"></input>
-            </td>
-            <td><input type="checkbox"></input></td>
+           
+                <form method="post" action="" id="form2" class="fconfirm"> <td>
+                {{ csrf_field() }}
+                 <input type="hidden" name="id" value="{{$f->id}}">
+
+                 <input type="hidden" name="idfiche" value="{{$f->idfiche}}">
+
+                <button type="submit" id="valider_{{$f->id}}" class="valider" data-id="{{$f->id}}">V</button></td></form>
+        
+                <form method="post" action="" id="form3" class="frefuse"> <td>
+                {{ csrf_field() }}
+                <input type="hidden" name="id" value="{{$f->id}}">
+
+                <input type="hidden" name="idfiche" value="{{$f->idfiche}}">
+                <button type="submit" id="refuser_{{$f->id}}" class="refuser" data-id="{{$f->id}}">R</button></td></form>
             @php
             $F = $F + $f->heuresEffectu;
             $P = $P + $f->Poids;
             @endphp
         </tr>
-     @if($loop->iteration ==8 or $loop->iteration ==15 or $loop->iteration ==22 or $loop->iteration ==29)
-    <tr id="depass"><td colspan="2">Depassement autorisé :</td>
+        @foreach($depassement as $d)
+        @if($loop->parent->iteration==7)
+        @if($d->semaine=="semaine 1")
+    <tr id="depass"><td colspan="2">Depassement autorisé : 2</td>
     <td></td>
     <td></td>
     <td></td>
     <td></td>
     <td></td>
 </tr>
-    @endif
-    @if($loop->iteration == 22)
+@else
+<tr id="depass"><td colspan="2">Depassement autorisé : 0</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+@endif
+@elseif($loop->parent->iteration==14)
+        @if($d->semaine=="semaine 2")
+    <tr id="depass"><td colspan="2">Depassement autorisé : 4</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+@else
+@continue
+@endif
+@elseif($loop->parent->iteration==21)
+        @if($d->semaine=="semaine 3")
+    <tr id="depass"><td colspan="2">Depassement autorisé : 6</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+@else
+@continue
+@endif
+@endif
+    @endforeach
+    @if($loop->iteration == 21)
     @break
     @endif
     @endforeach
@@ -107,36 +157,65 @@ $DIF=0;
             <th>Nb heures</th>
             <th>Poids</th>
             <th>Ecart</th>
-            <th style="background-color:#b1eab1;">Valider</th>
-            <th style="background-color:#eab1b3;">Refuser</th>
+            <th></th>
+            <th></th>
         </thead>
     <tbody>
     @foreach($fiche as $f)
-    @if($loop->iteration > 22)
+    @if($loop->iteration >= 22)
     <tr>
             <td>{{ $f->Date }}</td>
             <td>{{ $f->activite1 }}</td>
             <td>{{ $f->heuresEffectu }}</td>
             <td>{{ $f->Poids }}</td>
             <td>{{ $f->ecart }}</td>
-            <td>
-            <input type="checkbox"></input>
-            </td>
-            <td><input type="checkbox"></input></td>
+            <form method="post" action="" id="form2" class="fconfirm"> <td>
+                {{ csrf_field() }}
+                 <input type="hidden" name="id" value="{{$f->id}}">
+
+                 <input type="hidden" name="idfiche" value="{{$f->idfiche}}">
+
+                <button type="submit" id="valider_{{$f->id}}" class="valider" data-id="{{$f->id}}">V</button></td></form>
+        
+                <form method="post" action="" id="form3" class="frefuse"> <td>
+                {{ csrf_field() }}
+                <input type="hidden" name="id" value="{{$f->id}}">
+
+                <input type="hidden" name="idfiche" value="{{$f->idfiche}}">
+                <button type="submit" id="refuser_{{$f->id}}" class="refuser" data-id="{{$f->id}}">R</button></td></form>
             @php
             $F = $F + $f->heuresEffectu;
             $P = $P + $f->Poids;
             @endphp
         </tr>
-    @if($loop->iteration ==8 or $loop->iteration ==15 or $loop->iteration ==22 or $loop->iteration ==29)
-    <tr id="depass"><td colspan="2">Depassement autorisé :</td>
+        @foreach($depassement as $d)
+        @if($loop->parent->iteration==28)
+        @if($d->semaine=="semaine 4")
+    <tr id="depass"><td colspan="2">Depassement autorisé : 20</td>
     <td></td>
     <td></td>
     <td></td>
     <td></td>
     <td></td>
 </tr>
-    @endif
+@else
+@continue
+@endif
+@endif
+@if($loop->parent->last)
+        @if($d->semaine=="semaine 5")
+    <tr id="depass"><td colspan="2">Depassement autorisé : 50</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+@else
+@continue
+@endif
+@endif
+@endforeach
     @endif
     @endforeach
     </tbody>
@@ -145,11 +224,11 @@ $DIF=0;
     <div id="stats">
        <table id="tableStats">
            <tr id="trT">
-               <td id="Fer">{{$T}}.00</td>
+               <td id="Fer">0.00</td>
                <td id="typeStat">Férié (jour)</td>
            </tr>
            <tr id="trT">
-               <td id="tra">0.00</td>
+               <td id="tra">{{$T}}.00</td>
                <td id="typeStat">Travaillé (jour)</td>
            </tr>
            <tr id="trT">
@@ -222,5 +301,59 @@ $DIF=0;
         </table>
     </div>
         </div>
+
+<script>
+$("#form2").on("submit", function (e) {
+    var dataString = $(this).serialize();
+    let id = $(this).data('id');
+    let idfiche = $(this).data('idfiche');
+    $.ajax({
+      type: "POST",
+      url: "/FicheHoraire/Details/confirm/"+id+"/"+idfiche,
+      data: dataString,
+      success: function () {
+      }
+    });
+    e.preventDefault();
+});
+</script>
+<script>
+$("#form3").on("submit", function (e) {
+    var dataString = $(this).serialize();
+    let id = $(this).data('id');
+    let idfiche = $(this).data('idfiche');
+    $.ajax({
+      type: "POST",
+      url: "/FicheHoraire/Details/refuse/"+id+"/"+idfiche,
+      data: dataString,
+      success: function () {
+      }
+    });
+    e.preventDefault();
+});
+</script>
+<script>
+    $(".valider").click(function() {
+        //get current id which was clicked
+        var current_id = $(this).data("id");
+        if ($('#refuser_'+current_id).prop("disabled")) {
+            $('#refuser_'+current_id).attr("disabled", false);
+        } else {
+            $('#refuser_'+current_id).attr("disabled", true);
+        }
+        $("#form2").toggle();
+    });
+    $(".refuser").click(function() {
+        //get current id which was clicked
+        var current_id = $(this).data("id");
+        if ($('#valider_'+current_id).prop("disabled")) {
+            $('#valider_'+current_id).attr("disabled", false);
+        } else {
+            $('#valider_'+current_id).attr("disabled", true);
+        }
+        $("#form3").toggle();
+    });
+</script>
+
   @endsection
 

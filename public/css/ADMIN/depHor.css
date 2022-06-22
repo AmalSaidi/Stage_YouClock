@@ -392,7 +392,6 @@ margin-right: 20px;
   td{
     width: 55%;
     padding-bottom: 5%;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
 
   select{
@@ -439,7 +438,11 @@ margin-right: 20px;
 .table-borderless td {
     vertical-align: top;
     border-top: 1px solid #dee2e6;
-    padding-bottom: 2%;
+    padding-bottom: 9%;
     padding-top: 2%;
-    font-size: 15px;
+    font-size: small;
+}
+
+#link-nom{
+    color: #8537bd !important;
 }

@@ -62,7 +62,8 @@ Route::get('/employes/ajouter',[PageEmployesController::class, 'store']);
 Route::get('/RH/{id}', [PageEmployesController::class, 'showRH']);
 Route::get('/FicheHoraire/{id}', [PageEmployesController::class, 'showFiche']);
 Route::get('/FicheHoraire/Details/{id}/{idfiche}', [PageEmployesController::class, 'showFicheComplete']);
-
+Route::post('/FicheHoraire/Details/confirm/{id}/{idfiche}', [PageEmployesController::class, 'confirm']);
+Route::post('/FicheHoraire/Details/refuse/{id}/{idfiche}', [PageEmployesController::class, 'refuse']);
 
 /*
 |--------------------------------------------------------------------------
@@ -113,6 +114,7 @@ Route::post('/mesConges/confirm/{id}',[DemandeCongeAdmin::class, 'confirm']);
 */
 
 Route::get('/depassementHoraire', [depHorController::class, 'index']);
+Route::post('/depassementHoraire', [depHorController::class, 'store']);
 
 
 
