@@ -36,7 +36,7 @@
     <h3>Autorisation dépassement horaire</h3>
     <div id="form-dep">
         <table style=" width: 60% !important;">
-          <form action="/depassementHoraire" method="POST" onsubmit="return false;">
+          <form action="/depassementHoraire" method="POST">
           {{ csrf_field() }}
             <tr><td>Nom du salarié</td><td><select name="nom">
               @foreach($emplo as $emp)
@@ -71,7 +71,7 @@
             <tr><td id="textarea">Motif</td>
             <td><textarea name="motif"></textarea></td></tr>
             <tr><td>Nombre d'heures</td>
-            <td><input type="time" name="heures"/></td></tr>
+            <td><input name="heures" type="number" placeholder="" step="0.1" min="0" max="10"/></td></tr>
             <tr><td></td><td><button id="valider">Valider le dépassement horaire</button></td></tr>
             </form>
 

@@ -12,6 +12,11 @@ $P=0;
 $F=0;
 $DIF=0;
 $DEP=0;
+$se1=0;
+$se2=0;
+$se3=0;
+$se4=0;
+$se5=0;
 @endphp
 <div id="button-list">
     
@@ -99,51 +104,50 @@ $DEP=0;
             $P = $P + $f->Poids;
             @endphp
         </tr>
-        @foreach($depassement as $d)
-        @if($loop->parent->iteration==7)
-        @if($d->semaine=="semaine 1")
-    <tr id="depass"><td colspan="2">Depassement autorisé : 2</td>
+
+        @if($loop->iteration==7)
+        @foreach($sem1 as $s1)
+        @php
+        $se1 = $se1 + $s1->nombreH
+        @endphp
+        @endforeach
+        <tr id="depass"><td colspan="2">Depassement autorisé : {{$se1}}
+    </td>
     <td></td>
     <td></td>
     <td></td>
     <td></td>
     <td></td>
 </tr>
-@else
-<tr id="depass"><td colspan="2">Depassement autorisé : 0</td>
+        @elseif($loop->iteration==14)
+        @foreach($sem2 as $s2)
+        @php
+        $se2 = $se2 + $s2->nombreH
+        @endphp
+        @endforeach
+        <tr id="depass"><td colspan="2">Depassement autorisé : {{$se2}}
+    </td>
     <td></td>
     <td></td>
     <td></td>
     <td></td>
     <td></td>
 </tr>
-@endif
-@elseif($loop->parent->iteration==14)
-        @if($d->semaine=="semaine 2")
-    <tr id="depass"><td colspan="2">Depassement autorisé : 4</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-</tr>
-@else
-@continue
-@endif
-@elseif($loop->parent->iteration==21)
-        @if($d->semaine=="semaine 3")
-    <tr id="depass"><td colspan="2">Depassement autorisé : 6</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-</tr>
-@else
-@continue
-@endif
-@endif
-    @endforeach
+        @elseif($loop->iteration==21)
+                @foreach($sem3 as $s3)
+                @php
+                $se3 = $se3 + $s3->nombreH
+                @endphp
+                @endforeach
+                <tr id="depass"><td colspan="2">Depassement autorisé : {{$se3}}
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        @endif
     @if($loop->iteration == 21)
     @break
     @endif
@@ -172,7 +176,6 @@ $DEP=0;
             <form method="post" action="" id="form2" class="fconfirm"> <td>
                 {{ csrf_field() }}
                  <input type="hidden" name="id" value="{{$f->id}}">
-
                  <input type="hidden" name="idfiche" value="{{$f->idfiche}}">
 
                 <button type="submit" id="valider_{{$f->id}}" class="valider" data-id="{{$f->id}}">V</button></td></form>
@@ -188,34 +191,35 @@ $DEP=0;
             $P = $P + $f->Poids;
             @endphp
         </tr>
-        @foreach($depassement as $d)
-        @if($loop->parent->iteration==28)
-        @if($d->semaine=="semaine 4")
-    <tr id="depass"><td colspan="2">Depassement autorisé : 20</td>
+        @if($loop->iteration==28)
+        @foreach($sem4 as $s4)
+        @php
+        $se4 = $se4 + $s4->nombreH
+        @endphp
+        @endforeach
+        <tr id="depass"><td colspan="2">Depassement autorisé : {{$se4}}
+    </td>
     <td></td>
     <td></td>
     <td></td>
     <td></td>
     <td></td>
 </tr>
-@else
-@continue
-@endif
-@endif
-@if($loop->parent->last)
-        @if($d->semaine=="semaine 5")
-    <tr id="depass"><td colspan="2">Depassement autorisé : 50</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-</tr>
-@else
-@continue
-@endif
-@endif
-@endforeach
+@elseif($loop->last)
+                @foreach($sem5 as $s5)
+                @php
+                $se5 = $se5 + $s5->nombreH
+                @endphp
+                @endforeach
+                <tr id="depass"><td colspan="2">Depassement autorisé : {{$se5}}
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        @endif
     @endif
     @endforeach
     </tbody>
@@ -272,7 +276,7 @@ $DEP=0;
     <div id="controle">
         <table id="tableControle">
             <thead>
-                <th colspan="2" style="text-align: center;">CONTRÖLE</th>
+                <th colspan="2" style="text-align: center;">CONTROLE</th>
             </thead>
             <tbody id="bodContr">
                 <tr id="trContr">
@@ -297,6 +301,15 @@ $DEP=0;
                     <td style="padding: 1 9 1 10;">{{$DIF}}.00</td>
                 </tr>
                 @endif
+                @php
+                $DEP=$se1+$se2+$se3+$se4+$se5;
+                @endphp
+                <tr id="trContr" style="background-color:white;">
+                    <td style="PADDING: 5 2 5 10;"><b>Dépassement autorisé :</b></td>
+                    <td style="padding: 1 9 1 10;">{{$DEP}}</td>
+                </tr>
+
+                </tr>
             </tbody>
         </table>
     </div>

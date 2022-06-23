@@ -6,7 +6,7 @@ body{
     background-color: white;
     width: 75.8%;
     MARGIN-LEFT: 22%;
-    height: 107%;
+    height: 120%;
     padding: 2%;
     font-family: system-ui;
     padding-bottom: 10%;
@@ -598,4 +598,8 @@ margin-right: 20px;
 button:disabled {
 background-color: rgba(238, 237, 237, 0.589) !important;
 border-color: white;
+}
+
+#confirmerFiche{
+    text-align: center;
 }
