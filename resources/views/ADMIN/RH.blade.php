@@ -57,21 +57,21 @@
 <div id="contrat-div">
 <div id="section-contrat">
 <p style="float:left;">Typologie de contrat</p>
-<div id="type-contrat"><small>Type de contrat</small><br>{{ $employe->id }}</div>
+<div id="type-contrat"><small>Type de contrat</small><br>{{ $employe->TypeContrat }}</div>
 </select>
-<div dropdown-menu id="temps-travail"><small>Temps du contrat</small><br>{{ $employe->nom }}</div>
-<div id="joursNonTravail"><small>Jour non travaillé</small><br>{{ $employe->id }}</div>
-<div id="semaine-type"><button id="semaineTypeButton" onclick="openForm3(modal);">Semaine type de l\'employé</button></div>
-<div id="Heures-mois"><small>Heures à réaliser par mois</small><br>{{ $employe->id }}</div>
+<div dropdown-menu id="temps-travail"><small>Temps du contrat</small><br>Temps Partiel</div>
+<div id="joursNonTravail"><small>Jour non travaillé</small><br>Mercredi</div>
+<div id="semaine-type"><button id="semaineTypeButton" onclick="openForm3(modal);">Semaine type de l'employé</button></div>
+<div id="Heures-mois"><small>Heures à réaliser par mois</small><br>35</div>
 </div>
 </div>
 
 <div id="coord-div">
 <div id="section-coord">
-<p style="float:left;"">Fiche métier</p>
-<div id="mail"><small>Adresse mail</small><br>{{ $employe->mail }}</div>
-<div id="tel"><small>Téléphone fixe</small><br>{{ $employe->mail }}</div>
-<div id="service"><small>Service</small><br>{{ $employe->mail }}</div>
+<p style="float:left;">Fiche métier</p>
+<div id="mail"><small>Intitulé du poste</small><br>{{ $employe->intitule }}</div>
+<div id="tel"><small>Structure</small><br>{{ $employe->structure }}</div>
+<div id="service"><small>Service</small><br>{{ $employe->service }}</div>
 </div>
 </div>
 
@@ -87,18 +87,8 @@
 @endforeach
 
 </div>
-<div id="ventilation-div">
-<div id="section-ventilation">
-<p style="float:left;">Ventilations autorisées</p>
-<form>
-<div id="ventilation-checkbox">
+
 @foreach( $employes as $employe )
-<input type="checkbox" id="checkbox">
-  <label for="">{{ $employe->Ventilation }}</label><br>
-  </div>
-  </form>
-</div>
-</div>
 
 
 <div id="modal2" class="modal2">
@@ -145,56 +135,119 @@
 
   <!-- Modal content -->
   <div class="modal-content" style="margin-left: 50%;">
-    <span class="close2" onclick="closeForm3(modal);">&times;</span>
+    <span class="close" onclick="closeForm3(modal);">&times;</span>
     <form>
-      <H1>Semaine type de l'employé(e) </H1>
-      <button id="mod-semaine-type"><img id="logo-reglages" src="https://cdn.discordapp.com/attachments/936584358654005321/973487539618971648/reglages.png" alt="reglages"> Modifier la semaine type</button>
+      <h4 id="idST" style="font-family: fangsong;">Semaine type de l'employé(e) </H4>
+     <button id="mod-semaine-type"> <a href="/RH/semaineType/{{ $employe->id }}" id="linkBU" style="color:black;"><img id="logo-reglages" src="https://cdn.discordapp.com/attachments/936584358654005321/973487539618971648/reglages.png" alt="reglages"> Modifier la semaine type</a></button>
       <br>
-      <div id="buttons-type">
-      <button id="type-travail">Travaillé</button>
-      <button id="type-travail">Travaillé</button>
-      <button id="type-travail">Travaillé</button>
-      <button id="type-travail">Travaillé</button>
-      <button id="type-travail-vendredi">Travaillé</button>
-      <button id="type-travail-weekend">    </button>
-      <button id="type-travail-weekend">    </button>
-</div>
-      <table class="table">
-        <thead class="thead">
-    <tr id="head-table">
-      <th scope="col">Lun</th>
-      <th scope="col">mar</th>
-      <th scope="col">merc</th>
-      <th scope="col">jeu</th>
-      <th scope="col">ven</th>
-      <th scope="col">sam</th>
-      <th scope="col">dim</th>
-    </tr>
-  </thead>
-  <tbody>
+<table class="table-bordered">
+<thead class="thead-dark">
+<th></th>
+<th>Matin</th>
+<th>Après-midi</th>
+<th>Soir</th>
+</thead>
+<tbody>
+@foreach($Lun as $lun)
     <tr>
-      @for($i=0;$i < 5; $i++)
-    <td>
-<div id="debutMat">09:00</div>
-<div style="FONT-SIZE: x-large;COLOR: GRAY;">|</div>
-<div id="finMat">12:30</div>
-<div>Déjeuner</div>
-<div id="debutAprem">13:30</div>
-<div style="FONT-SIZE: x-large;COLOR: GRAY;">|</div>
-<div id="finAprem">17:00</div>
-</td>
-@endfor
-<td id="weekend">
-      <div></div>
-    </td>
-    <td id="weekend">
-        <div></div>
-    </td>
-  </tr>
-  </tbody>
-</table>
-  <button type="submit" class="btn btn-primary" id="ajouter-button">Valider</button>
-</form>
+        <td><input name="Lun" type="hidden" value="Lundi"/>Lundi</td> 
+        <td>
+            <input name="DM1" type="time" value="{{$lun->DM}}" disabled/> -  <input name="FM1" type="time" value="{{$lun->FM}}" disabled/>
+        </td>
+        <td>
+            <input name="DA1" type="time" value="{{$lun->DA}}" disabled/> -  <input name="FA1" type="time" value="{{$lun->FA}}" disabled/>
+        </td>
+        <td>
+            <input name="DS1" type="time" value="{{$lun->DS}}" disabled/> -  <input name="FS1" type="time" value="{{$lun->FS}}" disabled/>
+        </td>
+    </tr>
+  @endforeach
+  @foreach($Mar as $mar)
+    <tr>
+        <td><input name="Mar" type="hidden" value="Mardi"/>Mardi</td> 
+        <td>
+            <input name="DM1" type="time" value="{{$mar->DM}}" disabled/> -  <input name="FM1" type="time" value="{{$mar->FM}}" disabled/>
+        </td>
+        <td>
+            <input name="DA1" type="time" value="{{$mar->DA}}" disabled/> -  <input name="FA1" type="time" value="{{$mar->FA}}" disabled/>
+        </td>
+        <td>
+            <input name="DS1" type="time" value="{{$mar->DS}}" disabled/> -  <input name="FS1" type="time" value="{{$mar->FS}}" disabled/>
+        </td>
+    </tr>
+  @endforeach
+  @foreach($Mer as $mer)
+    <tr>
+        <td><input name="Mer" type="hidden" value="Mercredi"/>Mercredi</td> 
+        <td>
+            <input name="DM1" type="time" value="{{$mer->DM}}" disabled/> -  <input name="FM1" type="time" value="{{$mer->FM}}" disabled/>
+        </td>
+        <td>
+            <input name="DA1" type="time" value="{{$mer->DA}}" disabled/> -  <input name="FA1" type="time" value="{{$mer->FA}}" disabled/>
+        </td>
+        <td>
+            <input name="DS1" type="time" value="{{$mer->DS}}" disabled/> -  <input name="FS1" type="time" value="{{$mer->FS}}" disabled/>
+        </td>
+    </tr>
+  @endforeach
+  @foreach($Jeu as $jeu)
+    <tr>
+        <td><input name="Jeu" type="hidden" value="Jeudi"/>Jeudi</td> 
+        <td>
+            <input name="DM1" type="time" value="{{$jeu->DM}}" disabled/> -  <input name="FM1" type="time" value="{{$jeu->FM}}" disabled/>
+        </td>
+        <td>
+            <input name="DA1" type="time" value="{{$jeu->DA}}" disabled/> -  <input name="FA1" type="time" value="{{$jeu->FA}}" disabled/>
+        </td>
+        <td>
+            <input name="DS1" type="time" value="{{$jeu->DS}}" disabled/> -  <input name="FS1" type="time" value="{{$jeu->FS}}" disabled/>
+        </td>
+    </tr>
+  @endforeach
+  @foreach($Ven as $ven)
+    <tr>
+        <td><input name="Ven" type="hidden" value="Vendredi"/>Vendredi</td> 
+        <td>
+            <input name="DM1" type="time" value="{{$ven->DM}}" disabled/> -  <input name="FM1" type="time" value="{{$ven->FM}}" disabled/>
+        </td>
+        <td>
+            <input name="DA1" type="time" value="{{$ven->DA}}" disabled/> -  <input name="FA1" type="time" value="{{$ven->FA}}" disabled/>
+        </td>
+        <td>
+            <input name="DS1" type="time" value="{{$ven->DS}}" disabled/> -  <input name="FS1" type="time" value="{{$ven->FS}}" disabled/>
+        </td>
+    </tr>
+  @endforeach
+  @foreach($Sam as $sam)
+    <tr>
+        <td><input name="Sam" type="hidden" value="Samedi"/>Samedi</td> 
+        <td>
+            <input name="DM1" type="time" value="{{$sam->DM}}" disabled/> -  <input name="FM1" type="time" value="{{$sam->FM}}" disabled/>
+        </td>
+        <td>
+            <input name="DA1" type="time" value="{{$sam->DA}}" disabled/> -  <input name="FA1" type="time" value="{{$sam->FA}}" disabled/>
+        </td>
+        <td>
+            <input name="DS1" type="time" value="{{$sam->DS}}" disabled/> -  <input name="FS1" type="time" value="{{$sam->FS}}" disabled/>
+        </td>
+    </tr>
+  @endforeach
+  @foreach($Dim as $dim)
+    <tr>
+        <td><input name="Dim" type="hidden" value="Dimanche"/>Dimanche</td> 
+        <td>
+            <input name="DM1" type="time" value="{{$dim->DM}}" disabled/> -  <input name="FM1" type="time" value="{{$dim->FM}}" disabled/>
+        </td>
+        <td>
+            <input name="DA1" type="time" value="{{$dim->DA}}" disabled/> -  <input name="FA1" type="time" value="{{$dim->FA}}" disabled/>
+        </td>
+        <td>
+            <input name="DS1" type="time" value="{{$dim->DS}}" disabled/> -  <input name="FS1" type="time" value="{{$dim->FS}}" disabled/>
+        </td>
+    </tr>
+  @endforeach
+</tbody>
+    </table>
   </div>
 </div>
     </div>

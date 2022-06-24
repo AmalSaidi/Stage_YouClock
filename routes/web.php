@@ -60,6 +60,8 @@ Route::get('/employes', [PageEmployesController::class, 'index']);
 Route::get('/employes/ajouter',[PageEmployesController::class, 'store']);
 Route::get('/employes/ajouter',[PageEmployesController::class, 'store']);
 Route::get('/RH/{id}', [PageEmployesController::class, 'showRH']);
+Route::get('/RH/semaineType/{id}', [PageEmployesController::class, 'showST']);
+Route::post('/RH/semaineType/{id}', [PageEmployesController::class, 'ajouterST']);
 Route::get('/FicheHoraire/{id}', [PageEmployesController::class, 'showFiche']);
 Route::get('/FicheHoraire/Details/{id}/{idfiche}', [PageEmployesController::class, 'showFicheComplete']);
 Route::post('/FicheHoraire/Details/confirm/{id}/{idfiche}', [PageEmployesController::class, 'confirm']);

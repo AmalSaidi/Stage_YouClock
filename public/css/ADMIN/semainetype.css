@@ -7,9 +7,14 @@ body{
     width: 75.8%;
     MARGIN-LEFT: 22%;
     height: fit-content;
+    margin-top: 1%;
     padding: 2%;
     font-family: system-ui;
     padding-bottom: 10%;
+}
+
+H1{
+    font-family: system-ui;
 }
 #mod{
     background-color: #ffffff00;
@@ -48,6 +53,12 @@ body{
     width: 6%;
 }
 
+#logo-reglages {
+    WIDTH: 20;
+MARGIN-BOTTOM: 2;
+PADDING: 2;
+}
+
 .table-borderless{
     width: -webkit-fill-available;
 }
@@ -77,9 +88,9 @@ body{
 }
 
 #RH{
-    background-color: white;
+    background-color: #355ba2;
     border: none;
-    color: #355ba2;
+    color: white;
     font-family: system-ui;
     width: fit-content;
     margin-right: 1%;
@@ -88,9 +99,9 @@ body{
 }
 
 #horaire{
-    background-color: #355ba2;
+    background-color: white;
     border: none;
-    color: white !important;
+    color: #355ba2;
     font-family: system-ui;
     width: fit-content;
     margin-right: 1%;
@@ -138,7 +149,7 @@ body{
     float: left;
     font-size: small;
 }
-#nom{
+#type-contrat{
     font-size: small;
     font-weight: 600;
     float: left;
@@ -149,7 +160,7 @@ body{
     margin-left: 20%;
 }
 
-#prenom{
+#temps-travail{
     float: left;
     font-size: small;
     font-weight: 600;
@@ -157,7 +168,8 @@ body{
     width: 15%;
     PADDING-LEFT: 1%;
     /* padding: 5px 5px 5px 5px; */
-    margin-left: 6%;
+    margin-left: 63px;
+    margin-right: 6%;
 }
 
 #mail{
@@ -168,7 +180,63 @@ body{
     width: 15%;
     PADDING-LEFT: 1%;
     /* padding: 5px 5px 5px 5px; */
-    margin-left: 9%;
+    margin-left: 25.5%;
+}
+
+#DateEmbauche{
+    font-size: small;
+    font-weight: 600;
+    float: left;
+    background-color: #e8f3fa;
+    width: 15%;
+    PADDING-LEFT: 1%;
+    /* padding: 5px 5px 5px 5px; */
+    margin-left: 22.5%;
+}
+
+#DateFin{
+    font-size: small;
+    font-weight: 600;
+    float: left;
+    background-color: #e8f3fa;
+    width: 15%;
+    PADDING-LEFT: 1%;
+    /* padding: 5px 5px 5px 5px; */
+    margin-left: 6%;
+}
+
+#ventilation-checkbox{
+    font-size: small;
+    font-weight: 600;
+    float: left;
+    width: fit-content;
+    PADDING-LEFT: 1%;
+    /* padding: 5px 5px 5px 5px; */
+    margin-left: 18%;
+}
+
+#ventilation-checkbox2{
+    font-size: small;
+    font-weight: 600;
+    float: left;
+    width: fit-content;
+    PADDING-LEFT: 1%;
+    /* padding: 5px 5px 5px 5px; */
+    margin-left: 10%;
+}
+
+#semaine-type{
+    margin-left: 10% !important;
+}
+
+#ventilation-checkbox3{
+    font-size: small;
+    font-weight: 600;
+    float: left;
+    width: fit-content;
+    PADDING-LEFT: 1%;
+    /* padding: 5px 5px 5px 5px; */
+    margin-left: 7%;
 }
 
 #tel{
@@ -182,8 +250,15 @@ body{
     margin-left: 6%;
 }
 
+#semaineTypeButton{
+    background-color: white;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    font-weight: 600 !important;
+}
 
-#id-conn{
+#joursNonTravail{
     float: left;
     margin-top: 4%;
     font-size: small;
@@ -192,7 +267,30 @@ body{
     width: 15%;
     PADDING-LEFT: 1%;
     /* padding: 5px 5px 5px 5px; */
-    margin-left: -35.99%;
+    margin-left: -41.7%;
+}
+
+#Heures-mois{
+    float: left;
+    font-size: small;
+    font-weight: 600;
+    background-color: #e8f3fa;
+    width: 15%;
+    PADDING-LEFT: 1%;
+    /* padding: 5px 5px 5px 5px; */
+    margin-left: -21%;
+    margin-top: 1.6%;
+}
+
+#service{
+    float: left;
+    font-size: small;
+    font-weight: 600;
+    background-color: #e8f3fa;
+    width: 15%;
+    PADDING-LEFT: 1%;
+    /* padding: 5px 5px 5px 5px; */
+    margin-left: 6%;
 }
 
 
@@ -202,7 +300,7 @@ body{
     color: gray;
 }
 
-#info-div{
+#contrat-div{
     margin-top: 4%;
     border-top: 0.1px #e9e9e9;
     border-left: none !important;
@@ -220,10 +318,35 @@ body{
     border-style: solid;
 }
 
-#section-id{
+#duree-div{
+    margin-top: 10%;
+    border-top: 0.1px #e9e9e9;
+    border-left: none !important;
+    border-bottom: none !important;
+    border-right: none !important;
+    border-style: solid;
+}
+
+#ventilation-div{
+    margin-top: 10%;
+    border-top: 0.1px #e9e9e9;
+    border-left: none !important;
+    border-bottom: none !important;
+    border-right: none !important;
+    border-style: solid;
+}
+
+#section-contrat{
+    margin-top: 1%;
+}
+
+#section-ventilation{
     margin-top: 1%;
 }
 #section-coord{
+    margin-top: 1%;
+}
+#section-duree{
     margin-top: 1%;
 }
 #info-bas{
@@ -240,6 +363,8 @@ body{
 
 #head-table{
     color: #0000008f;
+    border-bottom: 1px#b1b1b1fc;
+    border-bottom-style: solid;
 }
 
 #export{
@@ -280,7 +405,20 @@ body{
     background-color: #bcbfc2a8;
 }
 
-.modal {
+.modal2 {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+
+  .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -330,6 +468,25 @@ body{
     margin-top: -2.7%;
   }
 
+  #mod-semaine-type{
+    background-color: #b7b7b770;
+    padding: 6 5 6 5;
+    border: none;
+    margin-top: 2%;
+    font-size: medium;
+    margin-bottom: 20;
+  }
+  .close2 {
+    float: right;
+    margin-left: 95%;
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5;
+  }
+
 #input-action{
 width: 15% !important;
 BORDER: none;
@@ -377,46 +534,115 @@ margin-right: 20px;
     cursor: pointer;
   }
 
-  
-#hidden{
-    background-color: white;
-    border: none;
-}
-#button-list{
-    margin-left: 3%;
-    /* margin-bottom: 1%; */
-    margin-top: 1%;
-}
-#hidden-cases{
-    border: none;
-}
+  .modal-content2{
+    margin-left: 50%;
+  }
 
-#thead-dark{
-    background-color: #1d5791;
-}
+  
+
 #logo-reglages{
     width: 15px;
 }
-
-.table{
-    width:50% !important;
-    border: 2px black !important;
-    margin-top: 5%;
-}
-
 .table td, .table th {
-    padding: 0.2rem !important;
     vertical-align: top;
-    border-top: 1px solid #dee2e6;
+    border-top: 1px solid #ffffff;
     text-align: center;
-    border-bottom: black !important;
 }
 
-#head-table{
-    background-color: #dfe3e7 !important;
-    color: black;
-    text-align: center;
-    font-family: auto;
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+    background-color: #2b5a92;
+    color: white;
+    font-family: cursive;
+}
+
+
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+    background-color: #2b5a92;
+    color: white;
+    font-family: cursive;
+}
+
+#debutMat{
+    background-color: #e2e2e28c;
+    width: fit-content;
+    padding: 5 15 5 15;
+    /* MARGIN: 1%; */
+    margin-left: 16%;
+    margin-top: 6;
+}
+
+#finMat{
+    background-color: #e2e2e28c;
+    width: fit-content;
+    padding: 5 15 5 15;
+    /* MARGIN: 1%; */
+    margin-left: 16%;
+    margin-top: 6;
+    margin-bottom: 30;
+}
+
+#debutAprem{
+    background-color: #e2e2e28c;
+    width: fit-content;
+    padding: 5 15 5 15;
+    /* MARGIN: 1%; */
+    margin-left: 16%;
+    margin-top: 30;
+}
+#finAprem{
+    background-color: #e2e2e28c;
+    width: fit-content;
+    padding: 5 15 5 15;
+    /* MARGIN: 1%; */
+    margin-left: 16%;
+    margin-top: 6;
+}
+
+#weekend{
+    background-color: #efefef;
+    border: none;
+    padding: 6 10 6 10;
+    width: 85;
+    margin-right: 35;
+}
+
+#travaille{
+    background-color: white !important;
+}
+
+#buttons-type{
+    margin-left: 21;
+    margin-bottom: 15;
+    width: max-content;
+}
+
+#type-travail{
+    background-color: #efefef;
+    border: none;
+    padding: 6 10 6 10;
+    width: 70;
+    margin-right: 35;
+}
+
+#type-travail-vendredi{
+    background-color: #efefef;
+    border: none;
+    padding: 6 10 6 10;
+    width: 70;
+    margin-right: 34;
+}
+
+#type-travail-weekend{
+    background-color: #efefef;
+    border: none;
+    padding: 21 10 10 10;
+    width: 50;
+    /* margin-right: 27; */
+    margin-right: 33;
 }
 
 #menu-reg {
@@ -432,12 +658,41 @@ margin-right: 20px;
     color: #8537bd !important;
 }
 
-.table-bordered{
-    width: 70%;
-    text-align: center;
-    margin-top:3%;
+#stTitre{
+    margin-top: 2%;
+    font-family: cursive;
+    margin-bottom: 2%;
 }
 
-#idST{
-    font-size: 1.7rem !important;
+
+.table-bordered thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+    background-color: #2b5a92;
+    color: white;
+    font-family: cursive;
+    text-align: center;
+}
+
+.table-bordered{
+    font-family: cursive;
+    width: 80%;
+}
+.table-bordered{
+    font-family: cursive;
+    width: 80%;
+}
+
+.table-bordered tr{
+    text-align: center;
+}
+
+.table-bordered td{
+    padding: 8 1 8 1;
+}
+
+#valideDiv{
+    margin-top: 3%;
+    margin-left: 38%;
+    
 }

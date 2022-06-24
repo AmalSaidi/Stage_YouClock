@@ -63,7 +63,11 @@
       <a id="link-nom" href = '/FicheHoraire/Details/{{ $employe->id }}/{{ $f->idfiche }}'>{{ $f->idfiche }}</a>
   </td>
   <td>
-  {{ $f->statutF }}
+  @if($f->statutF=="EnCours")
+  En Cours
+  @else
+  Valide
+  @endif
   </td>
     </tr>
      @endforeach

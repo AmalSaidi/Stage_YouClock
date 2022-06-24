@@ -59,7 +59,7 @@
 <p style="float:left;">Identité</p>
 <div id="nom"><small>Prénom</small><br>{{ $employe->prenom }}</div>
 <div id="prenom"><small>Nom</small><br>{{ $employe->nom }}</div>
-<div id="id-conn"><small>Id de connection</small><br>{{ $employe->id }}</div>
+<div id="id-conn"><small>Id de connection</small><br>{{ $employe->identifiant }}</div>
 </div>
 </div>
 

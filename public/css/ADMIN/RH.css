@@ -458,18 +458,19 @@ PADDING: 2;
     width: fit-content;
     float: right;
     BACKGROUND-COLOR: white;
-    font-size: 1.5rem;
+    font-size: 45 !important;
     font-weight: 700;
     line-height: 1;
     color: #000;
     text-shadow: 0 1px 0 #fff;
     opacity: .5;
-    margin-left: 100%;
+    margin-left: 98%;
     margin-top: -2.7%;
   }
 
   #mod-semaine-type{
     background-color: #b7b7b770;
+    color: black !important;
     padding: 6 5 6 5;
     border: none;
     margin-top: 2%;
@@ -563,7 +564,7 @@ margin-right: 20px;
     width: fit-content;
     padding: 5 15 5 15;
     /* MARGIN: 1%; */
-    margin-left: 16%;
+    margin-left: 11%;
     margin-top: 6;
 }
 
@@ -572,7 +573,7 @@ margin-right: 20px;
     width: fit-content;
     padding: 5 15 5 15;
     /* MARGIN: 1%; */
-    margin-left: 16%;
+    margin-left: 11%;
     margin-top: 6;
     margin-bottom: 30;
 }
@@ -582,7 +583,7 @@ margin-right: 20px;
     width: fit-content;
     padding: 5 15 5 15;
     /* MARGIN: 1%; */
-    margin-left: 16%;
+    margin-left: 11%;
     margin-top: 30;
 }
 #finAprem{
@@ -590,7 +591,7 @@ margin-right: 20px;
     width: fit-content;
     padding: 5 15 5 15;
     /* MARGIN: 1%; */
-    margin-left: 16%;
+    margin-left: 11%;
     margin-top: 6;
 }
 
@@ -649,3 +650,30 @@ margin-right: 20px;
 #link-nom{
     color: #8537bd !important;
 }
+
+linkBU{
+    color:black !important;
+}
+
+.table-bordered thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+    background-color: #2b5a92;
+    color: white;
+    font-family: cursive;
+    text-align: center;
+}
+
+.table-bordered{
+    font-family: cursive;
+    width: 100%;
+}
+
+.table-bordered tr{
+    text-align: center;
+}
+
+.table-bordered td{
+    padding: 8 1 8 1;
+}
+
