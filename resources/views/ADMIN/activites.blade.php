@@ -25,10 +25,14 @@
 <p id="fa-titre" style="font-family: cursive;">Familles de la Sarthe - Liste des activités</p>
 <br>
 <div id="button-list">
-  <button id="export"> Export CSV <img id="logo-reglages" src="/images/downald.png" alt="reglages">
+<form id="form2" action="{{ route('activites.details') }}" method="POST">
+{{ csrf_field() }}
+<button id="export"> Export CSV <img id="logo-reglages" src="/images/downald.png" alt="reglages">
 </button>
-<button id="ajouter"> ajouter une activité
+
+</form><button id="ajouter"> ajouter une activité
 </button>
+
 </div>    
 
         <table class="table-bordered">
@@ -110,6 +114,24 @@
       <script type="text/javascript" src="{{ URL::asset('js/ajouter_popup.js') }}"></script>
        <script type="text/javascript" src="{{ URL::asset('js/afficher-form-modifier.js') }}">
       </script>
-
+<script>
+   function exportTasks(_this) {
+      let _url = $(_this).data('href');
+      window.location.href = _url;
+   }
+</script>
+<script>
+$("#form2").on("submit", function (e) {
+    var dataString = $(this).serialize();
+    $.ajax({
+      type: "POST",
+      url: "activites",
+      data: dataString,
+      success: function () {
+      }
+    });
+    e.preventDefault();
+});
+</script>
 @endsection
   

@@ -1,10 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Exports\ActivitesExport;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use App\Models\activites;
 use Illuminate\Support\Facades\DB;
+use App\Exports\UsersExport;
+use Maatwebsite\Excel\Facades\Excel;
+use PhpOffice\PhpSpreadsheet\Calculation\LookupRef\ExcelMatch;
+
 class ActivitesController extends Controller
 {
     public function __construct()
@@ -61,4 +67,8 @@ class ActivitesController extends Controller
         return redirect('/activites');
         }
 
+        public function export() 
+        {
+            return Excel::download(new ActivitesExport, 'activites.xlsx');
+        }
 }

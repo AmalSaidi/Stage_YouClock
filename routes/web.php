@@ -23,6 +23,9 @@ Route::get('activites', [ActivitesController::class, 'index']);
 Route::post('activites', [ActivitesController::class, 'store']);
 Route::get('/activites/edit/{id}',[ActivitesController::class, 'show']);
 Route::post('/activites/edit/{id}',[ActivitesController::class, 'edit']);
+Route::post('/activites/export', [ActivitesController::class, 'export'])->name('activites.details');;
+
+
 /*
 |--------------------------------------------------------------------------
 | Services
