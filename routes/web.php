@@ -35,6 +35,7 @@ Route::get('services', [ServicesController::class, 'index']);
 Route::post('services', [ServicesController::class, 'store']);
 Route::get('/services/edit/{id}',[ServicesController::class, 'show']);
 Route::post('/services/edit/{id}',[ServicesController::class, 'edit']);
+
 /*
 |--------------------------------------------------------------------------
 | Structures
@@ -44,6 +45,7 @@ Route::get('structures', [StructuresController::class, 'index']);
 Route::post('structures', [StructuresController::class, 'store']);
 Route::get('/structures/edit/{id}',[StructuresController::class, 'show']);
 Route::post('/structures/edit/{id}',[StructuresController::class, 'edit']);
+Route::post('/structures/export', [StructuresController::class, 'export'])->name('structures.details');
 /*
 |--------------------------------------------------------------------------
 | Durée de pause
@@ -60,8 +62,7 @@ Route::post('/dureePause/edit/{id}',[dureeController::class, 'edit']);
 */
 Route::get('/employes/{id}', [PageEmployesController::class, 'show']);
 Route::get('/employes', [PageEmployesController::class, 'index']);
-Route::get('/employes/ajouter',[PageEmployesController::class, 'store']);
-Route::get('/employes/ajouter',[PageEmployesController::class, 'store']);
+Route::post('/employes', [PageEmployesController::class, 'store']);
 Route::get('/RH/{id}', [PageEmployesController::class, 'showRH']);
 Route::get('/RH/semaineType/{id}', [PageEmployesController::class, 'showST']);
 Route::post('/RH/semaineType/{id}', [PageEmployesController::class, 'ajouterST']);

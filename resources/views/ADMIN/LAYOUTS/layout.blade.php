@@ -25,7 +25,7 @@
                 <a class="nav-link" href="/depassementHoraire">Dépassement horaire</a>
               </li>
           </ul>
-          <div style="margin-left: 40%; height:fit-content;">
+          <div style="margin-left: 50%; height:fit-content;">
           <div class="dropdown">
   <button class="dropbtn">{{ Auth::user()->name }}</button>
   <div class="dropdown-content">

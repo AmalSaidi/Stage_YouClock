@@ -1,10 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Exports\StructuresExport;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use App\Models\structures;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class StructuresController extends Controller
 {
@@ -51,6 +55,11 @@ class StructuresController extends Controller
         /* DB::table('student')->whereIn('id', $id)->update($request->all());*/
         DB::update('update structures set libellé = ?,code = ?,congePaye=? where id = ?',[$libellé,$code,$congePaye,$id]);
         return redirect('/structures');
+        }
+
+        public function export() 
+        {
+            return Excel::download(new StructuresExport, 'structures.xlsx');
         }
 
 }

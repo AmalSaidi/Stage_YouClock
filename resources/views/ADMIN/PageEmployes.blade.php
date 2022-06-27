@@ -59,35 +59,44 @@
     {{ csrf_field() }}
   <div class="form-group">
     <label for="code">Nom</label>
-    <input type="text" class="form-control" name="nom" id="code" placeholder="Nom de l'employé">
+    <input type="text" class="form-control" name="nom" id="code" placeholder="Nom de l'employé" required>
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Prénom</label>
-    <input type="text" class="form-control" name="prenom" id="libelle" placeholder="Prénom de l'employé">
+    <input type="text" class="form-control" name="prenom" id="libelle" placeholder="Prénom de l'employé"  required>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">identifiant</label>
+    <input type="text" class="form-control" name="identifiant" id="identifiant" placeholder="identifiant de l'employé " required>
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Structure</label>
-    <input type="text" class="form-control" name="structure" id="poids" placeholder="la structure">
+    <br>
+    <select name="structure" id="struSelect"  required>
+      @foreach($structures as $str)
+      <option>{{ $str->libellé}} </option>
+      @endforeach
+    </select>
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Intitulé</label>
-    <input type="text" class="form-control" name="intitule" id="libelle" placeholder="Prénom de l'employé">
+    <input type="text" class="form-control" name="intitule" id="libelle" placeholder="intitulé de l'employé"  required>
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Date de début</label>
-    <input type="date" class="form-control" name="dateEmbauche" id="poids" placeholder="La date de début">
+    <input type="date" class="form-control" name="dateEmbauche" id="poids" placeholder="La date de début"  required>
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Date de fin</label>
-    <input type="date" class="form-control" name="Datefin" id="poids" placeholder="La date de fin">
+    <input type="date" class="form-control" name="Datefin" id="poids" placeholder="La date de fin"  required>
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Contrat mensuel</label>
-    <input type="text" class="form-control" name="TypeContrat" id="poids" placeholder="Le contrat mensuel">
+    <input type="text" class="form-control" name="TypeContrat" id="poids" placeholder="Le contrat mensuel"  required>
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Adresse mail</label>
-    <input type="text" class="form-control" name="mail" id="poids" placeholder="L'adresse mail">
+    <input type="email" class="form-control" name="mail" id="poids" placeholder="L'adresse mail"  required>
   </div>
   <button type="submit" class="btn btn-primary" id="ajouter-button">AJOUTER</button>
 </form>

@@ -21,8 +21,9 @@ class PageEmployesController extends Controller
         $user=Auth::user();
         $session_str = $user->structure;
         $employes = DB::table('employes')->where('structure', 'like', '%'.$session_str.'%')->where('admin',0)->get();
+        $structures = DB::select('select * from structures');
         return view('ADMIN/PageEmployes',[
-            'employes' =>$employes,
+            'employes' =>$employes,'structures'=>$structures,
         ]);
     }
 
@@ -33,6 +34,7 @@ class PageEmployesController extends Controller
 
         $employes->nom = request('nom');
         $employes->prenom = request('prenom');
+        $employes->identifiant = request('identifiant');
         $employes->structure = request('structure');
         $employes->intitule = request('intitule');
         $employes->dateEmbauche = request('dateEmbauche');
@@ -42,7 +44,7 @@ class PageEmployesController extends Controller
 
         $employes->save();
 
-        return redirect('/services');
+        return redirect('/employes');
     }
 
     public function show($id) {

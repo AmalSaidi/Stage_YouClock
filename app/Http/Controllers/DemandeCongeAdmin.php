@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DemandeCongeAdmin extends Controller
 {
@@ -24,6 +25,9 @@ class DemandeCongeAdmin extends Controller
         $month = date('n');
         $year = date('Y');
         $m= date("t");
+        $user=Auth::user();
+        $session_str = $user->structure;
+        $employees = DB::table('employes')->where('structure', 'like', '%'.$session_str.'%')->where('admin',0)->get();
         function dateDiffInDays($date1, $date2) 
         {
             // Calculating the difference in timestamps
@@ -83,6 +87,8 @@ class DemandeCongeAdmin extends Controller
             'EmpSer'=>$EmpSer,
             'm'=>$m,
             'getDemande'=>$getDemande,
+            'employees'=>$employees,
+            'session_str'=>$session_str,
         ]);
     }
 
@@ -109,7 +115,10 @@ class DemandeCongeAdmin extends Controller
     public function show($id) {
         $demande = DB::select('select * from demandeconge where id = ?',[$id]);
         $EmpSer = DB::select('select * FROM employes where intitule="compta" or intitule="Paie"');
-        return view('Admin.CongeEdit',['demande'=>$demande,'EmpSer'=>$EmpSer,]);
+        $user=Auth::user();
+        $session_str = $user->structure;
+        $employees = DB::table('employes')->where('structure', 'like', '%'.$session_str.'%')->where('admin',0)->get();
+        return view('Admin.CongeEdit',['demande'=>$demande,'EmpSer'=>$EmpSer,'employees'=>$employees]);
         }
 
     public function confirm($id) {

@@ -7,7 +7,7 @@
     BACKGROUND-COLOR: WHITE;
     WIDTH: 19%;
     margin-left: 2%;
-    margin-top: -95.4%;
+    margin-top: -85.4%;
     float: left;
     text-align: center;
 }

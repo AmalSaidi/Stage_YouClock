@@ -25,7 +25,9 @@
         <p id="fa-titre" style="font-family: cursive;">Familles de la Sarthe - Liste des structures</p>
         <br>
 <div id="button-list">
-<button id="export">Export CSV<img id="logo-reglages" src="https://cdn.discordapp.com/attachments/936584358654005321/973940327759085619/downald.png" alt="reglages">
+<form id="form2" action="{{ route('structures.details') }}" method="POST">
+{{ csrf_field() }}
+<button id="export"> Export CSV <img id="logo-reglages" src="/images/downald.png" alt="reglages">
 </button>
 <button id="ajouter"> ajouter une structure
 </button>
@@ -99,7 +101,19 @@
 </div>
 <script type="text/javascript" src="{{ URL::asset('js/ajouter_popup.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/afficher-form-modifier.js') }}"></script>
-
+<script>
+$("#form2").on("submit", function (e) {
+    var dataString = $(this).serialize();
+    $.ajax({
+      type: "POST",
+      url: "structures",
+      data: dataString,
+      success: function () {
+      }
+    });
+    e.preventDefault();
+});
+</script>
   </div>
 @endsection
   

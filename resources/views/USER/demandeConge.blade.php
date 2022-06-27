@@ -6,7 +6,11 @@
   
 </script>
 @section('content')
+@php
+$userNom=Auth::user()->name;
+@endphp
 @foreach( $employes as $employe )
+@if($employe->nom==$userNom)
 <div id="menu-reg">
     <img id="logo-icon" src="https://cdn.discordapp.com/attachments/936584358654005321/974610254220378112/user.png">
     <BR>
@@ -30,7 +34,7 @@
   </tbody>
 </table>
 </div>
-  
+@endif
 @endforeach
 <div id="acti">
 <h3>Mes congés</h3>

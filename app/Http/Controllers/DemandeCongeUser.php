@@ -11,7 +11,7 @@ class DemandeCongeUser extends Controller
     }
 
     public function index(){
-        $employes = DB::select('select * from employes where id = ?', [1]);
+        $employes = DB::select('select * from employes');
         $conge =  DB::table('demandeconge')->get();
         $date = date('F Y');//Current Month Year
         $row_count=0;

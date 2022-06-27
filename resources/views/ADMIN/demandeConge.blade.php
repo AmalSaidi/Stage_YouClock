@@ -16,10 +16,10 @@
 <div id="menu-reg">
 <table class="table-borderless">
   <tbody>
-  @foreach( $EmpSer as $emp )
+  @foreach( $employees as $emp )
     <tr>
-      <td>{{ $emp->nom }} {{ $emp->prenom }} <br>
-        <small>{{ $emp->intitule }}</small>
+      <td><a id="link-nom" href = '/employes/{{ $emp->id }}'>{{ $emp->nom }} {{ $emp->prenom }} <a><br>
+        <small>{{ $emp->structure }}</small>
       </td>
     </tr>
     @endforeach
@@ -28,11 +28,11 @@
 </div>
 
     <div id="acti">
-    <h3>Equipe : Comptabilié / Paie</h3>
+    <h3>Equipe : {{ $session_str }}</h3>
     <table class="table-bordered" id="MyTable">
   <thead>
       <th></th>
-      @while(strtotime($date) <= strtotime(date('Y-m') . '-' . date('t', strtotime($date))))
+      @while(strtotime($date) <= strtotime(date('Y-m') . '-' . date('j', strtotime($date))))
 @php
 $day_num = date('j', strtotime($date));//Day number
 $month_num = date('m', strtotime($date));
@@ -79,7 +79,7 @@ $day = "$day_num";
 $date = date("Y-m-d", strtotime($date));
 $month = date('m');
 @endphp
-  @foreach( $EmpSer as $emp )
+  @foreach( $employees as $emp )
   @foreach($getDemande as $value)
       @php
       $dayNum = date('j', strtotime($value->dateDebut));
@@ -125,7 +125,7 @@ $month = date('m');
     @endforeach
     <tr>
       <td>TOTAL :</td>
-      @for ($i = 1; $i < $m; $i++)
+      @for ($i = 1; $i <= $m; $i++)
         <td></td>
         @endfor
     </tr> 

@@ -180,7 +180,7 @@ PADDING: 2;
     width: 15%;
     PADDING-LEFT: 1%;
     /* padding: 5px 5px 5px 5px; */
-    margin-left: 25.5%;
+    margin-left: 25%;
 }
 
 #DateEmbauche{
@@ -191,7 +191,7 @@ PADDING: 2;
     width: 15%;
     PADDING-LEFT: 1%;
     /* padding: 5px 5px 5px 5px; */
-    margin-left: 22.5%;
+    margin-left: 22.1%;
 }
 
 #DateFin{
@@ -202,7 +202,7 @@ PADDING: 2;
     width: 15%;
     PADDING-LEFT: 1%;
     /* padding: 5px 5px 5px 5px; */
-    margin-left: 6%;
+    margin-left: 5.7%;
 }
 
 #ventilation-checkbox{
@@ -247,7 +247,7 @@ PADDING: 2;
     width: 15%;
     PADDING-LEFT: 1%;
     /* padding: 5px 5px 5px 5px; */
-    margin-left: 6%;
+    margin-left: 5.2%;
 }
 
 #semaineTypeButton{
@@ -267,7 +267,7 @@ PADDING: 2;
     width: 15%;
     PADDING-LEFT: 1%;
     /* padding: 5px 5px 5px 5px; */
-    margin-left: -41.7%;
+   margin-left: -41.1% !important;
 }
 
 #Heures-mois{
@@ -393,7 +393,7 @@ PADDING: 2;
     font-family: cursive;
     background-color: #008be6;
     color: white;
-    MARGIN-LEFT: 73.1%;
+    MARGIN-LEFT: 73.7%;
     font-size: small;
 }
 
