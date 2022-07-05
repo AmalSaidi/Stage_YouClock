@@ -75,14 +75,13 @@
 <div class="form-group">
     <h5 id="ventilation-titre">Ventilation</h5>
     <div id="venti">
-    <input id="ven" type="text" placeholder="ventilation1" ><br>
-    <input id="ven" type="text" placeholder="ventilation2" ><br>
-    <input id="ven" type="text" placeholder="ventilation3" ><br>
+    <h6>Entraide familiale : </h6><br>
+    <input onblur="findTotal()" id="num" name="num" type="number" placeholder="" step="0.01" min="0" max="10"><br>
+    <input id="ven" type="hidden" placeholder="ventilation3" ><br>
     </div>
     <div>
-    <input onblur="findTotal()" id="num" name="num" type="number" placeholder="" step="0.01" min="0" max="10"><br>
-    <input onblur="findTotal()" id="num" name="num" type="number" placeholder="" step="0.01" min="0" max="10"><br>
-    <input onblur="findTotal()" id="num" name="num" type="number" placeholder="" step="0.01" min="0" max="10"><br>
+    <input onblur="findTotal()" id="num" name="num" type="hidden" placeholder="" step="0.01" min="0" max="10"><br>
+    <input onblur="findTotal()" id="num" name="num" type="hidden" placeholder="" step="0.01" min="0" max="10"><br>
     <input name="heureseffectu" onblur="findTotal()" type="hidden" name="total" id="total" max="10"/>
     </div>
 </div>
@@ -101,7 +100,6 @@
 <script type="text/javascript" src="{{ URL::asset('js/ajouter_popup.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/afficher-form-modifier.js') }}"></script>
 <script type="text/javascript">
-
 function findTotal(){
     var arr = document.getElementsByName('num');
     var tot=0;

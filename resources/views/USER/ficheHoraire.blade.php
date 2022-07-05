@@ -185,12 +185,10 @@ $Valide="Valide";
 @endif
 @endforeach
     <script>
-
       </script>
       <script type="text/javascript" src="{{ URL::asset('js/modifier_popup.js') }}"></script>
       <script type="text/javascript" src="{{ URL::asset('js/ajouter_popup.js') }}"></script>
        <script type="text/javascript" src="{{ URL::asset('js/afficher-form-modifier.js') }}">
-      </script>
-      
+      </script>      
 @endsection
   

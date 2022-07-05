@@ -60,9 +60,6 @@ class ActivitesController extends Controller
         $code = $request->input('code');
         $libellé = $request->input('libelle');
         $Poids = $request->input('poids');
-        /*$data=array('first_name'=>$first_name,"last_name"=>$last_name,"city_name"=>$city_name,"email"=>$email);*/
-        /*DB::table('student')->update($data);*/
-        /* DB::table('student')->whereIn('id', $id)->update($request->all());*/
         DB::update('update activites set code = ?,libellé = ?,Poids=? where id = ?',[$code,$libellé,$Poids,$id]);
         return redirect('/activites');
         }

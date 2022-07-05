@@ -76,7 +76,6 @@ class DemandeCongeUser extends Controller
             'dateFin' => request('fin'),
             'dateRetour' => request('retour')
         ]);
-
         return redirect()->back();
 
     }
