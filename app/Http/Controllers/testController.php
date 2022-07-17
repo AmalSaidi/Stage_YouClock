@@ -18,7 +18,7 @@ class testController extends Controller
     }
 
     public function boo(){
-        if(!Gate::allows('access-admin')){
+        if(!Gate::any(['access-admin', 'access-direction'])){
             abort('403');
             }
         return view('ADMIN.activites');
