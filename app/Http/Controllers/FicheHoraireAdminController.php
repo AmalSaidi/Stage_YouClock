@@ -12,7 +12,7 @@ class FicheHoraireAdminController extends Controller
     }
 
     public function index(){
-        if(!Gate::any(['access-admin', 'access-direction'])){
+        if(!Gate::allows('access-admin')){
             abort('403');
             }
         $employes = DB::select('select * from employes');

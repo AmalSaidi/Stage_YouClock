@@ -19,7 +19,7 @@ class ActivitesController extends Controller
     }
 
     public function index(){
-        if(!Gate::any(['access-admin', 'access-direction'])){
+        if(!Gate::allows('access-admin')){
             abort('403');
             }
         $activites = activites::all();
@@ -30,7 +30,7 @@ class ActivitesController extends Controller
     }
 
     public function store(){
-        if(!Gate::any(['access-admin', 'access-direction'])){
+        if(!Gate::allows('access-admin')){
             abort('403');
             }
 
@@ -46,7 +46,7 @@ class ActivitesController extends Controller
     }
 
     public function show($id) {
-        if(!Gate::any(['access-admin', 'access-direction'])){
+        if(!Gate::allows('access-admin')){
             abort('403');
             }
         $activites = DB::select('select * from activites where id = ?',[$id]);
@@ -54,7 +54,7 @@ class ActivitesController extends Controller
         }
 
     public function edit(Request $request,$id) {
-        if(!Gate::any(['access-admin', 'access-direction'])){
+        if(!Gate::allows('access-admin')){
             abort('403');
             }
         $code = $request->input('code');

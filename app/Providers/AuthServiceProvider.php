@@ -28,8 +28,5 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('access-admin',function(user $user){
             return $user->admin;
         });
-        Gate::define('access-direction',function(user $user){
-            return $user->direction;
-        });
     }
 }

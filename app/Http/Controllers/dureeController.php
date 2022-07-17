@@ -13,7 +13,7 @@ class dureeController extends Controller
     }
 
     public function index(){
-        if(!Gate::any(['access-admin', 'access-direction'])){
+        if(!Gate::allows('access-admin')){
             abort('403');
             }
         $duree = duree::all();

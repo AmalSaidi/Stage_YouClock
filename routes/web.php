@@ -5,7 +5,6 @@ use App\Http\Controllers\testController;
 use App\Http\Controllers\ActivitesController;
 use App\Http\Controllers\dureeController;
 use App\Http\Controllers\PageEmployesController;
-use App\Http\Controllers\PageEmployesControllerDirection;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\StructuresController;
 use App\Http\Controllers\DemandeCongeUser;
@@ -71,7 +70,6 @@ Route::get('/FicheHoraire/{id}', [PageEmployesController::class, 'showFiche']);
 Route::get('/FicheHoraire/Details/{id}/{idfiche}', [PageEmployesController::class, 'showFicheComplete']);
 Route::post('/FicheHoraire/Details/confirm/{id}/{idfiche}', [PageEmployesController::class, 'confirm']);
 Route::post('/FicheHoraire/Details/refuse/{id}/{idfiche}', [PageEmployesController::class, 'refuse']);
-
 
 /*
 |--------------------------------------------------------------------------

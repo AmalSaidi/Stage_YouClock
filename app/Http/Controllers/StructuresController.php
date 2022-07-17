@@ -18,7 +18,7 @@ class StructuresController extends Controller
     }
 
     public function index(){
-        if(!Gate::any(['access-admin', 'access-direction'])){
+        if(!Gate::allows('access-admin')){
             abort('403');
             }
         $structures = structures::all();
