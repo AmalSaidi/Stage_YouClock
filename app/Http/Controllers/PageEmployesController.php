@@ -22,9 +22,17 @@ class PageEmployesController extends Controller
         $session_str = $user->structure;
         $employes = DB::table('employes')->where('structure', 'like', '%'.$session_str.'%')->where('admin',0)->get();
         $structures = DB::select('select * from structures');
-        return view('ADMIN/PageEmployes',[
-            'employes' =>$employes,'structures'=>$structures,
-        ]);
+        $employees = DB::select('select * from employes');
+        if(Gate::allows('access-admin')){
+            return view('ADMIN/PageEmployes',[
+                'employes' =>$employes,'structures'=>$structures,
+            ]);
+        }
+        if(Gate::allows('access-direction')){
+            return view('DIRECTION/PageEmployes',[
+                'employees' =>$employees,'structures'=>$structures,
+            ]);
+        }
     }
 
 
@@ -93,8 +101,14 @@ class PageEmployesController extends Controller
         $sem4 = DB::select('select * from depassements where idfiche =? AND semaine="semaine 4" AND identifiant = (select identifiant from employes where id = ?)',[$idfiche,$id]);
         $sem5 = DB::select('select * from depassements where idfiche =? AND semaine="semaine 5" AND identifiant = (select identifiant from employes where id = ?)',[$idfiche,$id]);
         $NR = DB::select('select * from fichehors where idfiche =? AND state="NR" AND idUser = (select identifiant from employes where id = ?)',[$idfiche,$id]);
-        return view('ADMIN/FicheHoraireDetails',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees
-        ,'depassement'=>$depassement,'sem1'=>$sem1,'sem2'=>$sem2,'sem3'=>$sem3,'sem4'=>$sem4,'sem5'=>$sem5,'NR'=>$NR]);
+         if(Gate::allows('access-admin')){
+            return view('ADMIN/FicheHoraireDetails',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees
+            ,'depassement'=>$depassement,'sem1'=>$sem1,'sem2'=>$sem2,'sem3'=>$sem3,'sem4'=>$sem4,'sem5'=>$sem5,'NR'=>$NR]);
+            }
+            if(Gate::allows('access-direction')){
+                return view('DIRECTION/FicheHoraireDetails',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees
+                ,'depassement'=>$depassement,'sem1'=>$sem1,'sem2'=>$sem2,'sem3'=>$sem3,'sem4'=>$sem4,'sem5'=>$sem5,'NR'=>$NR]);
+                }
         }
       
         public function refuse(Request $request) {

@@ -603,3 +603,25 @@ border-color: white;
 #confirmerFiche{
     text-align: center;
 }
+
+#VV{
+    background-color: lightgreen;
+}
+
+
+#RR{
+    background-color: lightcoral;
+}
+
+#EC{
+    background-color: gainsboro;
+}
+
+#ValiderFiche{
+    text-align: center;
+    color: black !important;
+}
+
+#validerButton{
+    color: black !important;
+}
