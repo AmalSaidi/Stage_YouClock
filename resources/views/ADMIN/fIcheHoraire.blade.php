@@ -36,7 +36,17 @@
         <div id="pic"><img id="logo-icon" src="https://cdn.discordapp.com/attachments/936584358654005321/974610254220378112/user.png"></div>
       <div id="info-bas">{{ $employe->prenom }} {{ $employe->nom }} <br>
       <div id="struc">{{ $employe->structure }}</div> 
-      <div id="statut">En attente de validation du responsable du service</div>
+      @foreach($fiiche as $f)
+  @if($f->statutF=="EnCours")
+  <div id="encourss" class="encours">En cours</div>
+  @elseif($f->statutF=="AttValiRS")
+  <div id="enAttRSS" class="enAttRS">En attente de validation responsable de service</div>
+  @elseif($f->statutF=="valideRS")
+  <div id="valideRSS" class="valideRS">Validé par responsable de service</div>
+  @else
+  <div id="validee" class="valide">Validé</div>
+  @endif
+  @endforeach
       </div>
       <br>
     <div id="buttons">
@@ -53,20 +63,27 @@
     <tr id="head-table">
       <th scope="col">Date</th>
       <th scope="col">Statut de la fiche horaire</th>
-      <th scope="col" id="hidden"></th>
     </tr>
   </thead>
   <tbody>
      @foreach($fiche as $f)
      <tr>
-      <td>  
+      <td id="dateFiche">
+      @if($f->statutF=="EnCours")  
+      {{ $f->idfiche }}
+      @else
       <a id="link-nom" href = '/FicheHoraire/Details/{{ $employe->id }}/{{ $f->idfiche }}'>{{ $f->idfiche }}</a>
+      @endif
   </td>
-  <td>
+  <td id="statut2">
   @if($f->statutF=="EnCours")
-  En Cours
+  <div id="encours">EN COURS</div>
+  @elseif($f->statutF=="AttValiRS")
+  <div id="enAttRS">EN ATTENTE VALIDATION RESPONSABLE SERVICE </div>
+  @elseif($f->statutF=="valideRS")
+  <div id="valideRS"> VALIDÉ PAR RESPONSABLE DE SERVICE</div>
   @else
-  Valide
+  <div id="valide">VALIDÉ</div>
   @endif
   </td>
     </tr>

@@ -24,64 +24,167 @@
 <h3 id="titlee">
 <?php echo $affichage[0]->Date; ?>
 </h3>
+<h5 id="mat">Jour</h5>
+<input type="hidden" name="typeJour">
+<select name="typeJour" id="typeJour">
+        <option value="Travaillé">Travaillé</option>
+        <option value="Férié">Férié</option>
+        <option value="CP">CP</option>
+        <option value="RTT">RTT</option>
+        <option value="1/2 RTT">1/2 RTT</option>
+        <option value="RCR">RCR</option>
+        <option value="Formation">Formation</option>
+        <option value="Maladie">Maladie</option>
+        <option value="Congés familiaux">Congés familiaux</option>
+        <option value="Sans soldes">Sans soldes</option>
+        <option value="Jour solidarité">Jour solidarité</option>
+</select></input>
 <div class="form-group">
     <h5 id="mat">Matin</h5>
-<input type="hidden" name="TM"><select name="TM" id="TM">
-    <option value="T">Activité : T</option>
-    <option value=""> </option>
+<input type="hidden" name="TM">
+<select name="TM" id="TM">
+@foreach($activites as $act)
+              <option value="{{ $act->code }}">activité : {{ $act->code }}</option>
+              @endforeach
 </select></input>
 <br>
 <div id="DeMatDiv">
 <p>Heure de début</p>
-<input type="time" name="morningS" value="09:00"/>
+
+@if(str_contains($affichage[0]->Date, 'Lun'))
+    <input type="time" name="morningS" value="{{$debutMLundi}}"/>
+@elseif(str_contains($affichage[0]->Date, 'Mar'))
+    <input type="time" name="morningS" value="{{$debutMMardi}}"/>
+@elseif(str_contains($affichage[0]->Date, 'Mer'))
+    <input type="time" name="morningS" value="{{$debutMMercredi}}"/>
+@elseif(str_contains($affichage[0]->Date, 'Jeu'))
+    <input type="time" name="morningS" value="{{$debutMJeudi}}"/>
+@elseif(str_contains($affichage[0]->Date, 'Ven'))
+    <input type="time" name="morningS" value="{{$debutMVendredi}}"/>
+@elseif(str_contains($affichage[0]->Date, 'Sam'))
+    <input type="time" name="morningS" value="{{$debutMSamedi}}"/>
+@elseif(str_contains($affichage[0]->Date, 'Dim'))
+    <input type="time" name="morningS" value="{{$debutMDimanche}}"/>
+@endif
 </div>
 <div id="FiMatDiv">
 <p>Heure de fin</p>
-<input type="time" name="morningF" value="12:30"/>
+@if(str_contains($affichage[0]->Date, 'Lun'))
+    <input type="time" name="morningF" value="{{$finMLundi}}"/>
+@elseif(str_contains($affichage[0]->Date, 'Mar'))
+    <input type="time" name="morningF" value="{{$finMMardi}}"/>
+@elseif(str_contains($affichage[0]->Date, 'Mer'))
+    <input type="time" name="morningF" value="{{$finMMercredi}}"/>
+@elseif(str_contains($affichage[0]->Date, 'Jeu'))
+    <input type="time" name="morningF" value="{{$finMJeudi}}"/>
+@elseif(str_contains($affichage[0]->Date, 'Ven'))
+    <input type="time" name="morningF" value="{{$finMVendredi}}"/>
+@elseif(str_contains($affichage[0]->Date, 'Sam'))
+    <input type="time" name="morningF" value="{{$finMSamedi}}"/>
+@elseif(str_contains($affichage[0]->Date, 'Dim'))
+    <input type="time" name="morningF" value="{{$finMDimanche}}"/>
+@endif
 </div>
 </div>
 <div class="form-group">
     <h5 id="apr">Après-midi</h5>
     <input type="hidden" name="TAP"><select id="TAP" name="TAP" id="">
-    <option value="T">Activité : T</option>
-    <option value=""> </option>
+    @foreach($activites as $act)
+              <option value="{{ $act->code }}">activité : {{ $act->code }}</option>
+              @endforeach
 </select></input>
 <br>
 <div id="DeApremDiv">
 <p>Heure de début</p>
-<input type="time" name="ApremS" value="13:30"/>
+@if(str_contains($affichage[0]->Date, 'Lun'))
+    <input type="time" name="ApremS" value="{{$debutALundi}}"/>
+@elseif(str_contains($affichage[0]->Date, 'Mar'))
+    <input type="time" name="ApremS" value="{{$debutAMardi}}"/>
+@elseif(str_contains($affichage[0]->Date, 'Mer'))
+    <input type="time" name="ApremS" value="{{$debutAMercredi}}"/>
+@elseif(str_contains($affichage[0]->Date, 'Jeu'))
+    <input type="time" name="ApremS" value="{{$debutAJeudi}}"/>
+@elseif(str_contains($affichage[0]->Date, 'Ven'))
+    <input type="time" name="ApremS" value="{{$debutAVendredi}}"/>
+@elseif(str_contains($affichage[0]->Date, 'Sam'))
+    <input type="time" name="ApremS" value="{{$debutASamedi}}"/>
+@elseif(str_contains($affichage[0]->Date, 'Dim'))
+    <input type="time" name="ApremS" value="{{$debutADimanche}}"/>
+@endif
 </div>
 <div>
 <p>Heure de fin</p>
-<input type="time" name="ApremF" value="17:00"/>
+@if(str_contains($affichage[0]->Date, 'Lun'))
+    <input type="time" name="ApremF" value="{{$finALundi}}"/>
+@elseif(str_contains($affichage[0]->Date, 'Mar'))
+    <input type="time" name="ApremF" value="{{$finAMardi}}"/>
+@elseif(str_contains($affichage[0]->Date, 'Mer'))
+    <input type="time" name="ApremF" value="{{$finAMercredi}}"/>
+@elseif(str_contains($affichage[0]->Date, 'Jeu'))
+    <input type="time" name="ApremF" value="{{$finAJeudi}}"/>
+@elseif(str_contains($affichage[0]->Date, 'Ven'))
+    <input type="time" name="ApremF" value="{{$finAVendredi}}"/>
+@elseif(str_contains($affichage[0]->Date, 'Sam'))
+    <input type="time" name="ApremF" value="{{$finASamedi}}"/>
+@elseif(str_contains($affichage[0]->Date, 'Dim'))
+    <input type="time" name="ApremF" value="{{$finADimanche}}"/>
+@endif
 </div>
 </div>
 <div class="form-group">
     <h5 id="soir">Soir</h5>
 <input type="hidden" name="TS"><select name="TS" id="TS">
-    <option value=""></option>
-    <option value="T">Activité : T</option>
+@foreach($activites as $act)
+              <option value="{{ $act->code }}">activité : {{ $act->code }}</option>
+              @endforeach
 </select></input>
 <br>
 <div id="DeSoirDiv">
 <p>Heure de début</p>
-<input type="time" name="soirS" value=" "/>
+@if(str_contains($affichage[0]->Date, 'Lun'))
+    <input type="time" name="soirS" value="{{$debutSLundi}}"/>
+@elseif(str_contains($affichage[0]->Date, 'Mar'))
+    <input type="time" name="soirS" value="{{$debutSMardi}}"/>
+@elseif(str_contains($affichage[0]->Date, 'Mer'))
+    <input type="time" name="soirS" value="{{$debutSMercredi}}"/>
+@elseif(str_contains($affichage[0]->Date, 'Jeu'))
+    <input type="time" name="soirS" value="{{$debutSJeudi}}"/>
+@elseif(str_contains($affichage[0]->Date, 'Ven'))
+    <input type="time" name="soirS" value="{{$debutSVendredi}}"/>
+@elseif(str_contains($affichage[0]->Date, 'Sam'))
+    <input type="time" name="soirS" value="{{$debutSSamedi}}"/>
+@elseif(str_contains($affichage[0]->Date, 'Dim'))
+    <input type="time" name="soirS" value="{{$debutSDimanche}}"/>
+@endif
 </div>
 <div>
 <p>Heure de fin</p>
-<input type="time" name="soirF" value=" "/>
+@if(str_contains($affichage[0]->Date, 'Lun'))
+    <input type="time" name="soirF" value="{{$finSLundi}}"/>
+@elseif(str_contains($affichage[0]->Date, 'Mar'))
+    <input type="time" name="soirF" value="{{$finSMardi}}"/>
+@elseif(str_contains($affichage[0]->Date, 'Mer'))
+    <input type="time" name="soirF" value="{{$finSMercredi}}"/>
+@elseif(str_contains($affichage[0]->Date, 'Jeu'))
+    <input type="time" name="soirF" value="{{$finSJeudi}}"/>
+@elseif(str_contains($affichage[0]->Date, 'Ven'))
+    <input type="time" name="soirF" value="{{$finSVendredi}}"/>
+@elseif(str_contains($affichage[0]->Date, 'Sam'))
+    <input type="time" name="soirF" value="{{$finSSamedi}}"/>
+@elseif(str_contains($affichage[0]->Date, 'Dim'))
+    <input type="time" name="soirF" value="{{$finSDimanche}}"/>
+@endif
 </div>
 </div>
 <div class="form-group">
     <h5 id="ventilation-titre">Ventilation</h5>
-    <div id="venti">
-    <h6>Entraide familiale : </h6><br>
-    <input onblur="findTotal()" id="num" name="num" type="number" placeholder="" step="0.01" min="0" max="10"><br>
-    <input id="ven" type="hidden" placeholder="ventilation3" ><br>
-    </div>
+    @foreach($ventil as $ven)
     <div>
-    <input onblur="findTotal()" id="num" name="num" type="hidden" placeholder="" step="0.01" min="0" max="10"><br>
-    <input onblur="findTotal()" id="num" name="num" type="hidden" placeholder="" step="0.01" min="0" max="10"><br>
+    <p>{{ $ven->ventilation }}
+    <input onblur="findTotal()" class="nume" name="{{ $ven->codeV }}" type="number" placeholder="" step="0.01" min="0" max="10"><br>
+    </div>
+    @endforeach
+    <div>
     <input name="heureseffectu" onblur="findTotal()" type="hidden" name="total" id="total" max="10"/>
     </div>
 </div>
@@ -101,7 +204,7 @@
 <script type="text/javascript" src="{{ URL::asset('js/afficher-form-modifier.js') }}"></script>
 <script type="text/javascript">
 function findTotal(){
-    var arr = document.getElementsByName('num');
+    var arr = document.getElementsByClassName('nume');
     var tot=0;
     for(var i=0;i<arr.length;i++){
         if(parseInt(arr[i].value))

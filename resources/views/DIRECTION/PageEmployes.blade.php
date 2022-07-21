@@ -15,7 +15,7 @@
         <i class="fas fa-search"></i>
       </button> -->
       <input type="text" id="input-stru"  placeholder="Toutes les structures" aria-describedby="basic-addon2">
-      <button id="ajouter"> ajouter un employé dir
+      <button id="ajouter"> ajouter un employé
     </button>
     </div>
     </div>  
@@ -38,7 +38,7 @@
   @foreach( $employees as $employe )
      
 <tr>
-      <td><a id="link-nom" href = '/employees/{{ $employe->id }}'><img id="logo-icon" src="https://cdn.discordapp.com/attachments/936584358654005321/974610254220378112/user.png">{{ $employe->nom }} {{ $employe->prenom }}</a></td>
+      <td><a id="link-nom" href = '/employes/{{ $employe->id }}'><img id="logo-icon" src="https://cdn.discordapp.com/attachments/936584358654005321/974610254220378112/user.png">{{ $employe->nom }} {{ $employe->prenom }}</a></td>
       <td><div id="stru">{{ $employe->structure }}</div></td>
       <td>{{ $employe->dateEmbauche }}</td>
       <td>{{ $employe->Datefin }}</td>

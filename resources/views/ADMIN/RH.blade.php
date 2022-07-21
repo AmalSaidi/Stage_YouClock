@@ -37,7 +37,17 @@
     <div id="pic"><img id="logo-icon" src="https://cdn.discordapp.com/attachments/936584358654005321/974610254220378112/user.png"></div>
       <div id="info-bas">{{ $employe->prenom }} {{ $employe->nom }} <br>
       <div id="struc">{{ $employe->structure }}</div> 
-      <div id="statut">En attente de validation du responsable du service</div>
+      @foreach($fiche as $f)
+  @if($f->statutF=="EnCours")
+  <div id="encours" class="encours">En cours</div>
+  @elseif($f->statutF=="AttValiRS")
+  <div id="enAttRS" class="enAttRS">En attente de validation responsable de service</div>
+  @elseif($f->statutF=="valideRS")
+  <div id="valideRS" class="valideRS">Validé par responsable de service</div>
+  @else
+  <div id="valide" class="valide">Validé</div>
+  @endif
+  @endforeach
       </div>
 
       @endforeach   
@@ -81,6 +91,58 @@
 <p style="float:left;">Durée du contrat</p>
 <div id="DateEmbauche"><small>Date d\'embauche</small><br>{{ $employe->dateEmbauche }}</div>
 <div id="DateFin"><small>Date de fin de période</small><br>{{ $employe->Datefin }}</div>
+</div>
+</div>
+
+<div id="duree-div">
+<div id="section-duree">
+<form action="" method="POST">
+    {{ csrf_field() }}
+<p style="float:left;">Ventilation</p>
+<div id="venti">
+<input type="hidden" name="idUser" value="{{$employe->identifiant}}">
+<input type="checkbox" value="FRASAD" name="ventilation[]">
+      <label for="FRASAD">FRASAD</label>
+      <br>
+      <input type="checkbox" value="Entraide familiale" name="ventilation[]">
+      <label for="Entraide familiale">Entraide familiale</label>
+      <br>
+      <input type="checkbox" value="Federation" name="ventilation[]">
+      <label for="Federation">Fédération</label>
+      <br>
+
+</div>
+      <div id="venti2">
+      <input type="checkbox" value="Prestataire" name="ventilation[]">
+             <label for="Prestataire">Prestataire</label>
+             <br>
+      <input type="checkbox" value="Voisineurs" name="ventilation[]">
+             <label for="Voisineurs">Voisineurs</label>
+             <br>
+      <input type="checkbox" value="ADU services" name="ventilation[]">
+      <label for="ADU services">ADU services</label>
+      <br>
+      </div>
+      <div id="venti3">
+      <input type="checkbox" value="Mandataires" name="ventilation[]">
+      <label for="Mandataires">Mandataires</label>
+      <br>
+
+      <input type="checkbox" value="SOS garde d'enfants" name="ventilation[]">
+      <label for="SOS garde d'enfants">SOS garde d'enfants</label>
+     <br>
+      <input type="checkbox" value="ADVM" name="ventilation[]"
+      > <label for="ADVM">ADVM</label>
+
+</div>
+<div id="venti4">
+<input type="checkbox" value="DELEGATION" name="ventilation[]"
+      > <label for="DELEGATION">DELEGATION</label>
+
+</div>
+<br>
+      <div id="maj-venti"><button type=submit class="btn btn-success">Mettre à jour la ventilation</button></div>
+</form>
 </div>
 </div>
 

@@ -64,12 +64,14 @@ Route::get('/employes/{id}', [PageEmployesController::class, 'show']);
 Route::get('/employes', [PageEmployesController::class, 'index']);
 Route::post('/employes', [PageEmployesController::class, 'store']);
 Route::get('/RH/{id}', [PageEmployesController::class, 'showRH']);
+Route::post('/RH/{id}', [PageEmployesController::class, 'ventila']);
 Route::get('/RH/semaineType/{id}', [PageEmployesController::class, 'showST']);
 Route::post('/RH/semaineType/{id}', [PageEmployesController::class, 'ajouterST']);
 Route::get('/FicheHoraire/{id}', [PageEmployesController::class, 'showFiche']);
 Route::get('/FicheHoraire/Details/{id}/{idfiche}', [PageEmployesController::class, 'showFicheComplete']);
 Route::post('/FicheHoraire/Details/confirm/{id}/{idfiche}', [PageEmployesController::class, 'confirm']);
 Route::post('/FicheHoraire/Details/refuse/{id}/{idfiche}', [PageEmployesController::class, 'refuse']);
+Route::post('/FicheHoraire/Details/valider', [PageEmployesController::class, 'validerFicheDir']);
 
 /*
 |--------------------------------------------------------------------------
@@ -93,6 +95,7 @@ Route::post('/FicheHoraire', [FicheHoraireUserController::class, 'addDays']);
 Route::get('/FicheHoraire/edit/{id}', [FicheHoraireUserController::class, 'show']);
 Route::post('/FicheHoraire/edit/{id}',[FicheHoraireUserController::class, 'edit']);
 Route::post('/FicheHoraire/ediit/{id}', [FicheHoraireUserController::class, 'nextD']);
+Route::post('/FicheHoraire/valider', [FicheHoraireUserController::class, 'validerFiche']);
 
 /*
 |--------------------------------------------------------------------------

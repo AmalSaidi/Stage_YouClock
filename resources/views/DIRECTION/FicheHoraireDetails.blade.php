@@ -10,6 +10,16 @@
 $T=0;
 $P=0;
 $F=0;
+$CP=0;
+$RTT=0;
+$HRTT=0;
+$RCR=0;
+$FORMATION=0;
+$FER=0;
+$MALADIE=0;
+$SS=0;
+$JS=0;
+$CF=0;
 $DIF=0;
 $DEP=0;
 $se1=0;
@@ -49,7 +59,17 @@ $se5=0;
           <div id="pic"><img id="logo-icon" src="https://cdn.discordapp.com/attachments/936584358654005321/974610254220378112/user.png"></div>
       <div id="info-bas">{{ $employe->prenom }} {{ $employe->nom }} <br>
       <div id="struc">{{ $employe->structure }}</div> 
-      <div id="statut">En attente de validation du responsable du service</div>
+      @foreach($fiiche as $f)
+  @if($f->statutF=="EnCours")
+  <div id="encours" class="encours">En cours</div>
+  @elseif($f->statutF=="AttValiRS")
+  <div id="enAttRS" class="enAttRS">En attente de validation responsable de service</div>
+  @elseif($f->statutF=="valideRS")
+  <div id="valideRS" class="valideRS">Validé par responsable de service</div>
+  @else
+  <div id="valide" class="valide">Validé</div>
+  @endif
+  @endforeach
       </div>
       <br>
     <div id="buttons">
@@ -72,15 +92,55 @@ $se5=0;
         </thead>
     <tbody>
     @foreach($fiche as $f)
-    @if( $f->activite1 =="T")
+    @if( $f->typeJour =="Travaillé")
     @php 
     $T=$T+1 
+    @endphp
+    @elseif( $f->typeJour =="Férié")
+    @php 
+    $FER=$FER+1 
+    @endphp
+    @elseif( $f->typeJour =="CP")
+    @php 
+    $CP=$CP+1 
+    @endphp
+    @elseif( $f->typeJour =="RTT")
+    @php 
+    $RTT=$RTT+1 
+    @endphp
+    @elseif( $f->typeJour =="1/2 RTT")
+    @php 
+    $HRTT=$HRTT+1 
+    @endphp
+    @elseif( $f->typeJour =="RCR")
+    @php 
+    $RCR=$RCR+1 
+    @endphp
+    @elseif( $f->typeJour =="Formation")
+    @php 
+    $FORMATION=$FORMATION+1 
+    @endphp
+    @elseif( $f->typeJour =="Maladie")
+    @php 
+    $MALADIE=$MALADIE+1 
+    @endphp
+    @elseif( $f->typeJour =="Congés familiaux")
+    @php 
+    $CF=$CF+1 
+    @endphp
+    @elseif( $f->typeJour =="Sans soldes")
+    @php 
+    $SS=$SS+1 
+    @endphp
+    @elseif( $f->typeJour =="Jour solidarité")
+    @php 
+    $JS=$JS+1 
     @endphp
     @endif
 <tr id="trTab">
         
             <td>{{ $f->Date }}</td>
-            <td>{{ $f->activite1 }}</td>
+            <td>{{ $f->typeJour }}</td>
             <td>{{ $f->heuresEffectu }}</td>
             <td>{{ $f->Poids }}</td>
             <td>{{ $f->ecart }}</td>
@@ -159,9 +219,54 @@ $se5=0;
     <tbody>
     @foreach($fiche as $f)
     @if($loop->iteration >= 22)
+    @if( $f->typeJour =="Travaillé")
+    @php 
+    $T=$T+1 
+    @endphp
+    @elseif( $f->typeJour =="Férié")
+    @php 
+    $FER=$FER+1 
+    @endphp
+    @elseif( $f->typeJour =="CP")
+    @php 
+    $CP=$CP+1 
+    @endphp
+    @elseif( $f->typeJour =="RTT")
+    @php 
+    $RTT=$RTT+1 
+    @endphp
+    @elseif( $f->typeJour =="1/2 RTT")
+    @php 
+    $HRTT=$HRTT+1 
+    @endphp
+    @elseif( $f->typeJour =="RCR")
+    @php 
+    $RCR=$RCR+1 
+    @endphp
+    @elseif( $f->typeJour =="Formation")
+    @php 
+    $FORMATION=$FORMATION+1 
+    @endphp
+    @elseif( $f->typeJour =="Maladie")
+    @php 
+    $MALADIE=$MALADIE+1 
+    @endphp
+    @elseif( $f->typeJour =="Congés familiaux")
+    @php 
+    $CF=$CF+1 
+    @endphp
+    @elseif( $f->typeJour =="Sans soldes")
+    @php 
+    $SS=$SS+1 
+    @endphp
+    @elseif( $f->typeJour =="Jour solidarité")
+    @php 
+    $JS=$JS+1 
+    @endphp
+    @endif
     <tr>
             <td>{{ $f->Date }}</td>
-            <td>{{ $f->activite1 }}</td>
+            <td>{{ $f->typeJour }}</td>
             <td>{{ $f->heuresEffectu }}</td>
             <td>{{ $f->Poids }}</td>
             <td>{{ $f->ecart }}</td>
@@ -214,7 +319,7 @@ $se5=0;
     <div id="stats">
        <table id="tableStats">
            <tr id="trT">
-               <td id="Fer">0.00</td>
+               <td id="Fer">{{$FER}}.00</td>
                <td id="typeStat">Férié (jour)</td>
            </tr>
            <tr id="trT">
@@ -222,39 +327,39 @@ $se5=0;
                <td id="typeStat">Travaillé (jour)</td>
            </tr>
            <tr id="trT">
-               <td id="cp">0.00</td>
+               <td id="cp">{{$CP}}.00</td>
                <td id="typeStat">CP (jour)</td>
            </tr>
            <tr id="trT">
-               <td id="RTT">0.00</td>
+               <td id="RTT">{{$RTT}}.00</td>
                <td id="typeStat">RTT (jour)</td>
            </tr>
            <tr>
-               <td id="HRTT">0.00</td>
+               <td id="HRTT">{{$HRTT}}.00</td>
                <td id="typeStat">1/2 RTT (jour)</td>
            </tr>
            <tr id="trT">
-               <td id="RCR">0.00</td>
+               <td id="RCR">{{$RCR}}.00</td>
                <td id="typeStat">RCR (jour)</td>
            </tr>
            <tr id="trT">
-               <td id="forma">0.00</td>
+               <td id="forma">{{$FORMATION}}.00</td>
                <td id="typeStat">Fomation (jour)</td>
            </tr>
            <tr id="trT">
-               <td id="malad">0.00</td>
+               <td id="malad">{{$MALADIE}}.00</td>
                <td id="typeStat">Maladie (jour)</td>
            </tr>
            <tr id="trT">
-               <td id="CF">0.00</td>
+               <td id="CF">{{$CF}}.00</td>
                <td id="typeStat">Congés familiaux (jour)</td>
            </tr>
            <tr id="trT">
-               <td id="SS">0.00</td>
+               <td id="SS">{{$SS}}.00</td>
                <td id="typeStat">Sans soldes (jour)</td>
            </tr>
            <tr id="trT">
-               <td id="js">0.00</td>
+               <td id="js">{{$JS}}.00</td>
                <td id="typeStat">Jour solidarité</td>
            </tr>
        </table>
@@ -304,15 +409,30 @@ $se5=0;
                 @endphp
                 @endif
                 @endforeach
+                @foreach($fiche as $f)
+                @php
+                $idfiche=$f->idfiche;
+                $idUser=$f->idUser;
+                @endphp
+                @once
                 @if($counter>0)
                 <tr id="trContr" style="background-color:white;">
                     <td colspan="2"id="ValiderFiche"><button title="en attente validation RS" id="validerButton"type="button" class="btn btn-secondary" disabled>valider la fiche</button></td>
                 </tr>
                 @else
                 <tr id="trContr" style="background-color:white;">
-                    <td colspan="2"id="ValiderFiche"><button id="validerButtonY"type="button" class="btn btn-primary">valider la fiche</button></td>
+                <form action = "/FicheHoraire/Details/valider" method = "post">
+                {{ csrf_field() }}
+                <input type="hidden" name="idfiche" value="{{ $idfiche }}">
+                <input type="hidden" name="idUser" value="{{ $idUser }}">
+                <td colspan="2"id="ValiderFiche"><button id="validerButtonY" type="submit" class="btn btn-primary">valider la fiche</button></td>
+                </form>
                 </tr>
                 @endif
+                @endonce
+                @endforeach
+
+               
                 </tr>
             </tbody>
         </table>

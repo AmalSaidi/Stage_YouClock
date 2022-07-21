@@ -89,7 +89,11 @@ $Valide="Valide";
 </table>
 @if($ajout==1)
 <div style="text-align:center;">
-<button id="Valider">Valider</button>
+<form action = "/FicheHoraire/valider" method = "post">
+    <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
+    <input type="hidden" name="idfiche" value="{{ $aff->idfiche }}">
+    <button type="submit" class="btn btn-success" id="Valider">Valider</button>
+    </form>
 @endif
 </div>
 </div>

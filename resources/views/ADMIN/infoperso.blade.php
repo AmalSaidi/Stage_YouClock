@@ -37,7 +37,17 @@
 <div id="pic"><img id="logo-icon" src="https://cdn.discordapp.com/attachments/936584358654005321/974610254220378112/user.png"></div>
   <div id="info-bas">{{ $employe->prenom }} {{ $employe->nom }} <br>
   <div id="struc">{{ $employe->structure }}</div> 
-  <div id="statut">En attente de validation du responsable du service</div>
+  @foreach($fiche as $f)
+  @if($f->statutF=="EnCours")
+  <div id="encours" class="encours">En cours</div>
+  @elseif($f->statutF=="AttValiRS")
+  <div id="enAttRS" class="enAttRS">En attente de validation responsable de service</div>
+  @elseif($f->statutF=="valideRS")
+  <div id="valideRS" class="valideRS">Validé par responsable de service</div>
+  @else
+  <div id="valide" class="valide">Validé</div>
+  @endif
+  @endforeach
   </div>
 
   @endforeach   

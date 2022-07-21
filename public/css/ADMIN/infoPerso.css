@@ -392,3 +392,40 @@ margin-right: 20px;
 #link-nom{
     color: #8537bd !important;
 }
+
+#enAttRS{
+    background-color: #f69c5e;
+    width: fit-content;
+    color: white;
+    padding: 2 10 2 10;
+    float: left;
+    font-size: small;
+
+}
+
+#encours{
+    background-color: #74c0d9;
+    width: fit-content;
+    color: white;
+    padding: 2 10 2 10;
+    float: left;
+    font-size: small;
+}
+
+#valideRS{
+    background-color: #106813;
+    width: fit-content;
+    color: white;
+    padding: 2 10 2 10;
+    float: left;
+    font-size: small;
+}
+
+#valide{
+    background-color: #50d755;
+    width: fit-content;
+    color: white;
+    padding: 2 10 2 10;
+    float: left;
+    font-size: small;
+}
