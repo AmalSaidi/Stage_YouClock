@@ -56,6 +56,11 @@ $se5=0;
 </div>
     @foreach( $employes as $employe )
         <div id="acti">
+        @if (session('status'))
+    <div class="alert alert-danger">
+        {{ session('status') }}
+    </div>
+@endif
           <div id="pic"><img id="logo-icon" src="https://cdn.discordapp.com/attachments/936584358654005321/974610254220378112/user.png"></div>
       <div id="info-bas">{{ $employe->prenom }} {{ $employe->nom }} <br>
       <div id="struc">{{ $employe->structure }}</div> 
@@ -413,8 +418,23 @@ $se5=0;
                     <td style="PADDING: 5 2 5 10;"><b>Dépassement autorisé :</b></td>
                     <td style="padding: 1 9 1 10;">{{$DEP}}</td>
                 </tr>
-
+                @foreach($fiche as $f)
+                @once
+                @php
+                $idfiche=$f->idfiche;
+                $idUser=$f->idUser;
+                @endphp
                 </tr>
+                <tr id="trContr" style="background-color:white;">
+                <form action = "/FicheHoraire/Details/validerRS" method = "post">
+                {{ csrf_field() }}
+                <input type="hidden" name="idfiche" value="{{ $idfiche }}">
+                <input type="hidden" name="idUser" value="{{ $idUser }}">
+                <td colspan="2"id="ValiderFiche"><button id="validerButtonY" type="submit" class="btn btn-primary">valider la fiche</button></td>
+                </form>
+                </tr>
+                @endonce
+                @endforeach
             </tbody>
         </table>
     </div>

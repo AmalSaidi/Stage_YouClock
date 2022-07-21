@@ -72,6 +72,8 @@ Route::get('/FicheHoraire/Details/{id}/{idfiche}', [PageEmployesController::clas
 Route::post('/FicheHoraire/Details/confirm/{id}/{idfiche}', [PageEmployesController::class, 'confirm']);
 Route::post('/FicheHoraire/Details/refuse/{id}/{idfiche}', [PageEmployesController::class, 'refuse']);
 Route::post('/FicheHoraire/Details/valider', [PageEmployesController::class, 'validerFicheDir']);
+Route::post('/FicheHoraire/Details/validerRS', [PageEmployesController::class, 'validerFicheRS']);
+
 
 /*
 |--------------------------------------------------------------------------

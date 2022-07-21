@@ -118,6 +118,20 @@ class PageEmployesController extends Controller
         $NR = DB::select('select * from fichehors where idfiche =? AND state="NR" AND idUser = (select identifiant from employes where id = ?)',[$idfiche,$id]);
         $countNR=0;
         if(Gate::allows('access-admin')){
+            return view('ADMIN/FicheHoraireDetails',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees
+            ,'depassement'=>$depassement,'sem1'=>$sem1,'sem2'=>$sem2,'sem3'=>$sem3,'sem4'=>$sem4,'sem5'=>$sem5,'NR'=>$NR,'fiiche'=>$fiiche]);
+            }
+            if(Gate::allows('access-direction')){
+                return view('DIRECTION/FicheHoraireDetails',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees
+                ,'depassement'=>$depassement,'sem1'=>$sem1,'sem2'=>$sem2,'sem3'=>$sem3,'sem4'=>$sem4,'sem5'=>$sem5,'NR'=>$NR,'fiiche'=>$fiiche]);
+                }
+        }
+
+        public function validerFicheRS(Request $request) {
+            $idU = $request->input('idUser');
+            $idF = $request->input('idfiche');
+            $fiche = DB::select('select * from fichehors where idfiche =? AND idUser = ?',[$idF,$idU]);
+            $countNR=0;
             foreach ($fiche as $fi) {
                 if($fi->state=="NR"){
                     $countNR=$countNR+1;
@@ -128,16 +142,13 @@ class PageEmployesController extends Controller
             }
             if($countNR==0)
             {
-                DB::update('update fichehors set statutF="valideRS" where idfiche = ? and idUser = (select identifiant from employes where id = ?)',[$idfiche,$id]);
+                DB::update('update fichehors set statutF="valideRS" where idfiche = ? and idUser = ?',[$idF,$idU]);
+                return redirect()->back();
             }
-            return view('ADMIN/FicheHoraireDetails',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees
-            ,'depassement'=>$depassement,'sem1'=>$sem1,'sem2'=>$sem2,'sem3'=>$sem3,'sem4'=>$sem4,'sem5'=>$sem5,'NR'=>$NR,'fiiche'=>$fiiche]);
+            else{
+                return redirect()->back()->with('status', 'vous devez renseigner tout les champs');
             }
-            if(Gate::allows('access-direction')){
-                return view('DIRECTION/FicheHoraireDetails',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees
-                ,'depassement'=>$depassement,'sem1'=>$sem1,'sem2'=>$sem2,'sem3'=>$sem3,'sem4'=>$sem4,'sem5'=>$sem5,'NR'=>$NR,'fiiche'=>$fiiche]);
-                }
-        }
+            }
 
         public function validerFicheDir(Request $request) {
             $idF = $request->input('idfiche');
@@ -145,7 +156,7 @@ class PageEmployesController extends Controller
             DB::update('update fichehors set statutF="valide" where idfiche = ? and idUser = ?',[$idF,$idU]);
             return redirect()->back();
             }
-      
+
         public function refuse(Request $request) {
             $idf = $request->id;
             $fiche = fichehor::find($idf);

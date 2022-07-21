@@ -64,7 +64,11 @@ $Valide="Valide";
         <td><input name="heuresEffec" type="hidden" value="{{ $aff->heuresEffectu }}">{{ $aff->heuresEffectu }} </input></td>
         <td><input name="poids" type="hidden" value="{{ $aff->Poids }}">{{ $aff->Poids }}</input></td>
         <td><input name="ecartJour" type="hidden" value="{{ $aff->ecart }}">{{ $aff->ecart }}</input></td>
+        @if($aff->statutF=="EnCours" )
         <td><a href = 'FicheHoraire/edit/{{ $aff->id }}'><button id="pointer">Pointer</button></a></td>
+        @else
+        <td><a href = 'FicheHoraire/edit/{{ $aff->id }}'><button id="pointer" disabled>Pointer</button></a></td>
+        @endif
       </tr>
       <input type="hidden" value="{{$p = $p + $aff->heuresEffectu }}">
       <input type="hidden" value="{{$f = $f + $aff->Poids }}">
@@ -88,12 +92,21 @@ $Valide="Valide";
   </tbody>
 </table>
 @if($ajout==1)
+@if($aff->statutF=="EnCours" )
 <div style="text-align:center;">
 <form action = "/FicheHoraire/valider" method = "post">
     <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
     <input type="hidden" name="idfiche" value="{{ $aff->idfiche }}">
     <button type="submit" class="btn btn-success" id="Valider">Valider</button>
     </form>
+    @else
+    <div style="text-align:center;">
+<form action = "/FicheHoraire/valider" method = "post">
+    <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
+    <input type="hidden" name="idfiche" value="{{ $aff->idfiche }}">
+    <button type="submit" class="btn btn-success" id="Valider" disabled>Valider</button>
+    </form>
+@endif
 @endif
 </div>
 </div>
