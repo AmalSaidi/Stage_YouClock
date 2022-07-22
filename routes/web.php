@@ -65,6 +65,7 @@ Route::get('/employes', [PageEmployesController::class, 'index']);
 Route::post('/employes', [PageEmployesController::class, 'store']);
 Route::get('/RH/{id}', [PageEmployesController::class, 'showRH']);
 Route::post('/RH/{id}', [PageEmployesController::class, 'ventila']);
+Route::get('/ventilation/{id}', [PageEmployesController::class, 'showVenti']);
 Route::get('/RH/semaineType/{id}', [PageEmployesController::class, 'showST']);
 Route::post('/RH/semaineType/{id}', [PageEmployesController::class, 'ajouterST']);
 Route::get('/FicheHoraire/{id}', [PageEmployesController::class, 'showFiche']);
@@ -73,6 +74,7 @@ Route::post('/FicheHoraire/Details/confirm/{id}/{idfiche}', [PageEmployesControl
 Route::post('/FicheHoraire/Details/refuse/{id}/{idfiche}', [PageEmployesController::class, 'refuse']);
 Route::post('/FicheHoraire/Details/valider', [PageEmployesController::class, 'validerFicheDir']);
 Route::post('/FicheHoraire/Details/validerRS', [PageEmployesController::class, 'validerFicheRS']);
+Route::post('/ventilation/validerVentil', [PageEmployesController::class, 'validerVentil']);
 
 
 /*

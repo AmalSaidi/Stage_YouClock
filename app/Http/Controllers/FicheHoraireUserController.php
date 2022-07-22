@@ -318,6 +318,7 @@ class FicheHoraireUserController extends Controller
         $fiche->idfiche = request('idfiche');
         $user=Auth::user();
         $session_id = $user->identifiant;
+        $semainetype=DB::select('select * from semainetypes where idUser=?',[$session_id]);
         $date = date('Y-m-01', strtotime("first day of this month"));
         $dateF = date('d', strtotime("last day of this month"));
         $date2 = date('l', strtotime($date));
@@ -412,6 +413,72 @@ class FicheHoraireUserController extends Controller
             $dateBD= $day_name." ".$day_num." ".$month;
 
             DB::insert('insert into fichehors (idfiche,Date,idUser,semaine) values (?,?,?,?)', [$idF,$dateBD,$session_id,$week]);
+            $fiches=DB::select('select * from fichehors where idUser=? and idfiche=?',[$session_id,$idF]);
+            foreach ($fiches as $fi) {
+                if(str_contains($fi->Date, 'Lun')){
+                    DB::update('UPDATE
+                    fichehors f,
+                    semainetypes s
+                SET
+                   f.Poids = s.poidsJour
+                WHERE
+                    f.idUser = s.idUser AND s.jour="Lundi" AND f.Date LIKE "%Lun%"');
+                }
+                else if(str_contains($fi->Date, 'Mar')){
+                    DB::update('UPDATE
+                    fichehors f,
+                    semainetypes s
+                SET
+                   f.Poids = s.poidsJour
+                WHERE
+                    f.idUser = s.idUser AND s.jour="Mardi" AND f.Date LIKE "%Mar%"');
+                }
+                else if(str_contains($fi->Date, 'Mer')){
+                    DB::update('UPDATE
+                    fichehors f,
+                    semainetypes s
+                SET
+                   f.Poids = s.poidsJour
+                WHERE
+                    f.idUser = s.idUser AND s.jour="Mercredi" AND f.Date LIKE "%Mer%"');
+                }
+                else if(str_contains($fi->Date, 'Jeu')){
+                    DB::update('UPDATE
+                    fichehors f,
+                    semainetypes s
+                SET
+                   f.Poids = s.poidsJour
+                WHERE
+                    f.idUser = s.idUser AND s.jour="Jeudi" AND f.Date LIKE "%Jeu%"');
+                }
+                else if(str_contains($fi->Date, 'Ven')){
+                    DB::update('UPDATE
+                    fichehors f,
+                    semainetypes s
+                SET
+                   f.Poids = s.poidsJour
+                WHERE
+                    f.idUser = s.idUser AND s.jour="Vendredi" AND f.Date LIKE "%Ven%"');
+                }
+                else if(str_contains($fi->Date, 'Sam')){
+                    DB::update('UPDATE
+                    fichehors f,
+                    semainetypes s
+                SET
+                   f.Poids = s.poidsJour
+                WHERE
+                    f.idUser = s.idUser AND s.jour="Samedi" AND f.Date LIKE "%Sam%"');
+                }
+                else if(str_contains($fi->Date, 'Dim')){
+                    DB::update('UPDATE
+                    fichehors f,
+                    semainetypes s
+                SET
+                   f.Poids = s.poidsJour
+                WHERE
+                    f.idUser = s.idUser AND s.jour="Dimanche" AND f.Date LIKE "%Dim%"');
+                }
+            }
         }
         return redirect()->back();
         }

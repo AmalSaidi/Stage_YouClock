@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use App\Models\employes;
 use App\Models\ventilation;
+use App\Models\ventilationfiche;
 use App\Models\fichehor;
 use App\Models\horairesemaine;
 use App\Models\semainetype;
@@ -101,6 +102,47 @@ class PageEmployesController extends Controller
         return view('ADMIN/ficheHoraire',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees,'fiiche'=>$fiiche]);
         }
 
+        public function showVenti($id) {
+            $user=Auth::user();
+            $session_str = $user->structure;
+            $employees = DB::table('employes')->where('structure', 'like', '%'.$session_str.'%')->where('admin',0)->get();
+            $employes = DB::select('select * from employes where id = ?',[$id]);
+            $fiiche = DB::select('select DISTINCT idfiche,statutF from fichehors where idUser = (select identifiant from employes where id = ?) ORDER BY id DESC LIMIT 1',[$id]);
+            $fiche = DB::select('select * from fichehors where idUser = (select identifiant from employes where id = ?) and idfiche=(select idfiche from
+            fichehors ORDER BY id DESC LIMIT 1 )',[$id]);
+            $FRASAD=0;
+            $Entraide=0;	
+            $Fédération=0;
+            $Prestataire=0;
+            $Voisineurs	=0;
+            $ADU=0;
+            $Mandataires=0;	
+            $SOS=0;	
+            $ADVM=0;	
+            $Délégation=0;
+            $poids=0;
+            foreach ($fiche as $fi) {
+                $Délégation=$fi->DELEGATION+$Délégation;
+                $FRASAD=$fi->FRASAD+$FRASAD;
+                $Entraide=$fi->EntraideFamiliale+$Entraide;
+                $Fédération=$fi->Federation+$Fédération;
+                $Prestataire=$fi->Prestataire+$Prestataire;
+                $Voisineurs=$fi->Voisineurs+$Voisineurs;
+                $ADU=$fi->ADUservices+$ADU;
+                $Mandataires=$fi->Mandataires+$Mandataires;
+                $SOS=$fi->SOSgarde+$SOS;
+                $ADVM=$fi->ADVM+$ADVM;
+                $poids=$fi->Poids+$poids;
+            }
+            $totalVentil=$Délégation+ $FRASAD+$Entraide+$Fédération+$Prestataire+$Voisineurs+$ADU+$Mandataires+$SOS+$ADVM;
+            $diff=$poids-$totalVentil;
+            return view('ADMIN/ventilationfiche',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees,'fiiche'=>$fiiche,'Délégation'=>$Délégation,
+            'FRASAD'=>$FRASAD,'Entraide'=>$Entraide,'Fédération'=>$Fédération,'Prestataire'=>$Prestataire,'Voisineurs'=>$Voisineurs,
+            'ADU'=>$ADU,'Mandataires'=>$Mandataires,'SOS'=>$SOS,'ADVM'=>$ADVM,'totalVentil'=>$totalVentil,'poids'=>$poids,'diff'=>$diff]);
+            }
+        
+
+
     public function showFicheComplete($id,$idfiche) {
         $user=Auth::user();
         $session_str = $user->structure;
@@ -157,6 +199,32 @@ class PageEmployesController extends Controller
             return redirect()->back();
             }
 
+        public function validerVentil(Request $request) {
+            $idF = $request->input('idfiche');
+            $idU = $request->input('idUser');
+            $FRASAD = $request->input('FRASAD');
+            $Entraide = $request->input('Entraide');
+            $Fédération = $request->input('Fédération');
+            $Prestataire = $request->input('Prestataire');
+            $Voisineurs = $request->input('Voisineurs');
+            $ADU = $request->input('ADU');
+            $Mandataires = $request->input('Mandataires');
+            $SOS = $request->input('SOS');
+            $Délégation = $request->input('Délégation');
+            $ADVM = $request->input('ADVM');
+            $venti = DB::select('select * from ventilationfiches where idFiche =? AND idUser = ?',[$idF,$idU]);
+            if(ventilationfiche::where('idUser', $idU)->where('idFiche', $idF)->count() > 0){
+                DB::update('update ventilationfiches set FRASAD=?,Entraide=?,Federation=?,Prestataire=?,Voisineurs=?,ADU=?,Mandataires=?
+                ,SOS=?,Delegation=?,ADVM=? where idfiche = ? and idUser = ?',[$FRASAD,$Entraide,$Fédération,$Prestataire,$Voisineurs,$ADU,$Mandataires,$SOS,$Délégation,$ADVM,$idF,$idU]);
+                }
+            else
+                {
+                DB::insert('insert into ventilationFiches (idFiche,idUser,FRASAD,Entraide,Federation,Prestataire,Voisineurs,ADU,Mandataires
+                ,SOS,Delegation,ADVM) values (?,?,?,?,?,?,?,?,?,?,?,?)', [$idF,$idU,$FRASAD,$Entraide,$Fédération,$Prestataire,$Voisineurs,$ADU,$Mandataires,$SOS,$Délégation,$ADVM]);
+                }
+            return redirect()->back();
+            }
+    
         public function refuse(Request $request) {
             $idf = $request->id;
             $fiche = fichehor::find($idf);
@@ -348,5 +416,6 @@ class PageEmployesController extends Controller
         [$poidsDim,$identifiant]);
             return redirect()->back()->with('status', 'Les modifications ont été bien enregistrés');
             }
+
         
     }
