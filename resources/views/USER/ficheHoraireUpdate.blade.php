@@ -24,7 +24,6 @@
 <h3 id="titlee">
 <?php echo $affichage[0]->Date; ?>
 </h3>
-<h5 id="mat">Jour</h5>
 <input type="hidden" name="typeJour">
 <select name="typeJour" id="typeJour">
         <option value="Travaillé">Travaillé</option>
@@ -178,12 +177,16 @@
 </div>
 <div class="form-group">
     <h5 id="ventilation-titre">Ventilation</h5>
-    @foreach($ventil as $ven)
-    <div>
-    <p>{{ $ven->ventilation }}
-    <input onblur="findTotal()" class="nume" name="{{ $ven->codeV }}" type="number" placeholder="" step="0.01" min="0" max="10"><br>
-    </div>
-    @endforeach
+    <table>
+        <tbody>
+        @foreach($ventil as $ven)
+            <tr>
+                <td>{{ $ven->ventilation }}</td>
+                <td><input onblur="findTotal()" class="nume" name="{{ $ven->codeV }}" type="number" placeholder="" step="0.01" min="0" max="10"></td>
+            </tr>
+         @endforeach
+        </tbody>
+    </table>
     <div>
     <input name="heureseffectu" onblur="findTotal()" type="hidden" name="total" id="total" max="10"/>
     </div>

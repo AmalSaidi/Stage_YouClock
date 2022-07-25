@@ -19,7 +19,7 @@ use App\Models\structures;
 | Activites
 |--------------------------------------------------------------------------
 */
-Route::get('activites', [ActivitesController::class, 'index']);
+Route::get('activites', [ActivitesController::class, 'index'])->name('activites');;
 Route::post('activites', [ActivitesController::class, 'store']);
 Route::get('/activites/edit/{id}',[ActivitesController::class, 'show']);
 Route::post('/activites/edit/{id}',[ActivitesController::class, 'edit']);
@@ -66,6 +66,7 @@ Route::post('/employes', [PageEmployesController::class, 'store']);
 Route::get('/RH/{id}', [PageEmployesController::class, 'showRH']);
 Route::post('/RH/{id}', [PageEmployesController::class, 'ventila']);
 Route::get('/ventilation/{id}', [PageEmployesController::class, 'showVenti']);
+Route::get('/statistiques/{id}', [PageEmployesController::class, 'showStat']);
 Route::get('/RH/semaineType/{id}', [PageEmployesController::class, 'showST']);
 Route::post('/RH/semaineType/{id}', [PageEmployesController::class, 'ajouterST']);
 Route::get('/FicheHoraire/{id}', [PageEmployesController::class, 'showFiche']);
@@ -94,7 +95,7 @@ Route::get('/demandeConge', [DemandeCongeUser::class, 'verifyDate']);
 |--------------------------------------------------------------------------
 */
 
-Route::get('/FicheHoraire', [FicheHoraireUserController::class, 'index']);
+Route::get('/FicheHoraire', [FicheHoraireUserController::class, 'index'])->name('ficheHoraireUser');
 Route::post('/FicheHoraire', [FicheHoraireUserController::class, 'addDays']);
 Route::get('/FicheHoraire/edit/{id}', [FicheHoraireUserController::class, 'show']);
 Route::post('/FicheHoraire/edit/{id}',[FicheHoraireUserController::class, 'edit']);

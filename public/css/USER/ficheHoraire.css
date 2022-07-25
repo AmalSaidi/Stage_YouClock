@@ -305,6 +305,7 @@ p{
 }
 
 #ventilation-titre{
+    margin-top: 2%;
     margin-bottom: 2%;
 }
 
@@ -332,4 +333,7 @@ p{
 
 #total{
     background-color: #dfdfdfc7;
+}
+#typeJour{
+    margin-bottom: 2%;
 }
