@@ -21,7 +21,7 @@ class EmployesSeeder extends Seeder
             'prenom' => "Marine",
             'mail' => "le-mans1.sad@orange.fr",
             'tel' => "0748105486",
-            'typeContrat' => "CDD",
+            'typeContrat' => "CDI",
             'intitule' => "SAD_Resp Bénéficiaires",
             'structure' => "FRASAD",
             'dateEmbauche' => "2021-09-20",
