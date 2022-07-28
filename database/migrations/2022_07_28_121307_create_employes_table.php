@@ -17,14 +17,13 @@ class CreateEmployesTable extends Migration
     {
         Schema::create('employes', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->integer('idS')->nullable();
             $table->text('nom');
             $table->text('prenom');
             $table->string('mail')->nullable();
             $table->integer('tel')->nullable();
             $table->string('TypeContrat');
-            $table->string('TempTra')->nullable();
+            $table->string('TempsTra')->nullable();
             $table->string('JoursNonTra')->nullable();
             $table->integer('heuresParMois')->nullable();
             $table->string('intitule')->nullable();
