@@ -25,7 +25,9 @@
 <?php echo $affichage[0]->Date; ?>
 </h3>
 <input type="hidden" name="typeJour">
+@if(str_contains($affichage[0]->Date, 'Sam') or str_contains($affichage[0]->Date, 'Dim'))
 <select name="typeJour" id="typeJour">
+        <option value="repos" selected>repos</option>
         <option value="Travaillé">Travaillé</option>
         <option value="Férié">Férié</option>
         <option value="CP">CP</option>
@@ -37,15 +39,43 @@
         <option value="Congés familiaux">Congés familiaux</option>
         <option value="Sans soldes">Sans soldes</option>
         <option value="Jour solidarité">Jour solidarité</option>
-</select></input>
+</select>
+@else
+<select name="typeJour" id="typeJour">
+        <option value="repos" >repos</option>
+        <option value="Travaillé" selected>Travaillé</option>
+        <option value="Férié">Férié</option>
+        <option value="CP">CP</option>
+        <option value="RTT">RTT</option>
+        <option value="1/2 RTT">1/2 RTT</option>
+        <option value="RCR">RCR</option>
+        <option value="Formation">Formation</option>
+        <option value="Maladie">Maladie</option>
+        <option value="Congés familiaux">Congés familiaux</option>
+        <option value="Sans soldes">Sans soldes</option>
+        <option value="Jour solidarité">Jour solidarité</option>
+</select>
+@endif
+</input>
 <div class="form-group">
     <h5 id="mat">Matin</h5>
 <input type="hidden" name="TM">
+@if(str_contains($affichage[0]->Date, 'Sam') or str_contains($affichage[0]->Date, 'Dim'))
+<select name="TM" id="TM">
+<option value="-" selected>activité : repos</option>
+@foreach($activites as $act)
+              <option value="{{ $act->code }}">activité : {{ $act->code }}</option>
+              @endforeach
+</select>
+@else
 <select name="TM" id="TM">
 @foreach($activites as $act)
               <option value="{{ $act->code }}">activité : {{ $act->code }}</option>
               @endforeach
-</select></input>
+              <option value="-">activité : repos</option>
+</select>
+@endif
+</input>
 <br>
 <div id="DeMatDiv">
 <p>Heure de début</p>
@@ -87,11 +117,23 @@
 </div>
 <div class="form-group">
     <h5 id="apr">Après-midi</h5>
-    <input type="hidden" name="TAP"><select id="TAP" name="TAP" id="">
-    @foreach($activites as $act)
+    <input type="hidden" name="TAP">
+    @if(str_contains($affichage[0]->Date, 'Sam') or str_contains($affichage[0]->Date, 'Dim'))
+<select name="TAP" id="TAP">
+<option value="-" selected>activité : repos</option>
+@foreach($activites as $act)
               <option value="{{ $act->code }}">activité : {{ $act->code }}</option>
               @endforeach
-</select></input>
+</select>
+@else
+<select name="TAP" id="TAP">
+@foreach($activites as $act)
+              <option value="{{ $act->code }}">activité : {{ $act->code }}</option>
+              @endforeach
+              <option value="-">activité : repos</option>
+</select>
+@endif
+</input>
 <br>
 <div id="DeApremDiv">
 <p>Heure de début</p>
@@ -132,11 +174,21 @@
 </div>
 <div class="form-group">
     <h5 id="soir">Soir</h5>
-<input type="hidden" name="TS"><select name="TS" id="TS">
+<input type="hidden" name="TS">@if(str_contains($affichage[0]->Date, 'Sam') or str_contains($affichage[0]->Date, 'Dim'))
+<select name="TS" id="TS">
+<option value="-" selected>activité : repos</option>
 @foreach($activites as $act)
               <option value="{{ $act->code }}">activité : {{ $act->code }}</option>
               @endforeach
-</select></input>
+</select>
+@else
+<select name="TS" id="TS">
+@foreach($activites as $act)
+              <option value="{{ $act->code }}">activité : {{ $act->code }}</option>
+              @endforeach
+              <option value="-">activité : repos</option>
+</select>
+@endif</input>
 <br>
 <div id="DeSoirDiv">
 <p>Heure de début</p>

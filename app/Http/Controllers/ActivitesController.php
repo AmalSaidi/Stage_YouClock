@@ -66,6 +66,6 @@ class ActivitesController extends Controller
 
         public function export() 
         {
-            return Excel::download(new ActivitesExport, 'activites.xlsx');
+            return (new ActivitesExport)->download('activites.xlsx');
         }
 }

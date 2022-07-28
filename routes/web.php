@@ -12,7 +12,14 @@ use App\Http\Controllers\DemandeCongeAdmin;
 use App\Http\Controllers\depHorController;
 use App\Http\Controllers\FicheHoraireUserController;
 use App\Http\Controllers\FicheHoraireAdminController;
+use App\Http\Controllers\passreset;
+use App\Http\Controllers\historique;
 use App\Models\structures;
+
+
+Route::get('/resetPass', [passreset::class, 'index']);
+Route::post('/resetPass', [passreset::class, 'updatePassword'])->name('update-password');
+
 
 /*
 |--------------------------------------------------------------------------
@@ -101,6 +108,14 @@ Route::get('/FicheHoraire/edit/{id}', [FicheHoraireUserController::class, 'show'
 Route::post('/FicheHoraire/edit/{id}',[FicheHoraireUserController::class, 'edit']);
 Route::post('/FicheHoraire/ediit/{id}', [FicheHoraireUserController::class, 'nextD']);
 Route::post('/FicheHoraire/valider', [FicheHoraireUserController::class, 'validerFiche']);
+/*
+|--------------------------------------------------------------------------
+| historique User :
+|--------------------------------------------------------------------------
+*/
+Route::get('/historique', [historique::class, 'index']);
+Route::get('/historiqueDetails/{idfiche}', [historique::class, 'details']);
+
 
 /*
 |--------------------------------------------------------------------------

@@ -12,5 +12,6 @@ class fichehor extends Model
     public function getTotalPriceAttribute() {
         return $this->heuresEffectu;
     }
+    
 
 }

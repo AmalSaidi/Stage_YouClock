@@ -338,6 +338,83 @@ p{
     margin-bottom: 2%;
 }
 
-.nume{
-    margin-left: 30;
+.table-bordered td, .table-bordered th {
+    border: 1px solid #000000;
+}
+
+th {
+    text-align: inherit;
+    background-color: #3b698d;
+    text-align: center !important;
+    color: white;
+}
+#encours{
+    background-color: #74c0d9;
+    width: fit-content;
+    color: white;
+    padding: 2 10 2 10;
+    float: left;
+    font-size: small;
+    margin-left: 425;
+}
+
+#valideRS{
+    background-color: #106813;
+    width: fit-content;
+    color: white;
+    padding: 2 10 2 10;
+    float: left;
+    font-size: small;
+    margin-left: 325;
+}
+
+#valide{
+    background-color: #50d755;
+    width: fit-content;
+    color: white;
+    padding: 2 10 2 10;
+    float: left;
+    font-size: small;
+    margin-left: 435;
+}
+
+#enAttRS{
+    background-color: #f69c5e !important;
+    width: fit-content;
+    color: white;
+    padding: 2 10 2 10;
+    float: left;
+    font-size: small;
+    margin-left: 290;
+}
+
+#encourss{
+    background-color: #74c0d9;
+    width: fit-content;
+    color: white;
+    padding: 2 10 2 10;
+    float: left;
+    font-size: small;
+}
+
+#valideRSS{
+    background-color: #106813;
+    width: fit-content;
+    color: white;
+    padding: 2 10 2 10;
+    float: left;
+    font-size: small;
+}
+
+#validee{
+    background-color: #50d755;
+    width: fit-content;
+    color: white;
+    padding: 2 10 2 10;
+    float: left;
+    font-size: small;
+}
+
+#DateF{
+    width: 300;
 }

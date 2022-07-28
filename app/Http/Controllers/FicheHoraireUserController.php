@@ -666,7 +666,8 @@ class FicheHoraireUserController extends Controller
                 [$prestataire,$id]);
             }
             }
-        return redirect('/FicheHoraire');}
+        return redirect('/FicheHoraire');
+    }
         else{
             return redirect()->back()->with('status', 'La durée de pause doit être supérieur à 45min');
         }}

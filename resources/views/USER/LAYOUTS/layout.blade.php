@@ -16,25 +16,39 @@
               <a class="nav-link" href="#">Statistiques</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="">Fiche horaires</a>
+                <a class="nav-link" href="/FicheHoraire">Fiche horaires</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="">Demande de congé</a>
+                <a class="nav-link" href="/user/demandeConge">Demande de congé</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/historique">Historique</a>
               </li>
           </ul>
-          <div style="margin-left: 55%;">
+          <div style="margin-left: 50%;">
+          <a href = '/resetPass'><button id="mod">
+      <img id="logo-reglages" src="https://cdn.discordapp.com/attachments/936584358654005321/973487539618971648/reglages.png" alt="reglages"></button></a>
           <div class="dropdown">
   <button class="dropbtn">{{ Auth::user()->name }}</button>
   <div class="dropdown-content">
-  <form method="POST" action="{{ route('logout') }}">
+      @if(Auth::user()->admin==1 OR Auth::user()->direction==1)
+      <button id="deco"><x-responsive-nav-link :href="route('activites')">
+          {{ __('Espace Admin') }}
+      </x-responsive-nav-link></button>
+      <button id="deco"><x-responsive-nav-link :href="route('ficheHoraireUser')">
+          {{ __('Espace usager') }}
+      </x-responsive-nav-link></button>
+      @endif
+      <form method="POST" action="{{ route('logout') }}" style="margin-bottom: 0;">
 @csrf
-<x-responsive-nav-link :href="route('logout')"
+<button id="deco"><x-responsive-nav-link :href="route('logout')"
               onclick="event.preventDefault();
                           this.closest('form').submit();">
           {{ __('Déconnexion') }}
-      </x-responsive-nav-link>
+      </x-responsive-nav-link></button>
 </form>
   </div>
+
 </div>
           </div>
         </div>
