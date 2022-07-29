@@ -30,7 +30,7 @@ class CreateFichehorsTable extends Migration
             $table->string('Poids')->nullable();
             $table->float('ecart')->nullable();
             $table->string('idfiche');
-            $table->string('idUser')->nullable();
+            $table->string('iduser')->nullable();
             $table->time('matinD')->nullable();
             $table->time('matinF')->nullable();
             $table->time('apremD')->nullable();

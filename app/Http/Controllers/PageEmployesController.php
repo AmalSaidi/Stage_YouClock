@@ -71,7 +71,7 @@ class PageEmployesController extends Controller
         $user=Auth::user();
         $session_str = $user->structure;
         $employees = DB::table('employes')->where('structure', 'like', '%'.$session_str.'%')->where('admin',0)->get();
-        $fiche = DB::select('select DISTINCT idfiche,statutF from fichehors where iduser = (select identifiant from employes where id = ?) ORDER BY id DESC LIMIT 1',[$id]);
+        $fiche = DB::select('select DISTINCT idfiche,statutF from fichehors where idUser = (select identifiant from employes where id = ?) ORDER BY id DESC LIMIT 1',[$id]);
         return view('ADMIN/infoperso',['employes'=>$employes,'employees'=>$employees,'fiche'=>$fiche]);
         }
 
