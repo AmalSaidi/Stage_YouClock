@@ -99,10 +99,10 @@ class PageEmployesController extends Controller
         $employes = DB::select('select * from employes where id = ?',[$id]);
         $fiiche = DB::select('select idfiche,statutF from fichehors where idUser = (select identifiant from employes where id = ?) ORDER BY id DESC LIMIT 1',[$id]);
         $fiche = DB::select('select idfiche,statutF from fichehors where idUser = (select identifiant from employes where id = ?)',[$id]);
-        return view('ADMIN/fichehoraire',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees,'fiiche'=>$fiiche]);
+        return view('ADMIN/FICHEHORAIRE',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees,'fiiche'=>$fiiche]);
         }
 
-        
+
         public function showVenti($id) {
             $user=Auth::user();
             $session_str = $user->structure;
