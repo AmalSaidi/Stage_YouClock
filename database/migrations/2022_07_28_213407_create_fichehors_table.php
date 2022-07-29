@@ -15,7 +15,7 @@ class CreateFichehorsTable extends Migration
     {
         Schema::create('fichehors', function (Blueprint $table) {
             $table->id();
-            $table->string('statutf')->default('EnCours');
+            $table->string('statutF')->default('EnCours');
             $table->string('state')->default('NR');
             $table->string('Date')->nullable();
             $table->string('semaine')->nullable();
@@ -30,7 +30,7 @@ class CreateFichehorsTable extends Migration
             $table->string('Poids')->nullable();
             $table->float('ecart')->nullable();
             $table->string('idfiche');
-            $table->string('iduser')->nullable();
+            $table->string('idUser')->nullable();
             $table->time('matinD')->nullable();
             $table->time('matinF')->nullable();
             $table->time('apremD')->nullable();
