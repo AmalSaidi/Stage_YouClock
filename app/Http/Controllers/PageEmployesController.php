@@ -81,7 +81,7 @@ class PageEmployesController extends Controller
         $employees = DB::table('employes')->where('structure', 'like', '%'.$session_str.'%')->where('admin',0)->get();
         $employes = DB::select('select * from employes where id = ?',[$id]);
         $fiche = DB::select('select idfiche,statutF from fichehors where idUser = (select identifiant from employes where id = ?) ORDER BY id DESC LIMIT 1',[$id]);
-        $Lun= DB::select('select * from semainetypes where jour=Lundi and idUser=(select identifiant from employes where id=?)',[$id]);
+        $Lun= DB::select('select * from semainetypes where jour=\'Lundi\' and idUser=(select identifiant from employes where id=?)',[$id]);
         $Mar= DB::select('select * from semainetypes where jour="Mardi" and idUser=(select identifiant from employes where id=?)',[$id]);
         $Mer= DB::select('select * from semainetypes where jour="Mercredi" and idUser=(select identifiant from employes where id=?)',[$id]);
         $Jeu= DB::select('select * from semainetypes where jour="Jeudi" and idUser=(select identifiant from employes where id=?)',[$id]);
