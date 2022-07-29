@@ -102,6 +102,7 @@ class PageEmployesController extends Controller
         return view('ADMIN/fichehoraire',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees,'fiiche'=>$fiiche]);
         }
 
+        
         public function showVenti($id) {
             $user=Auth::user();
             $session_str = $user->structure;
