@@ -26,14 +26,15 @@
               </li>
           </ul>
           <div style="margin-left: 50%;">
-          <a href = '/resetPass' id="alignReg" style="color: #007bff;
+          <div style="float:left; margin-top: 10;"><a href = '/resetPass' id="alignReg" style="color: #007bff;
     text-decoration: none;
     background-color: transparent;
     float: left;
     margin-top: 9;"><button id="mod">
       <img id="logo-reglages" src="https://cdn.discordapp.com/attachments/936584358654005321/973487539618971648/reglages.png" alt="reglages"></button></a>
-          <div class="dropdown">
-  <button class="dropbtn">{{ Auth::user()->name }}</button>
+</div>
+      <div class="dropdown">
+  <button class="dropbtn"><img id="logo-reg" style="width:40" src="https://cdn.discordapp.com/attachments/936584358654005321/1002594406043492352/icons8-utilisateur-48.png" alt="reglages"></button>
   <div class="dropdown-content">
       @if(Auth::user()->admin==1 OR Auth::user()->direction==1)
       <button id="deco"><x-responsive-nav-link :href="route('activites')">
