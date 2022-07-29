@@ -82,12 +82,12 @@ class PageEmployesController extends Controller
         $employes = DB::select('select * from employes where id = ?',[$id]);
         $fiche = DB::select('select idfiche,statutF from fichehors where idUser = (select identifiant from employes where id = ?) ORDER BY id DESC LIMIT 1',[$id]);
         $Lun= DB::select('select * from semainetypes where jour=\'Lundi\' and idUser=(select identifiant from employes where id=?)',[$id]);
-        $Mar= DB::select('select * from semainetypes where jour="Mardi" and idUser=(select identifiant from employes where id=?)',[$id]);
-        $Mer= DB::select('select * from semainetypes where jour="Mercredi" and idUser=(select identifiant from employes where id=?)',[$id]);
-        $Jeu= DB::select('select * from semainetypes where jour="Jeudi" and idUser=(select identifiant from employes where id=?)',[$id]);
-        $Ven= DB::select('select * from semainetypes where jour="Vendredi" and idUser=(select identifiant from employes where id=?)',[$id]);
-        $Sam= DB::select('select * from semainetypes where jour="Samedi" and idUser=(select identifiant from employes where id=?)',[$id]);
-        $Dim= DB::select('select * from semainetypes where jour="Dimanche" and idUser=(select identifiant from employes where id=?)',[$id]);
+        $Mar= DB::select('select * from semainetypes where jour=\'Mardi\' and idUser=(select identifiant from employes where id=?)',[$id]);
+        $Mer= DB::select('select * from semainetypes where jour=\'Mercredi\' and idUser=(select identifiant from employes where id=?)',[$id]);
+        $Jeu= DB::select('select * from semainetypes where jour=\'Jeudi\' and idUser=(select identifiant from employes where id=?)',[$id]);
+        $Ven= DB::select('select * from semainetypes where jour=\'Vendredi\' and idUser=(select identifiant from employes where id=?)',[$id]);
+        $Sam= DB::select('select * from semainetypes where jour=\'Samedi\' and idUser=(select identifiant from employes where id=?)',[$id]);
+        $Dim= DB::select('select * from semainetypes where jour=\'Dimanche\' and idUser=(select identifiant from employes where id=?)',[$id]);
         return view('ADMIN/RH',['employes'=>$employes,'employees'=>$employees,'Lun'=>$Lun,'Mar'=>$Mar,'Mer'=>$Mer
         ,'Jeu'=>$Jeu,'Ven'=>$Ven,'Sam'=>$Sam,'Dim'=>$Dim,'fiche'=>$fiche]);
         }
