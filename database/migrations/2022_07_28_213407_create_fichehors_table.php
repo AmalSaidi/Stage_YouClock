@@ -15,7 +15,7 @@ class CreateFichehorsTable extends Migration
     {
         Schema::create('fichehors', function (Blueprint $table) {
             $table->id();
-            $table->string('statutF')->default('EnCours');
+            $table->string('statutf')->default('EnCours');
             $table->string('state')->default('NR');
             $table->string('Date')->nullable();
             $table->string('semaine')->nullable();
