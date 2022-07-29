@@ -15,7 +15,7 @@ class CreateSemainetypesTable extends Migration
     {
         Schema::create('semainetypes', function (Blueprint $table) {
             $table->id();
-            $table->string('idUser');
+            $table->string('iduser');
             $table->string('jour');
             $table->float('poidsJour')->nullable();;
             $table->time('DM')->nullable();;
