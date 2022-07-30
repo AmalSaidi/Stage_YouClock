@@ -9,9 +9,6 @@
     background-color: #ffffff00;
     border: none;
 }
-#logo-reglages {
-    width: 15px;
-}
       </style>
     <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -36,14 +33,14 @@
           </ul>
           
           <div style="margin-left: 50%;">
-          <div style="float:left; margin-top: 10;"><a href = '/resetPassA' id="alignReg" style="color: #007bff;width: 15px !important;
+          <div style="float:left; margin-top: 10;"><a href = '/resetPassA' id="alignReg" style="color: #007bff;
     text-decoration: none;
     background-color: transparent;
     float: left;
     margin-top: 9;"><button id="mod">
       <img id="logo-reglages" src="https://cdn.discordapp.com/attachments/936584358654005321/973487539618971648/reglages.png" alt="reglages"></button></a>
 </div>
-<div class="dropdown">
+<div class="dropdown" style="">
   <button class="dropbtn"><img id="logo-reg" style="width:40" src="https://cdn.discordapp.com/attachments/936584358654005321/1002594406043492352/icons8-utilisateur-48.png" alt="reglages"></button>
   <div class="dropdown-content">
 <button id="deco"><x-responsive-nav-link :href="route('ficheHoraireUser')">
