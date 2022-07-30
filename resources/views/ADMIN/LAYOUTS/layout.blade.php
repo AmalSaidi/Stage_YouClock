@@ -36,7 +36,7 @@
           </ul>
           
           <div style="margin-left: 50%;">
-          <div style="float:left; margin-top: 10;"><a href = '/resetPassA' id="alignReg" style="color: #007bff;
+          <div style="float:left; margin-top: 10;"><a href = '/resetPassA' id="alignReg" style="color: #007bff;width: 15px !important;
     text-decoration: none;
     background-color: transparent;
     float: left;
