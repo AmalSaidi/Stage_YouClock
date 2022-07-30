@@ -2,6 +2,7 @@
 <link rel="stylesheet" type="text/css" href="{{ url('/css/ADMIN/navbar.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ url('/css/ADMIN/dureePause.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ url('/css/ADMIN/reglages.css') }}" />
+<title>durée de pause</title>
 
 @section('content')
 <div id="menu-reg">

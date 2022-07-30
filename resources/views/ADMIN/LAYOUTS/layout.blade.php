@@ -2,12 +2,16 @@
     <head>
       <meta charset="utf-8">
       <link rel="stylesheet" type="text/css" href="{{ url('/css/ADMIN/navbar.css') }}" />
+      <link rel="icon" href="{{ URL::asset('/css/youclock.png') }}" type="image/x-icon"/>
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
     <style>
       #mod {
     background-color: #ffffff00;
     border: none;
+}
+#logo-reglages {
+    width: 15px;
 }
       </style>
     <body>
@@ -33,15 +37,15 @@
           </ul>
           
           <div style="margin-left: 50%;">
-          <div style="float:left; margin-top: 10;"><a href = '/resetPassA' id="alignReg" style="color: #007bff;
+          <div style="float:left; margin-top: 10;"><a href = '/resetPassA' id="alignReg" style="color: #007bff;width: 15px !important;
     text-decoration: none;
     background-color: transparent;
     float: left;
-    margin-top: 9;"><button id="mod">
+    margin-top: 9;;margin-right: 10"><button id="mod">
       <img id="logo-reglages" src="https://cdn.discordapp.com/attachments/936584358654005321/973487539618971648/reglages.png" alt="reglages"></button></a>
 </div>
-<div class="dropdown" style="">
-  <button class="dropbtn"><img id="logo-reg" style="width:40" src="https://cdn.discordapp.com/attachments/936584358654005321/1002594406043492352/icons8-utilisateur-48.png" alt="reglages"></button>
+<div class="dropdown">
+  <button class="dropbtn"><img id="logo-reg" style="width:40;" src="https://cdn.discordapp.com/attachments/936584358654005321/1002594406043492352/icons8-utilisateur-48.png" alt="reglages"></button>
   <div class="dropdown-content">
 <button id="deco"><x-responsive-nav-link :href="route('ficheHoraireUser')">
           {{ __('Espace usager') }}

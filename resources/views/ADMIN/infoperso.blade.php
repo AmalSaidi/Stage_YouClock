@@ -3,6 +3,7 @@
 <link rel="stylesheet" type="text/css" href="{{ url('/css/ADMIN/navbar.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ url('/css/ADMIN/infoPerso.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ url('/css/ADMIN/reglages.css') }}" />
+<title>informations personnelles</title>
 
 @section('content')
 <div id="button-list">

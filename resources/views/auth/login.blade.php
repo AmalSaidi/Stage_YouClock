@@ -1,6 +1,8 @@
 <x-guest-layout>
 <link rel="stylesheet" href="/css/connection.css">
 <title>connection</title>
+<link rel="icon" href="{{ URL::asset('/css/youclock.png') }}" type="image/x-icon"/>
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <div id="logo1">
         <img id="logo-FS" src="https://media.discordapp.net/attachments/936584358654005321/972050887025508412/LOGO.png?width=820&height=670" alt="Familles de la sarthe">

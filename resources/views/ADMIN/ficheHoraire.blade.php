@@ -3,6 +3,7 @@
 <link rel="stylesheet" type="text/css" href="{{ url('/css/ADMIN/navbar.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ url('/css/ADMIN/ficheHoraire.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ url('/css/ADMIN/reglages.css') }}" />
+<title>Fiche horaire</title>
 
 @section('content')
  <div id="button-list">

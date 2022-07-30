@@ -2,6 +2,8 @@
 <link rel="stylesheet" type="text/css" href="{{ url('/css/ADMIN/navbar.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ url('/css/USER/ficheHoraire.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ url('/css/USER/reglages.css') }}" />
+<title>Fiche horaire</title>
+
 <style>
 #menu-reg {
     BACKGROUND-COLOR: WHITE;

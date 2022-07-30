@@ -2,6 +2,7 @@
 <link rel="stylesheet" type="text/css" href="{{ url('/css/ADMIN/navbar.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ url('/css/ADMIN/semainetype.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ url('/css/ADMIN/reglages.css') }}" />
+<title>Semaine type</title>
 
 @section('content')
     <div id="button-list">

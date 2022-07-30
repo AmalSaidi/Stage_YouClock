@@ -2,6 +2,8 @@
 <link rel="stylesheet" type="text/css" href="{{ url('/css/ADMIN/navbar.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ url('/css/USER/historique.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ url('/css/USER/reglages.css') }}" />
+<title>modifier mes informations</title>
+
 <style>
     #menu-reg {
     BACKGROUND-COLOR: WHITE;
