@@ -11,6 +11,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+
 
 
 
@@ -41,6 +43,45 @@ class passreset extends Controller
             return back()->with("error", "aucun utilisateur avec l'adresse mail saisie");
         }
     }
+
+    public function changeinfo(Request $request){
+        $user=Auth::user();
+        $session_id = $user->identifiant;
+        $employes = DB::select('select * from employes where identifiant=?',[$session_id]);
+        $services = DB::select('select * from services');
+        $structures = DB::select('select * from structures');
+        if(Gate::any(['access-admin', 'access-direction'])){
+            return view('ADMIN.changerInfo',[
+                'employes' =>$employes,'services' =>$services,'structures' =>$structures,
+            ]);
+        }
+        else{
+            return view('USER.changerInfo',[
+                'employes' =>$employes,'services' =>$services,'structures' =>$structures  ]);
+        }
+        
+    }
+
+    public function updateinfo(Request $request){
+        $user=Auth::user();
+        $session_id = $user->identifiant;
+        $nom = $request->input('nom');
+        $prenom = $request->input('prenom');
+        $mail = $request->input('mail');
+        $tel = $request->input('tel');
+        $TypeContrat = $request->input('TypeContrat');
+        $structure = $request->input('structure');
+        $service = $request->input('service');
+        $dateEmbauche = $request->input('dateEmbauche');
+        $Datefin = $request->input('Datefin');
+        DB::update('update employes set nom = ?,prenom = ?,mail=?,tel=?,TypeContrat=?,structure=?,service=?,dateEmbauche=?,Datefin=?
+         where identifiant = ?',[$nom,$prenom,$mail,$tel,$TypeContrat,$structure,$service,$dateEmbauche,$Datefin,$session_id]);
+         DB::update('update users set name = ?,email=?,structure=? where identifiant = ?',
+         [$nom,$mail,$structure,$session_id]);
+        return back()->with("status", "Les changements ont été bien mises à jour");
+    }
+
+
     
     public function updatePassword(Request $request)
 {

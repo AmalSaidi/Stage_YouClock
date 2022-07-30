@@ -44,6 +44,10 @@
           {{ __('Espace usager') }}
       </x-responsive-nav-link></button>
       @endif
+      <button id="deco"><x-responsive-nav-link :href="route('changer-info')">
+      {{ __('Modifier mon') }}<br>
+          {{ __('profil') }}
+      </x-responsive-nav-link></button>
       <form method="POST" action="{{ route('logout') }}" style="margin-bottom: 0;">
 @csrf
 <button id="deco"><x-responsive-nav-link :href="route('logout')"
