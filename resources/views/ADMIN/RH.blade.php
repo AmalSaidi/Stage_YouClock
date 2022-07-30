@@ -200,7 +200,8 @@
     <span class="close" onclick="closeForm3(modal);">&times;</span>
     <form>
       <h4 id="idST" style="font-family: fangsong;">Semaine type de l'employé(e) </H4>
-     <button id="mod-semaine-type"> <a href="/RH/semaineType/{{ $employe->id }}" id="linkBU" style="color:black;"><img id="logo-reglages" src="https://cdn.discordapp.com/attachments/936584358654005321/973487539618971648/reglages.png" alt="reglages"> Modifier la semaine type</a></button>
+      
+     <div id="mod-semaine-type" style="width:fit-content;"> <a href="/RH/semaineType/{{ $employe->id }}" id="linkBU" style="color:black;"><img id="logo-reglages" src="https://cdn.discordapp.com/attachments/936584358654005321/973487539618971648/reglages.png" alt="reglages"> Modifier la semaine type</a></div>
       <br>
 <table class="table-bordered">
 <thead class="thead-dark">
