@@ -9,6 +9,7 @@ use Mail;
 use Reminder;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Gate;
 
 
 
@@ -17,8 +18,12 @@ use Illuminate\Support\Facades\Hash;
 class passreset extends Controller
 {
     public function index(){
-
-        return view('ADMIN.passReset');
+        if(Gate::any(['access-admin', 'access-direction'])){
+            return view('ADMIN.passReset');
+            }
+            else{
+        return view('USER.passReset');
+            }
     }
 
     public function updatePassword(Request $request)
@@ -32,7 +37,7 @@ class passreset extends Controller
 
         #Match The Old Password
         if(!Hash::check($request->old_password, auth()->user()->password)){
-            return back()->with("error", "Old Password Doesn't match!");
+            return back()->with("error", "L'ancien mot de passe est incorrect");
         }
 
 
@@ -41,7 +46,7 @@ class passreset extends Controller
             'password' => Hash::make($request->new_password)
         ]);
 
-        return back()->with("status", "Password changed successfully!");
+        return back()->with("status", "le nouveau mot de passe a été bien enregistré!");
 }
 
 

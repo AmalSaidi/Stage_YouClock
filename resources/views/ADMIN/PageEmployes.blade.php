@@ -50,12 +50,12 @@
 
   </tbody>
 </table>
-<div id="myModal" class="modal">
+<div id="myModal" class="modal" style="overflow: auto;">
 
   <!-- Modal content -->
   <div class="modal-content">
     <span class="close">&times;</span>
-    <form action="/employes" method="POST">
+    <form action="" method="POST">
     {{ csrf_field() }}
   <div class="form-group">
     <label for="code">Nom</label>
@@ -76,6 +76,15 @@
       @foreach($structures as $str)
       <option>{{ $str->libellé}} </option>
       @endforeach
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">type</label>
+    <br>
+    <select name="type" id="type"  required>
+      <option>admin</option>
+      <option>direction</option>
+      <option>utilisateur</option>
     </select>
   </div>
   <div class="form-group">

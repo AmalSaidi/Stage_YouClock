@@ -8,6 +8,7 @@ use App\Models\ventilation;
 use App\Models\ventilationfiche;
 use App\Models\fichehor;
 use App\Models\horairesemaine;
+use App\Models\User;
 use App\Models\semainetype;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -41,7 +42,30 @@ class PageEmployesController extends Controller
     public function store(){
 
         $employes = new employes();
-
+        $user = new User();
+        $user->name = request('nom');
+        $user->password = '$2y$10$X7iMritVZGtm7zB7u2hlpOwTuFbfLHFM.Q8RBv87xMTpG.xY1YTaq';
+        $user->identifiant = request('identifiant');
+        $user->admin = '0';
+        $user->direction = '1';
+        $user->structure = request('structure');
+        $user->email = request('mail');
+        if(request('type')=="direction")
+        {
+            $user->direction = '1';
+            $user->admin = '0';
+        }
+        else if(request('type')=="admin")
+        {
+            $user->direction = '0';
+            $user->admin = '1';
+            $employes->admin = '1';
+        }
+        else if(request('type')=="utilisateur")
+        {
+            $user->direction = '0';
+            $user->admin = '0';
+        }
         $employes->nom = request('nom');
         $employes->prenom = request('prenom');
         $employes->identifiant = request('identifiant');
@@ -53,6 +77,8 @@ class PageEmployesController extends Controller
         $employes->mail = request('mail');
 
         $employes->save();
+        $user->save();
+
 
         return redirect('/employes');
     }

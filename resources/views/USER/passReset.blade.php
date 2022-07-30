@@ -1,4 +1,4 @@
-@extends('ADMIN.LAYOUTS.layout')
+@extends('USER.LAYOUTS.layout')
 <link rel="stylesheet" type="text/css" href="{{ url('/css/ADMIN/navbar.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ url('/css/ADMIN/activites.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ url('/css/ADMIN/reglages.css') }}" />
