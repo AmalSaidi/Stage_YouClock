@@ -21,6 +21,10 @@ Route::get('resetPassA', [passreset::class, 'index']);
 Route::post('resetPassA', [passreset::class, 'updatePassword'])->name('update-password');
 Route::get('resetPassU', [passreset::class, 'index']);
 Route::post('resetPassU', [passreset::class, 'updatePassword'])->name('update-password');
+Route::get('forgotpass', [passreset::class, 'showforgot']);
+Route::post('forgotpass', [passreset::class, 'changepass']);
+
+
 
 /*
 |--------------------------------------------------------------------------
