@@ -12,7 +12,7 @@ $userNom=Auth::user()->name;
 @foreach( $employes as $employe )
 @if($employe->nom==$userNom)
 <div id="menu-reg">
-    <img id="logo-icon" src="https://cdn.discordapp.com/attachments/936584358654005321/974610254220378112/user.png">
+    <img id="logo-icon" src="https://cdn.discordapp.com/attachments/936584358654005321/1002996904004694057/icons8-utilisateur-96_1.png">
     <BR>
     <div id="info-user"><p>{{ $employe->nom }} {{ $employe->prenom }}</p></div>
 <div id="stru-user">{{ $employe->structure }}</div>

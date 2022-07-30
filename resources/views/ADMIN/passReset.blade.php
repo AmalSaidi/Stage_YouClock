@@ -25,7 +25,7 @@
                             <div class="mb-3">
                                 <label for="oldPasswordInput" class="form-label">L'ancien mot de passe</label>
                                 <input name="old_password" type="password" class="form-control @error('old_password') is-invalid @enderror" id="oldPasswordInput"
-                                    placeholder="Old Password">
+                                   >
                                 @error('old_password')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -33,7 +33,7 @@
                             <div class="mb-3">
                                 <label for="newPasswordInput" class="form-label">Le nouveau mot de passe</label>
                                 <input name="new_password" type="password" class="form-control @error('new_password') is-invalid @enderror" id="newPasswordInput"
-                                    placeholder="New Password">
+                                   >
                                 @error('new_password')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -41,7 +41,7 @@
                             <div class="mb-3">
                                 <label for="confirmNewPasswordInput" class="form-label">confirmez votre nouveau mot de passe</label>
                                 <input name="new_password_confirmation" type="password" class="form-control" id="confirmNewPasswordInput"
-                                    placeholder="Confirm New Password">
+                                    >
                             </div>
 
                         </div>

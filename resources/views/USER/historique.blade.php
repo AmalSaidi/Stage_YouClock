@@ -24,7 +24,7 @@ $Valide="Valide";
 @endphp
 @foreach($employes as $emp)
     <div id="menu-reg">
-    <img id="logo-icon" src="https://cdn.discordapp.com/attachments/936584358654005321/974610254220378112/user.png">
+    <img id="logo-icon" src="https://cdn.discordapp.com/attachments/936584358654005321/1002996904004694057/icons8-utilisateur-96_1.png">
     <BR>
     <div id="info-user"><p>{{ $emp->nom }} {{ $emp->prenom }}</p></div>
 <div id="stru-user">{{ $emp->structure }}</div>
