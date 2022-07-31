@@ -56,19 +56,21 @@ class PageEmployesController extends Controller
     public function vueAdmin() {
         $user=Auth::user();
         $session_str = $user->service;
+        $services = DB::select('select * from services');
         $employees = DB::table('employes')->where('service', 'like', '%'.$session_str.'%')->where('admin',0)->get();
         $structures = DB::select('select * from structures');
         return view('DIRECTION/PageEmployes',[
-            'employees' =>$employees,'structures'=>$structures,
+            'employees' =>$employees,'structures'=>$structures,'services'=>$services,
         ]);
     }
     public function vueDirection() {
         $user=Auth::user();
         $session_str = $user->service;
         $employees = DB::select('select * from employes');
+        $services = DB::select('select * from services');
         $structures = DB::select('select * from structures');
         return view('DIRECTION/PageEmployes',[
-            'employees' =>$employees,'structures'=>$structures,
+            'employees' =>$employees,'structures'=>$structures,'services'=>$services,
         ]);
     }
 
@@ -146,16 +148,26 @@ class PageEmployesController extends Controller
     public function show($id) {
         $employes = DB::select('select * from employes where id = ?',[$id]);
         $user=Auth::user();
-        $session_str = $user->structure;
-        $employees = DB::table('employes')->where('structure', 'like', '%'.$session_str.'%')->where('admin',0)->get();
+        $session_str = $user->service;
+        if($user->direction==1){
+            $employees = DB::table('employes')->get();
+
+        }else{
+            $employees = DB::table('employes')->where('service', 'like', '%'.$session_str.'%')->where('admin',0)->get();
+        }
         $fiche = DB::select('select DISTINCT idfiche,statutF from fichehors where idUser = (select identifiant from employes where id = ?) ORDER BY id DESC LIMIT 1',[$id]);
         return view('ADMIN/infoperso',['employes'=>$employes,'employees'=>$employees,'fiche'=>$fiche]);
         }
 
     public function showRH($id) {
         $user=Auth::user();
-        $session_str = $user->structure;
-        $employees = DB::table('employes')->where('structure', 'like', '%'.$session_str.'%')->where('admin',0)->get();
+        $session_str = $user->service;
+        if($user->direction==1){
+            $employees = DB::table('employes')->get();
+
+        }else{
+            $employees = DB::table('employes')->where('service', 'like', '%'.$session_str.'%')->where('admin',0)->get();
+        }
         $employes = DB::select('select * from employes where id = ?',[$id]);
         $fiche = DB::select('select DISTINCT idfiche,statutF from fichehors where idUser = (select identifiant from employes where id = ?) ORDER BY id DESC LIMIT 1',[$id]);
         $Lun= DB::select('select * from semainetypes where jour="Lundi" and idUser=(select identifiant from employes where id=?)',[$id]);
@@ -171,8 +183,13 @@ class PageEmployesController extends Controller
 
     public function showFiche($id) {
         $user=Auth::user();
-        $session_str = $user->structure;
-        $employees = DB::table('employes')->where('structure', 'like', '%'.$session_str.'%')->where('admin',0)->get();
+        $session_str = $user->service;
+        if($user->direction==1){
+            $employees = DB::table('employes')->get();
+
+        }else{
+            $employees = DB::table('employes')->where('service', 'like', '%'.$session_str.'%')->where('admin',0)->get();
+        }
         $employes = DB::select('select * from employes where id = ?',[$id]);
         $fiiche = DB::select('select DISTINCT idfiche,statutF from fichehors where idUser = (select identifiant from employes where id = ?) ORDER BY id DESC LIMIT 1',[$id]);
         $fiche = DB::select('select DISTINCT idfiche,statutF from fichehors where idUser = (select identifiant from employes where id = ?)',[$id]);
@@ -182,8 +199,13 @@ class PageEmployesController extends Controller
 
         public function showVenti($id) {
             $user=Auth::user();
-            $session_str = $user->structure;
-            $employees = DB::table('employes')->where('structure', 'like', '%'.$session_str.'%')->where('admin',0)->get();
+            $session_str = $user->service;
+            if($user->direction==1){
+                $employees = DB::table('employes')->get();
+    
+            }else{
+                $employees = DB::table('employes')->where('service', 'like', '%'.$session_str.'%')->where('admin',0)->get();
+            }
             $employes = DB::select('select * from employes where id = ?',[$id]);
             $fiiche = DB::select('select DISTINCT idfiche,statutF from fichehors where idUser = (select identifiant from employes where id = ?) ORDER BY id DESC LIMIT 1',[$id]);
             $fiche = DB::select('select * from fichehors where idUser = (select identifiant from employes where id = ?) and idfiche=(select idfiche from
@@ -222,8 +244,13 @@ class PageEmployesController extends Controller
 
             public function showStat($id) {
                 $user=Auth::user();
-                $session_str = $user->structure;
-                $employees = DB::table('employes')->where('structure', 'like', '%'.$session_str.'%')->where('admin',0)->get();
+                $session_str = $user->service;
+                if($user->direction==1){
+                    $employees = DB::table('employes')->get();
+        
+                }else{
+                    $employees = DB::table('employes')->where('service', 'like', '%'.$session_str.'%')->where('admin',0)->get();
+                }
                 $employes = DB::select('select * from employes where id = ?',[$id]);
                 $fiiche = DB::select('select DISTINCT idfiche,statutF from fichehors where idUser = (select identifiant from employes where id = ?) ORDER BY id DESC LIMIT 1',[$id]);
                 $fiche = DB::select('select * from fichehors where idUser = (select identifiant from employes where id = ?)',[$id]);
@@ -1008,8 +1035,13 @@ class PageEmployesController extends Controller
 
     public function showFicheComplete($id,$idfiche) {
         $user=Auth::user();
-        $session_str = $user->structure;
-        $fiiche = DB::select('select DISTINCT idfiche,statutF from fichehors where idUser = (select identifiant from employes where id = ?) ORDER BY id DESC LIMIT 1',[$id]);
+        $session_str = $user->service;
+        if($user->direction==1){
+            $employees = DB::table('employes')->get();
+
+        }else{
+            $employees = DB::table('employes')->where('service', 'like', '%'.$session_str.'%')->where('admin',0)->get();
+        }
         $employees = DB::table('employes')->where('structure', 'like', '%'.$session_str.'%')->where('admin',0)->get();
         $employes = DB::select('select * from employes where id = ?',[$id]);
         $poidsJour = DB::select('select * from ventilationfinals where idUser = (select identifiant from employes where id=?)',[$id]);
@@ -1125,8 +1157,13 @@ class PageEmployesController extends Controller
         public function showST($id) {
             $user=Auth::user();
             $fiiche = DB::select('select DISTINCT idfiche,statutF from fichehors where idUser = (select identifiant from employes where id = ?) ORDER BY id DESC LIMIT 1',[$id]);
-            $session_str = $user->structure;
-            $employees = DB::table('employes')->where('structure', 'like', '%'.$session_str.'%')->where('admin',0)->get();
+            $session_str = $user->service;
+            if($user->direction==1){
+                $employees = DB::table('employes')->get();
+    
+            }else{
+                $employees = DB::table('employes')->where('service', 'like', '%'.$session_str.'%')->where('admin',0)->get();
+            }
             $employes = DB::select('select * from employes where id = ?',[$id]);
             return view('ADMIN/semaineType',['employes'=>$employes,'employees'=>$employees,'fiiche'=>$fiiche]);
             }
