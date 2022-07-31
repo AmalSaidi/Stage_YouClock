@@ -1036,6 +1036,7 @@ class PageEmployesController extends Controller
     public function showFicheComplete($id,$idfiche) {
         $user=Auth::user();
         $session_str = $user->service;
+        $fiiche = DB::select('select DISTINCT idfiche,statutF from fichehors where idUser = (select identifiant from employes where id = ?) ORDER BY id DESC LIMIT 1',[$id]);
         if($user->direction==1){
             $employees = DB::table('employes')->get();
 
