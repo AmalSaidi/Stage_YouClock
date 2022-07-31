@@ -93,6 +93,15 @@
     </select>
   </div>
   <div class="form-group">
+    <label for="exampleInputPassword1">Service</label>
+    <br>
+    <select name="service" id="struSelect"  required>
+      @foreach($services as $ser)
+      <option>{{ $ser->libellé}} </option>
+      @endforeach
+    </select>
+  </div>
+  <div class="form-group">
     <label for="exampleInputPassword1">type</label>
     <br>
     <select name="type" id="type"  required>
@@ -121,6 +130,7 @@
     <label for="exampleInputPassword1">Adresse mail</label>
     <input type="email" class="form-control" name="mail" id="poids" placeholder="L'adresse mail"  required>
   </div>
+
   <button type="submit" class="btn btn-primary" id="ajouter-button">AJOUTER</button>
 </form>
   </div>

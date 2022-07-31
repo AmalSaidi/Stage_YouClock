@@ -25,6 +25,7 @@ class PageEmployesController extends Controller
         $session_str = $user->service;
         $employes = DB::table('employes')->where('service', 'like', '%'.$session_str.'%')->where('admin',0)->get();
         $structures = DB::select('select * from structures');
+        $services = DB::select('select * from services');
         $employees = DB::select('select * from employes');
         /*if(Gate::allows('access-admin')){
             return view('ADMIN/PageEmployes',[
@@ -38,16 +39,16 @@ class PageEmployesController extends Controller
         } */
         if($user->admin==1 AND $user->direction==1){
             return view('DIRECTION/PageEmployes',[
-                'employees' =>$employees,'structures'=>$structures,
+                'employees' =>$employees,'structures'=>$structures,'services'=>$services,
             ]);
         }
         else if($user->admin==1 AND $user->direction==0){
             return view('ADMIN/PageEmployes',[
-                'employes' =>$employes,'structures'=>$structures,
+                'employes' =>$employes,'structures'=>$structures,'services'=>$services,
             ]);
         }else if($user->admin==0 AND $user->direction==1){
             return view('DIRECTION/PageEmployes',[
-                'employees' =>$employees,'structures'=>$structures,
+                'employees' =>$employees,'structures'=>$structures,'services'=>$services,
             ]);
         }
     }
@@ -95,6 +96,7 @@ class PageEmployesController extends Controller
         $user->password = '$2y$10$X7iMritVZGtm7zB7u2hlpOwTuFbfLHFM.Q8RBv87xMTpG.xY1YTaq';
         $user->identifiant = request('identifiant');
         $user->admin = '0';
+        $user->service = request('service');
         $user->direction = '1';
         $user->structure = request('structure');
         $user->email = request('mail');
@@ -123,6 +125,7 @@ class PageEmployesController extends Controller
         $employes->Datefin = request('Datefin');
         $employes->TypeContrat = request('TypeContrat');
         $employes->mail = request('mail');
+        $employes->service = request('service');
 
         $employes->save();
         $user->save();
@@ -1121,10 +1124,11 @@ class PageEmployesController extends Controller
 
         public function showST($id) {
             $user=Auth::user();
+            $fiiche = DB::select('select DISTINCT idfiche,statutF from fichehors where idUser = (select identifiant from employes where id = ?) ORDER BY id DESC LIMIT 1',[$id]);
             $session_str = $user->structure;
             $employees = DB::table('employes')->where('structure', 'like', '%'.$session_str.'%')->where('admin',0)->get();
             $employes = DB::select('select * from employes where id = ?',[$id]);
-            return view('ADMIN/semaineType',['employes'=>$employes,'employees'=>$employees]);
+            return view('ADMIN/semaineType',['employes'=>$employes,'employees'=>$employees,'fiiche'=>$fiiche]);
             }
 
          public function ajouterST(Request $request){

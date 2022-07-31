@@ -15,7 +15,6 @@
     <i class="fas fa-search"></i>
   </button> -->
   <button id="ajouter" onclick="openForm4(modal2);"> ajouter un employé
-</button>
 </div>
 </div>  
 <div id="menu-reg">
@@ -42,8 +41,18 @@
 <div id="pic"><img id="logo-icon" src="https://cdn.discordapp.com/attachments/936584358654005321/1002996904004694057/icons8-utilisateur-96_1.png"></div>
   <div id="info-bas">{{ $employe->prenom }} {{ $employe->nom }} <br>
   <div id="struc">{{ $employe->structure }}</div> 
-  <div id="statut">En attente de validation du responsable du service</div>
-  </div> 
+  @foreach($fiiche as $f)
+  @if($f->statutF=="EnCours")
+  <div id="encourss" class="encours">En cours</div>
+  @elseif($f->statutF=="AttValiRS")
+  <div id="enAttRSS" class="enAttRS">En attente de validation responsable de service</div>
+  @elseif($f->statutF=="valideRS")
+  <div id="valideRSS" class="valideRS">Validé par responsable de service</div>
+  @else
+  <div id="validee" class="valide">Validé</div>
+  @endif
+  @endforeach
+      </div>
 
 <br>
 

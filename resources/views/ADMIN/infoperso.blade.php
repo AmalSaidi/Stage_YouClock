@@ -15,8 +15,7 @@
       <!-- <button type="button" class="btn btn-primary">
         <i class="fas fa-search"></i>
       </button> -->
-      <button id="ajouter"> ajouter un employé
-    </button>
+  
     </div>
     </div>  
 <div id="menu-reg">

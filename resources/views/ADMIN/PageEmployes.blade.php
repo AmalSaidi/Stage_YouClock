@@ -16,8 +16,6 @@
         <i class="fas fa-search"></i>
       </button> -->
       <input type="text" id="input-stru"  placeholder="Toutes les structures" aria-describedby="basic-addon2">
-      <button id="ajouter"> ajouter un employé
-    </button>
     </div>
     </div>  
 <div id="acti">
