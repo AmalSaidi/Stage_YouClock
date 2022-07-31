@@ -63,6 +63,18 @@ $se5=0;
         {{ session('status') }}
     </div>
 @endif
+@if(Auth::user()->admin==1 AND Auth::user()->direction==1)
+<div id="vue" style="text-align-last: right;">
+<form method="post" action="/FicheHoraire/Details/direction" id="form5" class="direction" style="float: left;"> <td>
+                {{ csrf_field() }}
+      <button type="submit" class="btn btn-danger" id="vuebutton"> Vue direction</button>
+</form>
+<form method="post" action="/FicheHoraire/Details/admin" id="form6" class="admin"> <td>
+                {{ csrf_field() }}
+      <button type="submit" class="btn btn-danger" id="vuebutton"> Vue admin</button>
+</form>
+</div>
+      @endif
           <div id="pic"><img id="logo-icon" src="https://cdn.discordapp.com/attachments/936584358654005321/1002996904004694057/icons8-utilisateur-96_1.png"></div>
       <div id="info-bas">{{ $employe->prenom }} {{ $employe->nom }} <br>
       <div id="struc">{{ $employe->structure }}</div> 

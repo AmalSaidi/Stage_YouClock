@@ -21,6 +21,19 @@
     </div>
     </div>  
 <div id="acti">
+@if(Auth::user()->admin==1 AND Auth::user()->direction==1)
+<div id="vue" style="text-align-last: right;">
+<form method="post" action="/employes/direction" id="form3" class="direction" style="float: left;"> <td>
+                {{ csrf_field() }}
+                
+      <button type="submit" class="btn btn-primary" id="vuebutton"> Vue direction</button>
+</form>
+<form method="post" action="/employes/admin" id="form4" class="admin"> <td>
+                {{ csrf_field() }}
+      <button type="submit" class="btn btn-primary" id="vuebutton"> Vue admin</button>
+</form>
+</div>
+      @endif
         <br>  
 
         <table class="table-borderless">
@@ -119,6 +132,29 @@
     <script type="text/javascript" src="{{ URL::asset('js/ajouter_popup.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/afficher-form-modifier.js') }}">
     </script>
-  
+<script>
+$("#form3").on("submit", function (e) {
+    $.ajax({
+      type: "POST",
+      url: "/employes/direction";
+      data: dataString,
+      success: function () {
+      }
+    });
+    e.preventDefault();
+});
+</script>
+<script>
+$("#form4").on("submit", function (e) {
+    $.ajax({
+      type: "POST",
+      url: "/employes/admin";
+      data: dataString,
+      success: function () {
+      }
+    });
+    e.preventDefault();
+});
+</script>
 @endsection
   

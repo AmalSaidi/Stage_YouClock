@@ -20,8 +20,10 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('direction');
+            $table->string('SeeAsAdmin')->default(0);
             $table->string('identifiant');
             $table->string('structure');
+            $table->string('service');
             $table->rememberToken();
             $table->timestamps();
         });

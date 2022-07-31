@@ -76,8 +76,8 @@ class passreset extends Controller
         $Datefin = $request->input('Datefin');
         DB::update('update employes set nom = ?,prenom = ?,mail=?,tel=?,TypeContrat=?,structure=?,service=?,dateEmbauche=?,Datefin=?
          where identifiant = ?',[$nom,$prenom,$mail,$tel,$TypeContrat,$structure,$service,$dateEmbauche,$Datefin,$session_id]);
-         DB::update('update users set name = ?,email=?,structure=? where identifiant = ?',
-         [$nom,$mail,$structure,$session_id]);
+         DB::update('update users set name = ?,email=?,structure=?,service=? where identifiant = ?',
+         [$nom,$mail,$structure,$service,$session_id]);
         return back()->with("status", "Les changements ont été bien mises à jour");
     }
 

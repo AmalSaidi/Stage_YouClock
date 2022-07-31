@@ -22,11 +22,11 @@ class PageEmployesController extends Controller
 
     public function index(){
         $user=Auth::user();
-        $session_str = $user->structure;
-        $employes = DB::table('employes')->where('structure', 'like', '%'.$session_str.'%')->where('admin',0)->get();
+        $session_str = $user->service;
+        $employes = DB::table('employes')->where('service', 'like', '%'.$session_str.'%')->where('admin',0)->get();
         $structures = DB::select('select * from structures');
         $employees = DB::select('select * from employes');
-        if(Gate::allows('access-admin')){
+        /*if(Gate::allows('access-admin')){
             return view('ADMIN/PageEmployes',[
                 'employes' =>$employes,'structures'=>$structures,
             ]);
@@ -35,8 +35,56 @@ class PageEmployesController extends Controller
             return view('DIRECTION/PageEmployes',[
                 'employees' =>$employees,'structures'=>$structures,
             ]);
+        } */
+        if($user->admin==1 AND $user->direction==1){
+            return view('DIRECTION/PageEmployes',[
+                'employees' =>$employees,'structures'=>$structures,
+            ]);
+        }
+        else if($user->admin==1 AND $user->direction==0){
+            return view('ADMIN/PageEmployes',[
+                'employes' =>$employes,'structures'=>$structures,
+            ]);
+        }else if($user->admin==0 AND $user->direction==1){
+            return view('DIRECTION/PageEmployes',[
+                'employees' =>$employees,'structures'=>$structures,
+            ]);
         }
     }
+
+    public function vueAdmin() {
+        $user=Auth::user();
+        $session_str = $user->service;
+        $employees = DB::table('employes')->where('service', 'like', '%'.$session_str.'%')->where('admin',0)->get();
+        $structures = DB::select('select * from structures');
+        return view('DIRECTION/PageEmployes',[
+            'employees' =>$employees,'structures'=>$structures,
+        ]);
+    }
+    public function vueDirection() {
+        $user=Auth::user();
+        $session_str = $user->service;
+        $employees = DB::select('select * from employes');
+        $structures = DB::select('select * from structures');
+        return view('DIRECTION/PageEmployes',[
+            'employees' =>$employees,'structures'=>$structures,
+        ]);
+    }
+
+    public function VueAdminFiche() {
+        $user=Auth::user();
+        $user_session = $user->identifiant;
+        DB::update('update users set SeeAsAdmin="1" where identifiant = ?',[$user_session]);
+        return redirect()->back();
+    }
+    
+    public function VueDirectionFiche() {
+        $user=Auth::user();
+        $user_session = $user->identifiant;
+        DB::update('update users set SeeAsAdmin="0" where identifiant = ?',[$user_session]);
+        return redirect()->back();
+    }
+
 
 
     public function store(){
@@ -971,13 +1019,30 @@ class PageEmployesController extends Controller
         $sem5 = DB::select('select * from depassements where idfiche =? AND semaine="semaine 5" AND identifiant = (select identifiant from employes where id = ?)',[$idfiche,$id]);
         $NR = DB::select('select * from fichehors where idfiche =? AND state="NR" AND idUser = (select identifiant from employes where id = ?)',[$idfiche,$id]);
         $countNR=0;
-        if(Gate::allows('access-admin')){
+        /*if(Gate::allows('access-admin')){
             return view('ADMIN/FicheHoraireDetails',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees
             ,'depassement'=>$depassement,'sem1'=>$sem1,'sem2'=>$sem2,'sem3'=>$sem3,'sem4'=>$sem4,'sem5'=>$sem5,'NR'=>$NR,'fiiche'=>$fiiche]);
             }
             if(Gate::allows('access-direction')){
                 return view('DIRECTION/FicheHoraireDetails',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees
                 ,'depassement'=>$depassement,'sem1'=>$sem1,'sem2'=>$sem2,'sem3'=>$sem3,'sem4'=>$sem4,'sem5'=>$sem5,'NR'=>$NR,'fiiche'=>$fiiche]);
+                }*/
+    
+                if($user->admin==1 AND $user->direction==1){
+                    if($user->SeeAsAdmin==1){
+                    return view('ADMIN/FicheHoraireDetails',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees
+                    ,'depassement'=>$depassement,'sem1'=>$sem1,'sem2'=>$sem2,'sem3'=>$sem3,'sem4'=>$sem4,'sem5'=>$sem5,'NR'=>$NR,'fiiche'=>$fiiche]);
+                    }else{
+                        return view('DIRECTION/FicheHoraireDetails',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees
+                    ,'depassement'=>$depassement,'sem1'=>$sem1,'sem2'=>$sem2,'sem3'=>$sem3,'sem4'=>$sem4,'sem5'=>$sem5,'NR'=>$NR,'fiiche'=>$fiiche]);
+                    }
+                }
+                else if($user->admin==1 AND $user->direction==0){
+                    return view('ADMIN/FicheHoraireDetails',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees
+            ,'depassement'=>$depassement,'sem1'=>$sem1,'sem2'=>$sem2,'sem3'=>$sem3,'sem4'=>$sem4,'sem5'=>$sem5,'NR'=>$NR,'fiiche'=>$fiiche]);
+                }else if($user->admin==0 AND $user->direction==1){
+                    return view('DIRECTION/FicheHoraireDetails',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees
+                    ,'depassement'=>$depassement,'sem1'=>$sem1,'sem2'=>$sem2,'sem3'=>$sem3,'sem4'=>$sem4,'sem5'=>$sem5,'NR'=>$NR,'fiiche'=>$fiiche]);
                 }
         }
 

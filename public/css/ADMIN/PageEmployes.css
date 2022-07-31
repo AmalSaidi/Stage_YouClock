@@ -214,3 +214,11 @@ margin-right: 20px;
     width: 100%;
     height: 37;
   }
+
+  #vuebutton{
+    background-color: #d7422a !important;
+  }
+
+  #vuebutton:hover{
+    background-color: #ad311d !important;
+  }

@@ -16,7 +16,7 @@ class ServicesSeeder extends Seeder
     {
         DB::table('services')->insert([[
             'id' => 1,
-            'libellé' => "Comptabilité",
+            'libellé' => "Comptabilité Paie",
             'responsable' => "Julie GOURMELON",
         ],[
             'id' => 2,
@@ -50,6 +50,21 @@ class ServicesSeeder extends Seeder
             'id' => 9,
             'libellé' => "Cadre Opérationnel Terrain",
             'responsable' => "Virginie LEFEUVRE",
+        ],
+        [
+            'id' => 10,
+            'libellé' => "Entraide familiale",
+            'responsable' => "Marion HARDY",
+        ],
+        [
+            'id' => 11,
+            'libellé' => "ADU",
+            'responsable' => "Anne Sophie MAHAOUI",
+        ],
+        [
+            'id' => 12,
+            'libellé' => "ADVM",
+            'responsable' => "Benoit GAGE",
         ],
         
     ]);

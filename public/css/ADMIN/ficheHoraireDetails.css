@@ -663,3 +663,10 @@ border-color: white;
     float: left;
     font-size: small;
 }
+#vuebutton{
+    background-color: #d7422a !important;
+  }
+
+  #vuebutton:hover{
+    background-color: #ad311d !important;
+  }
