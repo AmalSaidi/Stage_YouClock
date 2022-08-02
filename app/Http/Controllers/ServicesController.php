@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use App\Models\services;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ServicesExport;
 class ServicesController extends Controller
 {
     public function __construct()
@@ -49,5 +51,10 @@ class ServicesController extends Controller
         /* DB::table('student')->whereIn('id', $id)->update($request->all());*/
         DB::update('update services set libellé = ?,responsable=? where id = ?',[$libelle,$responsable,$id]);
         return redirect('/services');
+        }
+
+        public function export() 
+        {
+            return Excel::download(new ServicesExport, 'Services.xlsx');
         }
 }

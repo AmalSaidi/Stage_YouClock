@@ -26,8 +26,11 @@
         <p id="fa-titre" style="font-family: cursive;">Services</p>
         <br>
 <div id="button-list">
+<form id="form2" action="{{ route('services.details') }}" method="POST">
+{{ csrf_field() }}
 <button id="export"> Export CSV <img id="logo-reglages" src="https://cdn.discordapp.com/attachments/936584358654005321/973940327759085619/downald.png" alt="reglages">
 </button>
+</form>
 <button id="ajouter"> ajouter un service
 </button>
 </div>    
@@ -97,5 +100,18 @@
 <script type="text/javascript" src="{{ URL::asset('js/afficher-form-modifier.js') }}"></script>
 
   </div>
+  <script>
+$("#form2").on("submit", function (e) {
+    var dataString = $(this).serialize();
+    $.ajax({
+      type: "POST",
+      url: "structures",
+      data: dataString,
+      success: function () {
+      }
+    });
+    e.preventDefault();
+});
+</script>
 @endsection
   

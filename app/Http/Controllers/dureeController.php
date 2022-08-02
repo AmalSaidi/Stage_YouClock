@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use App\Models\duree;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\DureesExport;
 class dureeController extends Controller
 {
     public function __construct()
@@ -35,6 +37,11 @@ class dureeController extends Controller
         /* DB::table('student')->whereIn('id', $id)->update($request->all());*/
         DB::update('update durees set pause = ? where id = ?',[$pause,$id]);
         return redirect('/dureePause');
+        }
+
+        public function export() 
+        {
+            return Excel::download(new DureesExport, 'Durée Pause.xlsx');
         }
 
 }

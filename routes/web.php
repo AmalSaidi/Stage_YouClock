@@ -52,6 +52,8 @@ Route::get('services', [ServicesController::class, 'index']);
 Route::post('services', [ServicesController::class, 'store']);
 Route::get('/services/edit/{id}',[ServicesController::class, 'show']);
 Route::post('/services/edit/{id}',[ServicesController::class, 'edit']);
+Route::post('/services/export', [ServicesController::class, 'export'])->name('services.details');
+
 
 /*
 |--------------------------------------------------------------------------
@@ -72,6 +74,8 @@ Route::get('dureePause', [dureeController::class, 'index']);
 Route::post('dureePause', [dureeController::class, 'store']);
 Route::get('/dureePause/edit/{id}',[dureeController::class, 'show']);
 Route::post('/dureePause/edit/{id}',[dureeController::class, 'edit']);
+Route::post('/dureePause/export', [dureeController::class, 'export'])->name('durees.details');
+
 /*
 |--------------------------------------------------------------------------
 | Employés

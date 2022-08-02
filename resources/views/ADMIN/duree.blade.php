@@ -31,8 +31,11 @@
 @endforeach
 <a href = 'dureePause/edit/{{ $duree->id }}'><button id="modifier">MODIFIER</button></a>
 <div id="button-list">
+<form id="form2" action="{{ route('durees.details') }}" method="POST">
+{{ csrf_field() }}
 <button id="export"> Export CSV <img id="logo-reglages" src="https://cdn.discordapp.com/attachments/936584358654005321/973940327759085619/downald.png" alt="reglages">
 </button>
+</form>
 </div>
 <div id="myModal" class="modal">
 
