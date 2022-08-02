@@ -100,7 +100,7 @@ $Valide="Valide";
  <option value="12">Décembre</option>
  </select>
   </div>
-  <button type="submit" class="btn btn-primary" id="ajouter-button">AJOUTER</button>
+  <button type="submit" class="btn btn-primary" id="ajouterr-button">AJOUTER</button>
 </form>
   </div>
 
