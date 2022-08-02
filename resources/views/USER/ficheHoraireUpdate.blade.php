@@ -241,13 +241,13 @@
         @foreach($ventil as $ven)
             <tr>
                 <td>{{ $ven->ventilation }}</td>
-                <td><input onblur="findTotal()" class="nume" name="{{ $ven->codeV }}" type="number" placeholder="" step="0.01" min="0" max="10"></td>
+                <td><input onblur="findTotal()" class="nume" name="{{ $ven->codeV }}" type="number" placeholder="" step="0.01" min="0"></td>
             </tr>
          @endforeach
         </tbody>
     </table>
     <div>
-    <input name="heureseffectu" onblur="findTotal()" type="hidden" name="total" id="total" max="10"/>
+    <input name="heureseffectu" onblur="findTotal()" type="hidden" name="total" id="total"/>
     </div>
 </div>
 <button type="submit" class="btn btn-primary" id="ajouter-button">Valider</button>
