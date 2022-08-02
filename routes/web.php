@@ -128,7 +128,10 @@ Route::post('/FicheHoraire/valider', [FicheHoraireUserController::class, 'valide
 |--------------------------------------------------------------------------
 */
 Route::get('/historique', [historique::class, 'index']);
+Route::post('/historique', [historique::class, 'AjouterFiche']);
 Route::get('/historiqueDetails/{idfiche}', [historique::class, 'details']);
+Route::get('/historiqueDetails/FicheHoraire/edit/{id}', [historique::class, 'show']);
+Route::post('/historiqueDetails/FicheHoraire/edit/{id}',[historique::class, 'edit']);
 
 
 /*

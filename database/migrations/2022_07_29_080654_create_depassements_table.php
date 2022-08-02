@@ -15,7 +15,7 @@ class CreateDepassementsTable extends Migration
     {
         Schema::create('depassements', function (Blueprint $table) {
             $table->id();
-            $table->string('nom');
+            $table->string('nom')->nullable();
             $table->string('identifiant');
             $table->string('idFiche');
             $table->string('semaine');

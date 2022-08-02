@@ -30,6 +30,8 @@ $Valide="Valide";
     <BR>
     <div id="info-user"><p>{{ $emp->nom }} {{ $emp->prenom }}</p></div>
 <div id="stru-user">{{ $emp->structure }}</div>
+<div><button class="btn btn-danger" id="ajouter"> ajouter une fiche</div>
+</button>
 </div>
 @endforeach
 <div id="acti">
@@ -56,5 +58,55 @@ $Valide="Valide";
 </table>
 
 </div>
+
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content" style="margin-top: 8%;">
+    <span class="close">&times;</span>
+    <form action="" method="POST">
+    {{ csrf_field() }}
+  <div class="form-group">
+    <label for="exampleInputPassword1">Année</label>
+    <select name="annee" id="select">
+    @php
+    $year = date("Y");
+    $yearArr = array();
+    @endphp
+    @for ($i = 0; $i < 30; $i++)
+    @php
+    $yearArr[$i] = $year -$i;
+    @endphp
+    <option value="{{$yearArr[$i]}}">{{$yearArr[$i]}}</option>
+    @endfor
+
+        @endphp
+ </select>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Mois</label>
+    <select name="mois" id="select">
+ <option value="01">Janvier</option>
+ <option value="02">Février</option>
+ <option value="03">Mars</option>
+ <option value="04">Avril</option>
+ <option value="05">Mai</option>
+ <option value="06">Juin</option>
+ <option value="07">Juillet</option>
+ <option value="08">Août</option>
+ <option value="09">Septembre</option>
+ <option value="10">Octobre</option>
+ <option value="11">Novembre</option>
+ <option value="12">Décembre</option>
+ </select>
+  </div>
+  <button type="submit" class="btn btn-primary" id="ajouter-button">AJOUTER</button>
+</form>
+  </div>
+
+</div>
+<script type="text/javascript" src="{{ URL::asset('js/modifier_popup.js') }}"></script>
+      <script type="text/javascript" src="{{ URL::asset('js/ajouter_popup.js') }}"></script>
+       <script type="text/javascript" src="{{ URL::asset('js/afficher-form-modifier.js') }}">
 @endsection
   

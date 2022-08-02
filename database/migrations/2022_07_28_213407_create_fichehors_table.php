@@ -18,6 +18,8 @@ class CreateFichehorsTable extends Migration
             $table->string('statutF')->default('EnCours');
             $table->string('state')->default('NR');
             $table->string('Date')->nullable();
+            $table->float('Diff')->nullable();
+            $table->float('mois')->nullable();
             $table->string('semaine')->nullable();
             $table->string('typeJour')->nullable();
             $table->string('activite1')->nullable();

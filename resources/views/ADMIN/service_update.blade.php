@@ -34,7 +34,14 @@
 </div>
 <div class="form-group">
   <label for="exampleInputPassword1">Responsable de service</label>
-  <input type="text" name = 'responsable' class="form-control" id="code" value = '<?php echo$services[0]->responsable; ?>'>
+  <select name="responsable" id="struSelect" style="font-size: 1rem;
+    width: 100%;
+    height: 37;" required>
+  <option><?php echo$services[0]->responsable; ?></option>
+      @foreach($employes as $emp)
+      <option>{{ $emp->nom}} {{ $emp->prenom}} </option>
+      @endforeach
+    </select>
 </div>
 <button type="submit" class="btn btn-primary" id="ajouter-button">modifier</button>
 </form>

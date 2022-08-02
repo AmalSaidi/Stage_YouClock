@@ -87,7 +87,6 @@ $Valide="Valide";
  </tr>
   </tbody>
 </table>
-@if($ajout==1)
 @if($aff->statutF=="EnCours" )
 <div style="text-align:center;">
 <form action = "/FicheHoraire/valider" method = "post">
@@ -102,7 +101,6 @@ $Valide="Valide";
     <input type="hidden" name="idfiche" value="{{ $aff->idfiche }}">
     <button type="submit" class="btn btn-success" id="Valider" disabled>Valider</button>
     </form>
-@endif
 @endif
 </div>
 </div>

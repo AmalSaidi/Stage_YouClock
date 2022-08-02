@@ -21,8 +21,9 @@
         {{ session('status') }}
     </div>
 @endif
-<form action = "/FicheHoraire/edit/<?php echo $affichage[0]->id; ?>" method = "post">
+<form action = "/historiqueDetails/FicheHoraire/edit/<?php echo $affichage[0]->id; ?>" method = "post">
 <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
+<input type="hidden" name="idFi" value="<?php echo $affichage[0]->idfiche; ?>">
 <h3 id="titlee">
 <?php echo $affichage[0]->Date; ?>
 </h3>

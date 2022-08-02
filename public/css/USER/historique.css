@@ -111,7 +111,6 @@
   .close {
     width: fit-content;
     float: right;
-    BACKGROUND-COLOR: white;
     font-size: 1.5rem;
     font-weight: 700;
     line-height: 1;
@@ -126,7 +125,7 @@
     background-color: #6c99cf !important;
     margin-left: 42%;
     MARGIN-TOP: 4%;
-    margin-left: 20%;
+    margin-left: 40%;
     BORDER: none;
   }
   #ajouter-button:hover{
@@ -146,16 +145,6 @@
     font-family: cursive;
 }
 
-#ajouter{
-    border: none;
-    padding: 1.1% 4% 1.1% 4%;
-    font-family: cursive;
-    background-color: #7ab3d8;
-    color: white;
-    MARGIN-LEFT: 3%;
-    float: right;
-    
-}
 #valider{
     border: none;
     padding: 0.5% 2% 0.5% 2%;
@@ -169,9 +158,6 @@
     background-color: darkgreen;
 }
 
-#ajouter:hover{
-    background-color: #6393b2;
-}
 #typeConge{
     background-color: #29497a; 
     color: white;
@@ -429,4 +415,36 @@ height: 37;
     background-color: #6c99cf !important;
     MARGIN-TOP: 4%;
     BORDER: none;
+  }
+
+#ajouter{
+    margin-top: 20;
+  }
+
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    width: 50% !important;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888; 
+  }
+
+  #select{
+    font-size: 1rem;
+    width: 100%;
+    height: 37;
   }

@@ -192,7 +192,7 @@ class PageEmployesController extends Controller
         }
         $employes = DB::select('select * from employes where id = ?',[$id]);
         $fiiche = DB::select('select DISTINCT idfiche,statutF from fichehors where idUser = (select identifiant from employes where id = ?) ORDER BY id DESC LIMIT 1',[$id]);
-        $fiche = DB::select('select DISTINCT idfiche,statutF from fichehors where idUser = (select identifiant from employes where id = ?)',[$id]);
+        $fiche = DB::select('select DISTINCT idfiche,statutF from fichehors where idUser = (select identifiant from employes where id = ?) ORDER BY idfiche DESC,mois ASC',[$id]);
         return view('ADMIN/ficheHoraire',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees,'fiiche'=>$fiiche]);
         }
 
@@ -304,63 +304,63 @@ class PageEmployesController extends Controller
                         $DFev=$DFev+$depFev->nombreH;
                     }
                 }
-                foreach($depassementFev as $depMar)
+                foreach($depassementMar as $depMar)
                 {
-                    if(str_contains($depJan->idFiche, $year)){
+                    if(str_contains($depMar->idFiche, $year)){
                         $DMar=$DMar+$depMar->nombreH;
                     }
                 }
-                foreach($depassementFev as $depAvr)
+                foreach($depassementAvr as $depAvr)
                 {
-                    if(str_contains($depJan->idFiche, $year)){
+                    if(str_contains($depAvr->idFiche, $year)){
                         $DAvr=$DAvr+$depAvr->nombreH;
                     }
                 }
-                foreach($depassementFev as $depMai)
+                foreach($depassementMai as $depMai)
                 {
-                    if(str_contains($depJan->idFiche, $year)){
+                    if(str_contains($depMai->idFiche, $year)){
                         $DMai=$DMai+$depMai->nombreH;
                     }
                 }
-                foreach($depassementFev as $depJuin)
+                foreach($depassementJuin as $depJuin)
                 {
-                    if(str_contains($depJan->idFiche, $year)){
+                    if(str_contains($depJuin->idFiche, $year)){
                         $DJuin=$DJuin+$depJuin->nombreH;
                     }
                 }
-                foreach($depassementFev as $depJuil)
+                foreach($depassementJuillet as $depJuil)
                 {
-                    if(str_contains($depJan->idFiche, $year)){
+                    if(str_contains($depJuil->idFiche, $year)){
                         $DJuil=$DJuil+$depJuil->nombreH;
                     }
                 }
-                foreach($depassementFev as $depAou)
+                foreach($depassementAout as $depAou)
                 {
-                    if(str_contains($depJan->idFiche, $year)){
+                    if(str_contains($depAou->idFiche, $year)){
                         $DAout=$DAout+$depAou->nombreH;
                     }
                 }
-                foreach($depassementFev as $depSept)
+                foreach($depassementSept as $depSept)
                 {
-                    if(str_contains($depJan->idFiche, $year)){
+                    if(str_contains($depSept->idFiche, $year)){
                         $DSept=$DSept+$depSept->nombreH;
                     }
                 }
-                foreach($depassementFev as $depOct)
+                foreach($depassementOct as $depOct)
                 {
-                    if(str_contains($depJan->idFiche, $year)){
+                    if(str_contains($depOct->idFiche, $year)){
                         $DJan=$DJan+$depOct->nombreH;
                     }
                 }
-                foreach($depassementFev as $depNov)
+                foreach($depassementNov as $depNov)
                 {
-                    if(str_contains($depJan->idFiche, $year)){
+                    if(str_contains($depNov->idFiche, $year)){
                         $DNov=$DNov+$depNov->nombreH;
                     }
                 }
-                foreach($depassementFev as $depDec)
+                foreach($depassementDec as $depDec)
                 {
-                    if(str_contains($depJan->idFiche, $year)){
+                    if(str_contains($depDec->idFiche, $year)){
                         $DDec=$DDec+$depDec->nombreH;
                     }
                 }

@@ -178,7 +178,7 @@ class UserSeeder extends Seeder
             'created_at' => "2022-06-18 05:19:36",
             'updated_at' => "2022-06-18 05:19:36",
             'admin' => 0,
-            'identifiant' => 'IN2021010060',
+            'identifiant' => '115',
             'SeeAsAdmin'=>0,
         ],[
             'id' => 14,

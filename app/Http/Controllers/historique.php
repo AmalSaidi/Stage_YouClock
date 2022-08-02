@@ -17,8 +17,188 @@ class historique extends Controller
         $user=Auth::user();
         $session_id = $user->identifiant;
         $employes = DB::select('select * from employes where identifiant=? ',[$session_id]);
-        $fiiche = DB::select('select DISTINCT idfiche,statutF from fichehors where idUser = ?',[$session_id]);
+        $fiiche = DB::select('select DISTINCT idfiche,statutF from fichehors where idUser = ? ORDER BY idfiche DESC,mois ASC',[$session_id]);
         return view('USER/historique',['fiiche'=>$fiiche,'employes'=>$employes]);
+        }
+
+    public function showNewFiche() {
+        $user=Auth::user();
+        $session_id = $user->identifiant;
+        $employes = DB::select('select * from employes where identifiant=? ',[$session_id]);
+        $fiiche = DB::select('select DISTINCT idfiche,statutF from fichehors where idUser = ?',[$session_id]);
+            return view('USER/AjouterFiche',['fiiche'=>$fiiche,'employes'=>$employes]);
+        }
+
+    public function AjouterFiche() {
+        $fiche = new fichehor();
+        $annee = request('annee');
+        $mois = request('mois');
+        $user=Auth::user();
+        $session_id = $user->identifiant;
+        $semainetype=DB::select('select * from semainetypes where idUser=?',[$session_id]);
+        date_default_timezone_set('Europe/Paris');
+        $date = date("Y-m-01",strtotime($annee."-".$mois."-01"));
+        $dateF = date("t", strtotime($date));
+        $date2 = date('l', strtotime($date));
+        $month = date('n', strtotime($date));
+        switch ($month) {
+            case 1:
+                $month="Janvier";
+                break;
+            case 2:
+                $month="Février";
+                break;
+            case 3:
+                $month="Mars";
+                break;
+            case 4:
+                $month="Avril";
+                break;
+            case 5:
+                $month="Mai";
+                break;
+            case 6:
+                $month="Juin";
+                break;
+            case 7:
+                $month="Juillet";
+                break;
+            case 8:
+                $month="Août";
+                break;
+            case 9:
+                $month="Septembre";
+                break;
+            case 10:
+                $month="Octobre";
+                break;
+            case 11:
+                $month="Novembre";
+                break;
+            case 12:
+                $month="Décembre";
+                break;
+        }
+        for($i=1;$i <= $dateF; $i++){
+            $date = date("$annee-m-$i", strtotime("+1 day", strtotime($date)));
+            $day_name = date('l', strtotime($date));
+            $day_num = date('d', strtotime($date));
+            $year_num = date('Y', strtotime($date));
+            if($day_name=="Wednesday"){
+                $day_name="Mer";
+            }
+            elseif($day_name=="Thursday")
+               {
+                $day_name="Jeu";
+               }
+            elseif($day_name=="Friday")
+               {
+                $day_name="Ven";
+               }
+            elseif($day_name=="Saturday")
+                {
+                $day_name="Sam";
+                }
+            elseif($day_name=="Sunday")
+                {
+                $day_name="Dim";
+                }
+            elseif($day_name=="Monday")
+              {
+                $day_name="Lun";
+              }
+            elseif($day_name=="Tuesday")
+               {
+                $day_name="Mar";
+               }
+            if($i <= 7){
+                $week = "semaine 1";
+            }
+            elseif($i>7 and $i<=14){
+                $week = "semaine 2";
+            }
+            elseif($i>14 and $i<=21){
+                $week = "semaine 3";
+            }
+            elseif($i>21 and $i<=28){
+                $week = "semaine 4";
+            }
+            elseif($i>28){
+                $week = "semaine 5";
+            }
+
+            $idF=  $year_num." - ".$month;
+            $dateBD= $day_name." ".$day_num." ".$month;
+
+            DB::insert('insert into fichehors (idfiche,Date,idUser,semaine,mois) values (?,?,?,?,?)', [$idF,$dateBD,$session_id,$week,$mois]);
+            $fiches=DB::select('select * from fichehors where idUser=? and idfiche=?',[$session_id,$idF]);
+            foreach ($fiches as $fi) {
+                if(str_contains($fi->Date, 'Lun')){
+                    DB::update('UPDATE
+                    fichehors f,
+                    semainetypes s
+                SET
+                   f.Poids = s.poidsJour
+                WHERE
+                    f.idUser = s.idUser AND s.jour="Lundi" AND f.Date LIKE "%Lun%"');
+                }
+                else if(str_contains($fi->Date, 'Mar')){
+                    DB::update('UPDATE
+                    fichehors f,
+                    semainetypes s
+                SET
+                   f.Poids = s.poidsJour
+                WHERE
+                    f.idUser = s.idUser AND s.jour="Mardi" AND f.Date LIKE "%Mar%"');
+                }
+                else if(str_contains($fi->Date, 'Mer')){
+                    DB::update('UPDATE
+                    fichehors f,
+                    semainetypes s
+                SET
+                   f.Poids = s.poidsJour
+                WHERE
+                    f.idUser = s.idUser AND s.jour="Mercredi" AND f.Date LIKE "%Mer%"');
+                }
+                else if(str_contains($fi->Date, 'Jeu')){
+                    DB::update('UPDATE
+                    fichehors f,
+                    semainetypes s
+                SET
+                   f.Poids = s.poidsJour
+                WHERE
+                    f.idUser = s.idUser AND s.jour="Jeudi" AND f.Date LIKE "%Jeu%"');
+                }
+                else if(str_contains($fi->Date, 'Ven')){
+                    DB::update('UPDATE
+                    fichehors f,
+                    semainetypes s
+                SET
+                   f.Poids = s.poidsJour
+                WHERE
+                    f.idUser = s.idUser AND s.jour="Vendredi" AND f.Date LIKE "%Ven%"');
+                }
+                else if(str_contains($fi->Date, 'Sam')){
+                    DB::update('UPDATE
+                    fichehors f,
+                    semainetypes s
+                SET
+                   f.Poids = s.poidsJour
+                WHERE
+                    f.idUser = s.idUser AND s.jour="Samedi" AND f.Date LIKE "%Sam%"');
+                }
+                else if(str_contains($fi->Date, 'Dim')){
+                    DB::update('UPDATE
+                    fichehors f,
+                    semainetypes s
+                SET
+                   f.Poids = s.poidsJour
+                WHERE
+                    f.idUser = s.idUser AND s.jour="Dimanche" AND f.Date LIKE "%Dim%"');
+                }
+            }
+        }
+        return redirect()->back();
         }
     
         public function details($id){
@@ -275,4 +455,251 @@ class historique extends Controller
             'dimanche' =>$dimanche,'affichage' => $affichage,'p'=>$p,'f'=>$f,'totEcart'=>$totEcart,'ajout'=>$ajout,'activites'=>$activites,
             ]);
         }
+
+        public function show($id) {
+            $user=Auth::user();
+            $session_id = $user->identifiant;
+            $affichage = DB::select('select * from fichehors where id = ?',[$id]);
+            $activites = DB::select('select * from activites');
+            $venti = DB::select('select * from ventilations where idUser = ?',[$session_id]);
+            $last = DB::select('select id from fichehors order by id DESC limit 1');
+            $ventil = DB::select('select * from ventilationfinals where idUser = ?',[$session_id]);
+            $horSemLun = DB::select('select DM,FM,DA,FA,DS,FS from semainetypes where idUser = ? AND jour="Lundi"',[$session_id]);
+            $horSemMar = DB::select('select DM,FM,DA,FA,DS,FS from semainetypes where idUser = ? AND jour="Mardi"',[$session_id]);
+            $horSemMer = DB::select('select DM,FM,DA,FA,DS,FS from semainetypes where idUser = ? AND jour="Mercredi"',[$session_id]);
+            $horSemJeu = DB::select('select DM,FM,DA,FA,DS,FS from semainetypes where idUser = ? AND jour="Jeudi"',[$session_id]);
+            $horSemVen = DB::select('select DM,FM,DA,FA,DS,FS from semainetypes where idUser = ? AND jour="Vendredi"',[$session_id]);
+            $horSemSam = DB::select('select DM,FM,DA,FA,DS,FS from semainetypes where idUser = ? AND jour="Samedi"',[$session_id]);
+            $horSemDim = DB::select('select DM,FM,DA,FA,DS,FS from semainetypes where idUser = ? AND jour="Dimanche"',[$session_id]);
+            foreach ($horSemLun as $horLun) {
+                $debutMLundi=$horLun->DM;
+                $finMLundi=$horLun->FM;
+                $debutALundi=$horLun->DA;
+                $finALundi=$horLun->FA;
+                $debutSLundi=$horLun->DS;
+                $finSLundi=$horLun->FS;
+            }
+            foreach ($horSemMar as $horMar) {
+                $debutMMardi=$horMar->DM;
+                $finMMardi=$horMar->FM;
+                $debutAMardi=$horMar->DA;
+                $finAMardi=$horMar->FA;
+                $debutSMardi=$horMar->DS;
+                $finSMardi=$horMar->FS;
+            }
+            foreach ($horSemMer as $horMer) {
+                $debutMMercredi=$horMer->DM;
+                $finMMercredi=$horMer->FM;
+                $debutAMercredi=$horMer->DA;
+                $finAMercredi=$horMer->FA;
+                $debutSMercredi=$horMer->DS;
+                $finSMercredi=$horMer->FS;
+            }
+            foreach ($horSemJeu as $horJeu) {
+                $debutMJeudi=$horJeu->DM;
+                $finMJeudi=$horJeu->FM;
+                $debutAJeudi=$horJeu->DA;
+                $finAJeudi=$horJeu->FA;
+                $debutSJeudi=$horJeu->DS;
+                $finSJeudi=$horJeu->FS;
+            }
+            foreach ($horSemVen as $horVen) {
+                $debutMVendredi=$horVen->DM;
+                $finMVendredi=$horVen->FM;
+                $debutAVendredi=$horVen->DA;
+                $finAVendredi=$horVen->FA;
+                $debutSVendredi=$horVen->DS;
+                $finSVendredi=$horVen->FS;
+            }
+            foreach ($horSemSam as $horSam) {
+                $debutMSamedi=$horSam->DM;
+                $finMSamedi=$horSam->FM;
+                $debutASamedi=$horSam->DA;
+                $finASamedi=$horSam->FA;
+                $debutSSamedi=$horSam->DS;
+                $finSSamedi=$horSam->FS;
+            }
+            foreach ($horSemDim as $horDim) {
+                $debutMDimanche=$horDim->DM;
+                $finMDimanche=$horDim->FM;
+                $debutADimanche=$horDim->DA;
+                $finADimanche=$horDim->FA;
+                $debutSDimanche=$horDim->DS;
+                $finSDimanche=$horDim->FS;
+            }
+            
+            if ($last)
+            {
+                $lastt=1;
+            }
+            else{
+                $lastt=0;
+            }
+            return view('USER/newFiche',['affichage'=>$affichage,'last'=>$last,'lastt'=>$lastt,'activites'=>$activites,'ventil'=>$ventil,
+            'debutMLundi'=>$debutMLundi,'finMLundi'=>$finMLundi,'debutALundi'=>$debutALundi,'finALundi'=>$finALundi,'debutSLundi'=>$debutSLundi,'finSLundi'=>$finSLundi,
+            'debutMMardi'=>$debutMMardi,'finMMardi'=>$finMMardi,'debutAMardi'=>$debutAMardi,'finAMardi'=>$finAMardi,'debutSMardi'=>$debutSMardi,'finSMardi'=>$finSMardi,
+            'debutMMercredi'=>$debutMMercredi,'finMMercredi'=>$finMMercredi,'debutAMercredi'=>$debutAMercredi,'finAMercredi'=>$finAMercredi,'debutSMercredi'=>$debutSMercredi,'finSMercredi'=>$finSMercredi,
+            'debutMJeudi'=>$debutMJeudi,'finMJeudi'=>$finMJeudi,'debutAJeudi'=>$debutAJeudi,'finAJeudi'=>$finAJeudi,'debutSJeudi'=>$debutSJeudi,'finSJeudi'=>$finSJeudi,
+            'debutMVendredi'=>$debutMVendredi,'finMVendredi'=>$finMVendredi,'debutAVendredi'=>$debutAVendredi,'finAVendredi'=>$finAVendredi,'debutSVendredi'=>$debutSVendredi,'finSVendredi'=>$finSVendredi,
+            'debutMSamedi'=>$debutMSamedi,'finMSamedi'=>$finMSamedi,'debutASamedi'=>$debutASamedi,'finASamedi'=>$finASamedi,'debutSSamedi'=>$debutSSamedi,'finSSamedi'=>$finSSamedi,
+            'debutMDimanche'=>$debutMDimanche,'finMDimanche'=>$finMDimanche,'debutADimanche'=>$debutADimanche,'finADimanche'=>$finADimanche,'debutSDimanche'=>$debutSDimanche,'finSDimanche'=>$finSDimanche
+        ]);
+                }
+                public function edit(Request $request,$id) {
+                    $user=Auth::user();
+                    $session_id = $user->identifiant;
+                    $fichehor = DB::select('select * from fichehors where idUser = ?',[$session_id]);
+                    $idFi = $request->input('idFi');
+                    $ventil = DB::select('select * from ventilationfinals where idUser = ?',[$session_id]);
+                    $matinD = $request->input('morningS');
+                    $matinF = $request->input('morningF');
+                    $ApremD = $request->input('ApremS');
+                    $ApremF = $request->input('ApremF');
+                    $soirD = $request->input('soirS');
+                    $soirF = $request->input('soirF');
+                    $activite1 = $request->input('TM');
+                    $activite2 = $request->input('TAP');
+                    $activite3 = $request->input('TS');
+                    $typeJour = $request->input('typeJour');
+                    $ventilationNom = $request->input('ventilationNom');
+                    $DELEGATION = $request->input('DELEG');
+                    $FRASAD = $request->input('FRAS');
+                    $Entraide = $request->input('ENTRAI');
+                    $Federation = $request->input('FEDE');
+                    $prestataire = $request->input('PRES');
+                    $voisineurs = $request->input('VOISI');
+                    $ADU = $request->input('ADU');
+                    $SOS = $request->input('SOS');
+                    $ADVM = $request->input('ADVM');
+                    $Mandataires = $request->input('MANDA');
+                    $matin = $matinD ." - " .$matinF;
+                    $aprem = $ApremD ." - " .$ApremF;
+                    $soir = $soirD ." - " .$soirF;
+                    $hourdiffMat = round((strtotime($matinF) - strtotime($matinD ))/3600, 1);
+                    $hourdiffAprem = round((strtotime($ApremF) - strtotime($ApremD))/3600, 1);
+                    $hourdiffSoir = round((strtotime($soirF) - strtotime($soirD))/3600, 1);
+                    $pauseMidi = round((strtotime($ApremD) - strtotime($matinF ))/3600, 1);
+                    $heuresEffectu = $hourdiffMat + $hourdiffAprem + $hourdiffSoir;
+                    $poids= $DELEGATION+$FRASAD+$Entraide+$Federation+$prestataire+$voisineurs+$ADU+$SOS+$ADVM+$Mandataires;
+                    $ecart=0;
+                    echo $pauseMidi;
+                    if($heuresEffectu!=$poids){
+                        $message="u cant";
+                    }
+                    if(!isset($message))
+                    {
+                        if($hourdiffMat!=0 and $hourdiffAprem!=0){
+                        if($pauseMidi>=0.8){
+                    DB::update('update fichehors set matinD = ?,matinF = ?,ApremD=?, ApremF = ?,
+                    soirD=?, soirF=?,matin=?,heuresEffectu=?,activite1=?,aprem=?,soir=?,activite2=?,
+                    activite3=?,ecart=?,typeJour=? where id = ?',
+                    [$matinD,$matinF,$ApremD,$ApremF,$soirD,$soirF,$matin,$heuresEffectu,$activite1,$aprem,
+                    $soir,$activite2,$activite3,$ecart,$typeJour,$id]);
+                    foreach ($ventil as $v) {
+                        if($v->ventilation == "DELEGATION"){
+                            DB::update('update fichehors set DELEGATION=? where id = ?',
+                            [$DELEGATION,$id]);
+                        }
+                        if($v->ventilation == "SOS Garde d'enfants"){
+                            DB::update('update fichehors set SOSgarde=? where id = ?',
+                            [$SOS,$id]);
+                        }
+                        if($v->ventilation == "FRASAD"){
+                            DB::update('update fichehors set FRASAD=? where id = ?',
+                            [$FRASAD,$id]);
+                        }
+                        if($v->ventilation == "Entraide familiale"){
+                            DB::update('update fichehors set EntraideFamiliale=? where id = ?',
+                            [$Entraide,$id]);
+                        }
+                        if($v->ventilation == "Federation"){
+                            DB::update('update fichehors set Federation=? where id = ?',
+                            [$Federation,$id]);
+                        }
+                        if($v->ventilation == "Mandataires"){
+                            DB::update('update fichehors set Mandataires=? where id = ?',
+                            [$Mandataires,$id]);
+                        }
+                        if($v->ventilation == "ADVM"){
+                            DB::update('update fichehors set ADVM=? where id = ?',
+                            [$ADVM,$id]);
+                        }
+                        if($v->ventilation == "ADU services"){
+                            DB::update('update fichehors set ADUservices=? where id = ?',
+                            [$ADU,$id]);
+                        }
+                        if($v->ventilation == "voisineurs"){
+                            DB::update('update fichehors set Voisineurs=? where id = ?',
+                            [$voisineurs,$id]);
+                        }
+                        if($v->ventilation == "prestataire"){
+                            DB::update('update fichehors set Prestataire=? where id = ?',
+                            [$prestataire,$id]);
+                        }
+                        }
+                        return redirect()->action(
+                            [historique::class, 'details'], ['idfiche' => $idFi]
+                        );
+                }
+                    else{
+                        return redirect()->back()->with('status', 'La durée de pause doit être supérieur à 45min');
+                    }}
+                    else{
+                        DB::update('update fichehors set matinD = ?,matinF = ?,ApremD=?, ApremF = ?,
+                    soirD=?, soirF=?,matin=?,heuresEffectu=?,activite1=?,aprem=?,soir=?,activite2=?,
+                    activite3=?,ecart=?,typeJour=? where id = ?',
+                    [$matinD,$matinF,$ApremD,$ApremF,$soirD,$soirF,$matin,$heuresEffectu,$activite1,$aprem,
+                    $soir,$activite2,$activite3,$ecart,$typeJour,$id]);
+                    foreach ($ventil as $v) {
+                        if($v->ventilation == "DELEGATION"){
+                            DB::update('update fichehors set DELEGATION=? where id = ?',
+                            [$DELEGATION,$id]);
+                        }
+                        if($v->ventilation == "SOS Garde d'enfants"){
+                            DB::update('update fichehors set SOSgarde=? where id = ?',
+                            [$SOS,$id]);
+                        }
+                        if($v->ventilation == "FRASAD"){
+                            DB::update('update fichehors set FRASAD=? where id = ?',
+                            [$FRASAD,$id]);
+                        }
+                        if($v->ventilation == "Entraide familiale"){
+                            DB::update('update fichehors set EntraideFamiliale=? where id = ?',
+                            [$Entraide,$id]);
+                        }
+                        if($v->ventilation == "Federation"){
+                            DB::update('update fichehors set Federation=? where id = ?',
+                            [$Federation,$id]);
+                        }
+                        if($v->ventilation == "Mandataires"){
+                            DB::update('update fichehors set Mandataires=? where id = ?',
+                            [$Mandataires,$id]);
+                        }
+                        if($v->ventilation == "ADVM"){
+                            DB::update('update fichehors set ADVM=? where id = ?',
+                            [$ADVM,$id]);
+                        }
+                        if($v->ventilation == "ADU services"){
+                            DB::update('update fichehors set ADUservices=? where id = ?',
+                            [$ADU,$id]);
+                        }
+                        if($v->ventilation == "voisineurs"){
+                            DB::update('update fichehors set Voisineurs=? where id = ?',
+                            [$voisineurs,$id]);
+                        }
+                        if($v->ventilation == "prestataire"){
+                            DB::update('update fichehors set Prestataire=? where id = ?',
+                            [$prestataire,$id]);
+                        }
+                        }
+                        return redirect()->action(
+                            [historique::class, 'details'], ['idfiche' => $idFi]
+                        );
+                    }
+                    }
+                    else{
+                        return redirect()->back()->with('status', 'Le nombre d\'heures effectués est invalide');
+                    }
+            
+            }
 }

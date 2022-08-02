@@ -30,7 +30,7 @@ class ActivitesExport implements FromCollection,
     */
     public function collection()
     {
-       return fichehor::where('idUser', 'IN2021050012')->where('idfiche', 'like', '%Juillet%')->get();
+       return fichehor::where('idUser', 'IN2021050012')->where('idfiche', 'like', '%Août%')->get();
     }
     public function map($fichehor): array
     {

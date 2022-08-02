@@ -15,9 +15,9 @@ class depHorController extends Controller
     }
     public function index(){
         $user=Auth::user();
-        $session_str = $user->structure;
-        $employes = DB::table('employes')->select()->where('structure', 'like', '%'.$session_str.'%')->where('admin',0)->get();
-        $emplo = DB::select('SELECT identifiant,CONCAT(nom, " ", prenom) AS fullname FROM employes where structure LIKE ?',[$session_str]);
+        $session_str = $user->service;
+        $employes = DB::table('employes')->select()->where('service', 'like', '%'.$session_str.'%')->where('admin',0)->get();
+        $emplo = DB::select('SELECT identifiant,CONCAT(nom, " ", prenom) AS fullname FROM employes where service LIKE ?',[$session_str]);
         return view('ADMIN/depassementHor',[
             'employes' =>$employes,'emplo'=>$emplo
         ]);

@@ -11,8 +11,10 @@ use Illuminate\Support\Facades\Redirect;
 use App\Models\ventilation;
 use App\Models\ventilationfinal;
 
+
 class FicheHoraireUserController extends Controller
 {
+    
     public function __construct()
     {
         $this->middleware('auth');
@@ -148,10 +150,12 @@ class FicheHoraireUserController extends Controller
         $user=Auth::user();
         $session_id = $user->identifiant;
         $semainetype=DB::select('select * from semainetypes where idUser=?',[$session_id]);
+        date_default_timezone_set('Europe/Paris');
         $date = date('Y-m-01', strtotime("first day of this month"));
         $dateF = date('d', strtotime("last day of this month"));
         $date2 = date('l', strtotime($date));
         $month = date('n', strtotime($date));
+        $month2 = date('m', strtotime($date));
         switch ($month) {
             case 1:
                 $month="Janvier";
@@ -241,7 +245,7 @@ class FicheHoraireUserController extends Controller
             $idF=  $year_num." - ".$month;
             $dateBD= $day_name." ".$day_num." ".$month;
 
-            DB::insert('insert into fichehors (idfiche,Date,idUser,semaine) values (?,?,?,?)', [$idF,$dateBD,$session_id,$week]);
+            DB::insert('insert into fichehors (idfiche,Date,idUser,semaine,mois) values (?,?,?,?,?)', [$idF,$dateBD,$session_id,$week,$month2]);
             $fiches=DB::select('select * from fichehors where idUser=? and idfiche=?',[$session_id,$idF]);
             foreach ($fiches as $fi) {
                 if(str_contains($fi->Date, 'Lun')){
@@ -313,6 +317,7 @@ class FicheHoraireUserController extends Controller
         }
 
     public function index(){
+        date_default_timezone_set('Europe/Paris');
         $user=Auth::user();
         $activites=DB::select('select * from activites');
         $session_id = $user->identifiant;

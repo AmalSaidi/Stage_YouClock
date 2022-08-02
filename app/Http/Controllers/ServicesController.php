@@ -37,7 +37,8 @@ class ServicesController extends Controller
 
     public function show($id) {
         $services = DB::select('select * from services where id = ?',[$id]);
-        return view('ADMIN/service_update',['services'=>$services]);
+        $employes = DB::select('select * from employes ');
+        return view('ADMIN/service_update',['services'=>$services,'employes'=>$employes]);
         }
 
     public function edit(Request $request,$id) {

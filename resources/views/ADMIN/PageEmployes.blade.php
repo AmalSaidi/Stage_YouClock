@@ -8,14 +8,12 @@
 <div id="button-list">
     
     <div class="input-group mb-3">
-      <input type="text" id="input-action"  placeholder="Action de masse" aria-describedby="basic-addon2">
       <div class="form-outline">
         <input type="search" id="form1" class="form-control" placeholder="Rechercher" />
       </div>
       <!-- <button type="button" class="btn btn-primary">
         <i class="fas fa-search"></i>
       </button> -->
-      <input type="text" id="input-stru"  placeholder="Toutes les structures" aria-describedby="basic-addon2">
     </div>
     </div>  
 <div id="acti">
