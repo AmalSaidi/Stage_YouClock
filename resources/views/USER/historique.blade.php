@@ -30,7 +30,7 @@ $Valide="Valide";
     <BR>
     <div id="info-user"><p>{{ $emp->nom }} {{ $emp->prenom }}</p></div>
 <div id="stru-user">{{ $emp->structure }}</div>
-<button class="btn btn-danger" id="ajouter"> ajouter une fiche
+<div><button class="btn btn-danger" style="margin-top: 20;"id="ajouter"> ajouter une fiche </div>
 </button>
 </div>
 @endforeach
@@ -67,7 +67,7 @@ $Valide="Valide";
     <form action="" method="POST">
     {{ csrf_field() }}
   <div class="form-group">
-    <label for="exampleInputPassword1">Annéeee</label>
+    <label for="exampleInputPassword1">Année</label>
     <select name="annee" id="select">
     @php
     $year = date("Y");
