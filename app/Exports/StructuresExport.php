@@ -9,10 +9,13 @@ use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 
 
 
-class StructuresExport implements FromCollection, ShouldAutoSize, WithStyles
+
+class StructuresExport implements FromCollection, ShouldAutoSize,
+WithHeadings,WithStyles
 {
     use Exportable;
     /**
@@ -21,6 +24,14 @@ class StructuresExport implements FromCollection, ShouldAutoSize, WithStyles
     public function collection()
     {
         return structures::select('libellé','code','congePaye')->get();
+    }
+    public function headings(): array
+    {
+        return [
+            'Libellé',
+            'Code',
+            'Congé Payé',
+        ];
     }
 
     public function styles(Worksheet $sheet)
