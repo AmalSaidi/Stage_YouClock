@@ -35,6 +35,11 @@ $Valide="Valide";
 </div>
 @endforeach
 <div id="acti">
+@if (session('status'))
+    <div class="alert alert-danger">
+        {{ session('status') }}
+    </div>
+@endif
 <h3>Historique</h3>
 <table class="table-bordered">
 <tbody>

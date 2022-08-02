@@ -79,6 +79,9 @@ class historique extends Controller
                 $month="Décembre";
                 break;
         }
+        $idFi=  $annee." - ".$month;
+
+        if(fichehor::where('idUser', $session_id)->where('idfiche', 'like', $idFi)->count()==0){
         for($i=1;$i <= $dateF; $i++){
             $date = date("$annee-m-$i", strtotime("+1 day", strtotime($date)));
             $day_name = date('l', strtotime($date));
@@ -129,7 +132,6 @@ class historique extends Controller
 
             $idF=  $year_num." - ".$month;
             $dateBD= $day_name." ".$day_num." ".$month;
-
             DB::insert('insert into fichehors (idfiche,Date,idUser,semaine,mois) values (?,?,?,?,?)', [$idF,$dateBD,$session_id,$week,$mois]);
             $fiches=DB::select('select * from fichehors where idUser=? and idfiche=?',[$session_id,$idF]);
             foreach ($fiches as $fi) {
@@ -199,6 +201,9 @@ class historique extends Controller
             }
         }
         return redirect()->back();
+    }else{
+        return redirect()->back()->with('status', 'La fiche horaire existe déjà');
+    }
         }
     
         public function details($id){
