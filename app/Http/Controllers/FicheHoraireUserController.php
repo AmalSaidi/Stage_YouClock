@@ -617,8 +617,7 @@ class FicheHoraireUserController extends Controller
         $poids= $DELEGATION+$FRASAD+$Entraide+$Federation+$prestataire+$voisineurs+$ADU+$SOS+$ADVM+$Mandataires;
         $ecart=0;
         echo $pauseMidi;
-        $diffJour = round((strtotime($soirF) - strtotime($matinD ))/3600, 1);
-        if($diffJour>11){
+        if($heuresEffectu>11){
             return redirect()->back()->with('status', 'La durée du jour ne peut pas être supérieur à 11 heures');
         }
         if($hourdiffMat>=6){
