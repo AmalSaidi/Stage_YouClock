@@ -121,14 +121,14 @@
     margin-top: -2.7%;
   }
 
-  #ajouterr-button{
+  #add{
     background-color: #6c99cf !important;
     margin-left: 42%;
     MARGIN-TOP: 4%;
     margin-left: 40%;
     BORDER: none;
   }
-  #ajouterr-button:hover{
+  #add:hover{
     background-color: #4d6e97 !important;
   }
   
