@@ -671,7 +671,9 @@ class FicheHoraireUserController extends Controller
                 [$prestataire,$id]);
             }
             }
-        return redirect('/FicheHoraire');
+            return redirect()->action(
+                [FicheHoraireUserController::class, 'index']
+            );
     }
         else{
             return redirect()->back()->with('status', 'La durée de pause doit être supérieur à 45min');
@@ -724,7 +726,9 @@ class FicheHoraireUserController extends Controller
                 [$prestataire,$id]);
             }
             }
-        return redirect('/FicheHoraire');
+            return redirect()->action(
+                [FicheHoraireUserController::class, 'index']
+            );
         }
         }
         else{
