@@ -12,7 +12,7 @@ use Maatwebsite\Excel\Concerns\withEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 
 
-class StructuresExport implements FromCollection, ShouldAutoSize, withHeadings, withEvents
+class StructuresExport implements FromCollection, ShouldAutoSize, withEvents
 {
     use Exportable;
     /**
@@ -23,12 +23,6 @@ class StructuresExport implements FromCollection, ShouldAutoSize, withHeadings, 
         return structures::select('libellé','code','congePaye')->get();
     }
     
-    public function headings(): array
-    {
-        return [
-            ['libelle','code','Congé payé'],
-        ];
-    }
     public function registerEvents(): array
     { return [
         AfterSheet::class    => function(AfterSheet $event){
