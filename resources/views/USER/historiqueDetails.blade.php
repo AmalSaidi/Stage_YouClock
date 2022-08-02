@@ -6,10 +6,9 @@
 
 <style>
 #menu-reg {
-    BACKGROUND-COLOR: WHITE;
+  BACKGROUND-COLOR: WHITE;
     WIDTH: 19%;
     margin-left: 2%;
-    margin-top: -81.2%;
     float: left;
     text-align: center;
 }
@@ -23,7 +22,9 @@ $NotStarted="notStarted";
 $EnCours="EnCours";
 $Valide="Valide";
 @endphp
-<div id="acti">
+<div id="parent" style="display: flex;
+  flex-direction: column-reverse;" >
+<div id="acti" style="margin-top: -21.5%;">
 <h3>Fiche Horaires</h3>
 <br>
 <div id="button-list">
@@ -192,6 +193,7 @@ $Valide="Valide";
     </tr>
   </tbody>
 </table>
+</div>
 </div>
 @endif
 @endforeach
