@@ -1241,46 +1241,46 @@ class PageEmployesController extends Controller
             $hourdiffDimAprem = round((strtotime($FA7) - strtotime($DA7 ))/3600, 1);
             $hourdiffDimSoir = round((strtotime($FS7) - strtotime($DS7 ))/3600, 1);
             $poidsDim = $hourdiffDimMat + $hourdiffDimAprem +  $hourdiffDimSoir;
-            $fiches=DB::select('select * from fichehors where idUser=?',[$identifiant]);
+            $fiches=DB::select('select * from fichehors where idUser=? and statutF="EnCours"',[$identifiant]);
             foreach ($fiches as $fi) {
                 if(str_contains($fi->Date, 'Lun')){
-                    DB::update('update fichehors set Poids=? where idUser=? AND Date LIKE "%Lun%"',
+                    DB::update('update fichehors set Poids=? where idUser=? AND Date LIKE "%Lun%" AND statutF="EnCours"',
                     [$poidsLundi,$identifiant]);
                 }
             }
             foreach ($fiches as $fi) {
                 if(str_contains($fi->Date, 'Mar')){
-                    DB::update('update fichehors set Poids=? where idUser=? AND Date LIKE "%Mar%"',
+                    DB::update('update fichehors set Poids=? where idUser=? AND Date LIKE "%Mar%" AND statutF="EnCours"',
                     [$poidsMardi,$identifiant]);
                 }
             }
             foreach ($fiches as $fi) {
                 if(str_contains($fi->Date, 'Mer')){
-                    DB::update('update fichehors set Poids=? where idUser=? AND Date LIKE "%Mer%"',
+                    DB::update('update fichehors set Poids=? where idUser=? AND Date LIKE "%Mer%" AND statutF="EnCours"',
                     [$poidsMerc,$identifiant]);
                 }
             }
             foreach ($fiches as $fi) {
                 if(str_contains($fi->Date, 'Jeu')){
-                    DB::update('update fichehors set Poids=? where idUser=? AND Date LIKE "%Jeu%"',
+                    DB::update('update fichehors set Poids=? where idUser=? AND Date LIKE "%Jeu%" AND statutF="EnCours"',
                     [$poidsJeudi,$identifiant]);
                 }
             }
             foreach ($fiches as $fi) {
                 if(str_contains($fi->Date, 'Ven')){
-                    DB::update('update fichehors set Poids=? where idUser=? AND Date LIKE "%Ven%"',
+                    DB::update('update fichehors set Poids=? where idUser=? AND Date LIKE "%Ven%" AND statutF="EnCours"',
                     [$poidsVen,$identifiant]);
                 }
             }
             foreach ($fiches as $fi) {
                 if(str_contains($fi->Date, 'Sam')){
-                    DB::update('update fichehors set Poids=? where idUser=? AND Date LIKE "%Sam%"',
+                    DB::update('update fichehors set Poids=? where idUser=? AND Date LIKE "%Sam%" AND statutF="EnCours"',
                     [$poidsSam,$identifiant]);
                 }
             }
             foreach ($fiches as $fi) {
                 if(str_contains($fi->Date, 'Dim')){
-                    DB::update('update fichehors set Poids=? where idUser=? AND Date LIKE "%Dim%"',
+                    DB::update('update fichehors set Poids=? where idUser=? AND Date LIKE "%Dim%" AND statutF="EnCours"',
                     [$poidsDim,$identifiant]);
                 }
             }
