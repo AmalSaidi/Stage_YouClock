@@ -583,6 +583,16 @@ class historique extends Controller
                     $poids= $DELEGATION+$FRASAD+$Entraide+$Federation+$prestataire+$voisineurs+$ADU+$SOS+$ADVM+$Mandataires;
                     $ecart=0;
                     echo $pauseMidi;
+                    if($heuresEffectu>11){
+                        return redirect()->back()->with('status', 'La durée du jour ne peut pas être supérieur à 11 heures');
+                    }
+                    if($hourdiffMat>=6){
+                        return redirect()->back()->with('status', 'La durée de matin ne peut pas être supérrieure à 6heures');
+                    }elseif($hourdiffAprem>=6){
+                        return redirect()->back()->with('status', 'La durée de l\'après-midi ne peut pas être supérrieure à 6heures');
+                    }elseif($hourdiffSoir>=6){
+                        return redirect()->back()->with('status', 'La durée de soir ne peut pas être supérrieure à 6heures');
+                    }
                     if($heuresEffectu!=$poids){
                         $message="u cant";
                     }
