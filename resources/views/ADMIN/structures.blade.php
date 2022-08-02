@@ -30,6 +30,7 @@
 {{ csrf_field() }}
 <button id="export"> Export CSV <img id="logo-reglages" src="/images/downald.png" alt="reglages">
 </button>
+</form>
 <button id="ajouter"> ajouter une structure
 </button>
 </div>    
