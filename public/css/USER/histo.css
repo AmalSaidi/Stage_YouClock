@@ -1,0 +1,450 @@
+#acti{
+    background-color: white;
+    width: 75%;
+    MARGIN-LEFT: 22%;
+    height: fit-content;
+    padding: 2% 2% 5% 2% !important;
+    margin-top: 30;
+}
+
+#fa-titre{
+    margin-top: 2.5%;
+    font-weight: 600;
+
+}
+
+#hidden{
+    background-color: white;
+    border: none;
+}
+#button-list{
+    margin-left: 60%;
+    margin-bottom: 1%;
+    margin-top: -6%;
+    font-size: small;
+}
+#hidden-cases{
+    border: none;
+}
+
+#info-user{
+    text-align: center;
+}
+
+#logo-reglages{
+    width: 15px;
+}
+
+ #logo-icon{
+    WIDTH: 30%;
+    margin-top: 12%;
+ }
+
+ #current-month{
+    margin-bottom: 0rem !important;
+ }
+
+.table-borderless{
+    margin: 0 auto;
+    width: 100px;
+    width: fit-content;
+    margin-top: 10%;
+    margin-bottom: 20%;
+}
+
+.table-bordered{
+    width:100% !important;
+    border: 2px black !important;
+}
+.table-bordered thead th{
+    padding: 1rem 1rem 1rem 1rem!important;
+    text-align: center;
+    background-color: #dde0e3c4;
+    font-size: 15;
+}
+.table-bordered td{
+    padding: 0.4rem 0.4rem 0.4rem 0.9rem!important;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+    text-align: center;
+}
+
+.table-bordered td, .table th {
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+    text-align: center;
+    border: 1px solid #dee2e6;
+    font-size: small;
+}
+
+#head-table {
+    background-color: #ebebeb !important;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    font-size: x-large;
+}
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    width: 50% !important;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888; 
+    margin-left: 50%;
+    margin-top: 30px;
+  }
+  
+  /* The Close Button */
+  .close {
+    width: fit-content;
+    float: right;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5;
+    margin-left: 100%;
+    margin-top: -2.7%;
+  }
+
+  #add{
+    background-color: #6c99cf !important;
+    margin-left: 42%;
+    MARGIN-TOP: 4%;
+    margin-left: 40%;
+    BORDER: none;
+  }
+  #add:hover{
+    background-color: #4d6e97 !important;
+  }
+  
+  .close:hover,.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  
+#export{
+    border: none;
+    padding: 1.1% 4% 1.1% 4%;
+    font-family: cursive;
+}
+
+#valider{
+    border: none;
+    padding: 0.5% 2% 0.5% 2%;
+    font-family: cursive;
+    background-color: #7ad750;
+    color: white;
+    margin-top: 20;
+}
+
+#valider:hover{
+    background-color: darkgreen;
+}
+
+#typeConge{
+    background-color: #29497a; 
+    color: white;
+    padding: 2 12 2 12;
+}
+
+#export:hover{
+    background-color: #bcbfc2a8;
+}
+
+body{
+    font-family: cursive !important; 
+}
+
+#mod{
+    background-color: #ffffff00;
+    border: none;
+}
+
+#calendar{
+    margin-top: 5%;
+}
+
+hr {
+    margin-top: 0.8rem !important;
+    margin-bottom: 1.5rem !important;
+    WIDTH: -webkit-fill-available;
+    border-top: 3px solid rgb(201 201 201) !important;
+}
+
+.form-group1{
+    margin-right: 25%;
+}
+
+.form-group2{
+    MARGIN-BOTTOM: 5%;
+}
+
+#start{
+    background-color: #eceaea9e;
+    BORDER: NONE;
+    TEXT-ALIGN: CENTER;
+    padding: 3 12 3 12;
+}
+
+#fin{
+    background-color: #eceaea9e;
+    BORDER: NONE;
+    TEXT-ALIGN: CENTER;
+    padding: 3 12 3 12;
+}
+
+#retour{
+    background-color: #eceaea9e;
+    BORDER: NONE;
+    TEXT-ALIGN: CENTER;
+    padding: 3 12 3 12;
+    MARGIN-BOTTOM: 3%;
+}
+
+#titlee{
+    margin-bottom: 2%;
+}
+
+#mat{
+    color: #1d4289;
+}
+
+#apr{
+    color: #1d4289;
+}
+
+#soir{
+    color: #1d4289;
+}
+
+#TM{
+    background-color: #4967a2;
+    COLOR: white;
+    padding: 3px;
+    font-size: smaller;
+    margin-bottom: 1%;
+}
+
+#TAP{
+    background-color: #4967a2;
+    COLOR: white;
+    padding: 3px;
+    font-size: smaller;
+    margin-bottom: 1%;
+}
+
+#TS{
+    background-color: #4967a2;
+    COLOR: white;
+    padding: 3px;
+    font-size: smaller;
+    margin-bottom: 1%;
+}
+
+#DeMatDiv{
+    float:left;
+    margin-right: 10%;
+}
+
+#DeApremDiv{
+float:left;
+margin-right: 10%;
+} 
+
+#DeSoirDiv{
+    float:left;
+    margin-right: 10%;
+}
+
+p{
+    font-size: smaller;
+}
+
+#venti{
+    float:left;
+    margin-right: 10%;
+}
+
+#num{
+    margin-bottom: 1%;
+}
+
+#ven{
+    margin-bottom: 4%;
+}
+
+#ventilation-titre{
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+#pointer{
+    background-color: #8099c6;
+    color: white;
+    border-color: #96bcde;
+}
+
+#pointer:hover{
+    background-color: #2f384b;
+}
+
+#ajoutFiche{
+    float: none;
+    margin-left: 62%;
+    background-color: #e95353;
+    color: white;
+    border-color: crimson;
+}
+
+#ajoutFiche:hover{
+    background-color: #5c2121;
+}
+
+#total{
+    background-color: #dfdfdfc7;
+}
+#typeJour{
+    margin-bottom: 2%;
+}
+
+.table-bordered td, .table-bordered th {
+    border: 1px solid #000000;
+}
+
+th {
+    text-align: inherit;
+    background-color: #3b698d;
+    text-align: center !important;
+    color: white;
+}
+#encours{
+    background-color: #74c0d9;
+    width: fit-content;
+    color: white;
+    padding: 2 10 2 10;
+    float: left;
+    font-size: small;
+    margin-left: 425;
+}
+
+#valideRS{
+    background-color: #106813;
+    width: fit-content;
+    color: white;
+    padding: 2 10 2 10;
+    float: left;
+    font-size: small;
+    margin-left: 325;
+}
+
+#valide{
+    background-color: #50d755;
+    width: fit-content;
+    color: white;
+    padding: 2 10 2 10;
+    float: left;
+    font-size: small;
+    margin-left: 435;
+}
+
+#enAttRS{
+    background-color: #f69c5e !important;
+    width: fit-content;
+    color: white;
+    padding: 2 10 2 10;
+    float: left;
+    font-size: small;
+    margin-left: 290;
+}
+
+#encourss{
+    background-color: #74c0d9;
+    width: fit-content;
+    color: white;
+    padding: 2 10 2 10;
+    float: left;
+    font-size: small;
+}
+
+#valideRSS{
+    background-color: #106813;
+    width: fit-content;
+    color: white;
+    padding: 2 10 2 10;
+    float: left;
+    font-size: small;
+}
+
+#validee{
+    background-color: #50d755;
+    width: fit-content;
+    color: white;
+    padding: 2 10 2 10;
+    float: left;
+    font-size: small;
+}
+
+#DateF{
+    width: 300;
+}
+#struSelect{
+font-size: 1rem;
+width: 100%;
+height: 37;
+}
+
+
+#modifierInfo{
+    background-color: #6c99cf !important;
+    MARGIN-TOP: 4%;
+    BORDER: none;
+  }
+
+#ajouter{
+    margin-top: 20;
+  }
+
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    width: 50% !important;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888; 
+  }
+
+  #select{
+    font-size: 1rem;
+    width: 100%;
+    height: 37;
+  }

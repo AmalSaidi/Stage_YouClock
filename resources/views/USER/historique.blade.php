@@ -1,6 +1,6 @@
 @extends('USER.LAYOUTS.layout')
 <link rel="stylesheet" type="text/css" href="{{ url('/css/ADMIN/navbar.css') }}" />
-<link rel="stylesheet" type="text/css" href="{{ url('/css/USER/historique.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ url('/css/USER/histo.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ url('/css/USER/reglages.css') }}" />
 <title>historique</title>
 
