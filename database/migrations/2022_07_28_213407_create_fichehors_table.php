@@ -33,12 +33,12 @@ class CreateFichehorsTable extends Migration
             $table->float('ecart')->nullable();
             $table->string('idfiche');
             $table->string('idUser')->nullable();
-            $table->time('matinD')->nullable();
-            $table->time('matinF')->nullable();
-            $table->time('apremD')->nullable();
-            $table->time('apremF')->nullable();
-            $table->time('soirD')->nullable();
-            $table->time('soirF')->nullable();
+            $table->float('matinD')->nullable();
+            $table->float('matinF')->nullable();
+            $table->float('apremD')->nullable();
+            $table->float('apremF')->nullable();
+            $table->float('soirD')->nullable();
+            $table->float('soirF')->nullable();
             $table->float ('FRASAD')->nullable();
             $table->float ('EntraideFamiliale')->nullable();
             $table->float ('Federation')->nullable();

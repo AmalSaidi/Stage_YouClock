@@ -338,6 +338,8 @@ p{
     margin-bottom: 2%;
 }
 
-.nume{
-    margin-left: 30;
+#FiMatDiv{
+    float: left;
+    margin-right: 120;
+
 }

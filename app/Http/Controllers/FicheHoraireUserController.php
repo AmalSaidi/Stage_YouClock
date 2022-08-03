@@ -12,6 +12,7 @@ use App\Models\ventilation;
 use App\Models\ventilationfinal;
 
 
+
 class FicheHoraireUserController extends Controller
 {
     
@@ -609,10 +610,10 @@ class FicheHoraireUserController extends Controller
         $matin = $matinD ." - " .$matinF;
         $aprem = $ApremD ." - " .$ApremF;
         $soir = $soirD ." - " .$soirF;
-        $hourdiffMat = round((strtotime($matinF) - strtotime($matinD ))/3600, 1);
-        $hourdiffAprem = round((strtotime($ApremF) - strtotime($ApremD))/3600, 1);
-        $hourdiffSoir = round((strtotime($soirF) - strtotime($soirD))/3600, 1);
-        $pauseMidi = round((strtotime($ApremD) - strtotime($matinF ))/3600, 1);
+        $hourdiffMat = $matinF-$matinD;
+        $hourdiffAprem = $ApremF-$ApremD;
+        $hourdiffSoir = $soirF-$soirD;
+        $pauseMidi = $ApremD-$matinF;
         $heuresEffectu = $hourdiffMat + $hourdiffAprem + $hourdiffSoir;
         $poids= $DELEGATION+$FRASAD+$Entraide+$Federation+$prestataire+$voisineurs+$ADU+$SOS+$ADVM+$Mandataires;
         $ecart=0;
@@ -742,7 +743,7 @@ class FicheHoraireUserController extends Controller
         }
         }
         else{
-            return redirect()->back()->with('status', 'Le nombre d\'heures effectués est invalide');
+            return redirect()->back()->with('status', 'le nombre d\'heures effectués est invalide');
         }
 
 }
