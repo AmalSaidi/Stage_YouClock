@@ -3,7 +3,8 @@
 <link rel="stylesheet" type="text/css" href="{{ url('/css/USER/ficheHoraire.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ url('/css/USER/reglages.css') }}" />
 <title>modifier mes horaires</title>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <style>
      #menu-reg {
     BACKGROUND-COLOR: WHITE;
@@ -321,6 +322,42 @@ document.getElementById('heureApr').value = diffHoursE;
 
 }
 
+</script>
+<script>
+  $(document).ready(function() {
+    const genderOldValue = '{{ old('TM') }}';
+    
+    if(genderOldValue !== '') {
+      $('#TM').val(genderOldValue);
+    }
+  });
+</script>
+<script>
+  $(document).ready(function() {
+    const genderOldValue = '{{ old('TAP') }}';
+    
+    if(genderOldValue !== '') {
+      $('#TAP').val(genderOldValue);
+    }
+  });
+</script>
+<script>
+  $(document).ready(function() {
+    const genderOldValue = '{{ old('TS') }}';
+    
+    if(genderOldValue !== '') {
+      $('#TS').val(genderOldValue);
+    }
+  });
+</script>
+<script>
+  $(document).ready(function() {
+    const genderOldValue = '{{ old('typeJour') }}';
+    
+    if(genderOldValue !== '') {
+      $('#typeJour').val(genderOldValue);
+    }
+  });
 </script>
 @endsection
   

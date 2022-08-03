@@ -3,7 +3,8 @@
 <link rel="stylesheet" type="text/css" href="{{ url('/css/USER/ficheHoraire.css') }}" />
 <link rel="stylesheet" type="text/css" href="{{ url('/css/USER/reglages.css') }}" />
 <title>modifier mes horaires</title>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <style>
      #menu-reg {
     BACKGROUND-COLOR: WHITE;
@@ -64,7 +65,7 @@
     <h5 id="mat">Matin</h5>
 <input type="hidden" name="TM">
 @if(str_contains($affichage[0]->Date, 'Sam') or str_contains($affichage[0]->Date, 'Dim'))
-<select name="TM" id="TM">
+<select name="TM" id="TM" data-value="{{ $data ? $data->value : old('TM') }}">
 <option value="-" selected>activité : repos</option>
 @foreach($activites as $act)
               <option value="{{ $act->code }}">activité : {{ $act->code }}</option>
@@ -257,7 +258,7 @@
         @foreach($ventil as $ven)
             <tr>
                 <td>{{ $ven->ventilation }}</td>
-                <td><input onblur="findTotal()" value="{{old('$ven->codeV')}}" class="nume" name="{{ $ven->codeV }}" type="number" placeholder="" step="0.01" min="0"></td>
+                <td><input onblur="findTotal()"  class="nume" name="{{ $ven->codeV }}" type="number" placeholder="" step="0.01" min="0"></td>
             </tr>
          @endforeach
         </tbody>
@@ -323,5 +324,42 @@ document.getElementById('heureApr').value = diffHoursE;
 }
 
 </script>
+<script>
+  $(document).ready(function() {
+    const genderOldValue = '{{ old('TM') }}';
+    
+    if(genderOldValue !== '') {
+      $('#TM').val(genderOldValue);
+    }
+  });
+</script>
+<script>
+  $(document).ready(function() {
+    const genderOldValue = '{{ old('TAP') }}';
+    
+    if(genderOldValue !== '') {
+      $('#TAP').val(genderOldValue);
+    }
+  });
+</script>
+<script>
+  $(document).ready(function() {
+    const genderOldValue = '{{ old('TS') }}';
+    
+    if(genderOldValue !== '') {
+      $('#TS').val(genderOldValue);
+    }
+  });
+</script>
+<script>
+  $(document).ready(function() {
+    const genderOldValue = '{{ old('typeJour') }}';
+    
+    if(genderOldValue !== '') {
+      $('#typeJour').val(genderOldValue);
+    }
+  });
+</script>
+
 @endsection
   
