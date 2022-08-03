@@ -33,6 +33,8 @@
 </div>
     @foreach( $employes as $employe )
         <div id="acti">
+        <form id="form2" action="/dureePause/{{ $employe->id }}/export" method="POST">
+{{ csrf_field() }}<button>export csv</button></form>
         <div id="pic"><img id="logo-icon" src="https://cdn.discordapp.com/attachments/936584358654005321/1002996904004694057/icons8-utilisateur-96_1.png"></div>
       <div id="info-bas">{{ $employe->prenom }} {{ $employe->nom }} <br>
       <div id="struc">{{ $employe->structure }}</div> 
@@ -90,7 +92,19 @@
      @endforeach
   </tbody>
     </table>
-
+    <script>
+$("#form2").on("submit", function (e) {
+    var dataString = $(this).serialize();
+    $.ajax({
+      type: "POST",
+      url: "structures",
+      data: dataString,
+      success: function () {
+      }
+    });
+    e.preventDefault();
+});
+</script>
 
 
   @endsection

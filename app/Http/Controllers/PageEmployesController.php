@@ -12,6 +12,10 @@ use App\Models\User;
 use App\Models\semainetype;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\AllFichesExport;
+use App\Exports\FicheDetailsExport;
+
 
 class PageEmployesController extends Controller
 {
@@ -1169,6 +1173,8 @@ class PageEmployesController extends Controller
             return view('ADMIN/semaineType',['employes'=>$employes,'employees'=>$employees,'fiiche'=>$fiiche]);
             }
 
+
+
          public function ajouterST(Request $request){
             $identifiant = $request->input('identifiant');
             $FM1 = $request->input('FM1');
@@ -1335,6 +1341,21 @@ class PageEmployesController extends Controller
         [$poidsDim,$identifiant]);
             return redirect()->back()->with('status', 'Les modifications ont été bien enregistrés');
             }
+
+
+            
+        public function export(Request $request) 
+        {
+            return Excel::download(new AllFichesExport($request->id), 'Fiches.xlsx');
+        }
+
+              
+        public function export2(Request $request) 
+        {
+            return Excel::download(new FicheDetailsExport($request->id), 'FichesD.xlsx');
+        }
+
+
 
         
     }

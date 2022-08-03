@@ -62,6 +62,8 @@ $se5=0;
         {{ session('status') }}
     </div>
 @endif
+<form id="form9" action="/dureePause/{{ $employe->id }}/export" method="POST">
+{{ csrf_field() }}<button>export csv</button></form>
 @if(Auth::user()->admin==1 AND Auth::user()->direction==1)
 <div id="vue" style="text-align-last: right;">
 <form method="post" action="/FicheHoraire/Details/direction" id="form5" class="direction" style="float: left;"> <td>
@@ -505,6 +507,18 @@ $("#form3").on("submit", function (e) {
         $("#form3").toggle();
     });
 </script>
-
+<script>
+$("#form9").on("submit", function (e) {
+    var dataString = $(this).serialize();
+    $.ajax({
+      type: "POST",
+      url: "structures",
+      data: dataString,
+      success: function () {
+      }
+    });
+    e.preventDefault();
+});
+</script>
   @endsection
 
