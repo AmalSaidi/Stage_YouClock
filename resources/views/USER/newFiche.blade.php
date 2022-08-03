@@ -99,7 +99,8 @@
     <input type="text" name="morningS" class="morningS" id="morningS" pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{$debutMDimanche}}"/>
 @endif
 </div>
-<div id="FiMatDiv">
+<div id="FiMatDiv" style="float: left;
+    margin-right: 120;">
 <p>Heure de fin</p>
 @if(str_contains($affichage[0]->Date, 'Lun'))
     <input type="text" name="morningF" class="morningF" id="morningF" pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{$finMLundi}}"/>
