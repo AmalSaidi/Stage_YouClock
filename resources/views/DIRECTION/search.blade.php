@@ -17,15 +17,30 @@
       <!-- <button type="button" class="btn btn-primary">
         <i class="fas fa-search"></i>
       </button> -->
+
+      <button id="ajouter"> ajouter un employé
+    </button>
     </div>
     </div>  
 <div id="acti">
+@if(Auth::user()->admin==1 AND Auth::user()->direction==1)
+<div id="vue" style="text-align-last: right;">
+<form method="post" action="/employes/direction" id="form3" class="direction" style="float: left;"> <td>
+                {{ csrf_field() }}
+                
+      <button type="submit" class="btn btn-primary" id="vuebutton"> Vue direction</button>
+</form>
+<form method="post" action="/employes/admin" id="form4" class="admin"> <td>
+                {{ csrf_field() }}
+      <button type="submit" class="btn btn-primary" id="vuebutton"> Vue admin</button>
+</form>
+</div>
+      @endif
         <br>  
 
         <table class="table-borderless">
         <thead class="thead">
     <tr id="head-table">
-
       <th scope="col">Employés</th>
       <th scope="col">Structure</th>
       <th scope="col">Date de début</th>
@@ -35,7 +50,7 @@
     </tr>
   </thead>
   <tbody>
-  @foreach( $employes as $employe )
+  @foreach( $employees as $employe )
      
 <tr>
       <td><a id="link-nom" href = '/employes/{{ $employe->id }}'><img id="logo-icon" src="https://cdn.discordapp.com/attachments/936584358654005321/1002995429509697547/icons8-utilisateur-48_1.png">{{ $employe->nom }} {{ $employe->prenom }}</a></td>
@@ -55,7 +70,7 @@
   <!-- Modal content -->
   <div class="modal-content">
     <span class="close">&times;</span>
-    <form action="" method="POST">
+    <form action="/employes" method="POST">
     {{ csrf_field() }}
   <div class="form-group">
     <label for="code">Nom</label>
@@ -75,6 +90,15 @@
     <select name="structure" id="struSelect"  required>
       @foreach($structures as $str)
       <option>{{ $str->libellé}} </option>
+      @endforeach
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Service</label>
+    <br>
+    <select name="service" id="struSelect"  required>
+      @foreach($services as $ser)
+      <option>{{ $ser->libellé}} </option>
       @endforeach
     </select>
   </div>
@@ -107,6 +131,7 @@
     <label for="exampleInputPassword1">Adresse mail</label>
     <input type="email" class="form-control" name="mail" id="poids" placeholder="L'adresse mail"  required>
   </div>
+
   <button type="submit" class="btn btn-primary" id="ajouter-button">AJOUTER</button>
 </form>
   </div>
@@ -118,6 +143,28 @@
     <script type="text/javascript" src="{{ URL::asset('js/ajouter_popup.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/afficher-form-modifier.js') }}">
     </script>
-  
+<script>
+$("#form3").on("submit", function (e) {
+    $.ajax({
+      type: "POST",
+      url: "/employes/direction";
+      data: dataString,
+      success: function () {
+      }
+    });
+    e.preventDefault();
+});
+</script>
+<script>
+$("#form4").on("submit", function (e) {
+    $.ajax({
+      type: "POST",
+      url: "/employes/admin";
+      data: dataString,
+      success: function () {
+      }
+    });
+    e.preventDefault();
+});
+</script>
 @endsection
-  

@@ -103,6 +103,7 @@ Route::post('/FicheHoraire/Details/admin', [PageEmployesController::class, 'VueA
 Route::post('/FicheHoraire/Details/valider', [PageEmployesController::class, 'validerFicheDir']);
 Route::post('/FicheHoraire/Details/validerRS', [PageEmployesController::class, 'validerFicheRS']);
 Route::post('/ventilation/validerVentil', [PageEmployesController::class, 'validerVentil']);
+Route::post('/search', [PageEmployesController::class, 'search']);
 
 
 /*

@@ -1355,6 +1355,40 @@ class PageEmployesController extends Controller
             return Excel::download(new FicheDetailsExport($request->id), 'FichesD.xlsx');
         }
 
+        public function search(Request $request) 
+        {
+         $search_text= $request->input('search');
+        $user=Auth::user();
+        $session_str = $user->service;
+        $employes = DB::table('employes')->where('service', 'like', '%'.$session_str.'%')->where('admin',0)->where('nom', 'like', '%'.$search_text.'%')->orwhere('prenom', 'like', '%'.$search_text.'%')->get();
+        $structures = DB::select('select * from structures');
+        $services = DB::select('select * from services');
+        $employees = DB::table('employes')->where('nom', 'like', '%'.$search_text.'%')->orwhere('prenom', 'like', '%'.$search_text.'%')->get();
+        /*if(Gate::allows('access-admin')){
+            return view('ADMIN/PageEmployes',[
+                'employes' =>$employes,'structures'=>$structures,
+            ]);
+        }
+        if(Gate::allows('access-direction')){
+            return view('DIRECTION/PageEmployes',[
+                'employees' =>$employees,'structures'=>$structures,
+            ]);
+        } */
+        if($user->admin==1 AND $user->direction==1){
+            return view('DIRECTION/search',[
+                'employees' =>$employees,'structures'=>$structures,'services'=>$services,
+            ]);
+        }
+        else if($user->admin==1 AND $user->direction==0){
+            return view('ADMIN/search',[
+                'employes' =>$employes,'structures'=>$structures,'services'=>$services,
+            ]);
+        }else if($user->admin==0 AND $user->direction==1){
+            return view('DIRECTION/search',[
+                'employees' =>$employees,'structures'=>$structures,'services'=>$services,
+            ]);
+        }
+        }
 
 
         
