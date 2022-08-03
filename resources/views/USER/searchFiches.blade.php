@@ -30,8 +30,6 @@ $Valide="Valide";
     <BR>
     <div id="info-user"><p>{{ $emp->nom }} {{ $emp->prenom }}</p></div>
 <div id="stru-user">{{ $emp->structure }}</div>
-<div><button class="btn btn-danger" style="margin-top: 20;"id="ajouter"> ajouter une fiche </div>
-</button>
 </div>
 @endforeach
 <div id="acti">

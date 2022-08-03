@@ -129,6 +129,8 @@ Route::get('/FicheHoraire/edit/{id}', [FicheHoraireUserController::class, 'show'
 Route::post('/FicheHoraire/edit/{id}',[FicheHoraireUserController::class, 'edit']);
 Route::post('/FicheHoraire/ediit/{id}', [FicheHoraireUserController::class, 'nextD']);
 Route::post('/FicheHoraire/valider', [FicheHoraireUserController::class, 'validerFiche']);
+
+
 /*
 |--------------------------------------------------------------------------
 | historique User :
@@ -139,6 +141,7 @@ Route::post('/historique', [historique::class, 'AjouterFiche']);
 Route::get('/historiqueDetails/{idfiche}', [historique::class, 'details']);
 Route::get('/historiqueDetails/FicheHoraire/edit/{id}', [historique::class, 'show']);
 Route::post('/historiqueDetails/FicheHoraire/edit/{id}',[historique::class, 'edit']);
+Route::post('/searchFiches', [historique::class, 'search']);
 
 
 /*

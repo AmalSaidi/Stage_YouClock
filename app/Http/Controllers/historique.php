@@ -664,4 +664,16 @@ class historique extends Controller
                     }
             
             }
+
+            public function search(Request $request) 
+            {
+            $search_text= $request->input('search');
+            $user=Auth::user();
+            $session_id = $user->identifiant;
+            $employes = DB::select('select * from employes where identifiant=? ',[$session_id]);
+            $fiiche = DB::table('fichehors')
+            ->select('idfiche', 'statutF')->where('idfiche', 'like', '%'.$search_text.'%')->where('idUser',$session_id)->distinct()->get();
+            return view('USER/searchFiches',['fiiche'=>$fiiche,'employes'=>$employes,'search_text'=>$search_text]);
+            }
+    
 }
