@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\ventilation;
 use App\Models\ventilationfinal;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
+
 
 
 
@@ -631,6 +634,7 @@ class FicheHoraireUserController extends Controller
         if($heuresEffectu!=$poids){
             $message="u cant";
         }
+
         if(!isset($message))
         {
             if($hourdiffMat!=0 and $hourdiffAprem!=0){
@@ -687,7 +691,7 @@ class FicheHoraireUserController extends Controller
             );
     }
         else{
-            return redirect()->back()->with('status', 'La durée de pause doit être supérieur à 45min');
+            return back()->withInput($request->all())->with('status', 'La durée de pause doit être supérieur à 45min');
         }}
         else{
             DB::update('update fichehors set matinD = ?,matinF = ?,ApremD=?, ApremF = ?,
@@ -743,7 +747,8 @@ class FicheHoraireUserController extends Controller
         }
         }
         else{
-            return redirect()->back()->with('status', 'le nombre d\'heures effectués est invalide');
+           // return redirect()->back()->with('status', 'le nombre d\'heures effectués est invalide');
+           return back()->withInput($request->all())->with('status', 'le nombre d\'heures effectués est invalide');
         }
 
 }

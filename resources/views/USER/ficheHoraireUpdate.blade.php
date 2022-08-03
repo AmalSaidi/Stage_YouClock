@@ -85,36 +85,36 @@
     <input type="text" name="morningS" class="morningS" id="morningS" pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"
     onblur="Hourdiffenrence()" value="{{old('morningS')}}"  />
 @elseif(str_contains($affichage[0]->Date, 'Mar'))
-    <input type="text" name="morningS" class="morningS" id="morningS" pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$" onblur="Hourdiffenrence()"value="{{$debutMMardi}}" placeholder="--,--"/>
+    <input type="text" name="morningS" class="morningS" id="morningS" pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$" onblur="Hourdiffenrence()"value="{{old('morningS')}}" placeholder="--,--"/>
 @elseif(str_contains($affichage[0]->Date, 'Mer'))
-    <input type="text" name="morningS" class="morningS" id="morningS" pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{$debutMMercredi}}"/>
+    <input type="text" name="morningS" class="morningS" id="morningS" pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{old('morningS')}}"/>
 @elseif(str_contains($affichage[0]->Date, 'Jeu'))
-    <input type="text" name="morningS" class="morningS" id="morningS" pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{$debutMJeudi}}"/>
+    <input type="text" name="morningS" class="morningS" id="morningS" pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{old('morningS')}}"/>
 @elseif(str_contains($affichage[0]->Date, 'Ven'))
-    <input type="text" name="morningS" class="morningS" id="morningS" pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{$debutMVendredi}}"/>
+    <input type="text" name="morningS" class="morningS" id="morningS" pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{old('morningS')}}"/>
 @elseif(str_contains($affichage[0]->Date, 'Sam'))
-    <input type="text" name="morningS" class="morningS" id="morningS" pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()" value="{{$debutMSamedi}}"/>
+    <input type="text" name="morningS" class="morningS" id="morningS" pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()" value="{{old('morningS')}}"/>
 @elseif(str_contains($affichage[0]->Date, 'Dim'))
-    <input type="text" name="morningS" class="morningS" id="morningS" pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{$debutMDimanche}}"/>
+    <input type="text" name="morningS" class="morningS" id="morningS" pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{old('morningS')}}"/>
 @endif
 </div>
 <div id="FiMatDiv" id="FiMatDiv" style="float: left;
     margin-right: 120;">
 <p>Heure de fin</p>
 @if(str_contains($affichage[0]->Date, 'Lun'))
-    <input type="text" name="morningF" class="morningF" id="morningF" pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{$finMLundi}}"/>
+    <input type="text" name="morningF" class="morningF" id="morningF" pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{old('morningF')}}"/>
 @elseif(str_contains($affichage[0]->Date, 'Mar'))
-    <input type="text" name="morningF"  class="morningF"id="morningF" pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{$finMMardi}}"/>
+    <input type="text" name="morningF"  class="morningF"id="morningF" pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{old('morningF')}}"/>
 @elseif(str_contains($affichage[0]->Date, 'Mer'))
-    <input type="text" name="morningF" class="morningF" id="morningF"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{$finMMercredi}}"/>
+    <input type="text" name="morningF" class="morningF" id="morningF"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{old('morningF')}}"/>
 @elseif(str_contains($affichage[0]->Date, 'Jeu'))
-    <input type="text" name="morningF"  class="morningF"id="morningF"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{$finMJeudi}}"/>
+    <input type="text" name="morningF"  class="morningF"id="morningF"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{old('morningF')}}"/>
 @elseif(str_contains($affichage[0]->Date, 'Ven'))
-    <input type="text" name="morningF"  class="morningF"id="morningF"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{$finMVendredi}}"/>
+    <input type="text" name="morningF"  class="morningF"id="morningF"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{old('morningF')}}"/>
 @elseif(str_contains($affichage[0]->Date, 'Sam'))
-    <input type="text" name="morningF"  class="morningF"id="morningF"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{$finMSamedi}}"/>
+    <input type="text" name="morningF"  class="morningF"id="morningF"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{old('morningF')}}"/>
 @elseif(str_contains($affichage[0]->Date, 'Dim'))
-    <input type="text" name="morningF"  class="morningF"id="morningF"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{$finMDimanche}}"/>
+    <input type="text" name="morningF"  class="morningF"id="morningF"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{old('morningF')}}"/>
 @endif
 </div>
 <div id="totMat">
@@ -145,38 +145,38 @@
 <div id="DeApremDiv">
 <p>Heure de début</p>
 @if(str_contains($affichage[0]->Date, 'Lun'))
-    <input type="text" name="ApremS"  class="ApremS" id="ApremS" pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{$debutALundi}}"/>
+    <input type="text" name="ApremS"  class="ApremS" id="ApremS" pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{old('ApremS')}}"/>
 @elseif(str_contains($affichage[0]->Date, 'Mar'))
-    <input type="text" name="ApremS"  class="ApremS"id="ApremS"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{$debutAMardi}}"/>
+    <input type="text" name="ApremS"  class="ApremS"id="ApremS"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{old('ApremS')}}"/>
 @elseif(str_contains($affichage[0]->Date, 'Mer'))
-    <input type="text" name="ApremS"  class="ApremS"id="ApremS"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"value="{{$debutAMercredi}}"/>
+    <input type="text" name="ApremS"  class="ApremS"id="ApremS"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{old('ApremS')}}"/>
 @elseif(str_contains($affichage[0]->Date, 'Jeu'))
-    <input type="text" name="ApremS"  class="ApremS"id="ApremS"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{$debutAJeudi}}"/>
+    <input type="text" name="ApremS"  class="ApremS"id="ApremS"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{old('ApremS')}}"/>
 @elseif(str_contains($affichage[0]->Date, 'Ven'))
-    <input type="text" name="ApremS"  class="ApremS"id="ApremS"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{$debutAVendredi}}"/>
+    <input type="text" name="ApremS"  class="ApremS"id="ApremS"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{old('ApremS')}}"/>
 @elseif(str_contains($affichage[0]->Date, 'Sam'))
-    <input type="text" name="ApremS"  class="ApremS"id="ApremS"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{$debutASamedi}}"/>
+    <input type="text" name="ApremS"  class="ApremS"id="ApremS"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{old('ApremS')}}"/>
 @elseif(str_contains($affichage[0]->Date, 'Dim'))
-    <input type="text" name="ApremS"  class="ApremS"id="ApremS"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{$debutADimanche}}"/>
+    <input type="text" name="ApremS"  class="ApremS"id="ApremS"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{old('ApremS')}}"/>
 @endif
 </div>
 <div style=  'float: left;
     margin-right: 120;'>
 <p>Heure de fin</p>
 @if(str_contains($affichage[0]->Date, 'Lun'))
-    <input type="text" name="ApremF"  class="ApremF"id="ApremF"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{$finALundi}}"/>
+    <input type="text" name="ApremF"  class="ApremF"id="ApremF"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{old('ApremF')}}"/>
 @elseif(str_contains($affichage[0]->Date, 'Mar'))
-    <input type="text" name="ApremF" class="ApremF"id="ApremF"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{$finAMardi}}"/>
+    <input type="text" name="ApremF" class="ApremF"id="ApremF"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{old('ApremF')}}"/>
 @elseif(str_contains($affichage[0]->Date, 'Mer'))
-    <input type="text" name="ApremF" class="ApremF"id="ApremF"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{$finAMercredi}}"/>
+    <input type="text" name="ApremF" class="ApremF"id="ApremF"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{old('ApremF')}}"/>
 @elseif(str_contains($affichage[0]->Date, 'Jeu'))
-    <input type="text" name="ApremF" class="ApremF"id="ApremF"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{$finAJeudi}}"/>
+    <input type="text" name="ApremF" class="ApremF"id="ApremF"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{old('ApremF')}}"/>
 @elseif(str_contains($affichage[0]->Date, 'Ven'))
-    <input type="text" name="ApremF" class="ApremF"id="ApremF"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{$finAVendredi}}"/>
+    <input type="text" name="ApremF" class="ApremF"id="ApremF"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{old('ApremF')}}"/>
 @elseif(str_contains($affichage[0]->Date, 'Sam'))
-    <input type="text" name="ApremF" class="ApremF"id="ApremF"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{$finASamedi}}"/>
+    <input type="text" name="ApremF" class="ApremF"id="ApremF"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{old('ApremF')}}"/>
 @elseif(str_contains($affichage[0]->Date, 'Dim'))
-    <input type="text" name="ApremF" class="ApremF"id="ApremF"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{$finADimanche}}"/>
+    <input type="text" name="ApremF" class="ApremF"id="ApremF"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"onblur="Hourdiffenrence()"value="{{old('ApremF')}}"/>
 @endif
 </div>
 <div id="totAprem">
@@ -205,38 +205,38 @@
 <div id="DeSoirDiv">
 <p>Heure de début</p>
 @if(str_contains($affichage[0]->Date, 'Lun'))
-    <input type="text" name="soirS" id="soirS"onblur="Hourdiffenrence()"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$" value="{{$debutSLundi}}"/>
+    <input type="text" name="soirS" id="soirS"onblur="Hourdiffenrence()"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$" value="{{old('soirS')}}"/>
 @elseif(str_contains($affichage[0]->Date, 'Mar'))
-    <input type="text" name="soirS" id="soirS"onblur="Hourdiffenrence()" pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$" value="{{$debutSMardi}}"/>
+    <input type="text" name="soirS" id="soirS"onblur="Hourdiffenrence()" pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$" value="{{old('soirS')}}"/>
 @elseif(str_contains($affichage[0]->Date, 'Mer'))
-    <input type="text" name="soirS" id="soirS"onblur="Hourdiffenrence()" pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$" value="{{$debutSMercredi}}"/>
+    <input type="text" name="soirS" id="soirS"onblur="Hourdiffenrence()" pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$" value="{{old('soirS')}}"/>
 @elseif(str_contains($affichage[0]->Date, 'Jeu'))
-    <input type="text" name="soirS" id="soirS"onblur="Hourdiffenrence()" pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$" value="{{$debutSJeudi}}"/>
+    <input type="text" name="soirS" id="soirS"onblur="Hourdiffenrence()" pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$" value="{{old('soirS')}}"/>
 @elseif(str_contains($affichage[0]->Date, 'Ven'))
-    <input type="text" name="soirS"  id="soirS"onblur="Hourdiffenrence()"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$" value="{{$debutSVendredi}}"/>
+    <input type="text" name="soirS"  id="soirS"onblur="Hourdiffenrence()"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$" value="{{old('soirS')}}"/>
 @elseif(str_contains($affichage[0]->Date, 'Sam'))
-    <input type="text" name="soirS"  id="soirS"onblur="Hourdiffenrence()" pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"value="{{$debutSSamedi}}"/>
+    <input type="text" name="soirS"  id="soirS"onblur="Hourdiffenrence()" pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"value="{{old('soirS')}}"/>
 @elseif(str_contains($affichage[0]->Date, 'Dim'))
-    <input type="text" name="soirS"  id="soirS"onblur="Hourdiffenrence()"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$" value="{{$debutSDimanche}}"/>
+    <input type="text" name="soirS"  id="soirS"onblur="Hourdiffenrence()"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$" value="{{old('soirS')}}"/>
 @endif
 </div>
 <div style=  'float: left;
     margin-right: 120;'>
 <p>Heure de fin</p>
 @if(str_contains($affichage[0]->Date, 'Lun'))
-    <input type="text" name="soirF"  id="soirF"onblur="Hourdiffenrence()" pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"value="{{$finSLundi}}"/>
+    <input type="text" name="soirF"  id="soirF"onblur="Hourdiffenrence()" pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"value="{{old('soirF')}}"/>
 @elseif(str_contains($affichage[0]->Date, 'Mar'))
-    <input type="text" name="soirF" id="soirF"onblur="Hourdiffenrence()"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"value="{{$finSMardi}}"/>
+    <input type="text" name="soirF" id="soirF"onblur="Hourdiffenrence()"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"value="{{old('soirF')}}"/>
 @elseif(str_contains($affichage[0]->Date, 'Mer'))
-    <input type="text" name="soirF" id="soirF"onblur="Hourdiffenrence()"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"value="{{$finSMercredi}}"/>
+    <input type="text" name="soirF" id="soirF"onblur="Hourdiffenrence()"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"value="{{old('soirF')}}"/>
 @elseif(str_contains($affichage[0]->Date, 'Jeu'))
-    <input type="text" name="soirF" id="soirF"onblur="Hourdiffenrence()"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"value="{{$finSJeudi}}"/>
+    <input type="text" name="soirF" id="soirF"onblur="Hourdiffenrence()"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"value="{{old('soirF')}}"/>
 @elseif(str_contains($affichage[0]->Date, 'Ven'))
-    <input type="text" name="soirF" id="soirF"onblur="Hourdiffenrence()"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"value="{{$finSVendredi}}"/>
+    <input type="text" name="soirF" id="soirF"onblur="Hourdiffenrence()"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"value="{{old('soirF')}}"/>
 @elseif(str_contains($affichage[0]->Date, 'Sam'))
-    <input type="text" name="soirF" id="soirF"onblur="Hourdiffenrence()"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"value="{{$finSSamedi}}"/>
+    <input type="text" name="soirF" id="soirF"onblur="Hourdiffenrence()"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"value="{{old('soirF')}}"/>
 @elseif(str_contains($affichage[0]->Date, 'Dim'))
-    <input type="text" name="soirF" id="soirF"onblur="Hourdiffenrence()"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"value="{{$finSDimanche}}"/>
+    <input type="text" name="soirF" id="soirF"onblur="Hourdiffenrence()"pattern="^(0|1|2|3|4|5|6|7|8|9|00|01|02|03|04|05|06|07|08|09|10|11|12|13|14|15|16|17|18|19|20|21|22|23)+.(00|25|50|75)$"value="{{old('soirF')}}"/>
 @endif
 </div>
 <div>
@@ -256,7 +256,7 @@
         @foreach($ventil as $ven)
             <tr>
                 <td>{{ $ven->ventilation }}</td>
-                <td><input onblur="findTotal()" class="nume" name="{{ $ven->codeV }}" type="number" placeholder="" step="0.01" min="0"></td>
+                <td><input onblur="findTotal()" value="{{old('$ven->codeV')}}" class="nume" name="{{ $ven->codeV }}" type="number" placeholder="" step="0.01" min="0"></td>
             </tr>
          @endforeach
         </tbody>
