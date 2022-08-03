@@ -603,7 +603,6 @@ class historique extends Controller
                     }
                     if(!isset($message))
                     {
-                        if($hourdiffMat!=0 and $hourdiffAprem!=0){
                         if($pauseMidi>=0.8){
                     DB::update('update fichehors set matinD = ?,matinF = ?,ApremD=?, ApremF = ?,
                     soirD=?, soirF=?,matin=?,heuresEffectu=?,activite1=?,aprem=?,soir=?,activite2=?,
@@ -658,58 +657,6 @@ class historique extends Controller
                 }
                     else{
                         return back()->withInput($request->all())->with('status', 'La durée de pause doit être supérieur à 45min');
-                    }}
-                    else{
-                        DB::update('update fichehors set matinD = ?,matinF = ?,ApremD=?, ApremF = ?,
-                    soirD=?, soirF=?,matin=?,heuresEffectu=?,activite1=?,aprem=?,soir=?,activite2=?,
-                    activite3=?,ecart=?,typeJour=? where id = ?',
-                    [$matinD,$matinF,$ApremD,$ApremF,$soirD,$soirF,$matin,$heuresEffectu,$activite1,$aprem,
-                    $soir,$activite2,$activite3,$ecart,$typeJour,$id]);
-                    foreach ($ventil as $v) {
-                        if($v->ventilation == "DELEGATION"){
-                            DB::update('update fichehors set DELEGATION=? where id = ?',
-                            [$DELEGATION,$id]);
-                        }
-                        if($v->ventilation == "SOS Garde d'enfants"){
-                            DB::update('update fichehors set SOSgarde=? where id = ?',
-                            [$SOS,$id]);
-                        }
-                        if($v->ventilation == "FRASAD"){
-                            DB::update('update fichehors set FRASAD=? where id = ?',
-                            [$FRASAD,$id]);
-                        }
-                        if($v->ventilation == "Entraide familiale"){
-                            DB::update('update fichehors set EntraideFamiliale=? where id = ?',
-                            [$Entraide,$id]);
-                        }
-                        if($v->ventilation == "Federation"){
-                            DB::update('update fichehors set Federation=? where id = ?',
-                            [$Federation,$id]);
-                        }
-                        if($v->ventilation == "Mandataires"){
-                            DB::update('update fichehors set Mandataires=? where id = ?',
-                            [$Mandataires,$id]);
-                        }
-                        if($v->ventilation == "ADVM"){
-                            DB::update('update fichehors set ADVM=? where id = ?',
-                            [$ADVM,$id]);
-                        }
-                        if($v->ventilation == "ADU services"){
-                            DB::update('update fichehors set ADUservices=? where id = ?',
-                            [$ADU,$id]);
-                        }
-                        if($v->ventilation == "voisineurs"){
-                            DB::update('update fichehors set Voisineurs=? where id = ?',
-                            [$voisineurs,$id]);
-                        }
-                        if($v->ventilation == "prestataire"){
-                            DB::update('update fichehors set Prestataire=? where id = ?',
-                            [$prestataire,$id]);
-                        }
-                        }
-                        return redirect()->action(
-                            [historique::class, 'details'], ['idfiche' => $idFi]
-                        );
                     }
                     }
                     else{
