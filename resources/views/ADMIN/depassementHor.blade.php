@@ -10,7 +10,10 @@
     <div id="button-list">
 <div class="input-group mb-3">
   <div class="form-outline">
-    <input type="search" id="form1" class="form-control" placeholder="Rechercher" />
+  <form method="post" action="/search" type="get" > <td>
+                {{ csrf_field() }}
+        <input type="search" id="form1" name="search" class="form-control" placeholder="Rechercher" />
+      </form>
   </div>
 </div>
 </div>  
