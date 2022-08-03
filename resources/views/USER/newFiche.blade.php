@@ -65,7 +65,7 @@
     <h5 id="mat">Matin</h5>
 <input type="hidden" name="TM">
 @if(str_contains($affichage[0]->Date, 'Sam') or str_contains($affichage[0]->Date, 'Dim'))
-<select name="TM" id="TM" data-value="{{ $data ? $data->value : old('TM') }}">
+<select name="TM" id="TM">
 <option value="-" selected>activité : repos</option>
 @foreach($activites as $act)
               <option value="{{ $act->code }}">activité : {{ $act->code }}</option>
