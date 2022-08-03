@@ -24,7 +24,7 @@ $Valide="Valide";
 @endphp
 <div id="parent" style="display: flex;
   flex-direction: column-reverse;" >
-<div id="acti" style="margin-top: -22.5%;">
+<div id="acti" style="margin-top: -21.5%; !important">
 <h3>Fiche Horaires</h3>
 <br>
 <div id="button-list">
