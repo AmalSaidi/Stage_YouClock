@@ -690,3 +690,40 @@ margin-right: 20px;
     margin-left: 38%;
     
 }
+
+#enAttRSS{
+    background-color: #f69c5e;
+    width: fit-content;
+    color: white;
+    padding: 2 10 2 10;
+    float: left;
+    font-size: small;
+
+}
+
+#encourss{
+    background-color: #74c0d9;
+    width: fit-content;
+    color: white;
+    padding: 2 10 2 10;
+    float: left;
+    font-size: small;
+}
+
+#valideRSS{
+    background-color: #106813;
+    width: fit-content;
+    color: white;
+    padding: 2 10 2 10;
+    float: left;
+    font-size: small;
+}
+
+#validee{
+    background-color: #50d755;
+    width: fit-content;
+    color: white;
+    padding: 2 10 2 10;
+    float: left;
+    font-size: small;
+}

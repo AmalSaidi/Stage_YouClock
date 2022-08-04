@@ -17,7 +17,7 @@
   <!-- <button type="button" class="btn btn-primary">
     <i class="fas fa-search"></i>
   </button> -->
-  <button id="ajouter" onclick="openForm4(modal2);"> ajouter un employé
+
 </div>
 </div>  
 <div id="menu-reg">

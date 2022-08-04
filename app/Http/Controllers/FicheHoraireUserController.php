@@ -249,7 +249,7 @@ class FicheHoraireUserController extends Controller
             $idF=  $year_num." - ".$month;
             $dateBD= $day_name." ".$day_num." ".$month;
 
-            DB::insert('insert into fichehors (idfiche,Date,idUser,semaine,mois) values (?,?,?,?,?)', [$idF,$dateBD,$session_id,$week,$month2]);
+            DB::insert('insert into fichehors (idfiche,Date,idUser,semaine,mois,year) values (?,?,?,?,?,?)', [$idF,$dateBD,$session_id,$week,$month2,$year_num]);
             $fiches=DB::select('select * from fichehors where idUser=? and idfiche=?',[$session_id,$idF]);
             foreach ($fiches as $fi) {
                 if(str_contains($fi->Date, 'Lun')){

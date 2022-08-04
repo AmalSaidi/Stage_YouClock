@@ -20,6 +20,7 @@ class CreateFichehorsTable extends Migration
             $table->string('Date')->nullable();
             $table->float('Diff')->nullable();
             $table->string('mois')->nullable();
+            $table->integer('year')->nullable();
             $table->string('semaine')->nullable();
             $table->string('typeJour')->nullable();
             $table->string('activite1')->nullable();

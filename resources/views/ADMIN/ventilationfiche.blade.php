@@ -19,7 +19,7 @@
     <i class="fas fa-search"></i>
   </button> -->
 </div>
-</div>  
+</div> 
     <div id="menu-reg">
 <table class="table-borderless">
   <tbody>
@@ -35,6 +35,15 @@
 </div>
     @foreach( $employes as $employe )
         <div id="acti">
+        <form method="post" action="" type="get" > <td>
+                {{ csrf_field() }}
+        <select name="searchventi" onchange="this.form.submit()" style="float:right;">
+        <option value="" disabled selected>Rechercher</option>
+            @foreach($fiicheS as $fi)
+            <option>{{$fi->idfiche}}</option>
+            @endforeach
+        </select>
+      </form>
         <div id="pic"><img id="logo-icon" src="https://cdn.discordapp.com/attachments/936584358654005321/1002996904004694057/icons8-utilisateur-96_1.png"></div>
       <div id="info-bas">{{ $employe->prenom }} {{ $employe->nom }} <br>
       <div id="struc">{{ $employe->structure }}</div> 

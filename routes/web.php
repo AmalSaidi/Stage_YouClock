@@ -104,6 +104,9 @@ Route::post('/FicheHoraire/Details/valider', [PageEmployesController::class, 'va
 Route::post('/FicheHoraire/Details/validerRS', [PageEmployesController::class, 'validerFicheRS']);
 Route::post('/ventilation/validerVentil', [PageEmployesController::class, 'validerVentil']);
 Route::post('/search', [PageEmployesController::class, 'search']);
+Route::post('/ventilation/{id}', [PageEmployesController::class, 'searchventi']);
+Route::post('/statistiques/{id}', [PageEmployesController::class, 'searchStat']);
+
 
 /*
 |--------------------------------------------------------------------------
