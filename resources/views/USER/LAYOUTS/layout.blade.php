@@ -20,7 +20,7 @@
                 <a class="nav-link" href="/FicheHoraire">Fiche horaires</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/user/demandeConge">Demande de congé</a>
+                <a class="nav-link" href="">Demande de congé</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/historique">Historique</a>

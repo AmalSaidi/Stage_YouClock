@@ -93,9 +93,9 @@ Route::get('/statistiques/{id}', [PageEmployesController::class, 'showStat']);
 Route::get('/RH/semaineType/{id}', [PageEmployesController::class, 'showST']);
 Route::post('/RH/semaineType/{id}', [PageEmployesController::class, 'ajouterST']);
 Route::get('/FicheHoraire/{id}', [PageEmployesController::class, 'showFiche'])->name('fiches');
-Route::post('/dureePause/{id}/export', [PageEmployesController::class, 'export'])->name('AllFiches.details');
+Route::post('/Fichehoraire/{id}/export', [PageEmployesController::class, 'export'])->name('AllFiches.details');
 Route::get('/FicheHoraire/Details/{id}/{idfiche}', [PageEmployesController::class, 'showFicheComplete']);
-Route::get('/FicheHoraire/Details/{id}/{idfiche}/export', [PageEmployesController::class, 'export2'])->name('fichesDetails.details');;
+Route::post('/FicheHoraire/Details/{id}/{idfiche}/export', [PageEmployesController::class, 'export2'])->name('fichesDetails.details');;
 Route::post('/FicheHoraire/Details/confirm/{id}/{idfiche}', [PageEmployesController::class, 'confirm']);
 Route::post('/FicheHoraire/Details/refuse/{id}/{idfiche}', [PageEmployesController::class, 'refuse']);
 Route::post('/FicheHoraire/Details/direction', [PageEmployesController::class, 'VueDirectionFiche']);
@@ -104,7 +104,6 @@ Route::post('/FicheHoraire/Details/valider', [PageEmployesController::class, 'va
 Route::post('/FicheHoraire/Details/validerRS', [PageEmployesController::class, 'validerFicheRS']);
 Route::post('/ventilation/validerVentil', [PageEmployesController::class, 'validerVentil']);
 Route::post('/search', [PageEmployesController::class, 'search']);
-
 
 /*
 |--------------------------------------------------------------------------

@@ -55,7 +55,7 @@
     <button id="info"><a href ='/employes/{{ $employe->id }}'>Informations personnelles</a></button>
     <button id="RH"><a href ='/RH/{{ $employe->id }}'>Dossier RH</a></button>
     <button id="horaire"><a href ='/FicheHoraire/{{ $employe->id }}'>Fiche Horaire</a></button>
-    <button id="ventilation" disabled>Ventilation</button>
+    <button id="ventilation"><a href="/ventilation/{{ $employe->id }}" style="color:white;">Ventilation</a></button>
     <button id="stat"><a href="/statistiques/{{ $employe->id }}">Statistiques</a></button>
     @endforeach
 </div>  

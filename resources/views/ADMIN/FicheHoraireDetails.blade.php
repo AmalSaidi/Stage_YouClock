@@ -62,8 +62,6 @@ $se5=0;
         {{ session('status') }}
     </div>
 @endif
-<form id="form9" action="/dureePause/{{ $employe->id }}/export" method="POST">
-{{ csrf_field() }}<button>export csv</button></form>
 @if(Auth::user()->admin==1 AND Auth::user()->direction==1)
 <div id="vue" style="text-align-last: right;">
 <form method="post" action="/FicheHoraire/Details/direction" id="form5" class="direction" style="float: left;"> <td>
@@ -76,6 +74,16 @@ $se5=0;
 </form>
 </div>
       @endif
+      @foreach($fiche as $f)
+        <form id="form8" action="/FicheHoraire/Details/{{ $employe->id }}/{{$f->idfiche}}/export" method="POST">
+{{ csrf_field() }}
+<input type="hidden" name="idF"value="{{$f->idfiche}}"/>
+<input type="hidden" name="statutF"value="{{$f->statutF}}"/>
+<input type="hidden" name="nom"value="{{$employe->nom}}"/>
+<input type="hidden" name="prenom"value="{{$employe->prenom}}"/>
+@endforeach
+<button id="export"> Export CSV <img id="logo-reglages" src="/images/downald.png" alt="reglages">
+</button></form>
           <div id="pic"><img id="logo-icon" src="https://cdn.discordapp.com/attachments/936584358654005321/1002996904004694057/icons8-utilisateur-96_1.png"></div>
       <div id="info-bas">{{ $employe->prenom }} {{ $employe->nom }} <br>
       <div id="struc">{{ $employe->structure }}</div> 
@@ -95,7 +103,7 @@ $se5=0;
     <div id="buttons">
     <button id="info"><a href ='/employes/{{ $employe->id }}'>Informations personnelles</a></button>
     <button id="RH"><a href ='/RH/{{ $employe->id }}'>Dossier RH</a></button>
-    <button id="horaire"disabled>Fiche Horaire</button>
+    <button id="horaire"><a href="/FicheHoraire/{{ $employe->id }}" style="color:white;">Fiche Horaire</a></button>
     <button id="ventilation"><a href="/ventilation/{{ $employe->id }}">Ventilation</a></button>
     <button id="stat"><a href="/statistiques/{{ $employe->id }}">Statistiques</a></button>
     @endforeach
@@ -406,11 +414,11 @@ $se5=0;
             <tbody id="bodContr">
                 <tr id="trContr">
                     <td style="PADDING: 5 2 5 10;">Nombre d'heures à effectuer</td>
-                    <td style="padding: 1 9 1 10;">{{$P}}.00</td>
+                    <td style="padding: 1 9 1 10;">{{$P}}</td>
                 </tr>
                 <tr id="trContr">
                     <td style="PADDING: 5 2 5 10;">Total effectué dans le mois</td>
-                    <td style="padding: 1 9 1 10;">{{$F}}.00</td>
+                    <td style="padding: 1 9 1 10;">{{$F}}</td>
                 </tr>
                 @php
                 $DIF=$P-$F;
@@ -418,12 +426,12 @@ $se5=0;
                 @if($DIF==0)
                 <tr id="trContr" style="background-color:#8bcfa5">
                     <td style="PADDING: 5 2 5 10;">différence</td>
-                    <td style="padding: 1 9 1 10;">{{$DIF}}.00</td>
+                    <td style="padding: 1 9 1 10;">{{$DIF}}</td>
                 </tr>
                 @else
                 <tr id="trContr" style="background-color:#d48086;">
                 <td style="PADDING: 5 2 5 10;">différence</td>
-                    <td style="padding: 1 9 1 10;">{{$DIF}}.00</td>
+                    <td style="padding: 1 9 1 10;">{{$DIF}}</td>
                 </tr>
                 @endif
                 @php

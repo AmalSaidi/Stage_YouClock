@@ -29,7 +29,7 @@
                 <a class="nav-link" href="/employes">Employés</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/mesConges">Demande de congé</a>
+                <a class="nav-link" href="">Demande de congé</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/depassementHoraire">Dépassement horaire</a>

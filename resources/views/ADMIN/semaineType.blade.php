@@ -61,7 +61,7 @@
 
 <div id="buttons">
 <button id="info"><a href='/employes/{{ $employe->id }}'>Informations personnelles</a></button>
-<button id="RH" disabled>Dossier RH</button>
+<button id="RH"><a href ='/RH/{{ $employe->id }}'style="color:white;">Dossier RH</a</button>
 <button id="horaire"><a href="/FicheHoraire/{{ $employe->id }}">Fiche Horaire</a></button>
 <button id="ventilation"><a href="">Ventilation</a></button>
 <button id="stat"><a href="">Statistiques</a></button>

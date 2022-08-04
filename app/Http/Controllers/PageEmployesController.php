@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\AllFichesExport;
-use App\Exports\FicheDetailsExport;
+use App\Exports\FichesDetailsExport;
 
 
 class PageEmployesController extends Controller
@@ -1352,7 +1352,22 @@ class PageEmployesController extends Controller
               
         public function export2(Request $request) 
         {
-            return Excel::download(new FicheDetailsExport($request->id), 'FichesD.xlsx');
+            $idFi = $request->input('idF');
+            $nom = $request->input('nom');
+            $prenom = $request->input('prenom');
+            $statutF = $request->input('statutF');
+            if($statutF=="EnCours"){
+                $statutF="En cours";
+            }
+            else if($statutF=="AttValiRS"){
+                $statutF="En attente validation RS";
+            }
+            else if($statutF=="valideRS"){
+                $statutF="Validée RS";
+            }else if($statutF=="valide"){
+                $statutF="validée";
+            }
+            return Excel::download(new FichesDetailsExport($request->id,$idFi,$nom,$prenom,$statutF), 'Fiche horaire.xlsx');
         }
 
         public function search(Request $request) 

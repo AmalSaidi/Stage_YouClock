@@ -36,8 +36,11 @@
 </div>
     @foreach( $employes as $employe )
         <div id="acti">
-        <form id="form2" action="/dureePause/{{ $employe->id }}/export" method="POST">
-{{ csrf_field() }}<button>export csv</button></form>
+        <form id="form2" action="/Fichehoraire/{{ $employe->id }}/export" method="POST">
+{{ csrf_field() }}
+<button id="export"> Export CSV <img id="logo-reglages" src="/images/downald.png" alt="reglages">
+</button>
+</form>
         <div id="pic"><img id="logo-icon" src="https://cdn.discordapp.com/attachments/936584358654005321/1002996904004694057/icons8-utilisateur-96_1.png"></div>
       <div id="info-bas">{{ $employe->prenom }} {{ $employe->nom }} <br>
       <div id="struc">{{ $employe->structure }}</div> 
@@ -57,7 +60,7 @@
     <div id="buttons">
     <button id="info"><a href ='/employes/{{ $employe->id }}'>Informations personnelles</a></button>
     <button id="RH"><a href ='/RH/{{ $employe->id }}'>Dossier RH</a></button>
-    <button id="horaire"disabled>Fiche Horaire</button>
+    <button id="horaire"><a href="/FicheHoraire/{{ $employe->id }}" style="color:white;">Fiche Horaire</a></button>
     <button id="ventilation"><a href="/ventilation/{{ $employe->id }}">Ventilation</a></button>
     <button id="stat"><a href="/statistiques/{{ $employe->id }}">Statistiques</a></button>
     @endforeach

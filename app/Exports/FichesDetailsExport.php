@@ -18,12 +18,21 @@ use Maatwebsite\Excel\Concerns\WithTitle;
 
 
 
-class AllFichesExport implements FromCollection , WithTitle ,ShouldAutoSize
+class FichesDetailsExport implements FromCollection , WithTitle ,ShouldAutoSize,WithHeadings,WithStyles
 {
     protected $id;
+    protected $idFi;
+    protected $nom;
+    protected $prenom;
+    protected $statutF;
 
-    function __construct($id) {
+    function __construct($id,$idFi,$nom,$prenom,$statutF) {
         $this->id = $id;
+        $this->idFi = $idFi;
+        $this->nom = $nom;
+        $this->prenom = $prenom;
+        $this->statutF = $statutF;
+
     }
 
     use Exportable;
@@ -32,14 +41,40 @@ class AllFichesExport implements FromCollection , WithTitle ,ShouldAutoSize
     */
     public function collection()
     {
-         $fiches = DB::select('select DISTINCT idfiche,statutF from fichehors where idUser = (select identifiant from employes where id = ?) ORDER BY idfiche DESC,mois ASC',[ $this->id]);
+         $fiches = DB::select('select idfiche,Date,
+         typeJour,
+         Poids,
+         activite1,
+         matinD,
+         matinF,
+         activite2,
+         apremD,
+         apremF,
+         activite3,
+         soirD,
+         soirF,
+         heuresEffectu,
+         ecart,
+         FRASAD,
+         Prestataire,
+         Mandataires,
+         EntraideFamiliale,
+         Voisineurs,
+         SOSgarde,
+         Federation,
+         ADUservices,
+         ADVM,
+         DELEGATION from fichehors where idUser = (select identifiant from employes where id = ?) AND idfiche=?',[ $this->id,$this->idFi]);
         
          return collect($fiches);
      }
     public function headings(): array
     {
         return [
-            'idfiche','statutF',
+            [$this->nom,$this->prenom,'','','','',$this->statutF],
+            [
+            'Fiche','Jours','Type jour','Poids du jour','Matin','Arrivée matin','Départ matin','Après midi','Arrivée aprem','Départ aprem','Soir','Arrivée soir','Départ soir','Total','Ecart jour',
+            'FRASAD','Prestataire','Mandataire','Entraide','Voisineurs','SOS GE','Fédération','ADU','ADVM','Délégation']
         ];
     }
 
@@ -48,11 +83,12 @@ class AllFichesExport implements FromCollection , WithTitle ,ShouldAutoSize
         return [
             // Style the first row as bold text.
             1    => ['font' => ['bold' => true]],
+            2    => ['font' => ['bold' => true]],
         ];
     }
     public function title(): string
     {
-        return 'Fiches horaires ' . $this->id;
+        return  $this->nom .' '. $this->prenom .' / '. $this->idFi;
     }
 
 }
