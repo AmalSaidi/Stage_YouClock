@@ -106,6 +106,8 @@ Route::post('/ventilation/validerVentil', [PageEmployesController::class, 'valid
 Route::post('/search', [PageEmployesController::class, 'search']);
 Route::post('/ventilation/{id}', [PageEmployesController::class, 'searchventi']);
 Route::post('/statistiques/{id}', [PageEmployesController::class, 'searchStat']);
+Route::get('/MesStatistiques', [FicheHoraireUserController::class, 'mesStats']);
+Route::post('/MesStatistiques', [FicheHoraireUserController::class, 'searchStat']);
 
 
 /*

@@ -14,7 +14,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" href="#">Statistiques</a>
+              <a class="nav-link" href="/MesStatistiques">Statistiques</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/FicheHoraire">Fiche horaires</a>
