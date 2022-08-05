@@ -36,8 +36,14 @@
 </div>
     @foreach( $employes as $employe )
         <div id="acti">
+        @foreach($fiche as $f)
         <form id="form2" action="/Fichehoraire/{{ $employe->id }}/export" method="POST">
-{{ csrf_field() }}
+        {{ csrf_field() }}
+<input type="hidden" name="idF"value="{{$f->idfiche}}"/>
+<input type="hidden" name="statutF"value="{{$f->statutF}}"/>
+<input type="hidden" name="nom"value="{{$employe->nom}}"/>
+<input type="hidden" name="prenom"value="{{$employe->prenom}}"/>
+@endforeach
 <button id="export"> Export CSV <img id="logo-reglages" src="/images/downald.png" alt="reglages">
 </button>
 </form>

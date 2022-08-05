@@ -1347,7 +1347,22 @@ class PageEmployesController extends Controller
             
         public function export(Request $request) 
         {
-            return Excel::download(new AllFichesExport($request->id), 'Fiches.xlsx');
+            $idFi = $request->input('idF');
+            $nom = $request->input('nom');
+            $prenom = $request->input('prenom');
+            $statutF = $request->input('statutF');
+            if($statutF=="EnCours"){
+                $statutF="En cours";
+            }
+            else if($statutF=="AttValiRS"){
+                $statutF="En attente validation RS";
+            }
+            else if($statutF=="valideRS"){
+                $statutF="Validée RS";
+            }else if($statutF=="valide"){
+                $statutF="validée";
+            }
+            return Excel::download(new AllFichesExport($request->id,$idFi,$nom,$prenom,$statutF), 'Fiches.xlsx');
         }
 
               

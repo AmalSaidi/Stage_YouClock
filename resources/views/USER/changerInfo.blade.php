@@ -52,7 +52,7 @@ $Valide="Valide";
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Télephone</label>
-    <input type="text" class="form-control" name="tel" id="libelle" placeholder="{{ $emp->tel }}">
+    <input type="text" class="form-control" name="tel" id="libelle" value="{{ $emp->tel }}">
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1"> Type contrat</label>
@@ -81,11 +81,11 @@ $Valide="Valide";
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1"> Date Embauche</label>
-    <input type="date" class="form-control" name="dateEmbauche" id="poids" placeholder="{{ $emp->dateEmbauche }}">
+    <input type="date" class="form-control" name="dateEmbauche" id="poids" placeholder="{{ $emp->dateEmbauche }}" value="{{ $emp->dateEmbauche }}">
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1"> Date Fin</label>
-    <input type="date" class="form-control" name="Datefin" id="poids" placeholder="{{ $emp->Datefin }}">
+    <input type="date" class="form-control" name="Datefin" id="poids" value="{{ $emp->Datefin }}" placeholder="{{ $emp->Datefin }}">
   </div>
   <div style="text-align:center;">
   <button type="submit" class="btn btn-primary" id="modifierInfo">Mettre à jour les  informations personnelles</button>

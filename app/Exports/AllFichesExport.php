@@ -18,12 +18,20 @@ use Maatwebsite\Excel\Concerns\WithTitle;
 
 
 
-class AllFichesExport implements FromCollection , WithTitle ,ShouldAutoSize
+class AllFichesExport implements  FromCollection , WithTitle ,ShouldAutoSize,WithHeadings,WithStyles
 {
     protected $id;
+    protected $idFi;
+    protected $nom;
+    protected $prenom;
+    protected $statutF;
 
-    function __construct($id) {
+    function __construct($id,$idFi,$nom,$prenom,$statutF) {
         $this->id = $id;
+        $this->idFi = $idFi;
+        $this->nom = $nom;
+        $this->prenom = $prenom;
+        $this->statutF = $statutF;
     }
 
     use Exportable;
@@ -39,7 +47,8 @@ class AllFichesExport implements FromCollection , WithTitle ,ShouldAutoSize
     public function headings(): array
     {
         return [
-            'idfiche','statutF',
+            [$this->nom,$this->prenom],
+            ['Fiche','Statut',]
         ];
     }
 
@@ -48,11 +57,12 @@ class AllFichesExport implements FromCollection , WithTitle ,ShouldAutoSize
         return [
             // Style the first row as bold text.
             1    => ['font' => ['bold' => true]],
+            2    => ['font' => ['bold' => true]],
         ];
     }
     public function title(): string
     {
-        return 'Fiches horaires ' . $this->id;
+        return 'Fiches horaires ' . $this->nom .$this->prenom;
     }
 
 }

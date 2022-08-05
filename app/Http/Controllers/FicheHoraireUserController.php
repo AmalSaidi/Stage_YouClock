@@ -694,7 +694,7 @@ class FicheHoraireUserController extends Controller
         }else{
         if(!isset($message))
         {
-            if($pauseMidi<0.8){
+            if($pauseMidi<0.750){
                     return back()->withInput($request->all())->with('status', 'La durée de pause doit être supérieur à 45min');
             }else{
         DB::update('update fichehors set matinD = ?,matinF = ?,ApremD=?, ApremF = ?,
