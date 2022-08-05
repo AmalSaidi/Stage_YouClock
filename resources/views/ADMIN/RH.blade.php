@@ -103,43 +103,82 @@
 <p style="float:left;">Ventilation</p>
 <div id="venti">
 <input type="hidden" name="idUser" value="{{$employe->identifiant}}">
+@if($FRAS==1)
+<input type="checkbox" value="FRASAD" name="ventilation[]" checked>
+@else
 <input type="checkbox" value="FRASAD" name="ventilation[]">
+@endif
       <label for="FRASAD">FRASAD</label>
       <br>
+      @if($ENTRAI==1)
+      <input type="checkbox" value="Entraide familiale" name="ventilation[]" checked>
+      @else
       <input type="checkbox" value="Entraide familiale" name="ventilation[]">
+      @endif
       <label for="Entraide familiale">Entraide familiale</label>
       <br>
+      @if($FEDE==1)
+      <input type="checkbox" value="Federation" name="ventilation[]" checked>
+      @else
       <input type="checkbox" value="Federation" name="ventilation[]">
+      @endif
       <label for="Federation">Fédération</label>
       <br>
 
 </div>
       <div id="venti2">
+      @if($PRES==1)
+      <input type="checkbox" value="Prestataire" name="ventilation[]" checked>
+      @else
       <input type="checkbox" value="Prestataire" name="ventilation[]">
-             <label for="Prestataire">Prestataire</label>
+      @endif
+      <label for="Prestataire">Prestataire</label>
              <br>
+      @if($VOISI==1)   
+      <input type="checkbox" value="Voisineurs" name="ventilation[]" checked>
+      @else
       <input type="checkbox" value="Voisineurs" name="ventilation[]">
+      @endif
              <label for="Voisineurs">Voisineurs</label>
              <br>
+       @if($ADU==1)   
+      <input type="checkbox" value="ADU services" name="ventilation[]" checked>
+      @else
       <input type="checkbox" value="ADU services" name="ventilation[]">
+      @endif
       <label for="ADU services">ADU services</label>
       <br>
       </div>
       <div id="venti3">
+      @if($MANDA==1)   
+      <input type="checkbox" value="Mandataires" name="ventilation[]" checked>
+      @else
       <input type="checkbox" value="Mandataires" name="ventilation[]">
+      @endif
       <label for="Mandataires">Mandataires</label>
       <br>
-
+      @if($SOS==1)   
+      <input type="checkbox" value="SOS garde d'enfants" name="ventilation[]" checked>
+      @else
       <input type="checkbox" value="SOS garde d'enfants" name="ventilation[]">
+      @endif
       <label for="SOS garde d'enfants">SOS garde d'enfants</label>
      <br>
-      <input type="checkbox" value="ADVM" name="ventilation[]"
-      > <label for="ADVM">ADVM</label>
+     @if($ADVM==1)   
+      <input type="checkbox" value="ADVM" name="ventilation[]" checked>
+      @else
+      <input type="checkbox" value="ADVM" name="ventilation[]">
+      @endif
+      <label for="ADVM">ADVM</label>
 
 </div>
 <div id="venti4">
-<input type="checkbox" value="DELEGATION" name="ventilation[]"
-      > <label for="DELEGATION">DELEGATION</label>
+@if($DELEG==1)   
+<input type="checkbox" value="DELEGATION" name="ventilation[]" checked>
+@else
+      <input type="checkbox" value="DELEGATION" name="ventilation[]">
+@endif
+<label for="DELEGATION">DELEGATION</label>
 
 </div>
 <br>
