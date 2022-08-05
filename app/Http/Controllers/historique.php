@@ -455,10 +455,61 @@ class historique extends Controller
                     break;
             }
             $affichage =DB::select('select * from fichehors where idUser = ? and idfiche=? ',[$session_id,$id]);
+            $ferie=0;
+            $TR=0;
+            $CP=0;
+            $RTT=0;
+            $HRTT=0;
+            $RCR=0;
+            $FOR=0;
+            $MAL=0;
+            $CF=0;
+            $SS=0;
+            $JS=0;
+            foreach ($affichage as $fi) {
+    
+                    if($fi->typeJour=="Férié"){
+                        $ferie=$ferie+1;
+                    }
+                    else if($fi->typeJour=="Travaillé"){
+                        $TR=$TR+1;
+                    }
+                    else if($fi->typeJour=="CP"){
+                        $CP=$CP+1;
+                    }
+                    else if($fi->typeJour=="RTT"){
+                        $RTT=$RTT+1;
+                    }
+    
+                    else if($fi->typeJour=="1/2 RTT"){
+                        $HRTT=$HRTT+1;
+                    }
+    
+                    else if($fi->typeJour=="RCR"){
+                        $RCR=$RCR+1;
+                    }
+    
+                    else if($fi->typeJour=="Formation"){
+                        $FOR=$FOR+1;
+                    }
+                    else if($fi->typeJour=="Maladie"){
+                        $MAL=$MAL+1;
+                    }
+                    else if($fi->typeJour=="Congés familiaux"){
+                        $CF=$CF+1;
+                    }
+                    else if($fi->typeJour=="Sans soldes"){
+                        $SS=$SS+1;
+                    }
+                    else if($fi->typeJour=="Jour solidarité"){
+                        $JS=$JS+1;
+                    }
+            }
             return view('USER.historiqueDetails',[ 'employes' =>$employes,'date' =>$date,'date2' =>$date2,'dateF' =>$dateF,'month' =>$month,
             'lundi' =>$lundi,'mardi' =>$mardi,'mercredi' =>$mercredi,'jeudi' =>$jeudi,'vendredi' =>$vendredi,'samedi' =>$samedi,
             'dimanche' =>$dimanche,'affichage' => $affichage,'p'=>$p,'f'=>$f,'totEcart'=>$totEcart,'ajout'=>$ajout,'activites'=>$activites,
-            ]);
+            'ferie'=>$ferie,'TR'=>$TR,'CP'=>$CP,'RTT'=>$RTT,'HRTT'=>$HRTT,'RCR'=>$RCR,'FOR'=>$FOR,'MAL'=>$MAL,'CF'=>$CF,'SS'=>$SS,'JS'=>$JS,
+        ]);
         }
 
         public function show($id) {
@@ -470,6 +521,7 @@ class historique extends Controller
             $last = DB::select('select id from fichehors order by id DESC limit 1');
             $ventil = DB::select('select * from ventilationfinals where idUser = ?',[$session_id]);
             $ventilations = DB::select('select * from ventilations where idUser = ?',[$session_id]);
+           
             $MANDA=0;
             $FRAS=0;
             $ENTRAI=0;
@@ -480,6 +532,7 @@ class historique extends Controller
             $SOS=0;
             $ADVM=0;
             $DELEG=0;
+
             foreach ($ventilations as $v) {
                 if(str_contains($v->ventilation, "Mandataires")){
                     $MANDA=1;

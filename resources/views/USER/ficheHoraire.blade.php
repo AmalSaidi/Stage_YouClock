@@ -187,7 +187,8 @@ $Valide="Valide";
 <div style="width: 20%;
     padding: 0% 1% 9% 1%;
     border: 1px solid;
-    float: right; margin-top:60;">
+    float: right; margin-top:60; font-size: x-small;
+">
       @foreach( $employes as $employe )
     @if($employe->nom==$userNom)
 {{$employe->nom}} {{$employe->prenom}}

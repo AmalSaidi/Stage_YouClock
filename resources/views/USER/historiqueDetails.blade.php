@@ -24,13 +24,20 @@ $Valide="Valide";
 @endphp
 <div id="parent" style="display: flex;
   flex-direction: column-reverse;" >
-<div id="acti" style="margin-top: -21.5%; !important">
-<h3>Fiche Horaires</h3>
+<div id="acti">
+<div style="float:left;">
+  @foreach( $affichage as $aff)
+  @once
+<h3>Fiche Horaire {{$aff->idfiche}}</h3>
+@endonce
+@endforeach
+</div>
+<button onclick="printme()" style="float:right;background-color: #dddddd;">Imprimer</button>
 <br>
 <div id="button-list">
 </div>  
 <div id="calendar">
-  <table class="table-bordered" id="MyTable">
+  <table class="table-bordered" id="MyTable" style="margin-top: 9%;">
   <thead>
     <th>Date</th>
     <th>Activité</th>
@@ -103,9 +110,85 @@ $Valide="Valide";
     <button type="submit" class="btn btn-success" id="Valider" disabled>Valider</button>
     </form>
 @endif
+<div style="float:left;">
+<table  class="table-bordered" style=" margin-top:60;">
+  <tbody>
+  <tr>
+        <td id="fer" >Férié (jour)</td>
+        <td style="width:50">{{$ferie}}</td>
+      </tr>
+      <tr>
+        <td id="tra">Travaillé (jour)</td>
+        <td style="width:50">{{$TR}}</td>
+        </tr>
+        <tr>
+        <td id="cp">CP (jour)</td>
+        <td style="width:50">{{$CP}}</td>
+        </tr>
+        <tr>
+        <td id="RTT">RTT (jour)</td>
+        <td style="width:50">{{$RTT}}</td>
+        </tr>
+        <tr>
+        <td id="HRTT">1/2 RTT (jour)</td>
+        <td style="width:50">{{$HRTT}}</td>
+        </tr>
+        <tr>
+        <td id="RCR">RCR (jour)</td>
+        <td style="width:50">{{$RCR}}</td>
+        </tr>
+        <tr>
+        <td id="forma">Fomation (jour)</td>
+        <td style="width:50">{{$FOR}}</td>
+        </tr>
+        <td id="malad">Maladie (jour)</td>
+        <td style="width:50">{{$MAL}}</td>
+        </tr>
+        <tr>
+        <td id="CF">Congés familiaux (jour)</td>
+        <td style="width:50">{{$CF}}</td>
+        </tr>
+        <tr>
+        <td id="SS">Sans soldes (jour)</td>
+        <td style="width:50">{{$SS}}</td>
+        </tr>
+        <tr>
+        <td id="js">Jour solidarité</td>
+        <td style="width:50">{{$JS}}</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div float:left;>
+  <table class="table-bordered" style="width:30% !important;  margin-top:60; margin-left: 20%;    float: left;">
+    <tbody>
+      <tr>
+        <td>Nombre d'heures à effectuer</td>
+        <td>{{$f}}</td>
+      </tr>
+      <tr>
+        <td>Total effectué dans le mois</td>
+        <td>{{$p}}</td>
+      </tr>
+      <tr>
+        <td>Différence</td>
+        <td>{{$totEcart}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div style="width: 20%;
+    padding: 0% 1% 9% 1%;
+    border: 1px solid;
+    float: right; margin-top:60;     font-size: x-small;">
+      @foreach( $employes as $employe )
+    @if($employe->nom==$userNom)
+{{$employe->nom}} {{$employe->prenom}}
+@endif
+@endforeach
 </div>
 </div>
-
+</div>
 <div>
 </div>
 <div id="myModal" class="modal">
@@ -172,36 +255,23 @@ $Valide="Valide";
   </div>
 </div>
     </div>
-    @foreach( $employes as $employe )
-@if($employe->nom==$userNom)
-<div id="menu-reg">
-    <img id="logo-icon" src="https://cdn.discordapp.com/attachments/936584358654005321/1002996904004694057/icons8-utilisateur-96_1.png">
-    <BR>
-    <div id="info-user"><p>{{ $employe->nom }} {{ $employe->prenom }}</p></div>
-<div id="stru-user">{{ $employe->structure }}</div>
-<table class="table-borderless">
-  <tbody>
-
-  <tr>
-      <td>Total des heures effectués : {{$p}}</td>
-    </tr>
-    <tr>
-      <td>Total des heures à effectuer : {{$f}}</td>
-    </tr>
-    <tr>
-      <td>Ecart : {{$totEcart}}</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-@endif
-@endforeach
     <script>
       </script>
       <script type="text/javascript" src="{{ URL::asset('js/modifier_popup.js') }}"></script>
       <script type="text/javascript" src="{{ URL::asset('js/ajouter_popup.js') }}"></script>
        <script type="text/javascript" src="{{ URL::asset('js/afficher-form-modifier.js') }}">
+      </script>    
+          <script>
+      </script>
+      <script type="text/javascript" src="{{ URL::asset('js/modifier_popup.js') }}"></script>
+      <script type="text/javascript" src="{{ URL::asset('js/ajouter_popup.js') }}"></script>
+       <script type="text/javascript" src="{{ URL::asset('js/afficher-form-modifier.js') }}">
       </script>      
+
+<script>
+  function printme(){
+    window.print();
+  }
+</script>  
 @endsection
   
