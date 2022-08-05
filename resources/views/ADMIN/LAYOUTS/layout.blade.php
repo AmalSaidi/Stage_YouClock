@@ -29,14 +29,11 @@
                 <a class="nav-link" href="/employes">Employés</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="">Demande de congé</a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link" href="/depassementHoraire">Dépassement horaire</a>
               </li>
           </ul>
           
-          <div style="margin-left: 50%;">
+          <div style="margin-left: 60%;">
           <div style="float:left; margin-top: 10;"><a href = '/resetPassA' id="alignReg" style="color: #007bff;width: 15px !important;
     text-decoration: none;
     background-color: transparent;

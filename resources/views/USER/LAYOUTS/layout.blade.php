@@ -20,13 +20,10 @@
                 <a class="nav-link" href="/FicheHoraire">Fiche horaires</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="">Demande de congé</a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link" href="/historique">Historique</a>
               </li>
           </ul>
-          <div style="margin-left: 50%;">
+          <div style="margin-left: 63%;">
           <div style="float:left; margin-top: 10;"><a href = '/resetPassU' id="alignReg" style="color: #007bff;
     text-decoration: none;
     background-color: transparent;
