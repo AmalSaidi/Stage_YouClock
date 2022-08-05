@@ -96,7 +96,7 @@
       <th scope="col">Avr</th>
       <th scope="col">Mai</th>
       <th scope="col">Juin</th>
-      <th scope="col">Juillet</th>
+      <th scope="col">Juill</th>
       <th scope="col">Août</th>
       <th scope="col">Sep</th>
       <th scope="col">Oct</th>
@@ -108,18 +108,18 @@
   <tr>
   <td id="secCol"><div id="fer">{{$ferie}}.00</div></td>
         <td id="firstCol">Férié (jour)</td>
-        <td>{{$FerieJan}}</td>
-        <td>{{$FerieFev}}</td>
-        <td>{{$FerieMar}}</td>
-        <td>{{$FerieAvr}}</td>
-        <td>{{$FerieMai}}</td>
-        <td>{{$FerieJuin}}</td>
-        <td>{{$FerieJuillet}}</td>
-        <td>{{$FerieAout}}</td>
-        <td>{{$FerieSeptembre}}</td>
-        <td>{{$FerieOctobre}}</td>
-        <td>{{$FerieNovembre}}</td>
-        <td>{{$FerieDecembre}}</td>
+        <td style="WIDTH: 75;">{{$FerieJan}}</td>
+        <td style="WIDTH: 75;">{{$FerieFev}}</td>
+        <td style="WIDTH: 75;">{{$FerieMar}}</td>
+        <td style="WIDTH: 75;">{{$FerieAvr}}</td>
+        <td style="WIDTH: 75;">{{$FerieMai}}</td>
+        <td style="WIDTH: 75;">{{$FerieJuin}}</td>
+        <td style="WIDTH: 75;">{{$FerieJuillet}}</td>
+        <td style="WIDTH: 75;">{{$FerieAout}}</td>
+        <td style="WIDTH: 75;">{{$FerieSeptembre}}</td>
+        <td style="WIDTH: 75;">{{$FerieOctobre}}</td>
+        <td style="WIDTH: 75;">{{$FerieNovembre}}</td>
+        <td style="WIDTH: 75;">{{$FerieDecembre}}</td>
     </tr>
     <tr>
     <td id="secCol"><div id="tra">{{$TR}}.00</div></td>
