@@ -469,6 +469,49 @@ class historique extends Controller
             $venti = DB::select('select * from ventilations where idUser = ?',[$session_id]);
             $last = DB::select('select id from fichehors order by id DESC limit 1');
             $ventil = DB::select('select * from ventilationfinals where idUser = ?',[$session_id]);
+            $ventilations = DB::select('select * from ventilations where idUser = ?',[$session_id]);
+            $MANDA=0;
+            $FRAS=0;
+            $ENTRAI=0;
+            $FEDE=0;
+            $PRES=0;
+            $VOISI=0;
+            $ADU=0;
+            $SOS=0;
+            $ADVM=0;
+            $DELEG=0;
+            foreach ($ventilations as $v) {
+                if(str_contains($v->ventilation, "Mandataires")){
+                    $MANDA=1;
+                }
+                if(str_contains($v->ventilation, "FRASAD")){
+                    $FRAS=1;
+                }
+                if(str_contains($v->ventilation, "Entraide")){
+                    $ENTRAI=1;
+                }
+                if(str_contains($v->ventilation, "Federation")){
+                    $FEDE=1;
+                }
+                if(str_contains($v->ventilation, "Prestataire")){
+                    $PRES=1;
+                }
+                if(str_contains($v->ventilation, "Voisineurs")){
+                    $VOISI=1;
+                }
+                if(str_contains($v->ventilation, "ADU")){
+                    $ADU=1;
+                }
+                if(str_contains($v->ventilation, "SOS")){
+                    $SOS=1;
+                }
+                if(str_contains($v->ventilation, "ADVM")){
+                    $ADVM=1;
+                }
+                if(str_contains($v->ventilation, "DELEGATION")){
+                    $DELEG=1;
+                }
+            }
             $horSemLun = DB::select('select DM,FM,DA,FA,DS,FS from semainetypes where idUser = ? AND jour="Lundi"',[$session_id]);
             $horSemMar = DB::select('select DM,FM,DA,FA,DS,FS from semainetypes where idUser = ? AND jour="Mardi"',[$session_id]);
             $horSemMer = DB::select('select DM,FM,DA,FA,DS,FS from semainetypes where idUser = ? AND jour="Mercredi"',[$session_id]);
@@ -548,6 +591,8 @@ class historique extends Controller
             'debutMVendredi'=>$debutMVendredi,'finMVendredi'=>$finMVendredi,'debutAVendredi'=>$debutAVendredi,'finAVendredi'=>$finAVendredi,'debutSVendredi'=>$debutSVendredi,'finSVendredi'=>$finSVendredi,
             'debutMSamedi'=>$debutMSamedi,'finMSamedi'=>$finMSamedi,'debutASamedi'=>$debutASamedi,'finASamedi'=>$finASamedi,'debutSSamedi'=>$debutSSamedi,'finSSamedi'=>$finSSamedi,
             'debutMDimanche'=>$debutMDimanche,'finMDimanche'=>$finMDimanche,'debutADimanche'=>$debutADimanche,'finADimanche'=>$finADimanche,'debutSDimanche'=>$debutSDimanche,'finSDimanche'=>$finSDimanche
+            ,'MANDA'=>$MANDA,'FRAS'=>$FRAS,'ENTRAI'=>$ENTRAI,'FEDE'=>$FEDE,
+            'PRES'=>$PRES,'VOISI'=>$VOISI,'ADU'=>$ADU,'SOS'=>$SOS,'ADVM'=>$ADVM,'DELEG'=>$DELEG
         ]);
                 }
                 public function edit(Request $request,$id) {
