@@ -1,10 +1,10 @@
 #acti{
     background-color: white;
-    width: 75%;
-    MARGIN-LEFT: 22%;
-    height: fit-content;
+     height: 230%;
     padding: 2% 2% 5% 2% !important;
     margin-top: 30;
+    WIDTH: 95%;
+    margin-left: 2%;
 }
 
 #fa-titre{
@@ -320,8 +320,7 @@ p{
 }
 
 #ajoutFiche{
-    float: none;
-    margin-left: 62%;
+    float: left;
     background-color: #e95353;
     color: white;
     border-color: crimson;
@@ -338,3 +337,53 @@ p{
     margin-bottom: 2%;
 }
 
+
+#fer{
+    background-color: #eac0eb;
+    border-radius: 50% !important;
+}
+
+#tra{
+    background-color: #e1dee1;
+    border-radius: 50% !important;
+}
+
+#cp{
+    background-color: #abc7e1;
+    border-radius: 50% !important;
+}
+
+#RTT{
+    background-color: #bcd4d7;
+    border-radius: 50% !important;
+}
+
+#HRTT{
+    background-color: #edeea0;
+    border-radius: 50% !important;
+}
+
+#RCR{
+    background-color: #a6f1a7;
+    border-radius: 50% !important;
+}
+#forma{
+    background-color: #cdb3d7;
+    border-radius: 50% !important;
+}
+#malad{
+    background-color: #8fca9e;
+    border-radius: 50% !important;
+}
+#CF{
+    background-color: #96e6cf;
+    border-radius: 50% !important;
+}
+#SS{
+    background-color: #e2bda1;
+    border-radius: 50% !important;
+}
+#js{
+    background-color: #eeddc4;
+    border-radius: 50% !important;
+}
