@@ -117,6 +117,7 @@ $se5=0;
             <th>Ecart</th>
             <th></th>
             <th></th>
+            <th></th>
         </thead>
     <tbody>
     @foreach($fiche as $f)
@@ -166,12 +167,25 @@ $se5=0;
     @endphp
     @endif
 <tr id="trTab">
-        
+            @if($f->state=="NR" )
             <td>{{ $f->Date }}</td>
             <td>{{ $f->typeJour }}</td>
             <td>{{ $f->heuresEffectu }}</td>
             <td>{{ $f->Poids }}</td>
             <td>{{ $f->ecart }}</td>
+            @elseif($f->state=="VR")
+            <td style="background-color:#9be39b;">{{ $f->Date }}</td>
+            <td style="background-color:#9be39b;">{{ $f->typeJour }}</td>
+            <td style="background-color:#9be39b;">{{ $f->heuresEffectu }}</td>
+            <td style="background-color:#9be39b;">{{ $f->Poids }}</td>
+            <td style="background-color:#9be39b;">{{ $f->ecart }}</td>
+            @elseif($f->state=="RR")
+            <td style="background-color:#e39494;">{{ $f->Date }}</td>
+            <td style="background-color:#e39494;">{{ $f->typeJour }}</td>
+            <td style="background-color:#e39494;">{{ $f->heuresEffectu }}</td>
+            <td style="background-color:#e39494;">{{ $f->Poids }}</td>
+            <td style="background-color:#e39494;">{{ $f->ecart }}</td>
+            @endif
            
                 <form method="post" action="" id="form2" class="fconfirm"> <td>
                 {{ csrf_field() }}
@@ -301,11 +315,25 @@ $se5=0;
     @endphp
     @endif
     <tr>
+    @if($f->state=="NR" )
             <td>{{ $f->Date }}</td>
             <td>{{ $f->typeJour }}</td>
             <td>{{ $f->heuresEffectu }}</td>
             <td>{{ $f->Poids }}</td>
             <td>{{ $f->ecart }}</td>
+            @elseif($f->state=="VR")
+            <td style="background-color:#9be39b;">{{ $f->Date }}</td>
+            <td style="background-color:#9be39b;">{{ $f->typeJour }}</td>
+            <td style="background-color:#9be39b;">{{ $f->heuresEffectu }}</td>
+            <td style="background-color:#9be39b;">{{ $f->Poids }}</td>
+            <td style="background-color:#9be39b;">{{ $f->ecart }}</td>
+            @elseif($f->state=="RR")
+            <td style="background-color:#e39494;">{{ $f->Date }}</td>
+            <td style="background-color:#e39494;">{{ $f->typeJour }}</td>
+            <td style="background-color:#e39494;">{{ $f->heuresEffectu }}</td>
+            <td style="background-color:#e39494;">{{ $f->Poids }}</td>
+            <td style="background-color:#e39494;">{{ $f->ecart }}</td>
+            @endif
             <form method="post" action="" id="form2" class="fconfirm"> <td>
                 {{ csrf_field() }}
                  <input type="hidden" name="id" value="{{$f->id}}">
@@ -357,6 +385,13 @@ $se5=0;
     @endforeach
     </tbody>
     </table>
+    <form method="post" action="" id="form7" class="fconfirm"> <td>
+                {{ csrf_field() }}
+                 <input type="hidden" name="idUser7" value="{{$f->idUser}}">
+                 <input type="hidden" name="idfiche7" value="{{$f->idfiche}}">
+    <button style="float: right;
+    margin-right: 13%;padding: 1 1% 1 1%;" class="btn btn-success" type="submit">Tout valider</button>
+    </form>
 
     <div id="stats">
        <table id="tableStats">

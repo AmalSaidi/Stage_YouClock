@@ -248,6 +248,7 @@ body{
     font-family: cursive;
     FONT-SIZE: smaller;
     FLOAT: right;
+    margin-right: 10;
 }
 
 #checkbox{

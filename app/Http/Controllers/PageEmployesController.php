@@ -242,7 +242,7 @@ class PageEmployesController extends Controller
         }
         $employes = DB::select('select * from employes where id = ?',[$id]);
         $fiiche = DB::select('select DISTINCT idfiche,statutF from fichehors where idUser = (select identifiant from employes where id = ?) ORDER BY id DESC LIMIT 1',[$id]);
-        $fiche = DB::select('select DISTINCT idfiche,statutF from fichehors where idUser = (select identifiant from employes where id = ?) ORDER BY idfiche DESC,mois ASC',[$id]);
+        $fiche = DB::select('select DISTINCT idUser,idfiche,statutF from fichehors where idUser = (select identifiant from employes where id = ?) ORDER BY idfiche DESC,mois ASC',[$id]);
         return view('ADMIN/ficheHoraire',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees,'fiiche'=>$fiiche]);
         }
 
@@ -1205,6 +1205,12 @@ class PageEmployesController extends Controller
             return view('ADMIN/FicheHoraireDetails',['id'=>$id]);
         }
 
+        public function confirmAll(Request $request) {
+            $idUser = $request->input('idUser7');
+            $idfiche = $request->input('idfiche7');
+            DB::update('update fichehors set state ="VR" where idfiche=? AND idUser=?',[$idfiche,$idUser]);
+            return redirect()->back();
+        }
 
         public function showST($id) {
             $user=Auth::user();
@@ -1394,6 +1400,7 @@ class PageEmployesController extends Controller
         public function export(Request $request) 
         {
             $idFi = $request->input('idF');
+            $idUser = $request->input('idUser');
             $nom = $request->input('nom');
             $prenom = $request->input('prenom');
             $statutF = $request->input('statutF');
@@ -1408,7 +1415,9 @@ class PageEmployesController extends Controller
             }else if($statutF=="valide"){
                 $statutF="validée";
             }
-            return Excel::download(new AllFichesExport($request->id,$idFi,$nom,$prenom,$statutF), 'Fiches.xlsx');
+
+            return Excel::download(new AllFichesExport($request->id,$idFi,$nom,$prenom,$statutF), 'Fiche horaire.xlsx');
+
         }
 
               
@@ -1430,6 +1439,23 @@ class PageEmployesController extends Controller
                 $statutF="validée";
             }
             return Excel::download(new FichesDetailsExport($request->id,$idFi,$nom,$prenom,$statutF), 'Fiche horaire.xlsx');
+        }
+
+        public function searchFiche(Request $request,$id) 
+        {
+            $search_text= $request->input('searchfiche');
+            $user=Auth::user();
+            $session_str = $user->service;
+            if($user->direction==1){
+                $employees = DB::table('employes')->get();
+    
+            }else{
+                $employees = DB::table('employes')->where('service', 'like', '%'.$session_str.'%')->where('admin',0)->get();
+            }
+            $employes = DB::select('select * from employes where id = ?',[$id]);
+            $fiiche = DB::select('select DISTINCT idfiche,statutF from fichehors where idUser = (select identifiant from employes where id = ?) ORDER BY id DESC LIMIT 1',[$id]);
+            $fiche = DB::select('select DISTINCT idUser,idfiche,statutF from fichehors where idUser = (select identifiant from employes where id = ?) and year=? order BY mois ASC',[$id,$search_text]);
+            return view('ADMIN/ficheHoraire',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees,'fiiche'=>$fiiche]);
         }
 
         public function search(Request $request) 

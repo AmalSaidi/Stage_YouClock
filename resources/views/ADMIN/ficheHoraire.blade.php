@@ -10,7 +10,7 @@
     
 <div class="input-group mb-3">
   <div class="form-outline">
-  <form method="post" action="/search" type="get" > <td>
+  <form method="post" action="" type="get" > <td>
                 {{ csrf_field() }}
         <input type="search" id="form1" name="search" class="form-control" placeholder="Rechercher" />
       </form>
@@ -36,17 +36,37 @@
 </div>
     @foreach( $employes as $employe )
         <div id="acti">
+        <form method="post" action="/searchFiche/{{$employe->id}}" type="get" > <td>
+                {{ csrf_field() }}
+        <select name="searchfiche" onchange="this.form.submit()" style="float:right;">
+        <option value="" disabled selected>Rechercher</option>
+        @php
+    $year = date("Y");
+    $yearArr = array();
+    @endphp
+    @for ($i = 0; $i < 30; $i++)
+    @php
+    $yearArr[$i] = $year -$i;
+    @endphp
+    <option value="{{$yearArr[$i]}}">{{$yearArr[$i]}}</option>
+    @endfor
+        @endphp
+        </select>
+      </form>
+          <!--
         @foreach($fiche as $f)
         <form id="form2" action="/Fichehoraire/{{ $employe->id }}/export" method="POST">
         {{ csrf_field() }}
-<input type="hidden" name="idF"value="{{$f->idfiche}}"/>
-<input type="hidden" name="statutF"value="{{$f->statutF}}"/>
-<input type="hidden" name="nom"value="{{$employe->nom}}"/>
-<input type="hidden" name="prenom"value="{{$employe->prenom}}"/>
+<input type="hidden" name="idF" value="{{$f->idfiche}}"/>
+<input type="hidden" name="statutF" value="{{$f->statutF}}"/>
+<input type="hidden" name="idUser" value="{{$f->idUser}}"/>
+<input type="hidden" name="nom" value="{{$employe->nom}}"/>
+<input type="hidden" name="prenom" value="{{$employe->prenom}}"/>
 @endforeach
 <button id="export"> Export CSV <img id="logo-reglages" src="/images/downald.png" alt="reglages">
 </button>
 </form>
+-->
         <div id="pic"><img id="logo-icon" src="https://cdn.discordapp.com/attachments/936584358654005321/1002996904004694057/icons8-utilisateur-96_1.png"></div>
       <div id="info-bas">{{ $employe->prenom }} {{ $employe->nom }} <br>
       <div id="struc">{{ $employe->structure }}</div> 
@@ -77,6 +97,7 @@
     <tr id="head-table">
       <th scope="col">Date</th>
       <th scope="col">Statut de la fiche horaire</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
@@ -99,6 +120,19 @@
   @else
   <div id="valide">VALIDÉ</div>
   @endif
+  
+  </td>
+  <td>
+  <form id="form2" action="/Fichehoraire/{{ $employe->id }}/export" method="POST">
+        {{ csrf_field() }}
+<input type="hidden" name="idF" value="{{$f->idfiche}}"/>
+<input type="hidden" name="statutF" value="{{$f->statutF}}"/>
+<input type="hidden" name="idUser" value="{{$f->idUser}}"/>
+<input type="hidden" name="nom" value="{{$employe->nom}}"/>
+<input type="hidden" name="prenom" value="{{$employe->prenom}}"/>
+<button id="export"> Export CSV <img id="logo-reglages" src="/images/downald.png" alt="reglages">
+</button>
+</form>
   </td>
     </tr>
      @endforeach

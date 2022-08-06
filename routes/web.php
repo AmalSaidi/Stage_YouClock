@@ -92,12 +92,14 @@ Route::get('/ventilation/{id}', [PageEmployesController::class, 'showVenti']);
 Route::get('/statistiques/{id}', [PageEmployesController::class, 'showStat']);
 Route::get('/RH/semaineType/{id}', [PageEmployesController::class, 'showST']);
 Route::post('/RH/semaineType/{id}', [PageEmployesController::class, 'ajouterST']);
+Route::post('/searchFiche/{id}', [PageEmployesController::class, 'searchFiche']);
 Route::get('/FicheHoraire/{id}', [PageEmployesController::class, 'showFiche'])->name('fiches');
 Route::post('/Fichehoraire/{id}/export', [PageEmployesController::class, 'export'])->name('AllFiches.details');
 Route::get('/FicheHoraire/Details/{id}/{idfiche}', [PageEmployesController::class, 'showFicheComplete']);
 Route::post('/FicheHoraire/Details/{id}/{idfiche}/export', [PageEmployesController::class, 'export2'])->name('fichesDetails.details');;
 Route::post('/FicheHoraire/Details/confirm/{id}/{idfiche}', [PageEmployesController::class, 'confirm']);
 Route::post('/FicheHoraire/Details/refuse/{id}/{idfiche}', [PageEmployesController::class, 'refuse']);
+Route::post('/FicheHoraire/Details/{id}/{idfiche}', [PageEmployesController::class, 'confirmAll']);
 Route::post('/FicheHoraire/Details/direction', [PageEmployesController::class, 'VueDirectionFiche']);
 Route::post('/FicheHoraire/Details/admin', [PageEmployesController::class, 'VueAdminFiche']);
 Route::post('/FicheHoraire/Details/valider', [PageEmployesController::class, 'validerFicheDir']);
@@ -108,6 +110,7 @@ Route::post('/ventilation/{id}', [PageEmployesController::class, 'searchventi'])
 Route::post('/statistiques/{id}', [PageEmployesController::class, 'searchStat']);
 Route::get('/MesStatistiques', [FicheHoraireUserController::class, 'mesStats']);
 Route::post('/MesStatistiques', [FicheHoraireUserController::class, 'searchStat']);
+
 
 
 /*
