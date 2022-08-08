@@ -58,16 +58,29 @@ $se5=0;
 </div>
     @foreach( $employes as $employe )
         <div id="acti">
-        @if(Auth::user()->admin==1 AND Auth::user()->direction==1)
+        @if(Auth::user()->direction==1)
 <div id="vue" style="text-align-last: right;">
 <form method="post" action="/FicheHoraire/Details/direction" id="form5" class="direction" style="float: left;"> <td>
                 {{ csrf_field() }}
-      <button type="submit" class="btn btn-danger" id="vuebutton"> Vue direction</button>
+      <button type="submit" class="btn btn-danger" id="vuebutton" style="margin-right: 20;"> Vue direction</button>
 </form>
-<form method="post" action="/FicheHoraire/Details/admin" id="form6" class="admin"> <td>
+<div>
+<form method="post" action="/FicheHoraire/Details/admin" id="form6" class="admin" style="float: left;"> <td>
                 {{ csrf_field() }}
       <button type="submit" class="btn btn-danger" id="vuebutton"> Vue admin</button>
 </form>
+</div>
+@foreach($fiche as $f)
+@once
+<form method="post" action="/FicheHoraire/Details/user/{{$f->idfiche}}/{{$f->idUser}}" id="form9" class="utilisateur"> <td>
+                {{ csrf_field() }}
+       <input type="hidden" name="identifiant9" value="{{$employe->identifiant}}"/>
+       <input type="hidden" name="mois9" value="{{$f->mois}}"/>
+       <input type="hidden" name="anne9" value="{{$f->year}}"/>
+      <button type="submit" class="btn btn-danger" id="vuebutton"> Vue utilisateur</button>
+</form>
+@endonce
+@endforeach
 </div>
 @endif
 @foreach($fiche as $f)
@@ -482,7 +495,7 @@ $("#form2").on("submit", function (e) {
 $("#form3").on("submit", function (e) {
     var dataString = $(this).serialize();
     let id = $(this).data('id');
-    let idfiche = $(this).data('idfiche');
+    let idfiche = $(this).data('idfiche9');
     $.ajax({
       type: "POST",
       url: "/FicheHoraire/Details/refuse/"+id+"/"+idfiche,
@@ -491,6 +504,18 @@ $("#form3").on("submit", function (e) {
       }
     });
     e.preventDefault();
+});
+</script>
+<script>
+$("#form9").on("submit", function (e) {
+    var dataString = $(this).serialize();
+    $.ajax({
+      type: "POST",
+      url: "/FicheHoraire/Details/utilisateur",
+      data: dataString,
+      success: function () {
+      }
+    });
 });
 </script>
 <script>

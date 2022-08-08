@@ -66,12 +66,23 @@ $se5=0;
 <div id="vue" style="text-align-last: right;">
 <form method="post" action="/FicheHoraire/Details/direction" id="form5" class="direction" style="float: left;"> <td>
                 {{ csrf_field() }}
-      <button type="submit" class="btn btn-danger" id="vuebutton"> Vue direction</button>
+      <button type="submit" class="btn btn-danger" id="vuebutton" style="margin-right: 20;"> Vue direction</button>
 </form>
-<form method="post" action="/FicheHoraire/Details/admin" id="form6" class="admin"> <td>
+<form method="post" action="/FicheHoraire/Details/admin" id="form6" class="admin"  style="float: left;"> <td>
                 {{ csrf_field() }}
       <button type="submit" class="btn btn-danger" id="vuebutton"> Vue admin</button>
 </form>
+@foreach($fiche as $f)
+@once
+<form method="post" action="/FicheHoraire/Details/user/{{$f->idfiche}}/{{$f->idUser}}" id="form10" class="utilisateur"> <td>
+                {{ csrf_field() }}
+       <input type="hidden" name="identifiant9" value="{{$employe->identifiant}}"/>
+       <input type="hidden" name="mois9" value="{{$f->mois}}"/>
+       <input type="hidden" name="anne9" value="{{$f->year}}"/>
+      <button type="submit" class="btn btn-danger" id="vuebutton"> Vue utilisateur</button>
+</form>
+@endonce
+@endforeach
 </div>
       @endif
       @foreach($fiche as $f)

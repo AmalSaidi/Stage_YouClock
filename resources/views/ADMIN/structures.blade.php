@@ -26,7 +26,7 @@
         <p id="fa-titre" style="font-family: cursive;">Familles de la Sarthe - Liste des structures</p>
         <br>
 <div id="button-list">
-<form id="form2" action="{{ route('structures.details') }}" method="POST">
+<form id="form2" action="{{ route('structures.details') }}" method="POST" style="float: left;">
 {{ csrf_field() }}
 <button id="export"> Export CSV <img id="logo-reglages" src="/images/downald.png" alt="reglages">
 </button>

@@ -26,7 +26,7 @@
         <p id="fa-titre" style="font-family: cursive;">Services</p>
         <br>
 <div id="button-list">
-<form id="form2" action="{{ route('services.details') }}" method="POST">
+<form id="form2" action="{{ route('services.details') }}" method="POST" style="float: left;">
 {{ csrf_field() }}
 <button id="export"> Export CSV <img id="logo-reglages" src="https://cdn.discordapp.com/attachments/936584358654005321/973940327759085619/downald.png" alt="reglages">
 </button>

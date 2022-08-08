@@ -36,6 +36,11 @@
 </div>
     @foreach( $employes as $employe )
         <div id="acti">
+        @if (session('status'))
+    <div class="alert alert-danger">
+        {{ session('status') }}
+    </div>
+@endif
         <form method="post" action="/searchFiche/{{$employe->id}}" type="get" > <td>
                 {{ csrf_field() }}
         <select name="searchfiche" onchange="this.form.submit()" style="float:right;">
@@ -90,9 +95,11 @@
     <button id="ventilation"><a href="/ventilation/{{ $employe->id }}">Ventilation</a></button>
     <button id="stat"><a href="/statistiques/{{ $employe->id }}">Statistiques</a></button>
     @endforeach
-</div>  
-
-    <table class="table-bordered" id="fiches">
+</div>
+@if(Auth::user()->direction==1)
+<button id="ajouter" class="btn btn-danger">Ajouter une fiche horaire</button>
+@endif
+    <table class="table-bordered" id="fiches" style="margin-top:1%;">
         <thead class="thead">
     <tr id="head-table">
       <th scope="col">Date</th>
@@ -104,11 +111,7 @@
      @foreach($fiche as $f)
      <tr>
       <td id="dateFiche">
-      @if($f->statutF=="EnCours")  
-      {{ $f->idfiche }}
-      @else
       <a id="link-nom" href = '/FicheHoraire/Details/{{ $employe->id }}/{{ $f->idfiche }}'>{{ $f->idfiche }}</a>
-      @endif
   </td>
   <td id="statut2">
   @if($f->statutF=="EnCours")
@@ -138,6 +141,54 @@
      @endforeach
   </tbody>
     </table>
+
+    <div id="myModal" class="modal">
+
+<!-- Modal content -->
+<div class="modal-content" style="margin-top: 8%;">
+  <span class="close">&times;</span>
+  <form action="/ajouterFiche" method="POST">
+  {{ csrf_field() }}
+  <input type="hidden" name="identifiant" value="{{$employe->identifiant}}"/>
+<div class="form-group">
+  <label for="exampleInputPassword1">Année</label>
+  <select name="annee" id="select">
+  @php
+  $year = date("Y");
+  $yearArr = array();
+  @endphp
+  @for ($i = 0; $i < 30; $i++)
+  @php
+  $yearArr[$i] = $year -$i;
+  @endphp
+  <option value="{{$yearArr[$i]}}">{{$yearArr[$i]}}</option>
+  @endfor
+
+      @endphp
+</select>
+</div>
+<div class="form-group">
+  <label for="exampleInputPassword1">Mois</label>
+  <select name="mois" id="select">
+<option value="01">Janvier</option>
+<option value="02">Février</option>
+<option value="03">Mars</option>
+<option value="04">Avril</option>
+<option value="05">Mai</option>
+<option value="06">Juin</option>
+<option value="07">Juillet</option>
+<option value="08">Août</option>
+<option value="09">Septembre</option>
+<option value="10">Octobre</option>
+<option value="11">Novembre</option>
+<option value="12">Décembre</option>
+</select>
+</div>
+<button type="submit" class="btn btn-danger" id="add">AJOUTER</button>
+</form>
+</div>
+
+</div>
     <script>
 $("#form2").on("submit", function (e) {
     var dataString = $(this).serialize();
@@ -151,6 +202,8 @@ $("#form2").on("submit", function (e) {
     e.preventDefault();
 });
 </script>
-
+<script type="text/javascript" src="{{ URL::asset('js/modifier_popup.js') }}"></script>
+      <script type="text/javascript" src="{{ URL::asset('js/ajouter_popup.js') }}"></script>
+       <script type="text/javascript" src="{{ URL::asset('js/afficher-form-modifier.js') }}">
 
   @endsection
