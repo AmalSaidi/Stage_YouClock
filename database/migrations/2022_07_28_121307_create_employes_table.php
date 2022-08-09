@@ -25,7 +25,7 @@ class CreateEmployesTable extends Migration
             $table->string('TypeContrat');
             $table->string('TempsTra')->nullable();
             $table->string('JoursNonTra')->nullable();
-            $table->integer('heuresParMois')->nullable();
+            $table->float('heuresParMois')->nullable();
             $table->string('intitule')->nullable();
             $table->string('structure');
             $table->string('service')->nullable();
