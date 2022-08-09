@@ -278,6 +278,23 @@ class PageEmployesController extends Controller
         else{
             ventilationfinal::where('idUser', $session_id)->where('ventilation', 'like', '%ADVM%')->delete();
         }
+        if(ventilation::where('idUser', $session_id)->where('ventilation', 'like', '%AI%')->count() > 0)
+        {
+            if(ventilationfinal::where('idUser', $session_id)->where('ventilation', 'AI')->count() <= 0)
+{
+            ventilationfinal::updateOrCreate(
+                ['idUser' => $session_id,'ventilation' => '"AI"'],
+                ['ventilation' => 'AI']
+            );
+        }
+        else{
+            DB::update('update ventilationfinals set codeV="AI" where idUser = ? and ventilation="AI"',
+            [$session_id]);
+        }
+    }
+        else{
+            ventilationfinal::where('idUser', $session_id)->where('ventilation','AI')->delete();
+        }
         foreach ($fichehor as $fi) {
             $DateFiche=$fi->Date;
             $ecartJour=$fi->heuresEffectu-$fi->Poids;
@@ -438,6 +455,7 @@ class PageEmployesController extends Controller
         $SOS=0;
         $ADVM=0;
         $DELEG=0;
+        $AI=0;
         foreach ($ventilations as $v) {
             if(str_contains($v->ventilation, "Mandataires")){
                 $MANDA=1;
@@ -468,6 +486,9 @@ class PageEmployesController extends Controller
             }
             if(str_contains($v->ventilation, "DELEGATION")){
                 $DELEG=1;
+            }
+            if(str_contains($v->ventilation, "AI")){
+                $AI=1;
             }
         }
         $horSemLun = DB::select('select DM,FM,DA,FA,DS,FS from semainetypes where idUser = ? AND jour="Lundi"',[$session_id]);
@@ -550,7 +571,7 @@ class PageEmployesController extends Controller
         'debutMSamedi'=>$debutMSamedi,'finMSamedi'=>$finMSamedi,'debutASamedi'=>$debutASamedi,'finASamedi'=>$finASamedi,'debutSSamedi'=>$debutSSamedi,'finSSamedi'=>$finSSamedi,
         'debutMDimanche'=>$debutMDimanche,'finMDimanche'=>$finMDimanche,'debutADimanche'=>$debutADimanche,'finADimanche'=>$finADimanche,'debutSDimanche'=>$debutSDimanche,'finSDimanche'=>$finSDimanche,
         'MANDA'=>$MANDA,'FRAS'=>$FRAS,'ENTRAI'=>$ENTRAI,'FEDE'=>$FEDE,
-        'PRES'=>$PRES,'VOISI'=>$VOISI,'ADU'=>$ADU,'SOS'=>$SOS,'ADVM'=>$ADVM,'DELEG'=>$DELEG
+        'PRES'=>$PRES,'VOISI'=>$VOISI,'ADU'=>$ADU,'SOS'=>$SOS,'ADVM'=>$ADVM,'DELEG'=>$DELEG,'AI'=>$AI
     ]);
             }
 
@@ -581,6 +602,7 @@ class PageEmployesController extends Controller
                 $SOS = $request->input('SOS');
                 $ADVM = $request->input('ADVM');
                 $Mandataires = $request->input('MANDA');
+                $AI = $request->input('AI');
                 $matin = $matinD ." - " .$matinF;
                 $aprem = $ApremD ." - " .$ApremF;
                 $soir = $soirD ." - " .$soirF;
@@ -589,7 +611,7 @@ class PageEmployesController extends Controller
                 $hourdiffSoir = $soirF-$soirD;
                 $pauseMidi = $ApremD-$matinF;
                 $heuresEffectu = $hourdiffMat + $hourdiffAprem + $hourdiffSoir;
-                $poids= $DELEGATION+$FRASAD+$Entraide+$Federation+$prestataire+$voisineurs+$ADU+$SOS+$ADVM+$Mandataires;
+                $poids= $DELEGATION+$FRASAD+$Entraide+$Federation+$prestataire+$voisineurs+$ADU+$SOS+$ADVM+$Mandataires+$AI;
                 $ecart=0;
                 echo $pauseMidi;
                 if($heuresEffectu>11){
@@ -654,6 +676,10 @@ class PageEmployesController extends Controller
                             DB::update('update fichehors set Prestataire=? where id = ?',
                             [$prestataire,$id]);
                         }
+                        if($v->ventilation == "AI"){
+                            DB::update('update fichehors set AI=? where id = ?',
+                            [$AI,$id]);
+                        }
                         }
                         return redirect()->route('ficheBack', ['idfiche' => $idFi,'idUser'=>$idUser]);
                         }else{
@@ -711,6 +737,10 @@ class PageEmployesController extends Controller
                     if($v->ventilation == "prestataire"){
                         DB::update('update fichehors set Prestataire=? where id = ?',
                         [$prestataire,$id]);
+                    }
+                    if($v->ventilation == "AI"){
+                        DB::update('update fichehors set AI=? where id = ?',
+                        [$AI,$id]);
                     }
                     }
                     return redirect()->route('ficheBack', ['idfiche' => $idFi,'idUser'=>$idUser]);
@@ -816,6 +846,7 @@ class PageEmployesController extends Controller
         $SOS=0;
         $ADVM=0;
         $DELEG=0;
+        $AI=0;
         foreach ($ventilations as $v) {
             if(str_contains($v->ventilation, "Mandataires")){
                 $MANDA=1;
@@ -847,6 +878,9 @@ class PageEmployesController extends Controller
             if(str_contains($v->ventilation, "DELEGATION")){
                 $DELEG=1;
             }
+            if(str_contains($v->ventilation, "AI")){
+                $AI=1;
+            }
         }
         $fiche = DB::select('select DISTINCT idfiche,statutF from fichehors where idUser = (select identifiant from employes where id = ?) ORDER BY id DESC LIMIT 1',[$id]);
         $Lun= DB::select('select * from semainetypes where jour="Lundi" and idUser=(select identifiant from employes where id=?)',[$id]);
@@ -858,7 +892,7 @@ class PageEmployesController extends Controller
         $Dim= DB::select('select * from semainetypes where jour="Dimanche" and idUser=(select identifiant from employes where id=?)',[$id]);
         return view('ADMIN/RH',['employes'=>$employes,'employees'=>$employees,'Lun'=>$Lun,'Mar'=>$Mar,'Mer'=>$Mer
         ,'Jeu'=>$Jeu,'Ven'=>$Ven,'Sam'=>$Sam,'Dim'=>$Dim,'fiche'=>$fiche,'MANDA'=>$MANDA,'FRAS'=>$FRAS,'ENTRAI'=>$ENTRAI,'FEDE'=>$FEDE,
-        'PRES'=>$PRES,'VOISI'=>$VOISI,'ADU'=>$ADU,'SOS'=>$SOS,'ADVM'=>$ADVM,'DELEG'=>$DELEG,'ventilations'=>$ventilations]);
+        'PRES'=>$PRES,'VOISI'=>$VOISI,'ADU'=>$ADU,'SOS'=>$SOS,'ADVM'=>$ADVM,'DELEG'=>$DELEG,'ventilations'=>$ventilations,'AI'=>$AI]);
         }
 
     public function showFiche($id) {
@@ -902,6 +936,7 @@ class PageEmployesController extends Controller
             $ADVM=0;	
             $Délégation=0;
             $poids=0;
+            $AI=0;
             foreach ($fiche as $fi) {
                 $Délégation=$fi->DELEGATION+$Délégation;
                 $FRASAD=$fi->FRASAD+$FRASAD;
@@ -914,11 +949,12 @@ class PageEmployesController extends Controller
                 $SOS=$fi->SOSgarde+$SOS;
                 $ADVM=$fi->ADVM+$ADVM;
                 $poids=$fi->Poids+$poids;
+                $AI=$fi->AI+$AI;
             }
-            $totalVentil=$Délégation+ $FRASAD+$Entraide+$Fédération+$Prestataire+$Voisineurs+$ADU+$Mandataires+$SOS+$ADVM;
+            $totalVentil=$Délégation+ $FRASAD+$Entraide+$Fédération+$Prestataire+$Voisineurs+$ADU+$Mandataires+$SOS+$ADVM+$AI;
             $diff=$poids-$totalVentil;
             return view('ADMIN/ventilationfiche',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees,'fiiche'=>$fiiche,'Délégation'=>$Délégation,
-            'FRASAD'=>$FRASAD,'Entraide'=>$Entraide,'Fédération'=>$Fédération,'Prestataire'=>$Prestataire,'Voisineurs'=>$Voisineurs,
+            'FRASAD'=>$FRASAD,'Entraide'=>$Entraide,'Fédération'=>$Fédération,'Prestataire'=>$Prestataire,'Voisineurs'=>$Voisineurs,'AI'=>$AI,
             'ADU'=>$ADU,'Mandataires'=>$Mandataires,'SOS'=>$SOS,'ADVM'=>$ADVM,'totalVentil'=>$totalVentil,'poids'=>$poids,'diff'=>$diff,'fiicheS'=>$fiicheS]);
             }
             
@@ -1055,6 +1091,7 @@ class PageEmployesController extends Controller
                 $SOS=0;	
                 $ADVM=0;	
                 $Délégation=0;
+                $AI=0;
                 $poids=0;
                 $ferie=0;
                 $TR=0;
@@ -1078,6 +1115,7 @@ class PageEmployesController extends Controller
                     $ADU=$fi->ADUservices+$ADU;
                     $Mandataires=$fi->Mandataires+$Mandataires;
                     $SOS=$fi->SOSgarde+$SOS;
+                    $AI=$fi->AI+$AI;
                     $ADVM=$fi->ADVM+$ADVM;
                     $poids=$fi->Poids+$poids;
                     }
@@ -1678,10 +1716,10 @@ class PageEmployesController extends Controller
                         
                 }
             }
-                $totalVentil=$Délégation+ $FRASAD+$Entraide+$Fédération+$Prestataire+$Voisineurs+$ADU+$Mandataires+$SOS+$ADVM;
+                $totalVentil=$Délégation+ $FRASAD+$Entraide+$Fédération+$Prestataire+$Voisineurs+$ADU+$Mandataires+$SOS+$ADVM+$AI;
                 $diff=$poids-$totalVentil;
                 return view('ADMIN/stat',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees,'fiiche'=>$fiiche,'Délégation'=>$Délégation,
-                'FRASAD'=>$FRASAD,'Entraide'=>$Entraide,'Fédération'=>$Fédération,'Prestataire'=>$Prestataire,'Voisineurs'=>$Voisineurs,
+                'FRASAD'=>$FRASAD,'Entraide'=>$Entraide,'Fédération'=>$Fédération,'Prestataire'=>$Prestataire,'Voisineurs'=>$Voisineurs,'AI'=>$AI,
                 'ADU'=>$ADU,'Mandataires'=>$Mandataires,'SOS'=>$SOS,'ADVM'=>$ADVM,'totalVentil'=>$totalVentil,'poids'=>$poids,'diff'=>$diff,'year'=>$year
                 ,'ferie'=>$ferie,'TR'=>$TR,'CP'=>$CP,'RTT'=>$RTT,'HRTT'=>$HRTT,'RCR'=>$RCR,'FOR'=>$FOR,'MAL'=>$MAL,'CF'=>$CF,'SS'=>$SS,'JS'=>$JS,
                 'FerieJan'=>$FerieJan,'TRJan'=>$TRJan,'CPJan'=>$CPJan,'RTTJan'=>$RTTJan,'HRTTJan'=>$HRTTJan,'RCRJan'=>$RCRJan,'FORJan'=>$FORJan,
@@ -1802,6 +1840,7 @@ class PageEmployesController extends Controller
             $Prestataire = $request->input('Prestataire');
             $Voisineurs = $request->input('Voisineurs');
             $ADU = $request->input('ADU');
+            $AI = $request->input('AI');
             $Mandataires = $request->input('Mandataires');
             $SOS = $request->input('SOS');
             $Délégation = $request->input('Délégation');
@@ -1809,12 +1848,12 @@ class PageEmployesController extends Controller
             $venti = DB::select('select * from ventilationfiches where idFiche =? AND idUser = ?',[$idF,$idU]);
             if(ventilationfiche::where('idUser', $idU)->where('idFiche', $idF)->count() > 0){
                 DB::update('update ventilationfiches set FRASAD=?,Entraide=?,Federation=?,Prestataire=?,Voisineurs=?,ADU=?,Mandataires=?
-                ,SOS=?,Delegation=?,ADVM=? where idfiche = ? and idUser = ?',[$FRASAD,$Entraide,$Fédération,$Prestataire,$Voisineurs,$ADU,$Mandataires,$SOS,$Délégation,$ADVM,$idF,$idU]);
+                ,SOS=?,Delegation=?,ADVM=?,AI=? where idfiche = ? and idUser = ?',[$FRASAD,$Entraide,$Fédération,$Prestataire,$Voisineurs,$ADU,$Mandataires,$SOS,$Délégation,$ADVM,$AI,$idF,$idU]);
                 }
             else
                 {
                 DB::insert('insert into ventilationFiches (idFiche,idUser,FRASAD,Entraide,Federation,Prestataire,Voisineurs,ADU,Mandataires
-                ,SOS,Delegation,ADVM) values (?,?,?,?,?,?,?,?,?,?,?,?)', [$idF,$idU,$FRASAD,$Entraide,$Fédération,$Prestataire,$Voisineurs,$ADU,$Mandataires,$SOS,$Délégation,$ADVM]);
+                ,SOS,Delegation,ADVM,AI) values (?,?,?,?,?,?,?,?,?,?,?,?,?)', [$idF,$idU,$FRASAD,$Entraide,$Fédération,$Prestataire,$Voisineurs,$ADU,$Mandataires,$SOS,$Délégation,$ADVM,$AI]);
                 }
             return redirect()->back();
             }
@@ -2149,6 +2188,7 @@ class PageEmployesController extends Controller
             $ADVM=0;	
             $Délégation=0;
             $poids=0;
+            $AI=0;
             foreach ($fiche as $fi) {
                 $Délégation=$fi->DELEGATION+$Délégation;
                 $FRASAD=$fi->FRASAD+$FRASAD;
@@ -2160,13 +2200,14 @@ class PageEmployesController extends Controller
                 $Mandataires=$fi->Mandataires+$Mandataires;
                 $SOS=$fi->SOSgarde+$SOS;
                 $ADVM=$fi->ADVM+$ADVM;
+                $AI=$fi->AI+$AI;
                 $poids=$fi->Poids+$poids;
             }
-            $totalVentil=$Délégation+ $FRASAD+$Entraide+$Fédération+$Prestataire+$Voisineurs+$ADU+$Mandataires+$SOS+$ADVM;
+            $totalVentil=$Délégation+ $FRASAD+$Entraide+$Fédération+$Prestataire+$Voisineurs+$ADU+$Mandataires+$SOS+$ADVM+$AI;
             $diff=$poids-$totalVentil;
             return view('ADMIN/ventilationfiche',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees,'fiiche'=>$fiiche,'Délégation'=>$Délégation,
             'FRASAD'=>$FRASAD,'Entraide'=>$Entraide,'Fédération'=>$Fédération,'Prestataire'=>$Prestataire,'Voisineurs'=>$Voisineurs,
-            'ADU'=>$ADU,'Mandataires'=>$Mandataires,'SOS'=>$SOS,'ADVM'=>$ADVM,'totalVentil'=>$totalVentil,'poids'=>$poids,'diff'=>$diff,'fiicheS'=>$fiicheS]);
+            'ADU'=>$ADU,'Mandataires'=>$Mandataires,'SOS'=>$SOS,'ADVM'=>$ADVM,'AI'=>$AI,'totalVentil'=>$totalVentil,'poids'=>$poids,'diff'=>$diff,'fiicheS'=>$fiicheS]);
         }
 
         public function searchStat(Request $request,$id) 
@@ -2304,6 +2345,7 @@ class PageEmployesController extends Controller
             $SOS=0;	
             $ADVM=0;	
             $Délégation=0;
+            $AI=0;
             $poids=0;
             $ferie=0;
             $TR=0;
@@ -2328,6 +2370,7 @@ class PageEmployesController extends Controller
                 $Mandataires=$fi->Mandataires+$Mandataires;
                 $SOS=$fi->SOSgarde+$SOS;
                 $ADVM=$fi->ADVM+$ADVM;
+                $AI=$fi->AI+$AI;
                 $poids=$fi->Poids+$poids;
                 }
             }
@@ -2927,10 +2970,10 @@ class PageEmployesController extends Controller
                     
             }
         }
-            $totalVentil=$Délégation+ $FRASAD+$Entraide+$Fédération+$Prestataire+$Voisineurs+$ADU+$Mandataires+$SOS+$ADVM;
+            $totalVentil=$Délégation+ $FRASAD+$Entraide+$Fédération+$Prestataire+$Voisineurs+$ADU+$Mandataires+$SOS+$ADVM+$AI;
             $diff=$poids-$totalVentil;
             return view('ADMIN/stat',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees,'fiiche'=>$fiiche,'Délégation'=>$Délégation,
-            'FRASAD'=>$FRASAD,'Entraide'=>$Entraide,'Fédération'=>$Fédération,'Prestataire'=>$Prestataire,'Voisineurs'=>$Voisineurs,
+            'FRASAD'=>$FRASAD,'Entraide'=>$Entraide,'Fédération'=>$Fédération,'Prestataire'=>$Prestataire,'Voisineurs'=>$Voisineurs,'AI'=>$AI,
             'ADU'=>$ADU,'Mandataires'=>$Mandataires,'SOS'=>$SOS,'ADVM'=>$ADVM,'totalVentil'=>$totalVentil,'poids'=>$poids,'diff'=>$diff,'year'=>$year
             ,'ferie'=>$ferie,'TR'=>$TR,'CP'=>$CP,'RTT'=>$RTT,'HRTT'=>$HRTT,'RCR'=>$RCR,'FOR'=>$FOR,'MAL'=>$MAL,'CF'=>$CF,'SS'=>$SS,'JS'=>$JS,
             'FerieJan'=>$FerieJan,'TRJan'=>$TRJan,'CPJan'=>$CPJan,'RTTJan'=>$RTTJan,'HRTTJan'=>$HRTTJan,'RCRJan'=>$RCRJan,'FORJan'=>$FORJan,

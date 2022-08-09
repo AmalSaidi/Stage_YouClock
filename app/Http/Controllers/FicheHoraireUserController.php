@@ -69,6 +69,7 @@ class FicheHoraireUserController extends Controller
         $SOS=0;
         $ADVM=0;
         $DELEG=0;
+        $AI=0;
         foreach ($ventilations as $v) {
             if(str_contains($v->ventilation, "Mandataires")){
                 $MANDA=1;
@@ -99,6 +100,9 @@ class FicheHoraireUserController extends Controller
             }
             if(str_contains($v->ventilation, "DELEGATION")){
                 $DELEG=1;
+            }
+            if(str_contains($v->ventilation, "AI")){
+                $AI=1;
             }
         }
         $horSemLun = DB::select('select DM,FM,DA,FA,DS,FS from semainetypes where idUser = ? AND jour="Lundi"',[$session_id]);
@@ -181,7 +185,7 @@ class FicheHoraireUserController extends Controller
         'debutMSamedi'=>$debutMSamedi,'finMSamedi'=>$finMSamedi,'debutASamedi'=>$debutASamedi,'finASamedi'=>$finASamedi,'debutSSamedi'=>$debutSSamedi,'finSSamedi'=>$finSSamedi,
         'debutMDimanche'=>$debutMDimanche,'finMDimanche'=>$finMDimanche,'debutADimanche'=>$debutADimanche,'finADimanche'=>$finADimanche,'debutSDimanche'=>$debutSDimanche,'finSDimanche'=>$finSDimanche,
         'MANDA'=>$MANDA,'FRAS'=>$FRAS,'ENTRAI'=>$ENTRAI,'FEDE'=>$FEDE,
-        'PRES'=>$PRES,'VOISI'=>$VOISI,'ADU'=>$ADU,'SOS'=>$SOS,'ADVM'=>$ADVM,'DELEG'=>$DELEG
+        'PRES'=>$PRES,'VOISI'=>$VOISI,'ADU'=>$ADU,'SOS'=>$SOS,'ADVM'=>$ADVM,'DELEG'=>$DELEG,'AI'=>$AI
     ]);
             }
     
@@ -539,6 +543,23 @@ class FicheHoraireUserController extends Controller
         else{
             ventilationfinal::where('idUser', $session_id)->where('ventilation', 'like', '%ADVM%')->delete();
         }
+        if(ventilation::where('idUser', $session_id)->where('ventilation', 'like', '%AI%')->count() > 0)
+        {
+            if(ventilationfinal::where('idUser', $session_id)->where('ventilation','AI')->count() <= 0)
+{
+            ventilationfinal::updateOrCreate(
+                ['idUser' => $session_id,'ventilation' => "'AI'"],
+                ['ventilation' => 'AI']
+            );
+        }
+        else{
+            DB::update('update ventilationfinals set codeV="AI" where idUser = ? and ventilation="AI"',
+            [$session_id]);
+        }
+    }
+        else{
+            ventilationfinal::where('idUser', $session_id)->where('ventilation', 'AI')->delete();
+        }
         foreach ($fichehor as $fi) {
             $DateFiche=$fi->Date;
             $ecartJour=$fi->heuresEffectu-$fi->Poids;
@@ -706,6 +727,7 @@ class FicheHoraireUserController extends Controller
         $SOS = $request->input('SOS');
         $ADVM = $request->input('ADVM');
         $Mandataires = $request->input('MANDA');
+        $AI = $request->input('AI');
         $matin = $matinD ." - " .$matinF;
         $aprem = $ApremD ." - " .$ApremF;
         $soir = $soirD ." - " .$soirF;
@@ -714,7 +736,7 @@ class FicheHoraireUserController extends Controller
         $hourdiffSoir = $soirF-$soirD;
         $pauseMidi = $ApremD-$matinF;
         $heuresEffectu = $hourdiffMat + $hourdiffAprem + $hourdiffSoir;
-        $poids= $DELEGATION+$FRASAD+$Entraide+$Federation+$prestataire+$voisineurs+$ADU+$SOS+$ADVM+$Mandataires;
+        $poids= $DELEGATION+$FRASAD+$Entraide+$Federation+$prestataire+$voisineurs+$ADU+$SOS+$ADVM+$Mandataires+$AI;
         $ecart=0;
         echo $pauseMidi;
         if($heuresEffectu>11){
@@ -779,6 +801,10 @@ class FicheHoraireUserController extends Controller
                     DB::update('update fichehors set Prestataire=? where id = ?',
                     [$prestataire,$id]);
                 }
+                if($v->ventilation == "AI"){
+                    DB::update('update fichehors set AI=? where id = ?',
+                    [$AI,$id]);
+                }
                 }
                 return redirect()->action(
                     [FicheHoraireUserController::class, 'index']
@@ -838,6 +864,10 @@ class FicheHoraireUserController extends Controller
             if($v->ventilation == "prestataire"){
                 DB::update('update fichehors set Prestataire=? where id = ?',
                 [$prestataire,$id]);
+            }
+            if($v->ventilation == "AI"){
+                DB::update('update fichehors set AI=? where id = ?',
+                [$AI,$id]);
             }
             }
             return redirect()->action(
@@ -979,6 +1009,7 @@ public function mesStats(Request $request) {
     $SOS=0;	
     $ADVM=0;	
     $Délégation=0;
+    $AI=0;
     $poids=0;
     $ferie=0;
     $TR=0;
@@ -1003,6 +1034,7 @@ public function mesStats(Request $request) {
         $Mandataires=$fi->Mandataires+$Mandataires;
         $SOS=$fi->SOSgarde+$SOS;
         $ADVM=$fi->ADVM+$ADVM;
+        $AI=$fi->AI+$AI;
         $poids=$fi->Poids+$poids;
         }
     }
@@ -1602,11 +1634,11 @@ public function mesStats(Request $request) {
             
     }
 }
-    $totalVentil=$Délégation+ $FRASAD+$Entraide+$Fédération+$Prestataire+$Voisineurs+$ADU+$Mandataires+$SOS+$ADVM;
+    $totalVentil=$Délégation+ $FRASAD+$Entraide+$Fédération+$Prestataire+$Voisineurs+$ADU+$Mandataires+$SOS+$ADVM+$AI;
     $diff=$poids-$totalVentil;
     if(!Gate::any(['access-admin', 'access-direction'])){
         return view('USER/statistiquesUser',['fiche'=>$fiche,'fiiche'=>$fiiche,'Délégation'=>$Délégation,
-    'FRASAD'=>$FRASAD,'Entraide'=>$Entraide,'Fédération'=>$Fédération,'Prestataire'=>$Prestataire,'Voisineurs'=>$Voisineurs,
+    'FRASAD'=>$FRASAD,'Entraide'=>$Entraide,'Fédération'=>$Fédération,'Prestataire'=>$Prestataire,'Voisineurs'=>$Voisineurs,'AI'=>$AI,
     'ADU'=>$ADU,'Mandataires'=>$Mandataires,'SOS'=>$SOS,'ADVM'=>$ADVM,'totalVentil'=>$totalVentil,'poids'=>$poids,'diff'=>$diff,'year'=>$year
     ,'ferie'=>$ferie,'TR'=>$TR,'CP'=>$CP,'RTT'=>$RTT,'HRTT'=>$HRTT,'RCR'=>$RCR,'FOR'=>$FOR,'MAL'=>$MAL,'CF'=>$CF,'SS'=>$SS,'JS'=>$JS,
     'FerieJan'=>$FerieJan,'TRJan'=>$TRJan,'CPJan'=>$CPJan,'RTTJan'=>$RTTJan,'HRTTJan'=>$HRTTJan,'RCRJan'=>$RCRJan,'FORJan'=>$FORJan,
@@ -1637,7 +1669,7 @@ public function mesStats(Request $request) {
 ]);
         }
     return view('ADMIN/statistiquesUser',['fiche'=>$fiche,'fiiche'=>$fiiche,'Délégation'=>$Délégation,
-    'FRASAD'=>$FRASAD,'Entraide'=>$Entraide,'Fédération'=>$Fédération,'Prestataire'=>$Prestataire,'Voisineurs'=>$Voisineurs,
+    'FRASAD'=>$FRASAD,'Entraide'=>$Entraide,'Fédération'=>$Fédération,'Prestataire'=>$Prestataire,'Voisineurs'=>$Voisineurs,'AI'=>$AI,
     'ADU'=>$ADU,'Mandataires'=>$Mandataires,'SOS'=>$SOS,'ADVM'=>$ADVM,'totalVentil'=>$totalVentil,'poids'=>$poids,'diff'=>$diff,'year'=>$year
     ,'ferie'=>$ferie,'TR'=>$TR,'CP'=>$CP,'RTT'=>$RTT,'HRTT'=>$HRTT,'RCR'=>$RCR,'FOR'=>$FOR,'MAL'=>$MAL,'CF'=>$CF,'SS'=>$SS,'JS'=>$JS,
     'FerieJan'=>$FerieJan,'TRJan'=>$TRJan,'CPJan'=>$CPJan,'RTTJan'=>$RTTJan,'HRTTJan'=>$HRTTJan,'RCRJan'=>$RCRJan,'FORJan'=>$FORJan,
@@ -1795,6 +1827,7 @@ public function searchStat(Request $request) {
     $SOS=0;	
     $ADVM=0;	
     $Délégation=0;
+    $AI=0;
     $poids=0;
     $ferie=0;
     $TR=0;
@@ -1819,6 +1852,7 @@ public function searchStat(Request $request) {
         $Mandataires=$fi->Mandataires+$Mandataires;
         $SOS=$fi->SOSgarde+$SOS;
         $ADVM=$fi->ADVM+$ADVM;
+        $AI=$fi->AI+$AI;
         $poids=$fi->Poids+$poids;
         }
     }
@@ -2418,11 +2452,11 @@ public function searchStat(Request $request) {
             
     }
 }
-    $totalVentil=$Délégation+ $FRASAD+$Entraide+$Fédération+$Prestataire+$Voisineurs+$ADU+$Mandataires+$SOS+$ADVM;
+    $totalVentil=$Délégation+ $FRASAD+$Entraide+$Fédération+$Prestataire+$Voisineurs+$ADU+$Mandataires+$SOS+$ADVM+$AI;
     $diff=$poids-$totalVentil;
     if(!Gate::any(['access-admin', 'access-direction'])){
         return view('USER/statistiquesUser',['fiche'=>$fiche,'fiiche'=>$fiiche,'Délégation'=>$Délégation,
-        'FRASAD'=>$FRASAD,'Entraide'=>$Entraide,'Fédération'=>$Fédération,'Prestataire'=>$Prestataire,'Voisineurs'=>$Voisineurs,
+        'FRASAD'=>$FRASAD,'Entraide'=>$Entraide,'Fédération'=>$Fédération,'Prestataire'=>$Prestataire,'Voisineurs'=>$Voisineurs,'AI'=>$AI,
         'ADU'=>$ADU,'Mandataires'=>$Mandataires,'SOS'=>$SOS,'ADVM'=>$ADVM,'totalVentil'=>$totalVentil,'poids'=>$poids,'diff'=>$diff,'year'=>$year
         ,'ferie'=>$ferie,'TR'=>$TR,'CP'=>$CP,'RTT'=>$RTT,'HRTT'=>$HRTT,'RCR'=>$RCR,'FOR'=>$FOR,'MAL'=>$MAL,'CF'=>$CF,'SS'=>$SS,'JS'=>$JS,
         'FerieJan'=>$FerieJan,'TRJan'=>$TRJan,'CPJan'=>$CPJan,'RTTJan'=>$RTTJan,'HRTTJan'=>$HRTTJan,'RCRJan'=>$RCRJan,'FORJan'=>$FORJan,
@@ -2453,7 +2487,7 @@ public function searchStat(Request $request) {
     ]);
     }
     return view('ADMIN/statistiquesUser',['fiche'=>$fiche,'fiiche'=>$fiiche,'Délégation'=>$Délégation,
-    'FRASAD'=>$FRASAD,'Entraide'=>$Entraide,'Fédération'=>$Fédération,'Prestataire'=>$Prestataire,'Voisineurs'=>$Voisineurs,
+    'FRASAD'=>$FRASAD,'Entraide'=>$Entraide,'Fédération'=>$Fédération,'Prestataire'=>$Prestataire,'Voisineurs'=>$Voisineurs,'AI'=>$AI,
     'ADU'=>$ADU,'Mandataires'=>$Mandataires,'SOS'=>$SOS,'ADVM'=>$ADVM,'totalVentil'=>$totalVentil,'poids'=>$poids,'diff'=>$diff,'year'=>$year
     ,'ferie'=>$ferie,'TR'=>$TR,'CP'=>$CP,'RTT'=>$RTT,'HRTT'=>$HRTT,'RCR'=>$RCR,'FOR'=>$FOR,'MAL'=>$MAL,'CF'=>$CF,'SS'=>$SS,'JS'=>$JS,
     'FerieJan'=>$FerieJan,'TRJan'=>$TRJan,'CPJan'=>$CPJan,'RTTJan'=>$RTTJan,'HRTTJan'=>$HRTTJan,'RCRJan'=>$RCRJan,'FORJan'=>$FORJan,

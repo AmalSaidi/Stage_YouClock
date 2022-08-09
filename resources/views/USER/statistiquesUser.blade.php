@@ -83,6 +83,10 @@
         <td>Délégation</td>
         <td id="secondCol">{{$Délégation}}</td>
     </tr>
+    <tr>
+        <td>AI</td>
+        <td id="secondCol">{{$AI}}</td>
+    </tr>
   </tbody>
     </table>
     <table class="table-bordered" id="fiches2">

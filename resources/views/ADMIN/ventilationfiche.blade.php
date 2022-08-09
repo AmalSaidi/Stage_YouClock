@@ -117,6 +117,10 @@
         <td>Délégation</td>
         <td>{{$Délégation}}</td>
     </tr>
+    <tr>
+        <td>AI</td>
+        <td>{{$AI}}</td>
+    </tr>
   </tbody>
     </table>
     <div id="controle">

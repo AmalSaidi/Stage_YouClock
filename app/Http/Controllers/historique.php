@@ -379,6 +379,23 @@ class historique extends Controller
             else{
                 ventilationfinal::where('idUser', $session_id)->where('ventilation', 'like', '%ADVM%')->delete();
             }
+            if(ventilation::where('idUser', $session_id)->where('ventilation', 'like', '%AI%')->count() > 0)
+            {
+                if(ventilationfinal::where('idUser', $session_id)->where('ventilation','AI')->count() <= 0)
+    {
+                ventilationfinal::updateOrCreate(
+                    ['idUser' => $session_id,'ventilation' => '"AI"'],
+                    ['ventilation' => 'AI']
+                );
+            }
+            else{
+                DB::update('update ventilationfinals set codeV="AI" where idUser = ? and ventilation="AI"',
+                [$session_id]);
+            }
+        }
+            else{
+                ventilationfinal::where('idUser', $session_id)->where('ventilation','AI')->delete();
+            }
             foreach ($fichehor as $fi) {
                 $DateFiche=$fi->Date;
                 $ecartJour=$fi->heuresEffectu-$fi->Poids;
@@ -532,6 +549,7 @@ class historique extends Controller
             $SOS=0;
             $ADVM=0;
             $DELEG=0;
+            $AI=0;
 
             foreach ($ventilations as $v) {
                 if(str_contains($v->ventilation, "Mandataires")){
@@ -563,6 +581,9 @@ class historique extends Controller
                 }
                 if(str_contains($v->ventilation, "DELEGATION")){
                     $DELEG=1;
+                }
+                if(str_contains($v->ventilation, "AI")){
+                    $AI=1;
                 }
             }
             $horSemLun = DB::select('select DM,FM,DA,FA,DS,FS from semainetypes where idUser = ? AND jour="Lundi"',[$session_id]);
@@ -645,7 +666,7 @@ class historique extends Controller
             'debutMSamedi'=>$debutMSamedi,'finMSamedi'=>$finMSamedi,'debutASamedi'=>$debutASamedi,'finASamedi'=>$finASamedi,'debutSSamedi'=>$debutSSamedi,'finSSamedi'=>$finSSamedi,
             'debutMDimanche'=>$debutMDimanche,'finMDimanche'=>$finMDimanche,'debutADimanche'=>$debutADimanche,'finADimanche'=>$finADimanche,'debutSDimanche'=>$debutSDimanche,'finSDimanche'=>$finSDimanche
             ,'MANDA'=>$MANDA,'FRAS'=>$FRAS,'ENTRAI'=>$ENTRAI,'FEDE'=>$FEDE,
-            'PRES'=>$PRES,'VOISI'=>$VOISI,'ADU'=>$ADU,'SOS'=>$SOS,'ADVM'=>$ADVM,'DELEG'=>$DELEG
+            'PRES'=>$PRES,'VOISI'=>$VOISI,'ADU'=>$ADU,'SOS'=>$SOS,'ADVM'=>$ADVM,'DELEG'=>$DELEG,'AI'=>$AI
         ]);
                 }
                 public function edit(Request $request,$id) {
@@ -674,6 +695,7 @@ class historique extends Controller
                     $ADU = $request->input('ADU');
                     $SOS = $request->input('SOS');
                     $ADVM = $request->input('ADVM');
+                    $AI = $request->input('AI');
                     $Mandataires = $request->input('MANDA');
                     $matin = $matinD ." - " .$matinF;
                     $aprem = $ApremD ." - " .$ApremF;
@@ -683,7 +705,7 @@ class historique extends Controller
                     $hourdiffSoir = $soirF-$soirD;
                     $pauseMidi = $ApremD-$matinF;
                     $heuresEffectu = $hourdiffMat + $hourdiffAprem + $hourdiffSoir;
-                    $poids= $DELEGATION+$FRASAD+$Entraide+$Federation+$prestataire+$voisineurs+$ADU+$SOS+$ADVM+$Mandataires;
+                    $poids= $DELEGATION+$FRASAD+$Entraide+$Federation+$prestataire+$voisineurs+$ADU+$SOS+$ADVM+$Mandataires+$AI;
                     $ecart=0;
                     echo $pauseMidi;
                     if($heuresEffectu>11){
@@ -748,6 +770,10 @@ class historique extends Controller
                                 DB::update('update fichehors set Prestataire=? where id = ?',
                                 [$prestataire,$id]);
                             }
+                            if($v->ventilation == "AI"){
+                                DB::update('update fichehors set AI=? where id = ?',
+                                [$AI,$id]);
+                            }
                             }
                             return redirect()->action(
                                 [historique::class, 'details'], ['idfiche' => $idFi]
@@ -807,6 +833,10 @@ class historique extends Controller
                         if($v->ventilation == "prestataire"){
                             DB::update('update fichehors set Prestataire=? where id = ?',
                             [$prestataire,$id]);
+                        }
+                        if($v->ventilation == "AI"){
+                            DB::update('update fichehors set AI=? where id = ?',
+                            [$AI,$id]);
                         }
                         }
                         return redirect()->action(

@@ -177,7 +177,13 @@
       <input type="checkbox" value="DELEGATION" name="ventilation[]">
 @endif
 <label for="DELEGATION">DELEGATION</label>
-
+<br>
+     @if($AI==1)   
+      <input type="checkbox" value="AI" name="ventilation[]" checked>
+      @else
+      <input type="checkbox" value="AI" name="ventilation[]">
+      @endif
+      <label for="AI">AI</label>
 </div>
 <br>
       <div id="maj-venti"><button type=submit class="btn btn-success">Mettre à jour la ventilation</button></div>

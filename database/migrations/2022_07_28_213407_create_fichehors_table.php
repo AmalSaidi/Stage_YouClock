@@ -50,6 +50,7 @@ class CreateFichehorsTable extends Migration
             $table->float ('SOSgarde')->nullable();
             $table->float ('ADVM')->nullable();
             $table->float ('DELEGATION')->nullable();
+            $table->float ('AI')->nullable();
         });
     }
 

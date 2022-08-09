@@ -315,6 +315,12 @@
                 <td><input onblur="findTotal()" class="nume" name="DELEG" type="number" value="{{ old('DELEG',$affichage[0]->DELEGATION	) }}" placeholder="" step="0.01" min="0"></td>
             </tr>
          @endif
+         @if($AI==1)
+            <tr>
+                <td>AI</td>
+                <td><input onblur="findTotal()" class="nume" name="AI" type="number" value="{{ old('AI',$affichage[0]->AI	) }}" placeholder="" step="0.01" min="0"></td>
+            </tr>
+         @endif
         </tbody>
     </table>
     <div>
