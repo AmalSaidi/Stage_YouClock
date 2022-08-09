@@ -112,16 +112,18 @@ $Valide="Valide";
 @if($ajout==1)
 @if($aff->statutF=="EnCours" )
 <div style="text-align:center;">
-<form action = "/FicheHoraire/valider" method = "post">
+<form action = "/FicheHoraire/Details/user/{{ $aff->idfiche }}/{{ $aff->idUser }}/valider"  method = "post" id="form11">
     <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
     <input type="hidden" name="idfiche" value="{{ $aff->idfiche }}">
+    <input type="hidden" name="idUser" value="{{ $aff->idUser }}">
     <button type="submit" class="btn btn-success" id="Valider">Valider</button>
     </form>
     @else
     <div style="text-align:center;">
-<form action = "/FicheHoraire/valider" method = "post">
+<form action = "" method = "post" id="form11">
     <input type = "hidden" name = "_token" value = "<?php echo csrf_token(); ?>">
     <input type="hidden" name="idfiche" value="{{ $aff->idfiche }}">
+    <input type="hidden" name="idfiche" value="{{ $aff->idUser }}">
     <button type="submit" class="btn btn-success" id="Valider" disabled>Valider</button>
     </form>
 @endif

@@ -62,7 +62,7 @@ $se5=0;
         {{ session('status') }}
     </div>
 @endif
-@if(Auth::user()->admin==1 AND Auth::user()->direction==1)
+@if(Auth::user()->direction==1)
 <div id="vue" style="text-align-last: right;">
 <form method="post" action="/FicheHoraire/Details/direction" id="form5" class="direction" style="float: left;"> <td>
                 {{ csrf_field() }}

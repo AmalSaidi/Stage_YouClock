@@ -25,6 +25,15 @@ class PageEmployesController extends Controller
         $this->middleware('auth');
     }
 
+    public function ValiderFicheHoraire(Request $request,$idF,$idU) {
+        $user=Auth::user();
+        $session_id = $user->identifiant;
+        $idFiche = $request->input('idfiche');
+        $idUser = $request->input('idUser');
+        DB::update('update fichehors set statutF="AttValiRS" where idfiche = ? and idUser = ?',[$idFiche,$idUser]);
+        return redirect()->back();
+        }
+
     public function index(){
         $user=Auth::user();
         $session_str = $user->service;
@@ -1736,7 +1745,7 @@ class PageEmployesController extends Controller
                 ,'depassement'=>$depassement,'sem1'=>$sem1,'sem2'=>$sem2,'sem3'=>$sem3,'sem4'=>$sem4,'sem5'=>$sem5,'NR'=>$NR,'fiiche'=>$fiiche]);
                 }*/
     
-                if($user->admin==1 AND $user->direction==1){
+                if($user->direction==1){
                     if($user->SeeAsAdmin==1){
                     return view('ADMIN/FicheHoraireDetails',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees
                     ,'depassement'=>$depassement,'sem1'=>$sem1,'sem2'=>$sem2,'sem3'=>$sem3,'sem4'=>$sem4,'sem5'=>$sem5,'NR'=>$NR,'fiiche'=>$fiiche]);

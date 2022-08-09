@@ -112,9 +112,10 @@ Route::get('/MesStatistiques', [FicheHoraireUserController::class, 'mesStats']);
 Route::post('/MesStatistiques', [FicheHoraireUserController::class, 'searchStat']);
 Route::post('/ajouterFiche', [PageEmployesController::class, 'ajouterFiche']);
 Route::post('/FicheHoraire/Details/user/{idfiche}/{idUser}', [PageEmployesController::class, 'VueUserFiche']);
-Route::get('/FicheHoraire/Details/utilisateur/{idfiche}/{idUser}', [PageEmployesController::class, 'VueUserFiche'])->name('ficheBack');;
+Route::get('/FicheHoraire/Details/user/{idfiche}/{idUser}', [PageEmployesController::class, 'VueUserFiche'])->name('ficheBack');
 Route::get('/edit/utilisateur/{id}/{idUser}', [PageEmployesController::class, 'showDetails']);
 Route::post('/edit/utilisateur/{id}/{idUser}',[PageEmployesController::class, 'editFiche']);
+Route::post('/FicheHoraire/Details/user/{idfiche}/{idUser}/valider', [PageEmployesController::class, 'ValiderFicheHoraire']);
 
 
 

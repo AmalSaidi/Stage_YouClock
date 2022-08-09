@@ -71,10 +71,8 @@
 <p style="float:left;">Typologie de contrat</p>
 <div id="type-contrat"><small>Type de contrat</small><br>{{ $employe->TypeContrat }}</div>
 </select>
-<div dropdown-menu id="temps-travail"><small>Temps du contrat</small><br>Temps Partiel</div>
-<div id="joursNonTravail"><small>Jour non travaillé</small><br>Mercredi</div>
+<div dropdown-menu id="temps-travail"><small>Heures à réaliser par mois</small><br>{{ $employe->heuresParMois }}</div>
 <div id="semaine-type"><button id="semaineTypeButton" onclick="openForm3(modal);">Semaine type de l'employé</button></div>
-<div id="Heures-mois"><small>Heures à réaliser par mois</small><br>35</div>
 </div>
 </div>
 
