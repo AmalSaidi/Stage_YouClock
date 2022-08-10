@@ -75,8 +75,7 @@
     <button id="ventilation"><a href ='/ventilation/{{ $employe->id }}'>Ventilation</a></button>
     <button id="stat"><a href="/statistiques/{{ $employe->id }}" style="color:white;">Statistiques</a></button>
     @endforeach
-</div>  
-
+</div>
     <table class="table-bordered" id="fiches1">
         <thead class="thead">
     <tr id="head-table">

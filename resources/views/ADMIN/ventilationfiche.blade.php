@@ -68,8 +68,17 @@
     <button id="stat"><a href="/statistiques/{{ $employe->id }}">Statistiques</a></button>
     @endforeach
 </div>  
-
     <table class="table-bordered" id="fiches">
+
+<thead>
+<th colspan=2>
+@foreach($fiche as $f)
+@once
+{{ $f->idfiche }}
+@endonce
+@endforeach
+</th>
+</thead>
         <thead class="thead">
     <tr id="head-table">
       <th scope="col">Ventilation analytique</th>
