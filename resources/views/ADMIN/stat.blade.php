@@ -89,10 +89,6 @@
         <td id="secondCol">{{$FRASAD}}</td>
     </tr>
     <tr>
-        <td>Entraide familiale</td>
-        <td id="secondCol">{{$Entraide}}</td>
-    </tr>
-    <tr>
         <td>Fédération</td>
         <td id="secondCol">{{$Fédération}}</td>
     </tr>

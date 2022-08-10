@@ -108,12 +108,12 @@
 @endif
       <label for="FRASAD">FRASAD</label>
       <br>
-      @if($ENTRAI==1)
-      <input type="checkbox" value="Entraide familiale" name="ventilation[]" checked>
+      @if($AI==1)   
+      <input type="checkbox" value="AI" name="ventilation[]" checked>
       @else
-      <input type="checkbox" value="Entraide familiale" name="ventilation[]">
+      <input type="checkbox" value="AI" name="ventilation[]">
       @endif
-      <label for="Entraide familiale">Entraide familiale</label>
+      <label for="AI">AI</label>
       <br>
       @if($FEDE==1)
       <input type="checkbox" value="Federation" name="ventilation[]" checked>
@@ -177,13 +177,6 @@
       <input type="checkbox" value="DELEGATION" name="ventilation[]">
 @endif
 <label for="DELEGATION">DELEGATION</label>
-<br>
-     @if($AI==1)   
-      <input type="checkbox" value="AI" name="ventilation[]" checked>
-      @else
-      <input type="checkbox" value="AI" name="ventilation[]">
-      @endif
-      <label for="AI">AI</label>
 </div>
 <br>
       <div id="maj-venti"><button type=submit class="btn btn-success">Mettre à jour la ventilation</button></div>

@@ -82,10 +82,6 @@
         <td>{{$FRASAD}}</td>
     </tr>
     <tr>
-        <td>Entraide familiale</td>
-        <td>{{$Entraide}}</td>
-    </tr>
-    <tr>
         <td>Fédération</td>
         <td>{{$Fédération}}</td>
     </tr>
