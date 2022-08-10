@@ -105,6 +105,7 @@
       <th scope="col">Date</th>
       <th scope="col">Statut de la fiche horaire</th>
       <th scope="col"></th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
@@ -125,7 +126,13 @@
   @endif
   
   </td>
-  <td>
+  <form id="form2" action="" method="POST">
+        {{ csrf_field() }}
+        <input type="hidden" name="idFiiche" value="{{$f->idfiche}}"/>
+        <input type="hidden" name="idUUser" value="{{$f->idUser}}"/>
+  <td><button type="submit" id="export">activer la modification</button></td>
+</form>
+<td>
   <form id="form2" action="/Fichehoraire/{{ $employe->id }}/export" method="POST">
         {{ csrf_field() }}
 <input type="hidden" name="idF" value="{{$f->idfiche}}"/>

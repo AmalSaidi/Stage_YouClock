@@ -94,6 +94,7 @@ Route::get('/RH/semaineType/{id}', [PageEmployesController::class, 'showST']);
 Route::post('/RH/semaineType/{id}', [PageEmployesController::class, 'ajouterST']);
 Route::post('/searchFiche/{id}', [PageEmployesController::class, 'searchFiche']);
 Route::get('/FicheHoraire/{id}', [PageEmployesController::class, 'showFiche'])->name('fiches');
+Route::post('/FicheHoraire/{id}', [PageEmployesController::class, 'activerAcces'])->name('activerAcces');
 Route::post('/Fichehoraire/{id}/export', [PageEmployesController::class, 'export'])->name('AllFiches.details');
 Route::get('/FicheHoraire/Details/{id}/{idfiche}', [PageEmployesController::class, 'showFicheComplete']);
 Route::post('/FicheHoraire/Details/{id}/{idfiche}/export', [PageEmployesController::class, 'export2'])->name('fichesDetails.details');

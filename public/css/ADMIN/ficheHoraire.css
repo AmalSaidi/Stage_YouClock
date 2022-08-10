@@ -436,7 +436,7 @@ margin-right: 20px;
 }
 
 .table-bordered{
-    width: 70%;
+    width: 80%;
     text-align: center;
 }
 
@@ -451,10 +451,11 @@ margin-right: 20px;
     padding: 2 10 2 10;
     float: left;
     font-size: small;
-    margin-left: 180;
+    margin-left: 50;
 }
 #statut2{
     text-align: center;
+    width: 450;
 }
 #dateFiche{
     width: 200;
@@ -466,7 +467,7 @@ margin-right: 20px;
     padding: 2 10 2 10;
     float: left;
     font-size: small;
-    margin-left: 300;
+    margin-left: 180;
 }
 
 #valideRS{
@@ -476,7 +477,7 @@ margin-right: 20px;
     padding: 2 10 2 10;
     float: left;
     font-size: small;
-    margin-left: 210;
+    margin-left: 100;
 }
 
 #valide{
@@ -486,7 +487,7 @@ margin-right: 20px;
     padding: 2 10 2 10;
     float: left;
     font-size: small;
-    margin-left: 300;
+    margin-left: 189;
 }
 
 #enAttRSS{

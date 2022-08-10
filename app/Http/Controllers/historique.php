@@ -708,15 +708,78 @@ class historique extends Controller
                     $poids= $DELEGATION+$FRASAD+$Entraide+$Federation+$prestataire+$voisineurs+$ADU+$SOS+$ADVM+$Mandataires+$AI;
                     $ecart=0;
                     echo $pauseMidi;
+                    if($typeJour=="CP"){
+                        DB::update('update fichehors set matinD = ?,matinF = ?,ApremD=?, ApremF = ?,
+                        soirD=?, soirF=?,matin=?,heuresEffectu=?,activite1=?,aprem=?,soir=?,activite2=?,
+                        activite3=?,Poids=?,typeJour=? where id = ?',
+                        [NUll,NULL,NULL,NULL,NULL,NULL,"-","0","CP","-",
+                        "-","CP","CP","0",$typeJour,$id]);
+                        return redirect()->action(
+                            [historique::class, 'details'], ['idfiche' => $idFi]
+                        );
+                    }
+                    if($typeJour=="repos"){
+                        DB::update('update fichehors set matinD = ?,matinF = ?,ApremD=?, ApremF = ?,
+                        soirD=?, soirF=?,matin=?,heuresEffectu=?,activite1=?,aprem=?,soir=?,activite2=?,
+                        activite3=?,Poids=?,typeJour=? where id = ?',
+                        [NUll,NULL,NULL,NULL,NULL,NULL,"-","0","repos","-",
+                        "-","repos","repos","0",$typeJour,$id]);
+                        return redirect()->action(
+                            [historique::class, 'details'], ['idfiche' => $idFi]
+                        );
+                    }
+                    if($typeJour=="RCR"){
+                        DB::update('update fichehors set matinD = ?,matinF = ?,ApremD=?, ApremF = ?,
+                        soirD=?, soirF=?,matin=?,heuresEffectu=?,activite1=?,aprem=?,soir=?,activite2=?,
+                        activite3=?,Poids=?,typeJour=? where id = ?',
+                        [NUll,NULL,NULL,NULL,NULL,NULL,"-","0","RCR","-",
+                        "-","RCR","RCR","0",$typeJour,$id]);
+                        return redirect()->action(
+                            [historique::class, 'details'], ['idfiche' => $idFi]
+                        );
+                    }
+                    if($typeJour=="Maladie"){
+                        DB::update('update fichehors set matinD = ?,matinF = ?,ApremD=?, ApremF = ?,
+                        soirD=?, soirF=?,matin=?,heuresEffectu=?,activite1=?,aprem=?,soir=?,activite2=?,
+                        activite3=?,Poids=?,typeJour=? where id = ?',
+                        [NUll,NULL,NULL,NULL,NULL,NULL,"-","0","M","-",
+                        "-","M","M","0",$typeJour,$id]);
+                        return redirect()->action(
+                            [historique::class, 'details'], ['idfiche' => $idFi]
+                        );
+                        
+                    }
+                    if($typeJour=="Congés familiaux"){
+                        DB::update('update fichehors set matinD = ?,matinF = ?,ApremD=?, ApremF = ?,
+                        soirD=?, soirF=?,matin=?,heuresEffectu=?,activite1=?,aprem=?,soir=?,activite2=?,
+                        activite3=?,Poids=?,typeJour=? where id = ?',
+                        [NUll,NULL,NULL,NULL,NULL,NULL,"-","0","CF","-",
+                        "-","CF","CF","0",$typeJour,$id]);
+                        return redirect()->action(
+                            [historique::class, 'details'], ['idfiche' => $idFi]
+                        );
+                        
+                    }
+                    if($typeJour=="Sans soldes"){
+                        DB::update('update fichehors set matinD = ?,matinF = ?,ApremD=?, ApremF = ?,
+                        soirD=?, soirF=?,matin=?,heuresEffectu=?,activite1=?,aprem=?,soir=?,activite2=?,
+                        activite3=?,Poids=?,typeJour=? where id = ?',
+                        [NUll,NULL,NULL,NULL,NULL,NULL,"-","0","S","-",
+                        "-","S","S","0",$typeJour,$id]);
+                        return redirect()->action(
+                            [historique::class, 'details'], ['idfiche' => $idFi]
+                        );
+                        
+                    }
                     if($heuresEffectu>11){
                         return redirect()->back()->with('status', 'La durée du jour ne peut pas être supérieur à 11 heures');
                     }
-                    if($hourdiffMat>=6){
-                        return redirect()->back()->with('status', 'La durée de matin ne peut pas être supérrieure à 6heures');
-                    }elseif($hourdiffAprem>=6){
-                        return redirect()->back()->with('status', 'La durée de l\'après-midi ne peut pas être supérrieure à 6heures');
-                    }elseif($hourdiffSoir>=6){
-                        return redirect()->back()->with('status', 'La durée de soir ne peut pas être supérrieure à 6heures');
+                    if($hourdiffMat>6){
+                        return redirect()->back()->with('status', 'La durée de matin ne peut pas être supérieure à 6heures');
+                    }elseif($hourdiffAprem>6){
+                        return redirect()->back()->with('status', 'La durée de l\'après-midi ne peut pas être supérieure à 6heures');
+                    }elseif($hourdiffSoir>6){
+                        return redirect()->back()->with('status', 'La durée de soir ne peut pas être supérieure à 6heures');
                     }
                     if($heuresEffectu!=$poids){
                         $message="u cant";
