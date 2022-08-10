@@ -10,7 +10,7 @@
     
 <div class="input-group mb-3">
   <div class="form-outline">
-  <form method="post" action="" type="get" > <td>
+  <form method="post" action="/search" type="get" > <td>
                 {{ csrf_field() }}
         <input type="search" id="form1" name="search" class="form-control" placeholder="Rechercher" />
       </form>
