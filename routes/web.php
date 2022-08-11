@@ -118,8 +118,9 @@ Route::get('/FicheHoraire/Details/user/{idfiche}/{idUser}', [PageEmployesControl
 Route::get('/edit/utilisateur/{id}/{idUser}', [PageEmployesController::class, 'showDetails']);
 Route::post('/edit/utilisateur/{id}/{idUser}',[PageEmployesController::class, 'editFiche']);
 Route::post('/FicheHoraire/Details/user/{idfiche}/{idUser}/valider', [PageEmployesController::class, 'ValiderFicheHoraire']);
-
-
+Route::post('/FicheHoraire/depa/{id}/{idfiche}', [PageEmployesController::class, 'showDep']);
+Route::get('depassements/edit/{id}',[PageEmployesController::class, 'showDepInfos']);
+Route::post('depassements/edit/{id}',[PageEmployesController::class, 'editDep']);
 
 
 

@@ -419,9 +419,9 @@ $se5=0;
                     <td style="padding: 1 9 1 10;">{{$F}}</td>
                 </tr>
                 @php
-                $DIF=$P-$F;
+                $DIF=$F-$P;
                 @endphp
-                @if($DIF==0)
+                @if($DIF>=0)
                 <tr id="trContr" style="background-color:#8bcfa5">
                     <td style="PADDING: 5 2 5 10;">différence</td>
                     <td style="padding: 1 9 1 10;">{{$DIF}}.</td>

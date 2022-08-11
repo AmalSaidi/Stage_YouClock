@@ -142,8 +142,8 @@
                     <td style="PADDING: 5 2 5 10;">Total effectué dans le mois</td>
                     <td style="padding: 1 9 1 10;">{{$totalVentil}}</td>
                 </tr>
-                @if($totalVentil==$poids)
-                <tr id="trContr" style="background-color:#8bcfa5">
+                @if($totalVentil<$poids)
+                <tr id="trContr" style="background-color:#d48086;">
                     <td style="PADDING: 5 2 5 10;">différence</td>
                     <td style="padding: 1 9 1 10;">{{$diff}}</td>
                 </tr>
@@ -169,13 +169,12 @@
                 <input type="hidden" name="SOS" value="{{ $SOS }}">
                 <input type="hidden" name="ADVM" value="{{ $ADVM }}">
                 <input type="hidden" name="Délégation" value="{{ $Délégation }}">
-                <td colspan="2"id="ValiderFiche"><button id="validerButtonY" type="submit" class="btn btn-primary">valider la fiche</button></td>
                 </form>
                 </tr>
                 @endonce
                 @endforeach
                 @else
-                <tr id="trContr" style="background-color:#d48086;">
+                <tr id="trContr" style="background-color:#8bcfa5;">
                 <td style="PADDING: 5 2 5 10;">différence</td>
                     <td style="padding: 1 9 1 10;">{{$diff}}</td>
                 </tr>

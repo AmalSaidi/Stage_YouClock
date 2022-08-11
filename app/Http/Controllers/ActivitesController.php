@@ -53,14 +53,15 @@ class ActivitesController extends Controller
         return view('ADMIN/activite_update',['activites'=>$activites]);
         }
 
-    public function edit(Request $request,$id) {
+    public function edit(Request $request) {
         if(!Gate::any(['access-admin', 'access-direction'])){
             abort('403');
             }
-        $code = $request->input('code');
-        $libellé = $request->input('libelle');
-        $Poids = $request->input('poids');
-        DB::update('update activites set code = ?,libellé = ?,Poids=? where id = ?',[$code,$libellé,$Poids,$id]);
+        $semaine = $request->input('semaine');
+        $nombreH = $request->input('nombreH');
+        $motif = $request->input('motif');
+        $id = $request->input('id');
+        DB::update('update depassements set semaine = ?,nombreH = ?, motif=? where id = ?',[$semaine,$nombreH,$motif,$id]);
         return redirect('/activites');
         }
 

@@ -1152,7 +1152,7 @@ class PageEmployesController extends Controller
                 $AI=$fi->AI+$AI;
             }
             $totalVentil=$Délégation+ $FRASAD+$Entraide+$Fédération+$Prestataire+$Voisineurs+$ADU+$Mandataires+$SOS+$ADVM+$AI;
-            $diff=$poids-$totalVentil;
+            $diff=$totalVentil-$poids;
             return view('ADMIN/ventilationfiche',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees,'fiiche'=>$fiiche,'Délégation'=>$Délégation,
             'FRASAD'=>$FRASAD,'Entraide'=>$Entraide,'Fédération'=>$Fédération,'Prestataire'=>$Prestataire,'Voisineurs'=>$Voisineurs,'AI'=>$AI,
             'ADU'=>$ADU,'Mandataires'=>$Mandataires,'SOS'=>$SOS,'ADVM'=>$ADVM,'totalVentil'=>$totalVentil,'poids'=>$poids,'diff'=>$diff,'fiicheS'=>$fiicheS]);
@@ -1197,6 +1197,114 @@ class PageEmployesController extends Controller
                 idFiche LIKE "%Novembre%"',[$id]);
                 $depassementDec =  DB::select('select * from depassements where identifiant = (select identifiant from employes where id = ?) and
                 idFiche LIKE "%Décembre%"',[$id]);
+                $ecartJan =  DB::select('select * from fichehors where idUser = (select identifiant from employes where id = ?) and
+                idfiche LIKE "%Janvier%"',[$id]);
+                $ecartFev =  DB::select('select * from fichehors where idUser = (select identifiant from employes where id = ?) and
+                idfiche LIKE "%Février%"',[$id]);
+                $ecartMar =  DB::select('select * from fichehors where idUser = (select identifiant from employes where id = ?) and
+                idfiche LIKE "%Mars%"',[$id]);
+                $ecartAvr =  DB::select('select * from fichehors where idUser = (select identifiant from employes where id = ?) and
+                idfiche LIKE "%Avril%"',[$id]);
+                $ecartMai =  DB::select('select * from fichehors where idUser = (select identifiant from employes where id = ?) and
+                idfiche LIKE "%Mai%"',[$id]);
+                $ecarJuin =  DB::select('select * from fichehors where idUser = (select identifiant from employes where id = ?) and
+                idfiche LIKE "%Juin%"',[$id]);
+                $ecartJuillet =  DB::select('select * from fichehors where idUser = (select identifiant from employes where id = ?) and
+                idfiche LIKE "%Juillet%"',[$id]);
+                $ecartAout =  DB::select('select * from fichehors where idUser = (select identifiant from employes where id = ?) and
+                idfiche LIKE "%Août%"',[$id]);
+                $ecartSept =  DB::select('select * from fichehors where idUser = (select identifiant from employes where id = ?) and
+                idfiche LIKE "%Septembre%"',[$id]);
+                $ecartOct =  DB::select('select * from fichehors where idUser = (select identifiant from employes where id = ?) and
+                idfiche LIKE "%Octobre%"',[$id]);
+                $ecartNov =  DB::select('select * from fichehors where idUser = (select identifiant from employes where id = ?) and
+                idfiche LIKE "%Novembre%"',[$id]);
+                $ecartDec =  DB::select('select * from fichehors where idUser = (select identifiant from employes where id = ?) and
+                idfiche LIKE "%Décembre%"',[$id]);
+                $EJan=0;
+                $EFev=0;
+                $EMar=0;
+                $EAvr=0;
+                $EMai=0;
+                $EJuin=0;
+                $EJuil=0;
+                $EAout=0;
+                $ESept=0;
+                $EOct=0;
+                $ENov=0;
+                $EDec=0;
+                foreach($ecartJan as $ecaJan)
+                {
+                    if(str_contains($ecaJan->idfiche, $year)){
+                        $EJan=$EJan+$ecaJan->ecart;
+                    }
+                }
+                foreach($ecartFev as $ecaFev)
+                {
+                    if(str_contains($ecaFev->idfiche, $year)){
+                        $EFev=$EFev+$ecaFev->ecart;
+                    }
+                }
+                foreach($ecartMar as $ecaMar)
+                {
+                    if(str_contains($ecaMar->idfiche, $year)){
+                        $EMar=$EMar+$ecaMar->ecart;
+                    }
+                }
+                foreach($ecartAvr as $ecaAvr)
+                {
+                    if(str_contains($ecaAvr->idfiche, $year)){
+                        $EAvr=$EAvr+$ecaAvr->ecart;
+                    }
+                }
+                foreach($ecartMai as $ecaMai)
+                {
+                    if(str_contains($ecaMai->idfiche, $year)){
+                        $EMai=$EMai+$ecaMai->ecart;
+                    }
+                }
+                foreach($ecarJuin as $ecaJuin)
+                {
+                    if(str_contains($ecaJuin->idfiche, $year)){
+                        $EJuin=$EJuin+$ecaJuin->ecart;
+                    }
+                }
+                foreach($ecartJuillet as $ecaJuil)
+                {
+                    if(str_contains($ecaJuil->idfiche, $year)){
+                        $EJuil=$EJuil+$ecaJuil->ecart;
+                    }
+                }
+                foreach($ecartAout as $ecaAou)
+                {
+                    if(str_contains($ecaAou->idfiche, $year)){
+                        $EAout=$EAout+$ecaAou->ecart;
+                    }
+                }
+                foreach($ecartSept as $ecaSept)
+                {
+                    if(str_contains($ecaSept->idfiche, $year)){
+                        $ESept=$ESept+$ecaSept->ecart;
+                    }
+                }
+                foreach($ecartOct as $ecaOct)
+                {
+                    if(str_contains($ecaOct->idfiche, $year)){
+                        $EJan=$EJan+$ecaOct->ecart;
+                    }
+                }
+                foreach($ecartNov as $ecaNov)
+                {
+                    if(str_contains($ecaNov->idfiche, $year)){
+                        $ENov=$ENov+$ecaNov->ecart;
+                    }
+                }
+                foreach($ecartDec as $ecaDec)
+                {
+                    if(str_contains($ecaDec->idfiche, $year)){
+                        $EDec=$EDec+$ecaDec->ecart;
+                    }
+                }
                 $DJan=0;
                 $DFev=0;
                 $DMar=0;
@@ -1946,7 +2054,8 @@ class PageEmployesController extends Controller
                 'MALNovembre'=>$MALNovembre,'CFNovembre'=>$CFNovembre,'SSNovembre'=>$SSNovembre,'JSNovembre'=>$JSNovembre,
                 'FerieDecembre'=>$FerieDecembre,'TRDecembre'=>$TRDecembre,'CPDecembre'=>$CPDecembre,'RTTDecembre'=>$RTTDecembre,'HRTTDecembre'=>$HRTTDecembre,'RCRDecembre'=>$RCRDecembre,'FORDecembre'=>$FORDecembre,
                 'MALDecembre'=>$MALDecembre,'CFDecembre'=>$CFDecembre,'SSDecembre'=>$SSDecembre,'JSDecembre'=>$JSDecembre,'DJan'=>$DJan,'DFev'=>$DFev,'DMar'=>$DMar,'DAvr'=>$DAvr,'DMai'=>$DMai,'DJuin'=>$DJuin,
-                'DJuil'=>$DJuil,'DAout'=>$DAout,'DSept'=>$DSept,'DOct'=>$DOct,'DNov'=>$DNov,'DDec'=>$DDec,'year'=>$year,
+                'DJuil'=>$DJuil,'DAout'=>$DAout,'DSept'=>$DSept,'DOct'=>$DOct,'DNov'=>$DNov,'DDec'=>$DDec,'year'=>$year,'EJan'=>$EJan,'EFev'=>$EFev,'EMar'=>$EMar,'EAvr'=>$EAvr,'EMai'=>$EMai,'EJuin'=>$EJuin,
+                'EJuil'=>$EJuil,'EAout'=>$EAout,'ESept'=>$ESept,'EOct'=>$EOct,'ENov'=>$ENov,'EDec'=>$EDec,
             ]);
                 }
         
@@ -2080,6 +2189,53 @@ class PageEmployesController extends Controller
             DB::update('update fichehors set state ="VR" where idfiche=? AND idUser=?',[$idfiche,$idUser]);
             return redirect()->back();
         }
+
+        public function showDep(Request $request,$id,$idfiche) {
+            $idUser = $request->input('idUser4');
+            $idfiche = $request->input('idfiche4');
+            $user=Auth::user();
+            $session_str = $user->service;
+            if($user->direction==1){
+                $employes = DB::table('employes')->get();
+                $emplo = DB::select('SELECT identifiant,CONCAT(nom, " ", prenom) AS fullname FROM employes ');
+            }
+            else{
+                $employes = DB::table('employes')->select()->where('service', 'like', '%'.$session_str.'%')->where('admin',0)->get();
+                $emplo = DB::select('SELECT identifiant,CONCAT(nom, " ", prenom) AS fullname FROM employes where service LIKE ?',[$session_str]);
+    
+            }
+            $empl = DB::select('select * from employes where id =?',[$id]);
+            $dep = DB::select('select * from depassements where identifiant =(select identifiant from employes where id=?) and idFiche=?',[$id,$idfiche]);
+            return view('ADMIN.depassementsPage',['employes'=>$employes,'idUser'=>$idUser,'empl'=>$empl,'dep'=>$dep]);
+        }
+
+        public function showDepInfos(Request $request,$id) {
+            $user=Auth::user();
+            $session_str = $user->service;
+            if($user->direction==1){
+                $employes = DB::table('employes')->get();
+                $emplo = DB::select('SELECT identifiant,CONCAT(nom, " ", prenom) AS fullname FROM employes ');
+            }
+            else{
+                $employes = DB::table('employes')->select()->where('service', 'like', '%'.$session_str.'%')->where('admin',0)->get();
+                $emplo = DB::select('SELECT identifiant,CONCAT(nom, " ", prenom) AS fullname FROM employes where service LIKE ?',[$session_str]);
+    
+            }
+            $dep=DB::select('select * from depassements where id=?',[$id]);
+            return view('ADMIN.depassementsEdit',['employes'=>$employes,'dep'=>$dep]);
+        }
+
+        public function editDep(Request $request) {
+            if(!Gate::any(['access-admin', 'access-direction'])){
+                abort('403');
+                }
+            $semaine = $request->input('semaine');
+            $nombreH = $request->input('nombreH');
+            $motif = $request->input('motif');
+            $id = $request->input('id');
+            DB::update('update depassements set semaine = ?,nombreH = ?, motif=? where id = ?',[$semaine,$nombreH,$motif,$id]);
+            return redirect()->back()->with('status', 'Les modifications ont été bien enregistrés');
+            }
 
         public function showST($id) {
             $user=Auth::user();
@@ -2404,7 +2560,7 @@ class PageEmployesController extends Controller
                 $poids=$fi->Poids+$poids;
             }
             $totalVentil=$Délégation+ $FRASAD+$Entraide+$Fédération+$Prestataire+$Voisineurs+$ADU+$Mandataires+$SOS+$ADVM+$AI;
-            $diff=$poids-$totalVentil;
+            $diff=$totalVentil-$poids;
             return view('ADMIN/ventilationfiche',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees,'fiiche'=>$fiiche,'Délégation'=>$Délégation,
             'FRASAD'=>$FRASAD,'Entraide'=>$Entraide,'Fédération'=>$Fédération,'Prestataire'=>$Prestataire,'Voisineurs'=>$Voisineurs,
             'ADU'=>$ADU,'Mandataires'=>$Mandataires,'SOS'=>$SOS,'ADVM'=>$ADVM,'AI'=>$AI,'totalVentil'=>$totalVentil,'poids'=>$poids,'diff'=>$diff,'fiicheS'=>$fiicheS]);
@@ -2451,6 +2607,114 @@ class PageEmployesController extends Controller
             idFiche LIKE "%Novembre%"',[$id]);
             $depassementDec =  DB::select('select * from depassements where identifiant = (select identifiant from employes where id = ?) and
             idFiche LIKE "%Décembre%"',[$id]);
+            $ecartJan =  DB::select('select * from fichehors where idUser = (select identifiant from employes where id = ?) and
+                idfiche LIKE "%Janvier%"',[$id]);
+                $ecartFev =  DB::select('select * from fichehors where idUser = (select identifiant from employes where id = ?) and
+                idfiche LIKE "%Février%"',[$id]);
+                $ecartMar =  DB::select('select * from fichehors where idUser = (select identifiant from employes where id = ?) and
+                idfiche LIKE "%Mars%"',[$id]);
+                $ecartAvr =  DB::select('select * from fichehors where idUser = (select identifiant from employes where id = ?) and
+                idfiche LIKE "%Avril%"',[$id]);
+                $ecartMai =  DB::select('select * from fichehors where idUser = (select identifiant from employes where id = ?) and
+                idfiche LIKE "%Mai%"',[$id]);
+                $ecarJuin =  DB::select('select * from fichehors where idUser = (select identifiant from employes where id = ?) and
+                idfiche LIKE "%Juin%"',[$id]);
+                $ecartJuillet =  DB::select('select * from fichehors where idUser = (select identifiant from employes where id = ?) and
+                idfiche LIKE "%Juillet%"',[$id]);
+                $ecartAout =  DB::select('select * from fichehors where idUser = (select identifiant from employes where id = ?) and
+                idfiche LIKE "%Août%"',[$id]);
+                $ecartSept =  DB::select('select * from fichehors where idUser = (select identifiant from employes where id = ?) and
+                idfiche LIKE "%Septembre%"',[$id]);
+                $ecartOct =  DB::select('select * from fichehors where idUser = (select identifiant from employes where id = ?) and
+                idfiche LIKE "%Octobre%"',[$id]);
+                $ecartNov =  DB::select('select * from fichehors where idUser = (select identifiant from employes where id = ?) and
+                idfiche LIKE "%Novembre%"',[$id]);
+                $ecartDec =  DB::select('select * from fichehors where idUser = (select identifiant from employes where id = ?) and
+                idfiche LIKE "%Décembre%"',[$id]);
+                $EJan=0;
+                $EFev=0;
+                $EMar=0;
+                $EAvr=0;
+                $EMai=0;
+                $EJuin=0;
+                $EJuil=0;
+                $EAout=0;
+                $ESept=0;
+                $EOct=0;
+                $ENov=0;
+                $EDec=0;
+                foreach($ecartJan as $ecaJan)
+                {
+                    if(str_contains($ecaJan->idfiche, $search_text)){
+                        $EJan=$EJan+$ecaJan->ecart;
+                    }
+                }
+                foreach($ecartFev as $ecaFev)
+                {
+                    if(str_contains($ecaFev->idfiche, $search_text)){
+                        $EFev=$EFev+$ecaFev->ecart;
+                    }
+                }
+                foreach($ecartMar as $ecaMar)
+                {
+                    if(str_contains($ecaMar->idfiche, $search_text)){
+                        $EMar=$EMar+$ecaMar->ecart;
+                    }
+                }
+                foreach($ecartAvr as $ecaAvr)
+                {
+                    if(str_contains($ecaAvr->idfiche, $search_text)){
+                        $EAvr=$EAvr+$ecaAvr->ecart;
+                    }
+                }
+                foreach($ecartMai as $ecaMai)
+                {
+                    if(str_contains($ecaMai->idfiche, $search_text)){
+                        $EMai=$EMai+$ecaMai->ecart;
+                    }
+                }
+                foreach($ecarJuin as $ecaJuin)
+                {
+                    if(str_contains($ecaJuin->idfiche, $search_text)){
+                        $EJuin=$EJuin+$ecaJuin->ecart;
+                    }
+                }
+                foreach($ecartJuillet as $ecaJuil)
+                {
+                    if(str_contains($ecaJuil->idfiche, $search_text)){
+                        $EJuil=$EJuil+$ecaJuil->ecart;
+                    }
+                }
+                foreach($ecartAout as $ecaAou)
+                {
+                    if(str_contains($ecaAou->idfiche, $search_text)){
+                        $EAout=$EAout+$ecaAou->ecart;
+                    }
+                }
+                foreach($ecartSept as $ecaSept)
+                {
+                    if(str_contains($ecaSept->idfiche, $search_text)){
+                        $ESept=$ESept+$ecaSept->ecart;
+                    }
+                }
+                foreach($ecartOct as $ecaOct)
+                {
+                    if(str_contains($ecaOct->idfiche, $search_text)){
+                        $EJan=$EJan+$ecaOct->ecart;
+                    }
+                }
+                foreach($ecartNov as $ecaNov)
+                {
+                    if(str_contains($ecaNov->idfiche, $search_text)){
+                        $ENov=$ENov+$ecaNov->ecart;
+                    }
+                }
+                foreach($ecartDec as $ecaDec)
+                {
+                    if(str_contains($ecaDec->idfiche, $search_text)){
+                        $EDec=$EDec+$ecaDec->ecart;
+                    }
+                }
             $DJan=0;
             $DFev=0;
             $DMar=0;
@@ -2465,73 +2729,73 @@ class PageEmployesController extends Controller
             $DDec=0;
             foreach($depassementJan as $depJan)
             {
-                if(str_contains($depJan->idFiche, $year)){
+                if(str_contains($depJan->idFiche, $search_text)){
                     $DJan=$DJan+$depJan->nombreH;
                 }
             }
             foreach($depassementFev as $depFev)
             {
-                if(str_contains($depFev->idFiche, $year)){
+                if(str_contains($depFev->idFiche, $search_text)){
                     $DFev=$DFev+$depFev->nombreH;
                 }
             }
             foreach($depassementMar as $depMar)
             {
-                if(str_contains($depMar->idFiche, $year)){
+                if(str_contains($depMar->idFiche, $search_text)){
                     $DMar=$DMar+$depMar->nombreH;
                 }
             }
             foreach($depassementAvr as $depAvr)
             {
-                if(str_contains($depAvr->idFiche, $year)){
+                if(str_contains($depAvr->idFiche, $search_text)){
                     $DAvr=$DAvr+$depAvr->nombreH;
                 }
             }
             foreach($depassementMai as $depMai)
             {
-                if(str_contains($depMai->idFiche, $year)){
+                if(str_contains($depMai->idFiche, $search_text)){
                     $DMai=$DMai+$depMai->nombreH;
                 }
             }
             foreach($depassementJuin as $depJuin)
             {
-                if(str_contains($depJuin->idFiche, $year)){
+                if(str_contains($depJuin->idFiche, $search_text)){
                     $DJuin=$DJuin+$depJuin->nombreH;
                 }
             }
             foreach($depassementJuillet as $depJuil)
             {
-                if(str_contains($depJuil->idFiche, $year)){
+                if(str_contains($depJuil->idFiche, $search_text)){
                     $DJuil=$DJuil+$depJuil->nombreH;
                 }
             }
             foreach($depassementAout as $depAou)
             {
-                if(str_contains($depAou->idFiche, $year)){
+                if(str_contains($depAou->idFiche, $search_text)){
                     $DAout=$DAout+$depAou->nombreH;
                 }
             }
             foreach($depassementSept as $depSept)
             {
-                if(str_contains($depSept->idFiche, $year)){
+                if(str_contains($depSept->idFiche, $search_text)){
                     $DSept=$DSept+$depSept->nombreH;
                 }
             }
             foreach($depassementOct as $depOct)
             {
-                if(str_contains($depOct->idFiche, $year)){
+                if(str_contains($depOct->idFiche, $search_text)){
                     $DJan=$DJan+$depOct->nombreH;
                 }
             }
             foreach($depassementNov as $depNov)
             {
-                if(str_contains($depNov->idFiche, $year)){
+                if(str_contains($depNov->idFiche, $search_text)){
                     $DNov=$DNov+$depNov->nombreH;
                 }
             }
             foreach($depassementDec as $depDec)
             {
-                if(str_contains($depDec->idFiche, $year)){
+                if(str_contains($depDec->idFiche, $search_text)){
                     $DDec=$DDec+$depDec->nombreH;
                 }
             }
@@ -3171,7 +3435,7 @@ class PageEmployesController extends Controller
             }
         }
             $totalVentil=$Délégation+ $FRASAD+$Entraide+$Fédération+$Prestataire+$Voisineurs+$ADU+$Mandataires+$SOS+$ADVM+$AI;
-            $diff=$poids-$totalVentil;
+            $diff=$totalVentil-$poids;
             return view('ADMIN/stat',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees,'fiiche'=>$fiiche,'Délégation'=>$Délégation,
             'FRASAD'=>$FRASAD,'Entraide'=>$Entraide,'Fédération'=>$Fédération,'Prestataire'=>$Prestataire,'Voisineurs'=>$Voisineurs,'AI'=>$AI,
             'ADU'=>$ADU,'Mandataires'=>$Mandataires,'SOS'=>$SOS,'ADVM'=>$ADVM,'totalVentil'=>$totalVentil,'poids'=>$poids,'diff'=>$diff,'year'=>$year
@@ -3200,7 +3464,8 @@ class PageEmployesController extends Controller
             'MALNovembre'=>$MALNovembre,'CFNovembre'=>$CFNovembre,'SSNovembre'=>$SSNovembre,'JSNovembre'=>$JSNovembre,
             'FerieDecembre'=>$FerieDecembre,'TRDecembre'=>$TRDecembre,'CPDecembre'=>$CPDecembre,'RTTDecembre'=>$RTTDecembre,'HRTTDecembre'=>$HRTTDecembre,'RCRDecembre'=>$RCRDecembre,'FORDecembre'=>$FORDecembre,
             'MALDecembre'=>$MALDecembre,'CFDecembre'=>$CFDecembre,'SSDecembre'=>$SSDecembre,'JSDecembre'=>$JSDecembre,'DJan'=>$DJan,'DFev'=>$DFev,'DMar'=>$DMar,'DAvr'=>$DAvr,'DMai'=>$DMai,'DJuin'=>$DJuin,
-            'DJuil'=>$DJuil,'DAout'=>$DAout,'DSept'=>$DSept,'DOct'=>$DOct,'DNov'=>$DNov,'DDec'=>$DDec,'search_text'=>$search_text
+            'DJuil'=>$DJuil,'DAout'=>$DAout,'DSept'=>$DSept,'DOct'=>$DOct,'DNov'=>$DNov,'DDec'=>$DDec,'search_text'=>$search_text,'EJan'=>$EJan,'EFev'=>$EFev,'EMar'=>$EMar,'EAvr'=>$EAvr,'EMai'=>$EMai,'EJuin'=>$EJuin,
+            'EJuil'=>$EJuil,'EAout'=>$EAout,'ESept'=>$ESept,'EOct'=>$EOct,'ENov'=>$ENov,'EDec'=>$EDec,
         ]);
     }
 

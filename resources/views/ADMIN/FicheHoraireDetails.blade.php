@@ -406,6 +406,13 @@ $se5=0;
     <button style="float: right;
     margin-right: 13%;padding: 1 1% 1 1%;" class="btn btn-success" type="submit">Tout valider</button>
     </form>
+    <form method="post" action="/FicheHoraire/depa/{{$employe->id}}}/{{$f->idfiche}}" id="form4" class="fconfirm"> <td>
+                {{ csrf_field() }}
+                 <input type="hidden" name="idUser4" value="{{$f->idUser}}">
+                 <input type="hidden" name="idfiche4" value="{{$f->idfiche}}">
+    <button style="background-color: brown;border:none;
+    margin-right: 13%;padding: 1 1% 1 1%;" class="btn btn-success" type="submit">Voir les dépassements</button>
+    </form>
 
     <div id="stats">
        <table id="tableStats">
@@ -470,9 +477,9 @@ $se5=0;
                     <td style="padding: 1 9 1 10;">{{$F}}</td>
                 </tr>
                 @php
-                $DIF=$P-$F;
+                $DIF=$F-$P;
                 @endphp
-                @if($DIF==0)
+                @if($DIF>=0)
                 <tr id="trContr" style="background-color:#8bcfa5">
                     <td style="PADDING: 5 2 5 10;">différence</td>
                     <td style="padding: 1 9 1 10;">{{$DIF}}</td>

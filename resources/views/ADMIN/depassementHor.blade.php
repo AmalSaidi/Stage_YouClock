@@ -75,7 +75,7 @@
             <tr><td id="textarea">Motif</td>
             <td><textarea name="motif"></textarea></td></tr>
             <tr><td>Nombre d'heures</td>
-            <td><input name="heures" type="number" placeholder="" step="0.1" min="0" max="10"/></td></tr>
+            <td><input name="heures" type="number" step="0.01"/></td></tr>
             <tr><td></td><td><button id="valider">Valider le dépassement horaire</button></td></tr>
             </form>
 
