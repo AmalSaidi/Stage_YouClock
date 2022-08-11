@@ -641,12 +641,12 @@ class PageEmployesController extends Controller
                     "-","repos","repos","0",$typeJour,$id]);
                     return redirect()->route('ficheBack', ['idfiche' => $idFi,'idUser'=>$idUser]);
                 }
-                if($typeJour=="RCR"){
+                if($typeJour=="Férié"){
                     DB::update('update fichehors set matinD = ?,matinF = ?,ApremD=?, ApremF = ?,
                     soirD=?, soirF=?,matin=?,heuresEffectu=?,activite1=?,aprem=?,soir=?,activite2=?,
                     activite3=?,Poids=?,typeJour=? where id = ?',
-                    [NUll,NULL,NULL,NULL,NULL,NULL,"-","0","RCR","-",
-                    "-","RCR","RCR","0",$typeJour,$id]);
+                    [NUll,NULL,NULL,NULL,NULL,NULL,"-","0","F","-",
+                    "-","F","F","0",$typeJour,$id]);
                     return redirect()->route('ficheBack', ['idfiche' => $idFi,'idUser'=>$idUser]);
                 }
                 if($typeJour=="Maladie"){
@@ -686,6 +686,135 @@ class PageEmployesController extends Controller
                 }elseif($hourdiffSoir>6){
                     return redirect()->back()->withInput($request->all())->with('status', 'La durée de soir ne peut pas être supérieure à 6heures');
                 }
+               if($activite1=="RCR" or $activite1=="RTT" or $activite1=="1/2 RTT" or $activite1=="M" or $activite1=="CF" or $activite1=="F" or $activite1=="EF"
+               or $activite2=="RCR" or $activite2=="RTT" or $activite2=="1/2 RTT" or $activite2=="M" or $activite2=="CF" or $activite2=="F" or $activite2=="EF"
+               or $activite3=="RCR" or $activite3=="RTT" or $activite3=="1/2 RTT" or $activite3=="M" or $activite3=="CF" or $activite3=="F" or $activite3=="EF")
+               {
+                if($activite1=="RCR" or $activite1=="RTT" or $activite1=="1/2 RTT" or $activite1=="M" or $activite1=="CF" or $activite1=="F" or $activite1=="EF"){
+                    $hourdiffMat=0;
+                }
+                if($activite2=="RCR" or $activite2=="RTT" or $activite2=="1/2 RTT" or $activite2=="M" or $activite2=="CF" or $activite2=="F" or $activite2=="EF"){
+                   $hourdiffAprem=0;
+                }
+                if($activite3=="RCR" or $activite3=="RTT" or $activite3=="1/2 RTT" or $activite3=="M" or $activite3=="CF" or $activite3=="F" or $activite3=="EF"){
+                    $hourdiffSoir=0;
+                }
+                if($matinF==null OR $ApremD==null){
+                $heuresEffectu = $hourdiffMat + $hourdiffAprem + $hourdiffSoir;
+                DB::update('update fichehors set matinD = ?,matinF = ?,ApremD=?, ApremF = ?,
+                soirD=?, soirF=?,matin=?,heuresEffectu=?,activite1=?,aprem=?,soir=?,activite2=?,
+                activite3=?,ecart=?,typeJour=? where id = ?',
+                [$matinD,$matinF,$ApremD,$ApremF,$soirD,$soirF,$matin,$heuresEffectu,$activite1,$aprem,
+                $soir,$activite2,$activite3,$ecart,$typeJour,$id]);
+                foreach ($ventil as $v) {
+                    if($v->ventilation == "DELEGATION"){
+                        DB::update('update fichehors set DELEGATION=? where id = ?',
+                        [$DELEGATION,$id]);
+                    }
+                    if($v->ventilation == "SOS Garde d'enfants"){
+                        DB::update('update fichehors set SOSgarde=? where id = ?',
+                        [$SOS,$id]);
+                    }
+                    if($v->ventilation == "FRASAD"){
+                        DB::update('update fichehors set FRASAD=? where id = ?',
+                        [$FRASAD,$id]);
+                    }
+                    if($v->ventilation == "Entraide familiale"){
+                        DB::update('update fichehors set EntraideFamiliale=? where id = ?',
+                        [$Entraide,$id]);
+                    }
+                    if($v->ventilation == "Federation"){
+                        DB::update('update fichehors set Federation=? where id = ?',
+                        [$Federation,$id]);
+                    }
+                    if($v->ventilation == "Mandataires"){
+                        DB::update('update fichehors set Mandataires=? where id = ?',
+                        [$Mandataires,$id]);
+                    }
+                    if($v->ventilation == "ADVM"){
+                        DB::update('update fichehors set ADVM=? where id = ?',
+                        [$ADVM,$id]);
+                    }
+                    if($v->ventilation == "ADU services"){
+                        DB::update('update fichehors set ADUservices=? where id = ?',
+                        [$ADU,$id]);
+                    }
+                    if($v->ventilation == "voisineurs"){
+                        DB::update('update fichehors set Voisineurs=? where id = ?',
+                        [$voisineurs,$id]);
+                    }
+                    if($v->ventilation == "prestataire"){
+                        DB::update('update fichehors set Prestataire=? where id = ?',
+                        [$prestataire,$id]);
+                    }
+                    if($v->ventilation == "AI"){
+                        DB::update('update fichehors set AI=? where id = ?',
+                        [$AI,$id]);
+                    }
+                    }
+                return redirect()->route('ficheBack', ['idfiche' => $idFi,'idUser'=>$idUser]);
+                }else{
+                    if($pauseMidi<0.750){
+                        return back()->withInput($request->all())->with('status', 'La durée de pause doit être supérieur à 45min');
+                }else{
+                    $heuresEffectu = $hourdiffMat + $hourdiffAprem + $hourdiffSoir;
+                    DB::update('update fichehors set matinD = ?,matinF = ?,ApremD=?, ApremF = ?,
+                    soirD=?, soirF=?,matin=?,heuresEffectu=?,activite1=?,aprem=?,soir=?,activite2=?,
+                    activite3=?,ecart=?,typeJour=? where id = ?',
+                    [$matinD,$matinF,$ApremD,$ApremF,$soirD,$soirF,$matin,$heuresEffectu,$activite1,$aprem,
+                    $soir,$activite2,$activite3,$ecart,$typeJour,$id]);
+                    foreach ($ventil as $v) {
+                        if($v->ventilation == "DELEGATION"){
+                            DB::update('update fichehors set DELEGATION=? where id = ?',
+                            [$DELEGATION,$id]);
+                        }
+                        if($v->ventilation == "SOS Garde d'enfants"){
+                            DB::update('update fichehors set SOSgarde=? where id = ?',
+                            [$SOS,$id]);
+                        }
+                        if($v->ventilation == "FRASAD"){
+                            DB::update('update fichehors set FRASAD=? where id = ?',
+                            [$FRASAD,$id]);
+                        }
+                        if($v->ventilation == "Entraide familiale"){
+                            DB::update('update fichehors set EntraideFamiliale=? where id = ?',
+                            [$Entraide,$id]);
+                        }
+                        if($v->ventilation == "Federation"){
+                            DB::update('update fichehors set Federation=? where id = ?',
+                            [$Federation,$id]);
+                        }
+                        if($v->ventilation == "Mandataires"){
+                            DB::update('update fichehors set Mandataires=? where id = ?',
+                            [$Mandataires,$id]);
+                        }
+                        if($v->ventilation == "ADVM"){
+                            DB::update('update fichehors set ADVM=? where id = ?',
+                            [$ADVM,$id]);
+                        }
+                        if($v->ventilation == "ADU services"){
+                            DB::update('update fichehors set ADUservices=? where id = ?',
+                            [$ADU,$id]);
+                        }
+                        if($v->ventilation == "voisineurs"){
+                            DB::update('update fichehors set Voisineurs=? where id = ?',
+                            [$voisineurs,$id]);
+                        }
+                        if($v->ventilation == "prestataire"){
+                            DB::update('update fichehors set Prestataire=? where id = ?',
+                            [$prestataire,$id]);
+                        }
+                        if($v->ventilation == "AI"){
+                            DB::update('update fichehors set AI=? where id = ?',
+                            [$AI,$id]);
+                        }
+                        }
+                    return redirect()->route('ficheBack', ['idfiche' => $idFi,'idUser'=>$idUser]);
+                }
+                }
+                
+               }
+
                 if($heuresEffectu!=$poids){
                     $message="u cant";
                 }
