@@ -802,6 +802,10 @@ class FicheHoraireUserController extends Controller
             );
             
         }
+        if($user->admin==1 or $user->direction==1 or $session_id=="59" or $session_id=="IN2021080010" or $session_id=="IN2021010057")
+        {
+
+        }else{
         if($heuresEffectu>11){
             return redirect()->back()->with('status', 'La durée du jour ne peut pas être supérieur à 11 heures');
         }
@@ -811,7 +815,7 @@ class FicheHoraireUserController extends Controller
             return redirect()->back()->withInput($request->all())->with('status', 'La durée de l\'après-midi ne peut pas être supérieure à 6heures');
         }elseif($hourdiffSoir>6){
             return redirect()->back()->withInput($request->all())->with('status', 'La durée de soir ne peut pas être supérieure à 6heures');
-        }
+        }}
        if($activite1=="RCR" or $activite1=="RTT" or $activite1=="1/2 RTT" or $activite1=="M" or $activite1=="CF" or $activite1=="F" or $activite1=="EF"
        or $activite2=="RCR" or $activite2=="RTT" or $activite2=="1/2 RTT" or $activite2=="M" or $activite2=="CF" or $activite2=="F" or $activite2=="EF"
        or $activite3=="RCR" or $activite3=="RTT" or $activite3=="1/2 RTT" or $activite3=="M" or $activite3=="CF" or $activite3=="F" or $activite3=="EF")

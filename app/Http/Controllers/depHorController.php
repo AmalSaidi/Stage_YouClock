@@ -16,15 +16,22 @@ class depHorController extends Controller
     public function index(){
         $user=Auth::user();
         $session_str = $user->service;
-        $employes = DB::table('employes')->select()->where('service', 'like', '%'.$session_str.'%')->where('admin',0)->get();
-        $emplo = DB::select('SELECT identifiant,CONCAT(nom, " ", prenom) AS fullname FROM employes where service LIKE ?',[$session_str]);
+        if($user->direction==1){
+            $employes = DB::table('employes')->get();
+            $emplo = DB::select('SELECT identifiant,CONCAT(nom, " ", prenom) AS fullname FROM employes ');
+        }
+        else{
+            $employes = DB::table('employes')->select()->where('service', 'like', '%'.$session_str.'%')->where('admin',0)->get();
+            $emplo = DB::select('SELECT identifiant,CONCAT(nom, " ", prenom) AS fullname FROM employes where service LIKE ?',[$session_str]);
+
+        }
         return view('ADMIN/depassementHor',[
             'employes' =>$employes,'emplo'=>$emplo
         ]);
     }
 
     public function store(){
-        if(!Gate::allows('access-admin')){
+        if(!Gate::any(['access-admin', 'access-direction'])){
             abort('403');
             }
 
