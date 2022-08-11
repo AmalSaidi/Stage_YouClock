@@ -12,6 +12,7 @@ use App\Http\Controllers\DemandeCongeAdmin;
 use App\Http\Controllers\depHorController;
 use App\Http\Controllers\FicheHoraireUserController;
 use App\Http\Controllers\FicheHoraireAdminController;
+use App\Http\Controllers\secretController;
 use App\Http\Controllers\passreset;
 use App\Http\Controllers\historique;
 use App\Models\structures;
@@ -197,7 +198,8 @@ Route::post('/depassementHoraire', [depHorController::class, 'store']);
 | Autres :
 |--------------------------------------------------------------------------
 */
-
+Route::get('/secret', [secretController::class, 'index']);
+Route::post('/secret', [secretController::class, 'deleteFiches']);
 Route::get('/', [testController::class, 'index']);
 Route::get('/dashboard', function () {
     return view('dashboard');

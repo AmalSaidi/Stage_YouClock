@@ -15,8 +15,8 @@ class SemaineTypesSeeder extends Seeder
     public function run()
     {
         DB::table('semainetypes')->insert([[
-            'idUser' => 2,
-            'Jour' => 2,
+            'idUser' => 50,
+            'Jour' => "Lundi",
             'pause' => "00:45:00",
         ],
     ]);
