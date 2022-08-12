@@ -948,7 +948,7 @@ class FicheHoraireUserController extends Controller
         }
         
        }
-        if($heuresEffectu!=$poids){
+       if (abs(($heuresEffectu-$poids)/$poids) > 0.00001){
             $message="u cant";
         }
         if($matinF==null OR $ApremD==null){
