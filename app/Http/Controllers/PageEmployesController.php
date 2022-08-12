@@ -1000,6 +1000,10 @@ class PageEmployesController extends Controller
                     return redirect()->route('ficheBack', ['idfiche' => $idFi,'idUser'=>$idUser]);
                     }}
                     else{
+                        if($heuresEffectu==$poids)
+                        {
+                            return redirect()->route('ficheBack', ['idfiche' => $idFi,'idUser'=>$idUser]);
+                        }
                         // return redirect()->back()->with('status', 'le nombre d\'heures effectués est invalide');
                         return back()->withInput($request->all())->with('status', 'le nombre d\'heures effectués est invalide 2'.$heuresEffectu." ".$poids);
                      }
