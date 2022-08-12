@@ -877,8 +877,7 @@ class PageEmployesController extends Controller
                 }
                 
                }
-
-                if($heuresEffectu!=floatval($poids)){
+               if (abs(($heuresEffectu-$poids)/$poids) > 0.00001){
                     $message="u cant";
                 }
                 if($matinF==null OR $ApremD==null){
@@ -1000,10 +999,6 @@ class PageEmployesController extends Controller
                     return redirect()->route('ficheBack', ['idfiche' => $idFi,'idUser'=>$idUser]);
                     }}
                     else{
-                        if($heuresEffectu==$poids)
-                        {
-                            return redirect()->route('ficheBack', ['idfiche' => $idFi,'idUser'=>$idUser]);
-                        }
                         // return redirect()->back()->with('status', 'le nombre d\'heures effectués est invalide');
                         return back()->withInput($request->all())->with('status', 'le nombre d\'heures effectués est invalide 2'.$heuresEffectu." ".$poids);
                      }
