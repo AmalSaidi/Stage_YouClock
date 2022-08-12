@@ -625,6 +625,7 @@ class PageEmployesController extends Controller
                 $pauseMidi = $ApremD-$matinF;
                 $heuresEffectu = $hourdiffMat + $hourdiffAprem + $hourdiffSoir;
                 $poids= $DELEGATION+$FRASAD+$Entraide+$Federation+$prestataire+$voisineurs+$ADU+$SOS+$ADVM+$Mandataires+$AI;
+                $poids=floatval($poids);
                 $ecart=0;
                 echo $pauseMidi;
                 if($typeJour=="CP"){
