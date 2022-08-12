@@ -29,6 +29,7 @@ $se2=0;
 $se3=0;
 $se4=0;
 $se5=0;
+$se6=0;
 @endphp
 <div id="button-list">
     
@@ -197,7 +198,9 @@ $se5=0;
             @endphp
         </tr>
 
-        @if($loop->iteration==7)
+       
+        @if(str_contains($f->Date,"Dim"))
+        @if($f->semaine=="semaine 1")
         @foreach($sem1 as $s1)
         @php
         $se1 = $se1 + $s1->nombreH
@@ -211,7 +214,7 @@ $se5=0;
     <td></td>
     <td></td>
 </tr>
-        @elseif($loop->iteration==14)
+        @elseif($f->semaine=="semaine 2")
         @foreach($sem2 as $s2)
         @php
         $se2 = $se2 + $s2->nombreH
@@ -225,20 +228,21 @@ $se5=0;
     <td></td>
     <td></td>
 </tr>
-        @elseif($loop->iteration==21)
-                @foreach($sem3 as $s3)
-                @php
-                $se3 = $se3 + $s3->nombreH
-                @endphp
-                @endforeach
-                <tr id="depass"><td colspan="2">Depassement autorisé : {{$se3}}
-            </td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
+  @elseif($f->semaine=="semaine 3")
+        @foreach($sem3 as $s3)
+        @php
+        $se3 = $se3 + $s3->nombreH
+        @endphp
+        @endforeach
+        <tr id="depass"><td colspan="2">Depassement autorisé : {{$se3}}
+    </td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+        @endif
         @endif
     @if($loop->iteration == 21)
     @break
@@ -322,7 +326,8 @@ $se5=0;
             $P = $P + $f->Poids;
             @endphp
         </tr>
-        @if($loop->iteration==28)
+        @if(str_contains($f->Date,"Dim"))
+        @if($f->semaine=="semaine 4")
         @foreach($sem4 as $s4)
         @php
         $se4 = $se4 + $s4->nombreH
@@ -336,21 +341,53 @@ $se5=0;
     <td></td>
     <td></td>
 </tr>
-@elseif($loop->last)
-                @foreach($sem5 as $s5)
-                @php
-                $se5 = $se5 + $s5->nombreH
-                @endphp
-                @endforeach
-                <tr id="depass"><td colspan="2">Depassement autorisé : {{$se5}}
-            </td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
+        @elseif($f->semaine=="semaine 5")
+        @foreach($sem5 as $s5)
+        @php
+        $se5 = $se5 + $s5->nombreH
+        @endphp
+        @endforeach
+        <tr id="depass"><td colspan="2">Depassement autorisé : {{$se5}}
+    </td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
         @endif
+        @endif
+    @endif
+    @if($loop->last)
+    @if($f->semaine=="semaine 5")
+    @foreach($sem5 as $s5)
+        @php
+        $se5 = $se5 + $s5->nombreH
+        @endphp
+        @endforeach
+        <tr id="depass"><td colspan="2">Depassement autorisé : {{$se5}}
+    </td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+@elseif($f->semaine=="semaine 6")
+@foreach($sem6 as $s6)
+        @php
+        $se6 = $se6 + $s6->nombreH
+        @endphp
+        @endforeach
+        <tr id="depass"><td colspan="2">Depassement autorisé : {{$se6}}
+    </td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+    @endif
     @endif
     @endforeach
     </tbody>

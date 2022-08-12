@@ -354,7 +354,12 @@
     </tr>
     <tr>
     <td id="firstCol" colspan="2">Temps à récupérer - soldes</td>
-    @if($EJan>=0)
+    @if($totRecup < 0)
+    <td style="background-color:lightcoral";>{{$totRecup}}</td>
+    @else
+    <td>{{$totRecup}}</td>
+    @endif
+    <!--@if($EJan>=0)
     <td>0</td>
     @else
     <td style="background-color:#f94545;">{{$EJan}}</td>
@@ -413,7 +418,7 @@
     <td>0</td>
     @else
     <td style="background-color:#f94545;">{{$EDec}}</td>
-    @endif
+    @endif -->
     </tr>
   </tbody>
     </table>

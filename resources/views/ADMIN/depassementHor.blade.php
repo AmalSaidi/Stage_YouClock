@@ -53,6 +53,7 @@
             <option>semaine 3</option>
             <option>semaine 4</option>
             <option>semaine 5</option>
+            <option>semaine 6</option>
         </select></td></tr>
         <tr><td>mois</td><td><select name="mois">
         <option>Janvier</option>

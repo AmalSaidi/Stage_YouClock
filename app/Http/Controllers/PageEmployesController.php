@@ -694,18 +694,71 @@ class PageEmployesController extends Controller
                         }
                     }
                 }
-                
-               if($activite1=="RCR" or $activite1=="RTT" or $activite1=="1/2 RTT" or $activite1=="M" or $activite1=="CF" or $activite1=="F" or $activite1=="EF"
-               or $activite2=="RCR" or $activite2=="RTT" or $activite2=="1/2 RTT" or $activite2=="M" or $activite2=="CF" or $activite2=="F" or $activite2=="EF"
-               or $activite3=="RCR" or $activite3=="RTT" or $activite3=="1/2 RTT" or $activite3=="M" or $activite3=="CF" or $activite3=="F" or $activite3=="EF")
+                if($activite1=="RCR" or $activite2=="RCR" or $activite3=="RCR"){
+                    DB::update('update fichehors set matinD = ?,matinF = ?,ApremD=?, ApremF = ?,
+                    soirD=?, soirF=?,matin=?,heuresEffectu=?,activite1=?,aprem=?,soir=?,activite2=?,
+                    activite3=?,ecart=?,typeJour=? where id = ?',
+                    [$matinD,$matinF,$ApremD,$ApremF,$soirD,$soirF,$matin,$heuresEffectu,$activite1,$aprem,
+                    $soir,$activite2,$activite3,$ecart,$typeJour,$id]);
+                    foreach ($ventil as $v) {
+                        if($v->ventilation == "DELEGATION"){
+                            DB::update('update fichehors set DELEGATION=? where id = ?',
+                            [$DELEGATION,$id]);
+                        }
+                        if($v->ventilation == "SOS Garde d'enfants"){
+                            DB::update('update fichehors set SOSgarde=? where id = ?',
+                            [$SOS,$id]);
+                        }
+                        if($v->ventilation == "FRASAD"){
+                            DB::update('update fichehors set FRASAD=? where id = ?',
+                            [$FRASAD,$id]);
+                        }
+                        if($v->ventilation == "Entraide familiale"){
+                            DB::update('update fichehors set EntraideFamiliale=? where id = ?',
+                            [$Entraide,$id]);
+                        }
+                        if($v->ventilation == "Federation"){
+                            DB::update('update fichehors set Federation=? where id = ?',
+                            [$Federation,$id]);
+                        }
+                        if($v->ventilation == "Mandataires"){
+                            DB::update('update fichehors set Mandataires=? where id = ?',
+                            [$Mandataires,$id]);
+                        }
+                        if($v->ventilation == "ADVM"){
+                            DB::update('update fichehors set ADVM=? where id = ?',
+                            [$ADVM,$id]);
+                        }
+                        if($v->ventilation == "ADU services"){
+                            DB::update('update fichehors set ADUservices=? where id = ?',
+                            [$ADU,$id]);
+                        }
+                        if($v->ventilation == "voisineurs"){
+                            DB::update('update fichehors set Voisineurs=? where id = ?',
+                            [$voisineurs,$id]);
+                        }
+                        if($v->ventilation == "prestataire"){
+                            DB::update('update fichehors set Prestataire=? where id = ?',
+                            [$prestataire,$id]);
+                        }
+                        if($v->ventilation == "AI"){
+                            DB::update('update fichehors set AI=? where id = ?',
+                            [$AI,$id]);
+                        }
+                        }
+                    return redirect()->route('ficheBack', ['idfiche' => $idFi,'idUser'=>$idUser]);
+                }
+               if($activite1=="RTT" or $activite1=="1/2 RTT" or $activite1=="M" or $activite1=="CF" or $activite1=="F" or $activite1=="EF" 
+               or $activite2=="RTT" or $activite2=="1/2 RTT" or $activite2=="M" or $activite2=="CF" or $activite2=="F" or $activite2=="EF"
+                or $activite3=="RTT" or $activite3=="1/2 RTT" or $activite3=="M" or $activite3=="CF" or $activite3=="F" or $activite3=="EF")
                {
-                if($activite1=="RCR" or $activite1=="RTT" or $activite1=="1/2 RTT" or $activite1=="M" or $activite1=="CF" or $activite1=="F" or $activite1=="EF"){
+                if( $activite1=="RTT" or $activite1=="1/2 RTT" or $activite1=="M" or $activite1=="CF" or $activite1=="F" or $activite1=="EF"){
                     $hourdiffMat=0;
                 }
-                if($activite2=="RCR" or $activite2=="RTT" or $activite2=="1/2 RTT" or $activite2=="M" or $activite2=="CF" or $activite2=="F" or $activite2=="EF"){
+                if($activite2=="RTT" or $activite2=="1/2 RTT" or $activite2=="M" or $activite2=="CF" or $activite2=="F" or $activite2=="EF"){
                    $hourdiffAprem=0;
                 }
-                if($activite3=="RCR" or $activite3=="RTT" or $activite3=="1/2 RTT" or $activite3=="M" or $activite3=="CF" or $activite3=="F" or $activite3=="EF"){
+                if($activite3=="RTT" or $activite3=="1/2 RTT" or $activite3=="M" or $activite3=="CF" or $activite3=="F" or $activite3=="EF"){
                     $hourdiffSoir=0;
                 }
                 if($matinF==null OR $ApremD==null){
@@ -2024,6 +2077,13 @@ class PageEmployesController extends Controller
                         
                 }
             }
+            $totEcart=$EJan+$EFev+$EMar+$EAvr+$EMai+$EJuin+$EJuil+$EAout+$ESept+$EOct+$ENov+$EDec;
+            $totDepa=$DJan+$DFev+$DMar+$DAvr+$DMai+$DJuin+$DJuil+$DAout+$DSept+$DOct+$DNov+$DDec;
+            $totRecup= $totDepa+$totEcart;
+            if($totRecup>=0)
+            {
+                $totRecup=0;
+            }
                 $totalVentil=$Délégation+ $FRASAD+$Entraide+$Fédération+$Prestataire+$Voisineurs+$ADU+$Mandataires+$SOS+$ADVM+$AI;
                 $diff=$poids-$totalVentil;
                 return view('ADMIN/stat',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees,'fiiche'=>$fiiche,'Délégation'=>$Délégation,
@@ -2055,7 +2115,7 @@ class PageEmployesController extends Controller
                 'FerieDecembre'=>$FerieDecembre,'TRDecembre'=>$TRDecembre,'CPDecembre'=>$CPDecembre,'RTTDecembre'=>$RTTDecembre,'HRTTDecembre'=>$HRTTDecembre,'RCRDecembre'=>$RCRDecembre,'FORDecembre'=>$FORDecembre,
                 'MALDecembre'=>$MALDecembre,'CFDecembre'=>$CFDecembre,'SSDecembre'=>$SSDecembre,'JSDecembre'=>$JSDecembre,'DJan'=>$DJan,'DFev'=>$DFev,'DMar'=>$DMar,'DAvr'=>$DAvr,'DMai'=>$DMai,'DJuin'=>$DJuin,
                 'DJuil'=>$DJuil,'DAout'=>$DAout,'DSept'=>$DSept,'DOct'=>$DOct,'DNov'=>$DNov,'DDec'=>$DDec,'year'=>$year,'EJan'=>$EJan,'EFev'=>$EFev,'EMar'=>$EMar,'EAvr'=>$EAvr,'EMai'=>$EMai,'EJuin'=>$EJuin,
-                'EJuil'=>$EJuil,'EAout'=>$EAout,'ESept'=>$ESept,'EOct'=>$EOct,'ENov'=>$ENov,'EDec'=>$EDec,
+                'EJuil'=>$EJuil,'EAout'=>$EAout,'ESept'=>$ESept,'EOct'=>$EOct,'ENov'=>$ENov,'EDec'=>$EDec,'totEcart'=>$totEcart,'totDepa'=>$totDepa,'totRecup'=>$totRecup,
             ]);
                 }
         
@@ -2081,6 +2141,7 @@ class PageEmployesController extends Controller
         $sem3 = DB::select('select * from depassements where idfiche =? AND semaine="semaine 3" AND identifiant = (select identifiant from employes where id = ?)',[$idfiche,$id]);
         $sem4 = DB::select('select * from depassements where idfiche =? AND semaine="semaine 4" AND identifiant = (select identifiant from employes where id = ?)',[$idfiche,$id]);
         $sem5 = DB::select('select * from depassements where idfiche =? AND semaine="semaine 5" AND identifiant = (select identifiant from employes where id = ?)',[$idfiche,$id]);
+        $sem6 = DB::select('select * from depassements where idfiche =? AND semaine="semaine 6" AND identifiant = (select identifiant from employes where id = ?)',[$idfiche,$id]);
         $NR = DB::select('select * from fichehors where idfiche =? AND state="NR" AND idUser = (select identifiant from employes where id = ?)',[$idfiche,$id]);
         $countNR=0;
         /*if(Gate::allows('access-admin')){
@@ -2095,18 +2156,18 @@ class PageEmployesController extends Controller
                 if($user->direction==1){
                     if($user->SeeAsAdmin==1){
                     return view('ADMIN/FicheHoraireDetails',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees
-                    ,'depassement'=>$depassement,'sem1'=>$sem1,'sem2'=>$sem2,'sem3'=>$sem3,'sem4'=>$sem4,'sem5'=>$sem5,'NR'=>$NR,'fiiche'=>$fiiche]);
+                    ,'depassement'=>$depassement,'sem1'=>$sem1,'sem2'=>$sem2,'sem3'=>$sem3,'sem4'=>$sem4,'sem5'=>$sem5,'sem6'=>$sem6,'NR'=>$NR,'fiiche'=>$fiiche]);
                     }else{
                         return view('DIRECTION/FicheHoraireDetails',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees
-                    ,'depassement'=>$depassement,'sem1'=>$sem1,'sem2'=>$sem2,'sem3'=>$sem3,'sem4'=>$sem4,'sem5'=>$sem5,'NR'=>$NR,'fiiche'=>$fiiche]);
+                    ,'depassement'=>$depassement,'sem1'=>$sem1,'sem2'=>$sem2,'sem3'=>$sem3,'sem4'=>$sem4,'sem5'=>$sem5,'sem6'=>$sem6,'NR'=>$NR,'fiiche'=>$fiiche]);
                     }
                 }
                 else if($user->admin==1 AND $user->direction==0){
                     return view('ADMIN/FicheHoraireDetails',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees
-            ,'depassement'=>$depassement,'sem1'=>$sem1,'sem2'=>$sem2,'sem3'=>$sem3,'sem4'=>$sem4,'sem5'=>$sem5,'NR'=>$NR,'fiiche'=>$fiiche]);
+            ,'depassement'=>$depassement,'sem1'=>$sem1,'sem2'=>$sem2,'sem3'=>$sem3,'sem4'=>$sem4,'sem5'=>$sem5,'sem6'=>$sem6,'NR'=>$NR,'fiiche'=>$fiiche]);
                 }else if($user->admin==0 AND $user->direction==1){
                     return view('DIRECTION/FicheHoraireDetails',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees
-                    ,'depassement'=>$depassement,'sem1'=>$sem1,'sem2'=>$sem2,'sem3'=>$sem3,'sem4'=>$sem4,'sem5'=>$sem5,'NR'=>$NR,'fiiche'=>$fiiche]);
+                    ,'depassement'=>$depassement,'sem1'=>$sem1,'sem2'=>$sem2,'sem3'=>$sem3,'sem4'=>$sem4,'sem5'=>$sem5,'sem6'=>$sem6,'NR'=>$NR,'fiiche'=>$fiiche]);
                 }
         }
 
@@ -3434,6 +3495,13 @@ class PageEmployesController extends Controller
                     
             }
         }
+            $totEcart=$EJan+$EFev+$EMar+$EAvr+$EMai+$EJuin+$EJuil+$EAout+$ESept+$EOct+$ENov+$EDec;
+            $totDepa=$DJan+$DFev+$DMar+$DAvr+$DMai+$DJuin+$DJuil+$DAout+$DSept+$DOct+$DNov+$DDec;
+            $totRecup= $totDepa+$totEcart;
+            if($totRecup>=0)
+            {
+                $totRecup=0;
+            }
             $totalVentil=$Délégation+ $FRASAD+$Entraide+$Fédération+$Prestataire+$Voisineurs+$ADU+$Mandataires+$SOS+$ADVM+$AI;
             $diff=$totalVentil-$poids;
             return view('ADMIN/stat',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees,'fiiche'=>$fiiche,'Délégation'=>$Délégation,
@@ -3465,7 +3533,7 @@ class PageEmployesController extends Controller
             'FerieDecembre'=>$FerieDecembre,'TRDecembre'=>$TRDecembre,'CPDecembre'=>$CPDecembre,'RTTDecembre'=>$RTTDecembre,'HRTTDecembre'=>$HRTTDecembre,'RCRDecembre'=>$RCRDecembre,'FORDecembre'=>$FORDecembre,
             'MALDecembre'=>$MALDecembre,'CFDecembre'=>$CFDecembre,'SSDecembre'=>$SSDecembre,'JSDecembre'=>$JSDecembre,'DJan'=>$DJan,'DFev'=>$DFev,'DMar'=>$DMar,'DAvr'=>$DAvr,'DMai'=>$DMai,'DJuin'=>$DJuin,
             'DJuil'=>$DJuil,'DAout'=>$DAout,'DSept'=>$DSept,'DOct'=>$DOct,'DNov'=>$DNov,'DDec'=>$DDec,'search_text'=>$search_text,'EJan'=>$EJan,'EFev'=>$EFev,'EMar'=>$EMar,'EAvr'=>$EAvr,'EMai'=>$EMai,'EJuin'=>$EJuin,
-            'EJuil'=>$EJuil,'EAout'=>$EAout,'ESept'=>$ESept,'EOct'=>$EOct,'ENov'=>$ENov,'EDec'=>$EDec,
+            'EJuil'=>$EJuil,'EAout'=>$EAout,'ESept'=>$ESept,'EOct'=>$EOct,'ENov'=>$ENov,'EDec'=>$EDec,'totEcart'=>$totEcart,'totDepa'=>$totDepa,'totRecup'=>$totRecup,
         ]);
     }
 
@@ -3523,6 +3591,7 @@ class PageEmployesController extends Controller
         $idFi=  $annee." - ".$month;
 
         if(fichehor::where('idUser', $identifiant)->where('idfiche', 'like', $idFi)->count()==0){
+        $s=1;
         for($i=1;$i <= $dateF; $i++){
             $date = date("$annee-m-$i", strtotime("+1 day", strtotime($date)));
             $day_name = date('l', strtotime($date));
@@ -3555,21 +3624,16 @@ class PageEmployesController extends Controller
                {
                 $day_name="Mar";
                }
-            if($i <= 7){
-                $week = "semaine 1";
+            if($day_name=="Lun"){
+                if($i==1)
+                {
+                    $s=1;
+                }
+                else{
+                $s=$s+1;
+                }
             }
-            elseif($i>7 and $i<=14){
-                $week = "semaine 2";
-            }
-            elseif($i>14 and $i<=21){
-                $week = "semaine 3";
-            }
-            elseif($i>21 and $i<=28){
-                $week = "semaine 4";
-            }
-            elseif($i>28){
-                $week = "semaine 5";
-            }
+            $week = "semaine ".$s;
 
             $idF=  $year_num." - ".$month;
             $dateBD= $day_name." ".$day_num." ".$month;
