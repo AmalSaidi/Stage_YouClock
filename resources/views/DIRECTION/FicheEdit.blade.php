@@ -347,7 +347,7 @@ function findTotal(){
     var arr = document.getElementsByClassName('nume');
     var tot=0;
     for(var i=0;i<arr.length;i++){
-        if(parseInt(arr[i].value))
+        if(arr[i].value)
             tot += parseFloat(arr[i].value);
     }
     //document.getElementById('total').value = tot;

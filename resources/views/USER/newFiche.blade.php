@@ -324,7 +324,7 @@
         </tbody>
     </table>
     <div>
-    <input name="heureseffectu" onblur="findTotal()" type="hidden" name="total" id="total"/>
+    <input name="heureseffectu" onblur="findTotal()" type="text" name="total" id="total"/>
     </div>
 </div>
 <button type="submit" class="btn btn-primary" id="ajouter-button">Valider</button>
@@ -347,10 +347,10 @@ function findTotal(){
     var arr = document.getElementsByClassName('nume');
     var tot=0;
     for(var i=0;i<arr.length;i++){
-        if(parseInt(arr[i].value))
+        if(arr[i].value)
             tot += parseFloat(arr[i].value);
     }
-    //document.getElementById('total').value = tot;
+    document.getElementById('total').value = tot;
 }
 
 function Hourdiffenrence(){
