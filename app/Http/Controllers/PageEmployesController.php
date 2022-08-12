@@ -1001,7 +1001,7 @@ class PageEmployesController extends Controller
                     }}
                     else{
                         // return redirect()->back()->with('status', 'le nombre d\'heures effectués est invalide');
-                        return back()->withInput($request->all())->with('status', 'le nombre d\'heures effectués est invalide 2');
+                        return back()->withInput($request->all())->with('status', 'le nombre d\'heures effectués est invalide 2'.$heuresEffectu." ".$poids);
                      }
                 }
         
