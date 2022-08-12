@@ -2322,19 +2322,85 @@ class PageEmployesController extends Controller
             $DA1 = $request->input('DA1');
             $FS1 = $request->input('FS1');
             $DS1 = $request->input('DS1');
-            $hourdiffLundiMat = round((strtotime($FM1) - strtotime($DM1 ))/3600, 1);
-            $hourdiffLundiAprem = round((strtotime($FA1) - strtotime($DA1 ))/3600, 1);
-            $hourdiffLundiSoir = round((strtotime($FS1) - strtotime($DS1 ))/3600, 1);
-            $poidsLundi = $hourdiffLundiMat + $hourdiffLundiAprem +  $hourdiffLundiSoir;
+            if($FM1==null or $DM1==null)
+            {
+                $hourdiffLundiMat=0;
+            }else{
+                $parts = explode(':', $DM1);
+                $parts2 = explode(':', $FM1);
+                $pepe1 = $parts[0] + floor(($parts[1]/60)*100) / 100 . PHP_EOL;
+                $pepe2 = $parts2[0] + floor(($parts2[1]/60)*100) / 100 . PHP_EOL;
+                $pepe1=floatval($pepe1);
+                $pepe2=floatval($pepe2);
+                $hourdiffLundiMat = $pepe2 - $pepe1;
+            }
+            if($FA1==null or $DA1==null)
+            {
+                $hourdiffLundiAprem=0;
+            }else{
+                $parts3 = explode(':', $DA1);
+                $parts4 = explode(':', $FA1);
+                $pepe1 = $parts3[0] + floor(($parts3[1]/60)*100) / 100 . PHP_EOL;
+                $pepe2 = $parts4[0] + floor(($parts4[1]/60)*100) / 100 . PHP_EOL;
+                $pepe1=floatval($pepe1);
+                $pepe2=floatval($pepe2);
+                $hourdiffLundiAprem = $pepe2 - $pepe1;
+            }
+            if($FS1==null or $DS1==null)
+            {
+                $hourdiffLundiSoir=0;
+            }else{
+                $parts5 = explode(':', $DS1);
+                $parts6 = explode(':', $FS1);
+                $pepe1 = $parts5[0] + floor(($parts5[1]/60)*100) / 100 . PHP_EOL;
+                $pepe2 = $parts6[0] + floor(($parts6[1]/60)*100) / 100 . PHP_EOL;
+                $pepe1=floatval($pepe1);
+                $pepe2=floatval($pepe2);
+                $hourdiffLundiSoir = $pepe2 - $pepe1;
+            }
+            $poidsLundi = $hourdiffLundiMat+$hourdiffLundiAprem+ $hourdiffLundiSoir ;
             $FM2 = $request->input('FM2');
             $DM2 = $request->input('DM2');
             $FA2 = $request->input('FA2');
             $DA2 = $request->input('DA2');
             $FS2 = $request->input('FS2');
             $DS2 = $request->input('DS2');
-            $hourdiffMardiMat = round((strtotime($FM2) - strtotime($DM2 ))/3600, 1);
-            $hourdiffMardiAprem = round((strtotime($FA2) - strtotime($DA2 ))/3600, 1);
-            $hourdiffMardiSoir = round((strtotime($FS2) - strtotime($DS2 ))/3600, 1);
+            if($FM2==null or $DM2==null)
+            {
+                $hourdiffMardiMat=0;
+            }else{
+                $parts7 = explode(':', $DM2);
+                $parts8 = explode(':', $FM2);
+                $pepe1 = $parts7[0] + floor(($parts7[1]/60)*100) / 100 . PHP_EOL;
+                $pepe2 = $parts8[0] + floor(($parts8[1]/60)*100) / 100 . PHP_EOL;
+                $pepe1=floatval($pepe1);
+                $pepe2=floatval($pepe2);
+                $hourdiffMardiMat = $pepe2 - $pepe1;
+            }
+            if($FA2==null or $DA2==null)
+            {
+                $hourdiffMardiAprem=0;
+            }else{
+                $parts9 = explode(':', $DA2);
+                $parts10 = explode(':', $FA2);
+                $pepe1 = $parts9[0] + floor(($parts9[1]/60)*100) / 100 . PHP_EOL;
+                $pepe2 = $parts10[0] + floor(($parts10[1]/60)*100) / 100 . PHP_EOL;
+                $pepe1=floatval($pepe1);
+                $pepe2=floatval($pepe2);
+                $hourdiffMardiAprem = $pepe2 - $pepe1;
+            }
+            if($FS2==null or $DS2==null)
+            {
+                $hourdiffMardiSoir=0;
+            }else{
+                $parts11 = explode(':', $DS2);
+                $parts12 = explode(':', $FS2);
+                $pepe1 = $parts11[0] + floor(($parts11[1]/60)*100) / 100 . PHP_EOL;
+                $pepe2 = $parts12[0] + floor(($parts12[1]/60)*100) / 100 . PHP_EOL;
+                $pepe1=floatval($pepe1);
+                $pepe2=floatval($pepe2);
+                $hourdiffMardiSoir = $pepe2 - $pepe1;
+            }
             $poidsMardi = $hourdiffMardiMat + $hourdiffMardiAprem +  $hourdiffMardiSoir;
             $FM3 = $request->input('FM3');
             $DM3 = $request->input('DM3');
@@ -2342,9 +2408,43 @@ class PageEmployesController extends Controller
             $DA3 = $request->input('DA3');
             $FS3 = $request->input('FS3');
             $DS3 = $request->input('DS3');
-            $hourdiffMercMat = round((strtotime($FM3) - strtotime($DM3 ))/3600, 1);
-            $hourdiffMercAprem = round((strtotime($FA3) - strtotime($DA3 ))/3600, 1);
-            $hourdiffMercSoir = round((strtotime($FS3) - strtotime($DS3 ))/3600, 1);
+            if($FM3==null or $DM3==null)
+            {
+                $hourdiffMercMat=0;
+            }else{
+                $parts13 = explode(':', $DM3);
+                $parts14 = explode(':', $FM3);
+                $pepe1 = $parts13[0] + floor(($parts13[1]/60)*100) / 100 . PHP_EOL;
+                $pepe2 = $parts14[0] + floor(($parts14[1]/60)*100) / 100 . PHP_EOL;
+                $pepe1=floatval($pepe1);
+                $pepe2=floatval($pepe2);
+                $hourdiffMercMat = $pepe2 - $pepe1;
+            }
+            if($FA3==null or $DA3==null)
+            {
+                $hourdiffMercAprem=0;
+            }else{
+                $parts15 = explode(':', $DA3);
+                $parts16 = explode(':', $FA3);
+                $pepe1 = $parts15[0] + floor(($parts15[1]/60)*100) / 100 . PHP_EOL;
+                $pepe2 = $parts16[0] + floor(($parts16[1]/60)*100) / 100 . PHP_EOL;
+                $pepe1=floatval($pepe1);
+                $pepe2=floatval($pepe2);
+                $hourdiffMercAprem = $pepe2 - $pepe1;
+            }
+            if($FS3==null or $DS3==null)
+            {
+                $hourdiffMercSoir=0;
+            }else{
+                $parts17 = explode(':', $DS3);
+                $parts18 = explode(':', $FS3);
+                $pepe1 = $parts17[0] + floor(($parts17[1]/60)*100) / 100 . PHP_EOL;
+                $pepe2 = $parts18[0] + floor(($parts18[1]/60)*100) / 100 . PHP_EOL;
+                $pepe1=floatval($pepe1);
+                $pepe2=floatval($pepe2);
+                $hourdiffMercSoir = $pepe2 - $pepe1;
+            }
+
             $poidsMerc = $hourdiffMercMat + $hourdiffMercAprem +  $hourdiffMercSoir;
             $FM4 = $request->input('FM4');
             $DM4 = $request->input('DM4');
@@ -2352,9 +2452,42 @@ class PageEmployesController extends Controller
             $DA4 = $request->input('DA4');
             $FS4 = $request->input('FS4');
             $DS4 = $request->input('DS4');
-            $hourdiffJeudiMat = round((strtotime($FM4) - strtotime($DM4 ))/3600, 1);
-            $hourdiffJeudiAprem = round((strtotime($FA4) - strtotime($DA4 ))/3600, 1);
-            $hourdiffJeudiSoir = round((strtotime($FS4) - strtotime($DS4 ))/3600, 1);
+            if($FM4==null or $DM4==null)
+            {
+                $hourdiffJeudiMat=0;
+            }else{
+                $parts19 = explode(':', $DM4);
+                $parts20 = explode(':', $FM4);
+                $pepe1 = $parts19[0] + floor(($parts19[1]/60)*100) / 100 . PHP_EOL;
+                $pepe2 = $parts20[0] + floor(($parts20[1]/60)*100) / 100 . PHP_EOL;
+                $pepe1=floatval($pepe1);
+                $pepe2=floatval($pepe2);
+                $hourdiffJeudiMat = $pepe2 - $pepe1;
+            }
+            if($FA4==null or $DA4==null)
+            {
+                $hourdiffJeudiAprem=0;
+            }else{
+                $parts21 = explode(':', $DA4);
+                $parts22 = explode(':', $FA4);
+                $pepe1 = $parts21[0] + floor(($parts21[1]/60)*100) / 100 . PHP_EOL;
+                $pepe2 = $parts22[0] + floor(($parts22[1]/60)*100) / 100 . PHP_EOL;
+                $pepe1=floatval($pepe1);
+                $pepe2=floatval($pepe2);
+                $hourdiffJeudiAprem = $pepe2 - $pepe1;
+            }
+            if($FS4==null or $DS4==null)
+            {
+                $hourdiffJeudiSoir=0;
+            }else{
+                $parts23 = explode(':', $DS4);
+                $parts24 = explode(':', $FS4);
+                $pepe1 = $parts23[0] + floor(($parts23[1]/60)*100) / 100 . PHP_EOL;
+                $pepe2 = $parts24[0] + floor(($parts24[1]/60)*100) / 100 . PHP_EOL;
+                $pepe1=floatval($pepe1);
+                $pepe2=floatval($pepe2);
+                $hourdiffJeudiSoir = $pepe2 - $pepe1;
+            }
             $poidsJeudi = $hourdiffJeudiMat + $hourdiffJeudiAprem +  $hourdiffJeudiSoir;
             $FM5 = $request->input('FM5');
             $DM5 = $request->input('DM5');
@@ -2362,9 +2495,42 @@ class PageEmployesController extends Controller
             $DA5 = $request->input('DA5');
             $FS5 = $request->input('FS5');
             $DS5 = $request->input('DS5');
-            $hourdiffVenMat = round((strtotime($FM5) - strtotime($DM5 ))/3600, 1);
-            $hourdiffVenAprem = round((strtotime($FA5) - strtotime($DA5 ))/3600, 1);
-            $hourdiffVenSoir = round((strtotime($FS5) - strtotime($DS5 ))/3600, 1);
+            if($FM5==null or $DM5==null)
+            {
+                $hourdiffVenMat=0;
+            }else{
+                $parts25 = explode(':', $DM5);
+                $parts26 = explode(':', $FM5);
+                $pepe1 = $parts25[0] + floor(($parts25[1]/60)*100) / 100 . PHP_EOL;
+                $pepe2 = $parts26[0] + floor(($parts26[1]/60)*100) / 100 . PHP_EOL;
+                $pepe1=floatval($pepe1);
+                $pepe2=floatval($pepe2);
+                $hourdiffVenMat = $pepe2 - $pepe1;
+            }
+            if($FA5==null or $DA5==null)
+            {
+                $hourdiffVenAprem=0;
+            }else{
+                $parts27 = explode(':', $DA5);
+                $parts28 = explode(':', $FA5);
+                $pepe1 = $parts27[0] + floor(($parts27[1]/60)*100) / 100 . PHP_EOL;
+                $pepe2 = $parts28[0] + floor(($parts28[1]/60)*100) / 100 . PHP_EOL;
+                $pepe1=floatval($pepe1);
+                $pepe2=floatval($pepe2);
+                $hourdiffVenAprem = $pepe2 - $pepe1;
+            }
+            if($FS5==null or $DS5==null)
+            {
+                $hourdiffVenSoir=0;
+            }else{
+                $parts29 = explode(':', $DS5);
+                $parts30 = explode(':', $FS5);
+                $pepe1 = $parts29[0] + floor(($parts29[1]/60)*100) / 100 . PHP_EOL;
+                $pepe2 = $parts30[0] + floor(($parts30[1]/60)*100) / 100 . PHP_EOL;
+                $pepe1=floatval($pepe1);
+                $pepe2=floatval($pepe2);
+                $hourdiffVenSoir = $pepe2 - $pepe1;
+            }
             $poidsVen = $hourdiffVenMat + $hourdiffVenAprem +  $hourdiffVenSoir;
             $FM6 = $request->input('FM6');
             $DM6 = $request->input('DM6');
@@ -2372,9 +2538,42 @@ class PageEmployesController extends Controller
             $DA6 = $request->input('DA6');
             $FS6 = $request->input('FS6');
             $DS6 = $request->input('DS6');
-            $hourdiffSamMat = round((strtotime($FM6) - strtotime($DM6 ))/3600, 1);
-            $hourdiffSamAprem = round((strtotime($FA6) - strtotime($DA6 ))/3600, 1);
-            $hourdiffSamSoir = round((strtotime($FS6) - strtotime($DS6 ))/3600, 1);
+            if($FM6==null or $DM6==null)
+            {
+                $hourdiffSamMat=0;
+            }else{
+                $parts31 = explode(':', $DM6);
+                $parts32 = explode(':', $FM6);
+                $pepe1 = $parts31[0] + floor(($parts31[1]/60)*100) / 100 . PHP_EOL;
+                $pepe2 = $parts32[0] + floor(($parts32[1]/60)*100) / 100 . PHP_EOL;
+                $pepe1=floatval($pepe1);
+                $pepe2=floatval($pepe2);
+                $hourdiffSamMat = $pepe2 - $pepe1;
+            }
+            if($FA6==null or $DA6==null)
+            {
+                $hourdiffSamAprem=0;
+            }else{
+                $parts33 = explode(':', $DA6);
+                $parts34 = explode(':', $FA6);
+                $pepe1 = $parts33[0] + floor(($parts33[1]/60)*100) / 100 . PHP_EOL;
+                $pepe2 = $parts34[0] + floor(($parts34[1]/60)*100) / 100 . PHP_EOL;
+                $pepe1=floatval($pepe1);
+                $pepe2=floatval($pepe2);
+                $hourdiffSamAprem = $pepe2 - $pepe1;
+            }
+            if($FS6==null or $DS6==null)
+            {
+                $hourdiffSamSoir=0;
+            }else{
+                $parts35 = explode(':', $DS6);
+                $parts36 = explode(':', $FS6);
+                $pepe1 = $parts35[0] + floor(($parts35[1]/60)*100) / 100 . PHP_EOL;
+                $pepe2 = $parts36[0] + floor(($parts36[1]/60)*100) / 100 . PHP_EOL;
+                $pepe1=floatval($pepe1);
+                $pepe2=floatval($pepe2);
+                $hourdiffSamSoir = $pepe2 - $pepe1;
+            }
             $poidsSam = $hourdiffSamMat + $hourdiffSamAprem +  $hourdiffSamSoir;
             $FM7 = $request->input('FM7');
             $DM7 = $request->input('DM7');
@@ -2382,9 +2581,42 @@ class PageEmployesController extends Controller
             $DA7 = $request->input('DA7');
             $FS7 = $request->input('FS7');
             $DS7 = $request->input('DS7');
-            $hourdiffDimMat = round((strtotime($FM7) - strtotime($DM7 ))/3600, 1);
-            $hourdiffDimAprem = round((strtotime($FA7) - strtotime($DA7 ))/3600, 1);
-            $hourdiffDimSoir = round((strtotime($FS7) - strtotime($DS7 ))/3600, 1);
+            if($FM7==null or $DM7==null)
+            {
+                $hourdiffDimMat=0;
+            }else{
+                $parts37 = explode(':', $DM7);
+                $parts38 = explode(':', $FM7);
+                $pepe1 = $parts37[0] + floor(($parts37[1]/60)*100) / 100 . PHP_EOL;
+                $pepe2 = $parts38[0] + floor(($parts38[1]/60)*100) / 100 . PHP_EOL;
+                $pepe1=floatval($pepe1);
+                $pepe2=floatval($pepe2);
+                $hourdiffDimMat = $pepe2 - $pepe1;
+            }
+            if($FA7==null or $DA7==null)
+            {
+                $hourdiffDimAprem=0;
+            }else{
+                $parts39 = explode(':', $DA7);
+                $parts40 = explode(':', $FA7);
+                $pepe1 = $parts39[0] + floor(($parts39[1]/60)*100) / 100 . PHP_EOL;
+                $pepe2 = $parts40[0] + floor(($parts40[1]/60)*100) / 100 . PHP_EOL;
+                $pepe1=floatval($pepe1);
+                $pepe2=floatval($pepe2);
+                $hourdiffDimAprem = $pepe2 - $pepe1;
+            }
+            if($FS7==null or $DS7==null)
+            {
+                $hourdiffDimSoir=0;
+            }else{
+                $parts41 = explode(':', $DS7);
+                $parts42 = explode(':', $FS7);
+                $pepe1 = $parts41[0] + floor(($parts41[1]/60)*100) / 100 . PHP_EOL;
+                $pepe2 = $parts42[0] + floor(($parts42[1]/60)*100) / 100 . PHP_EOL;
+                $pepe1=floatval($pepe1);
+                $pepe2=floatval($pepe2);
+                $hourdiffDimSoir = $pepe2 - $pepe1;
+            }
             $poidsDim = $hourdiffDimMat + $hourdiffDimAprem +  $hourdiffDimSoir;
             $fiches=DB::select('select * from fichehors where idUser=? and statutF="EnCours"',[$identifiant]);
             foreach ($fiches as $fi) {
