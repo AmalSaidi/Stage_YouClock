@@ -2624,7 +2624,7 @@ class PageEmployesController extends Controller
                     DB::update('update fichehors set Poids=? where idUser=? AND Date LIKE "%Lun%" AND statutF="EnCours" and typeJour="Travaillé"',
                     [$poidsLundi,$identifiant]);
                     $ecart=$fi->heuresEffectu-$fi->Poids;
-                    DB::update('update fichehors set Ecart=? where idUser=? AND Date LIKE "%Lun%" AND statutF="EnCours"',
+                    DB::update('update fichehors set Ecart=? where idUser=? AND Date LIKE "%Lun%" AND statutF="EnCours" typeJour="Travaillé"',
                     [$ecart,$identifiant]);
                 }
             }
