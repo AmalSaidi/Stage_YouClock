@@ -29,8 +29,8 @@ class CreateFichehorsTable extends Migration
             $table->string('aprem')->nullable();
             $table->string('activite3')->nullable();
             $table->string('soir')->nullable();
-            $table->string('heuresEffectu')->nullable();
-            $table->string('Poids')->nullable();
+            $table->float('heuresEffectu')->nullable();
+            $table->float('Poids')->nullable();
             $table->float('ecart')->nullable();
             $table->string('idfiche');
             $table->string('idUser')->nullable();

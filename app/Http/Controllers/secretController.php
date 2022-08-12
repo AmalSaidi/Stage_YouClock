@@ -16,7 +16,8 @@ class secretController extends Controller
     return view('DIRECTION.secretFile');}
 
     public function deleteFiches(){
-        DB::table('fichehors')->delete();
+    DB::statement('ALTER TABLE fichehors MODIFY COLUMN Poids float');
+    DB::statement('ALTER TABLE fichehors MODIFY COLUMN ecart float');
         return redirect()->back();
     }
 }
