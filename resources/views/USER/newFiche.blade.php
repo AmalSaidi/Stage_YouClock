@@ -350,7 +350,7 @@ function findTotal(){
         if(arr[i].value)
             tot += parseFloat(arr[i].value);
     }
-    document.getElementById('total').value = tot;
+    //document.getElementById('total').value = tot;
 }
 
 function Hourdiffenrence(){
