@@ -212,7 +212,7 @@ $se6=0;
     <td></td>
     <td></td>
     <td></td>
-    <td></td>
+    <td style="background-color:white;color:black">{{$totSe1}}</td>
 </tr>
         @elseif($f->semaine=="semaine 2")
         @foreach($sem2 as $s2)
@@ -226,7 +226,7 @@ $se6=0;
     <td></td>
     <td></td>
     <td></td>
-    <td></td>
+    <td style="background-color:white;color:black">{{$totSe2}}</td>
 </tr>
   @elseif($f->semaine=="semaine 3")
         @foreach($sem3 as $s3)
@@ -240,7 +240,7 @@ $se6=0;
     <td></td>
     <td></td>
     <td></td>
-    <td></td>
+    <td style="background-color:white;color:black">{{$totSe3}}</td>
 </tr>
         @endif
         @endif
@@ -339,7 +339,7 @@ $se6=0;
     <td></td>
     <td></td>
     <td></td>
-    <td></td>
+    <td style="background-color:white;color:black">{{$totSe4}}</td>
 </tr>
         @elseif($f->semaine=="semaine 5")
         @foreach($sem5 as $s5)
@@ -353,7 +353,7 @@ $se6=0;
     <td></td>
     <td></td>
     <td></td>
-    <td></td>
+    <td style="background-color:white;color:black">{{$totSe5}}</td>
 </tr>
         @endif
         @endif
@@ -371,7 +371,7 @@ $se6=0;
     <td></td>
     <td></td>
     <td></td>
-    <td></td>
+    <td style="background-color:white;color:black">{{$totSe5}}</td>
 </tr>
 @elseif($f->semaine=="semaine 6")
 @foreach($sem6 as $s6)
@@ -385,7 +385,7 @@ $se6=0;
     <td></td>
     <td></td>
     <td></td>
-    <td></td>
+    <td style="background-color:white;color:black">{{$totSe6}}</td>
 </tr>
     @endif
     @endif

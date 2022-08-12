@@ -314,18 +314,71 @@
     </tr>
     <tr>
     <td id="firstCol" colspan="2">Temps à récupérer - soldes</td>
-        <td></td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
-        <td>1</td>
+    @if($totRecup < 0)
+    <td style="background-color:lightcoral" colspan="12">{{$totRecup}}</td>
+    @else
+    <td colspan="12">{{$totRecup}}</td>
+    @endif
+    <!--@if($EJan>=0)
+    <td>0</td>
+    @else
+    <td style="background-color:#f94545;">{{$EJan}}</td>
+    @endif
+    @if($EFev>=0)
+    <td>0</td>
+    @else
+    <td style="background-color:#f94545;">{{$EFev}}</td>
+    @endif
+    @if($EMar>=0)
+    <td>0</td>
+    @else
+    <td style="background-color:#f94545;">{{$EMar}}</td>
+    @endif
+    @if($EAvr>=0)
+    <td>0</td>
+    @else
+    <td style="background-color:#f94545;">{{$EAvr}}</td>
+    @endif
+    @if($EMai>=0)
+    <td>0</td>
+    @else
+    <td style="background-color:#f94545;">{{$EMai}}</td>
+    @endif
+    @if($EJuin>=0)
+    <td>0</td>
+    @else
+    <td style="background-color:#f94545;">{{$EJuin}}</td>
+    @endif
+    @if($EJuil>=0)
+    <td>0</td>
+    @else
+    <td style="background-color:#f94545;">{{$EJuil}}</td>
+    @endif
+    @if($EAout>=0)
+    <td>0</td>
+    @else
+    <td style="background-color:#f94545;">{{$EAout}}</td>
+    @endif
+    @if($ESept>=0)
+    <td>0</td>
+    @else
+    <td style="background-color:#f94545;">{{$ESept}}</td>
+    @endif
+    @if($EOct>=0)
+    <td>0</td>
+    @else
+    <td style="background-color:#f94545;">{{$EOct}}</td>
+    @endif
+    @if($ENov>=0)
+    <td>0</td>
+    @else
+    <td style="background-color:#f94545;">{{$ENov}}</td>
+    @endif
+    @if($EDec>=0)
+    <td>0</td>
+    @else
+    <td style="background-color:#f94545;">{{$EDec}}</td>
+    @endif -->
     </tr>
   </tbody>
     </table>

@@ -247,7 +247,9 @@ class FicheHoraireUserController extends Controller
                 $month="Décembre";
                 break;
         }
+        $s=1;
         for($i=1;$i <= $dateF; $i++){
+            
             $date = date("Y-m-$i", strtotime("+1 day", strtotime($date)));
             $day_name = date('l', strtotime($date));
             $day_num = date('d', strtotime($date));
@@ -279,21 +281,16 @@ class FicheHoraireUserController extends Controller
                {
                 $day_name="Mar";
                }
-            if($i <= 7){
-                $week = "semaine 1";
+               if($day_name=="Lun"){
+                if($i==1)
+                {
+                    $s=1;
+                }
+                else{
+                $s=$s+1;
+                }
             }
-            elseif($i>7 and $i<=14){
-                $week = "semaine 2";
-            }
-            elseif($i>14 and $i<=21){
-                $week = "semaine 3";
-            }
-            elseif($i>21 and $i<=28){
-                $week = "semaine 4";
-            }
-            elseif($i>28){
-                $week = "semaine 5";
-            }
+            $week = "semaine ".$s;
 
             $idF=  $year_num." - ".$month;
             $dateBD= $day_name." ".$day_num." ".$month;
@@ -1114,6 +1111,114 @@ public function mesStats(Request $request) {
     idFiche LIKE "%Novembre%"',[$session_id]);
     $depassementDec =  DB::select('select * from depassements where identifiant = ? and
     idFiche LIKE "%Décembre%"',[$session_id]);
+    $ecartJan =  DB::select('select * from fichehors where idUser = ? and
+    idfiche LIKE "%Janvier%"',[$session_id]);
+    $ecartFev =  DB::select('select * from fichehors where idUser = ? and
+    idfiche LIKE "%Février%"',[$session_id]);
+    $ecartMar =  DB::select('select * from fichehors where idUser = ? and
+     idfiche LIKE "%Mars%"',[$session_id]);
+    $ecartAvr =  DB::select('select * from fichehors where idUser = ? and
+     idfiche LIKE "%Avril%"',[$session_id]);
+                $ecartMai =  DB::select('select * from fichehors where idUser = ? and
+                idfiche LIKE "%Mai%"',[$session_id]);
+                $ecarJuin =  DB::select('select * from fichehors where idUser = ? and
+                idfiche LIKE "%Juin%"',[$session_id]);
+                $ecartJuillet =  DB::select('select * from fichehors where idUser = ? and
+                idfiche LIKE "%Juillet%"',[$session_id]);
+                $ecartAout =  DB::select('select * from fichehors where idUser = ? and
+                idfiche LIKE "%Août%"',[$session_id]);
+                $ecartSept =  DB::select('select * from fichehors where idUser = ? and
+                idfiche LIKE "%Septembre%"',[$session_id]);
+                $ecartOct =  DB::select('select * from fichehors where idUser = ? and
+                idfiche LIKE "%Octobre%"',[$session_id]);
+                $ecartNov =  DB::select('select * from fichehors where idUser = ? and
+                idfiche LIKE "%Novembre%"',[$session_id]);
+                $ecartDec =  DB::select('select * from fichehors where idUser = ? and
+                idfiche LIKE "%Décembre%"',[$session_id]);
+    $EJan=0;
+    $EFev=0;
+    $EMar=0;
+    $EAvr=0;
+    $EMai=0;
+    $EJuin=0;
+    $EJuil=0;
+    $EAout=0;
+    $ESept=0;
+    $EOct=0;
+    $ENov=0;
+    $EDec=0;
+    foreach($ecartJan as $ecaJan)
+    {
+        if(str_contains($ecaJan->idfiche, $year)){
+            $EJan=$EJan+$ecaJan->ecart;
+        }
+    }
+    foreach($ecartFev as $ecaFev)
+    {
+        if(str_contains($ecaFev->idfiche,  $year)){
+            $EFev=$EFev+$ecaFev->ecart;
+        }
+    }
+    foreach($ecartMar as $ecaMar)
+    {
+        if(str_contains($ecaMar->idfiche, $year)){
+            $EMar=$EMar+$ecaMar->ecart;
+        }
+    }
+    foreach($ecartAvr as $ecaAvr)
+    {
+        if(str_contains($ecaAvr->idfiche,  $year)){
+            $EAvr=$EAvr+$ecaAvr->ecart;
+        }
+    }
+    foreach($ecartMai as $ecaMai)
+    {
+        if(str_contains($ecaMai->idfiche, $year)){
+            $EMai=$EMai+$ecaMai->ecart;
+        }
+    }
+    foreach($ecarJuin as $ecaJuin)
+    {
+        if(str_contains($ecaJuin->idfiche, $year)){
+            $EJuin=$EJuin+$ecaJuin->ecart;
+        }
+    }
+    foreach($ecartJuillet as $ecaJuil)
+    {
+        if(str_contains($ecaJuil->idfiche,  $year)){
+            $EJuil=$EJuil+$ecaJuil->ecart;
+        }
+    }
+    foreach($ecartAout as $ecaAou)
+    {
+        if(str_contains($ecaAou->idfiche, $year)){
+            $EAout=$EAout+$ecaAou->ecart;
+        }
+    }
+    foreach($ecartSept as $ecaSept)
+    {
+        if(str_contains($ecaSept->idfiche,  $year)){
+            $ESept=$ESept+$ecaSept->ecart;
+        }
+    }
+    foreach($ecartOct as $ecaOct)
+    {
+        if(str_contains($ecaOct->idfiche,  $year)){
+            $EJan=$EJan+$ecaOct->ecart;
+        }
+    }
+    foreach($ecartNov as $ecaNov)
+    {
+        if(str_contains($ecaNov->idfiche,  $year)){
+            $ENov=$ENov+$ecaNov->ecart;
+        }
+    }
+    foreach($ecartDec as $ecaDec)
+    {
+        if(str_contains($ecaDec->idfiche, $year)){
+            $EDec=$EDec+$ecaDec->ecart;
+        }
+    }
     $DJan=0;
     $DFev=0;
     $DMar=0;
@@ -1833,6 +1938,13 @@ public function mesStats(Request $request) {
             
     }
 }
+$totEcart=$EJan+$EFev+$EMar+$EAvr+$EMai+$EJuin+$EJuil+$EAout+$ESept+$EOct+$ENov+$EDec;
+$totDepa=$DJan+$DFev+$DMar+$DAvr+$DMai+$DJuin+$DJuil+$DAout+$DSept+$DOct+$DNov+$DDec;
+$totRecup= $totDepa+$totEcart;
+if($totRecup>=0)
+{
+    $totRecup=0;
+}
     $totalVentil=$Délégation+ $FRASAD+$Entraide+$Fédération+$Prestataire+$Voisineurs+$ADU+$Mandataires+$SOS+$ADVM+$AI;
     $diff=$poids-$totalVentil;
     if(!Gate::any(['access-admin', 'access-direction'])){
@@ -1864,7 +1976,8 @@ public function mesStats(Request $request) {
     'MALNovembre'=>$MALNovembre,'CFNovembre'=>$CFNovembre,'SSNovembre'=>$SSNovembre,'JSNovembre'=>$JSNovembre,
     'FerieDecembre'=>$FerieDecembre,'TRDecembre'=>$TRDecembre,'CPDecembre'=>$CPDecembre,'RTTDecembre'=>$RTTDecembre,'HRTTDecembre'=>$HRTTDecembre,'RCRDecembre'=>$RCRDecembre,'FORDecembre'=>$FORDecembre,
     'MALDecembre'=>$MALDecembre,'CFDecembre'=>$CFDecembre,'SSDecembre'=>$SSDecembre,'JSDecembre'=>$JSDecembre,'DJan'=>$DJan,'DFev'=>$DFev,'DMar'=>$DMar,'DAvr'=>$DAvr,'DMai'=>$DMai,'DJuin'=>$DJuin,
-    'DJuil'=>$DJuil,'DAout'=>$DAout,'DSept'=>$DSept,'DOct'=>$DOct,'DNov'=>$DNov,'DDec'=>$DDec,
+    'DJuil'=>$DJuil,'DAout'=>$DAout,'DSept'=>$DSept,'DOct'=>$DOct,'DNov'=>$DNov,'DDec'=>$DDec,'EJan'=>$EJan,'EFev'=>$EFev,'EMar'=>$EMar,'EAvr'=>$EAvr,'EMai'=>$EMai,'EJuin'=>$EJuin,
+    'EJuil'=>$EJuil,'EAout'=>$EAout,'ESept'=>$ESept,'EOct'=>$EOct,'ENov'=>$ENov,'EDec'=>$EDec,'totEcart'=>$totEcart,'totDepa'=>$totDepa,'totRecup'=>$totRecup,
 ]);
         }
     return view('ADMIN/statistiquesUser',['fiche'=>$fiche,'fiiche'=>$fiiche,'Délégation'=>$Délégation,
@@ -1895,7 +2008,8 @@ public function mesStats(Request $request) {
     'MALNovembre'=>$MALNovembre,'CFNovembre'=>$CFNovembre,'SSNovembre'=>$SSNovembre,'JSNovembre'=>$JSNovembre,
     'FerieDecembre'=>$FerieDecembre,'TRDecembre'=>$TRDecembre,'CPDecembre'=>$CPDecembre,'RTTDecembre'=>$RTTDecembre,'HRTTDecembre'=>$HRTTDecembre,'RCRDecembre'=>$RCRDecembre,'FORDecembre'=>$FORDecembre,
     'MALDecembre'=>$MALDecembre,'CFDecembre'=>$CFDecembre,'SSDecembre'=>$SSDecembre,'JSDecembre'=>$JSDecembre,'DJan'=>$DJan,'DFev'=>$DFev,'DMar'=>$DMar,'DAvr'=>$DAvr,'DMai'=>$DMai,'DJuin'=>$DJuin,
-    'DJuil'=>$DJuil,'DAout'=>$DAout,'DSept'=>$DSept,'DOct'=>$DOct,'DNov'=>$DNov,'DDec'=>$DDec,
+    'DJuil'=>$DJuil,'DAout'=>$DAout,'DSept'=>$DSept,'DOct'=>$DOct,'DNov'=>$DNov,'DDec'=>$DDec,'EJan'=>$EJan,'EFev'=>$EFev,'EMar'=>$EMar,'EAvr'=>$EAvr,'EMai'=>$EMai,'EJuin'=>$EJuin,
+    'EJuil'=>$EJuil,'EAout'=>$EAout,'ESept'=>$ESept,'EOct'=>$EOct,'ENov'=>$ENov,'EDec'=>$EDec,'totEcart'=>$totEcart,'totDepa'=>$totDepa,'totRecup'=>$totRecup,
 ]);
 }
 
@@ -1932,6 +2046,114 @@ public function searchStat(Request $request) {
     idFiche LIKE "%Novembre%"',[$session_id]);
     $depassementDec =  DB::select('select * from depassements where identifiant = ? and
     idFiche LIKE "%Décembre%"',[$session_id]);
+    $ecartJan =  DB::select('select * from fichehors where idUser = ? and
+    idfiche LIKE "%Janvier%"',[$session_id]);
+    $ecartFev =  DB::select('select * from fichehors where idUser = ? and
+    idfiche LIKE "%Février%"',[$session_id]);
+    $ecartMar =  DB::select('select * from fichehors where idUser = ? and
+     idfiche LIKE "%Mars%"',[$session_id]);
+    $ecartAvr =  DB::select('select * from fichehors where idUser = ? and
+     idfiche LIKE "%Avril%"',[$session_id]);
+                $ecartMai =  DB::select('select * from fichehors where idUser = ? and
+                idfiche LIKE "%Mai%"',[$session_id]);
+                $ecarJuin =  DB::select('select * from fichehors where idUser = ? and
+                idfiche LIKE "%Juin%"',[$session_id]);
+                $ecartJuillet =  DB::select('select * from fichehors where idUser = ? and
+                idfiche LIKE "%Juillet%"',[$session_id]);
+                $ecartAout =  DB::select('select * from fichehors where idUser = ? and
+                idfiche LIKE "%Août%"',[$session_id]);
+                $ecartSept =  DB::select('select * from fichehors where idUser = ? and
+                idfiche LIKE "%Septembre%"',[$session_id]);
+                $ecartOct =  DB::select('select * from fichehors where idUser = ? and
+                idfiche LIKE "%Octobre%"',[$session_id]);
+                $ecartNov =  DB::select('select * from fichehors where idUser = ? and
+                idfiche LIKE "%Novembre%"',[$session_id]);
+                $ecartDec =  DB::select('select * from fichehors where idUser = ? and
+                idfiche LIKE "%Décembre%"',[$session_id]);
+                $EJan=0;
+                $EFev=0;
+                $EMar=0;
+                $EAvr=0;
+                $EMai=0;
+                $EJuin=0;
+                $EJuil=0;
+                $EAout=0;
+                $ESept=0;
+                $EOct=0;
+                $ENov=0;
+                $EDec=0;
+                foreach($ecartJan as $ecaJan)
+                {
+                    if(str_contains($ecaJan->idfiche, $search_text)){
+                        $EJan=$EJan+$ecaJan->ecart;
+                    }
+                }
+                foreach($ecartFev as $ecaFev)
+                {
+                    if(str_contains($ecaFev->idfiche, $search_text)){
+                        $EFev=$EFev+$ecaFev->ecart;
+                    }
+                }
+                foreach($ecartMar as $ecaMar)
+                {
+                    if(str_contains($ecaMar->idfiche, $search_text)){
+                        $EMar=$EMar+$ecaMar->ecart;
+                    }
+                }
+                foreach($ecartAvr as $ecaAvr)
+                {
+                    if(str_contains($ecaAvr->idfiche, $search_text)){
+                        $EAvr=$EAvr+$ecaAvr->ecart;
+                    }
+                }
+                foreach($ecartMai as $ecaMai)
+                {
+                    if(str_contains($ecaMai->idfiche, $search_text)){
+                        $EMai=$EMai+$ecaMai->ecart;
+                    }
+                }
+                foreach($ecarJuin as $ecaJuin)
+                {
+                    if(str_contains($ecaJuin->idfiche, $search_text)){
+                        $EJuin=$EJuin+$ecaJuin->ecart;
+                    }
+                }
+                foreach($ecartJuillet as $ecaJuil)
+                {
+                    if(str_contains($ecaJuil->idfiche, $search_text)){
+                        $EJuil=$EJuil+$ecaJuil->ecart;
+                    }
+                }
+                foreach($ecartAout as $ecaAou)
+                {
+                    if(str_contains($ecaAou->idfiche, $search_text)){
+                        $EAout=$EAout+$ecaAou->ecart;
+                    }
+                }
+                foreach($ecartSept as $ecaSept)
+                {
+                    if(str_contains($ecaSept->idfiche, $search_text)){
+                        $ESept=$ESept+$ecaSept->ecart;
+                    }
+                }
+                foreach($ecartOct as $ecaOct)
+                {
+                    if(str_contains($ecaOct->idfiche, $search_text)){
+                        $EJan=$EJan+$ecaOct->ecart;
+                    }
+                }
+                foreach($ecartNov as $ecaNov)
+                {
+                    if(str_contains($ecaNov->idfiche, $search_text)){
+                        $ENov=$ENov+$ecaNov->ecart;
+                    }
+                }
+                foreach($ecartDec as $ecaDec)
+                {
+                    if(str_contains($ecaDec->idfiche, $search_text)){
+                        $EDec=$EDec+$ecaDec->ecart;
+                    }
+                }
     $DJan=0;
     $DFev=0;
     $DMar=0;
@@ -2651,6 +2873,13 @@ public function searchStat(Request $request) {
             
     }
 }
+$totEcart=$EJan+$EFev+$EMar+$EAvr+$EMai+$EJuin+$EJuil+$EAout+$ESept+$EOct+$ENov+$EDec;
+$totDepa=$DJan+$DFev+$DMar+$DAvr+$DMai+$DJuin+$DJuil+$DAout+$DSept+$DOct+$DNov+$DDec;
+$totRecup= $totDepa+$totEcart;
+if($totRecup>=0)
+{
+    $totRecup=0;
+}
     $totalVentil=$Délégation+ $FRASAD+$Entraide+$Fédération+$Prestataire+$Voisineurs+$ADU+$Mandataires+$SOS+$ADVM+$AI;
     $diff=$poids-$totalVentil;
     if(!Gate::any(['access-admin', 'access-direction'])){
@@ -2682,7 +2911,8 @@ public function searchStat(Request $request) {
         'MALNovembre'=>$MALNovembre,'CFNovembre'=>$CFNovembre,'SSNovembre'=>$SSNovembre,'JSNovembre'=>$JSNovembre,
         'FerieDecembre'=>$FerieDecembre,'TRDecembre'=>$TRDecembre,'CPDecembre'=>$CPDecembre,'RTTDecembre'=>$RTTDecembre,'HRTTDecembre'=>$HRTTDecembre,'RCRDecembre'=>$RCRDecembre,'FORDecembre'=>$FORDecembre,
         'MALDecembre'=>$MALDecembre,'CFDecembre'=>$CFDecembre,'SSDecembre'=>$SSDecembre,'JSDecembre'=>$JSDecembre,'DJan'=>$DJan,'DFev'=>$DFev,'DMar'=>$DMar,'DAvr'=>$DAvr,'DMai'=>$DMai,'DJuin'=>$DJuin,
-        'DJuil'=>$DJuil,'DAout'=>$DAout,'DSept'=>$DSept,'DOct'=>$DOct,'DNov'=>$DNov,'DDec'=>$DDec,
+        'DJuil'=>$DJuil,'DAout'=>$DAout,'DSept'=>$DSept,'DOct'=>$DOct,'DNov'=>$DNov,'DDec'=>$DDec,'EJan'=>$EJan,'EFev'=>$EFev,'EMar'=>$EMar,'EAvr'=>$EAvr,'EMai'=>$EMai,'EJuin'=>$EJuin,
+        'EJuil'=>$EJuil,'EAout'=>$EAout,'ESept'=>$ESept,'EOct'=>$EOct,'ENov'=>$ENov,'EDec'=>$EDec,'totEcart'=>$totEcart,'totDepa'=>$totDepa,'totRecup'=>$totRecup,
     ]);
     }
     return view('ADMIN/statistiquesUser',['fiche'=>$fiche,'fiiche'=>$fiiche,'Délégation'=>$Délégation,
@@ -2713,7 +2943,8 @@ public function searchStat(Request $request) {
     'MALNovembre'=>$MALNovembre,'CFNovembre'=>$CFNovembre,'SSNovembre'=>$SSNovembre,'JSNovembre'=>$JSNovembre,
     'FerieDecembre'=>$FerieDecembre,'TRDecembre'=>$TRDecembre,'CPDecembre'=>$CPDecembre,'RTTDecembre'=>$RTTDecembre,'HRTTDecembre'=>$HRTTDecembre,'RCRDecembre'=>$RCRDecembre,'FORDecembre'=>$FORDecembre,
     'MALDecembre'=>$MALDecembre,'CFDecembre'=>$CFDecembre,'SSDecembre'=>$SSDecembre,'JSDecembre'=>$JSDecembre,'DJan'=>$DJan,'DFev'=>$DFev,'DMar'=>$DMar,'DAvr'=>$DAvr,'DMai'=>$DMai,'DJuin'=>$DJuin,
-    'DJuil'=>$DJuil,'DAout'=>$DAout,'DSept'=>$DSept,'DOct'=>$DOct,'DNov'=>$DNov,'DDec'=>$DDec,
+    'DJuil'=>$DJuil,'DAout'=>$DAout,'DSept'=>$DSept,'DOct'=>$DOct,'DNov'=>$DNov,'DDec'=>$DDec,'EJan'=>$EJan,'EFev'=>$EFev,'EMar'=>$EMar,'EAvr'=>$EAvr,'EMai'=>$EMai,'EJuin'=>$EJuin,
+    'EJuil'=>$EJuil,'EAout'=>$EAout,'ESept'=>$ESept,'EOct'=>$EOct,'ENov'=>$ENov,'EDec'=>$EDec,'totEcart'=>$totEcart,'totDepa'=>$totDepa,'totRecup'=>$totRecup,
 ]);
 }
 }

@@ -937,7 +937,7 @@ class PageEmployesController extends Controller
                         return redirect()->route('ficheBack', ['idfiche' => $idFi,'idUser'=>$idUser]);
                         }else{
                             // return redirect()->back()->with('status', 'le nombre d\'heures effectués est invalide');
-                            return back()->withInput($request->all())->with('status', 'le nombre d\'heures effectués est invalide 1');
+                            return back()->withInput($request->all())->with('status', 'le nombre d\'heures effectués est invalide');
                          }
                 }else{
                 if(!isset($message))
@@ -1000,7 +1000,7 @@ class PageEmployesController extends Controller
                     }}
                     else{
                         // return redirect()->back()->with('status', 'le nombre d\'heures effectués est invalide');
-                        return back()->withInput($request->all())->with('status', 'le nombre d\'heures effectués est invalide 2'.$heuresEffectu." ".$poids);
+                        return back()->withInput($request->all())->with('status', 'le nombre d\'heures effectués est invalide');
                      }
                 }
         
@@ -2143,6 +2143,36 @@ class PageEmployesController extends Controller
         $sem5 = DB::select('select * from depassements where idfiche =? AND semaine="semaine 5" AND identifiant = (select identifiant from employes where id = ?)',[$idfiche,$id]);
         $sem6 = DB::select('select * from depassements where idfiche =? AND semaine="semaine 6" AND identifiant = (select identifiant from employes where id = ?)',[$idfiche,$id]);
         $NR = DB::select('select * from fichehors where idfiche =? AND state="NR" AND idUser = (select identifiant from employes where id = ?)',[$idfiche,$id]);
+        $NH1=  DB::select('select * from fichehors where idfiche =? AND semaine="semaine 1" AND idUser = (select identifiant from employes where id = ?)',[$idfiche,$id]);
+        $NH2=  DB::select('select * from fichehors where idfiche =? AND semaine="semaine 2" AND idUser = (select identifiant from employes where id = ?)',[$idfiche,$id]);
+        $NH3=  DB::select('select * from fichehors where idfiche =? AND semaine="semaine 3" AND idUser = (select identifiant from employes where id = ?)',[$idfiche,$id]);
+        $NH4=  DB::select('select * from fichehors where idfiche =? AND semaine="semaine 4" AND idUser = (select identifiant from employes where id = ?)',[$idfiche,$id]);
+        $NH5=  DB::select('select * from fichehors where idfiche =? AND semaine="semaine 5" AND idUser = (select identifiant from employes where id = ?)',[$idfiche,$id]);
+        $NH6=  DB::select('select * from fichehors where idfiche =? AND semaine="semaine 6" AND idUser = (select identifiant from employes where id = ?)',[$idfiche,$id]);
+        $totSe1=0;
+        $totSe2=0;
+        $totSe3=0;
+        $totSe4=0;
+        $totSe5=0;
+        $totSe6=0;
+        foreach($NH1 as $N1){
+        $totSe1= $totSe1+$N1->heuresEffectu;
+        }
+        foreach($NH2 as $N2){
+            $totSe2= $totSe2+$N2->heuresEffectu;
+            }
+            foreach($NH3 as $N3){
+                $totSe3= $totSe3+$N3->heuresEffectu;
+                }
+                foreach($NH4 as $N4){
+                    $totSe4= $totSe4+$N4->heuresEffectu;
+                    }
+                    foreach($NH5 as $N5){
+                        $totSe5= $totSe5+$N5->heuresEffectu;
+                        }
+                        foreach($NH6 as $N6){
+                            $totSe6= $totSe6+$N6->heuresEffectu;
+                            }
         $countNR=0;
         /*if(Gate::allows('access-admin')){
             return view('ADMIN/FicheHoraireDetails',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees
@@ -2155,18 +2185,18 @@ class PageEmployesController extends Controller
     
                 if($user->direction==1){
                     if($user->SeeAsAdmin==1){
-                    return view('ADMIN/FicheHoraireDetails',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees
+                    return view('ADMIN/FicheHoraireDetails',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees,'totSe1'=> $totSe1,'totSe6'=> $totSe6,'totSe2'=> $totSe2,'totSe3'=> $totSe3,'totSe4'=> $totSe4,'totSe5'=> $totSe5
                     ,'depassement'=>$depassement,'sem1'=>$sem1,'sem2'=>$sem2,'sem3'=>$sem3,'sem4'=>$sem4,'sem5'=>$sem5,'sem6'=>$sem6,'NR'=>$NR,'fiiche'=>$fiiche]);
                     }else{
-                        return view('DIRECTION/FicheHoraireDetails',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees
+                        return view('DIRECTION/FicheHoraireDetails',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees,'totSe1'=> $totSe1,'totSe6'=> $totSe6,'totSe2'=> $totSe2,'totSe3'=> $totSe3,'totSe4'=> $totSe4,'totSe5'=> $totSe5
                     ,'depassement'=>$depassement,'sem1'=>$sem1,'sem2'=>$sem2,'sem3'=>$sem3,'sem4'=>$sem4,'sem5'=>$sem5,'sem6'=>$sem6,'NR'=>$NR,'fiiche'=>$fiiche]);
                     }
                 }
                 else if($user->admin==1 AND $user->direction==0){
-                    return view('ADMIN/FicheHoraireDetails',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees
+                    return view('ADMIN/FicheHoraireDetails',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees,'totSe1'=> $totSe1,'totSe6'=> $totSe6,'totSe2'=> $totSe2,'totSe3'=> $totSe3,'totSe4'=> $totSe4,'totSe5'=> $totSe5
             ,'depassement'=>$depassement,'sem1'=>$sem1,'sem2'=>$sem2,'sem3'=>$sem3,'sem4'=>$sem4,'sem5'=>$sem5,'sem6'=>$sem6,'NR'=>$NR,'fiiche'=>$fiiche]);
                 }else if($user->admin==0 AND $user->direction==1){
-                    return view('DIRECTION/FicheHoraireDetails',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees
+                    return view('DIRECTION/FicheHoraireDetails',['employes'=>$employes,'fiche'=>$fiche,'employees'=>$employees,'totSe1'=> $totSe1,'totSe6'=> $totSe6,'totSe2'=> $totSe2,'totSe3'=> $totSe3,'totSe4'=> $totSe4,'totSe5'=> $totSe5
                     ,'depassement'=>$depassement,'sem1'=>$sem1,'sem2'=>$sem2,'sem3'=>$sem3,'sem4'=>$sem4,'sem5'=>$sem5,'sem6'=>$sem6,'NR'=>$NR,'fiiche'=>$fiiche]);
                 }
         }

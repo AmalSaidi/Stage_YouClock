@@ -82,6 +82,7 @@ class historique extends Controller
         $idFi=  $annee." - ".$month;
 
         if(fichehor::where('idUser', $session_id)->where('idfiche', 'like', $idFi)->count()==0){
+            $s=1;
         for($i=1;$i <= $dateF; $i++){
             $date = date("$annee-m-$i", strtotime("+1 day", strtotime($date)));
             $day_name = date('l', strtotime($date));
@@ -114,21 +115,16 @@ class historique extends Controller
                {
                 $day_name="Mar";
                }
-            if($i <= 7){
-                $week = "semaine 1";
+               if($day_name=="Lun"){
+                if($i==1)
+                {
+                    $s=1;
+                }
+                else{
+                $s=$s+1;
+                }
             }
-            elseif($i>7 and $i<=14){
-                $week = "semaine 2";
-            }
-            elseif($i>14 and $i<=21){
-                $week = "semaine 3";
-            }
-            elseif($i>21 and $i<=28){
-                $week = "semaine 4";
-            }
-            elseif($i>28){
-                $week = "semaine 5";
-            }
+            $week = "semaine ".$s;
 
             $idF=  $year_num." - ".$month;
             $dateBD= $day_name." ".$day_num." ".$month;
