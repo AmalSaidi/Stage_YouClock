@@ -2623,7 +2623,7 @@ class PageEmployesController extends Controller
                 if(str_contains($fi->Date, 'Lun')){
                     DB::update('update fichehors set Poids=? where idUser=? AND Date LIKE "%Lun%" AND statutF="EnCours" and typeJour="Travaillé"',
                     [$poidsLundi,$identifiant]);
-                    $ecart=$fi->heuresEffectu-$fi->Poids;
+                    $ecart=$fi->heuresEffectu-floatval($fi->Poids);
                     DB::update('update fichehors set Ecart=? where idUser=? AND Date LIKE "%Lun%" AND statutF="EnCours" and typeJour="Travaillé"',
                     [$ecart,$identifiant]);
                 }
