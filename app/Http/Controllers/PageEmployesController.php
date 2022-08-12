@@ -2621,9 +2621,9 @@ class PageEmployesController extends Controller
             $fiches=DB::select('select * from fichehors where idUser=? and statutF="EnCours"',[$identifiant]);
             foreach ($fiches as $fi) {
                 if(str_contains($fi->Date, 'Lun')){
-                    $ecart=$fi->heuresEffectu-$poidsLundi;
                     DB::update('update fichehors set Poids=? where idUser=? AND Date LIKE "%Lun%" AND statutF="EnCours" and typeJour="Travaillé"',
                     [$poidsLundi,$identifiant]);
+                    $ecart=$fi->heuresEffectu-$fi->$Poids;
                     DB::update('update fichehors set Ecart=? where idUser=? AND Date LIKE "%Lun%" AND statutF="EnCours"',
                     [$ecart,$identifiant]);
                 }
