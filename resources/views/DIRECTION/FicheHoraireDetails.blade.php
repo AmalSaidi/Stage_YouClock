@@ -392,7 +392,12 @@ $se6=0;
     @endforeach
     </tbody>
     </table>
-
+    <form method="post" action="/FicheHoraire/depa/{{$employe->id}}}/{{$f->idfiche}}" id="form4" class="fconfirm"> <td>
+                {{ csrf_field() }}
+                 <input type="hidden" name="idUser4" value="{{$f->idUser}}">
+                 <input type="hidden" name="idfiche4" value="{{$f->idfiche}}">
+    <button style="background-color: brown;border:none;padding: 1 1% 1 1%;" class="btn btn-success" type="submit">Voir les dépassements</button>
+    </form>
     <div id="stats">
        <table id="tableStats">
            <tr id="trT">
