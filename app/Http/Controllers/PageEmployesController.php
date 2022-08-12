@@ -879,7 +879,7 @@ class PageEmployesController extends Controller
                 
                }
 
-                if($heuresEffectu!=$poids){
+                if(floatval($heuresEffectu)!=floatval($poids)){
                     $message="u cant";
                 }
                 if($matinF==null OR $ApremD==null){
