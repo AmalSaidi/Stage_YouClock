@@ -323,7 +323,7 @@
         </tbody>
     </table>
     <div>
-    <input name="heureseffectu" onblur="findTotal()" type="text" name="total" id="total"/>
+    <input name="heureseffectu" onblur="findTotal()" type="hidden" name="total" id="total"/>
     </div>
 </div>
 <button type="submit" class="btn btn-primary" id="ajouter-button">Valider</button>
