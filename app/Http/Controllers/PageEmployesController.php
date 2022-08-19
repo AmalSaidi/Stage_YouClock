@@ -2125,6 +2125,21 @@ class PageEmployesController extends Controller
         $user=Auth::user();
         $session_str = $user->service;
         $fiiche = DB::select('select DISTINCT idfiche,statutF from fichehors where idUser = (select identifiant from employes where id = ?) ORDER BY id DESC LIMIT 1',[$id]);
+        $fiches=DB::select('select * from fichehors where idUser=(select identifiant from employes where id=?) and statutF="EnCours"',[$id]);
+        foreach ($fiches as $fi) {
+            if($fi->typeJour =='CP'){
+                DB::update('update fichehors set Poids=0 where id=?',
+                [$fi->id]);
+            }
+            if($fi->typeJour =='repos'){
+                DB::update('update fichehors set Poids=0 where id=?',
+                [$fi->id]);
+            }
+            if($fi->typeJour =='Férié'){
+                DB::update('update fichehors set Poids=0 where id=?',
+                [$fi->id]);
+            }
+        }
         if($user->direction==1){
             $employees = DB::table('employes')->get();
 
