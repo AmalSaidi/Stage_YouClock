@@ -2651,13 +2651,13 @@ class PageEmployesController extends Controller
             $fiches=DB::select('select * from fichehors where idUser=? and statutF="EnCours"',[$identifiant]);
             foreach ($fiches as $fi) {
                 if(str_contains($fi->Date, 'Lun')){
-                    DB::update('update fichehors set Poids=? where idUser=? AND Date LIKE "%Lun%" AND statutF="EnCours" and (typeJour="Travaillé" or typeJour IS NULL)',
+                    DB::update('update fichehors set Poids=? where idUser=? AND Date LIKE "%Lun%" AND statutF="EnCours" and (typeJour="Travaillé" or typeJour="RCR" or typeJour IS NULL)',
                     [$poidsLundi,$identifiant]);
                 }
             }
             foreach ($fiches as $fi) {
                 if(str_contains($fi->Date, 'Mar')){
-                    DB::update('update fichehors set Poids=? where idUser=? AND Date LIKE "%Mar%" AND statutF="EnCours" and (typeJour="Travaillé" or typeJour IS NULL)',
+                    DB::update('update fichehors set Poids=? where idUser=? AND Date LIKE "%Mar%" AND statutF="EnCours" and (typeJour="Travaillé" or typeJour="RCR" or typeJour IS NULL)',
                     [$poidsMardi,$identifiant]);
                    
                 }
@@ -2665,7 +2665,7 @@ class PageEmployesController extends Controller
             foreach ($fiches as $fi) {
                 if(str_contains($fi->Date, 'Mer')){
                    
-                    DB::update('update fichehors set Poids=? where idUser=? AND Date LIKE "%Mer%" AND statutF="EnCours" and (typeJour="Travaillé" or typeJour IS NULL)',
+                    DB::update('update fichehors set Poids=? where idUser=? AND Date LIKE "%Mer%" AND statutF="EnCours" and (typeJour="Travaillé" or typeJour="RCR" or typeJour IS NULL)',
                     [$poidsMerc,$identifiant]);
               
                  
@@ -2674,14 +2674,14 @@ class PageEmployesController extends Controller
             foreach ($fiches as $fi) {
                 if(str_contains($fi->Date, 'Jeu')){
                     
-                    DB::update('update fichehors set Poids=? where idUser=? AND Date LIKE "%Jeu%" AND statutF="EnCours" and (typeJour="Travaillé" or typeJour IS NULL)',
+                    DB::update('update fichehors set Poids=? where idUser=? AND Date LIKE "%Jeu%" AND statutF="EnCours" and (typeJour="Travaillé" or typeJour="RCR" or typeJour IS NULL)',
                     [$poidsJeudi,$identifiant]);
                    
                 }
             }
             foreach ($fiches as $fi) {
                 if(str_contains($fi->Date, 'Ven')){
-                    DB::update('update fichehors set Poids=? where idUser=? AND Date LIKE "%Ven%" AND statutF="EnCours" and (typeJour="Travaillé" or typeJour IS NULL)',
+                    DB::update('update fichehors set Poids=? where idUser=? AND Date LIKE "%Ven%" AND statutF="EnCours" and (typeJour="Travaillé" or typeJour="RCR" or typeJour IS NULL)',
                     [$poidsVen,$identifiant]);
                   
                     
@@ -2689,14 +2689,14 @@ class PageEmployesController extends Controller
             }
             foreach ($fiches as $fi) {
                 if(str_contains($fi->Date, 'Sam')){
-                    DB::update('update fichehors set Poids=? where idUser=? AND Date LIKE "%Sam%" AND statutF="EnCours" and (typeJour="Travaillé" or typeJour IS NULL)',
+                    DB::update('update fichehors set Poids=? where idUser=? AND Date LIKE "%Sam%" AND statutF="EnCours" and (typeJour="Travaillé" or typeJour="RCR" or typeJour IS NULL)',
                     [$poidsSam,$identifiant]);
                    
                 }
             }
             foreach ($fiches as $fi) {
                 if(str_contains($fi->Date, 'Dim')){
-                    DB::update('update fichehors set Poids=? where idUser=? AND Date LIKE "%Dim%" AND statutF="EnCours" and (typeJour="Travaillé" or typeJour IS NULL)',
+                    DB::update('update fichehors set Poids=? where idUser=? AND Date LIKE "%Dim%" AND statutF="EnCours" and (typeJour="Travaillé" or typeJour="RCR" or typeJour IS NULL)',
                     [$poidsDim,$identifiant]);
                   
                 }
