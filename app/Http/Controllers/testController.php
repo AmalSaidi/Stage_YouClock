@@ -14,7 +14,7 @@ class testController extends Controller
     }
     
     public function index(){
-        return view('welcome');
+        return view('USER.ficheHoraire');
     }
 
     public function boo(){

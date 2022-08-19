@@ -695,7 +695,7 @@ class PageEmployesController extends Controller
                         }
                     }
                 }
-                if($activite1=="RCR" or $activite2=="RCR" or $activite3=="RCR"){
+                if($typeJour=="RCR"){
                     DB::update('update fichehors set matinD = ?,matinF = ?,ApremD=?, ApremF = ?,
                     soirD=?, soirF=?,matin=?,heuresEffectu=?,activite1=?,aprem=?,soir=?,activite2=?,
                     activite3=?,ecart=?,typeJour=? where id = ?',

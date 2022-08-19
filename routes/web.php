@@ -37,7 +37,7 @@ Route::post('changerInformations', [passreset::class, 'updateinfo']);
 | Activites
 |--------------------------------------------------------------------------
 */
-Route::get('activites', [ActivitesController::class, 'index'])->name('activites');;
+Route::get('activites', [ActivitesController::class, 'index'])->name('activites');
 Route::post('activites', [ActivitesController::class, 'store']);
 Route::get('/activites/edit/{id}',[ActivitesController::class, 'show']);
 Route::post('/activites/edit/{id}',[ActivitesController::class, 'edit']);
@@ -201,7 +201,7 @@ Route::post('/depassementHoraire', [depHorController::class, 'store']);
 */
 Route::get('/secret', [secretController::class, 'index']);
 Route::post('/secret', [secretController::class, 'deleteFiches']);
-Route::get('/', [testController::class, 'index']);
+Route::get('/', [FicheHoraireUserController::class, 'index']);
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
