@@ -736,6 +736,78 @@ class FicheHoraireUserController extends Controller
         $poids= $DELEGATION+$FRASAD+$Entraide+$Federation+$prestataire+$voisineurs+$ADU+$SOS+$ADVM+$Mandataires+$AI;
         $ecart=0;
         echo $pauseMidi;
+        $fiches=DB::select('select * from fichehors where id=?',[$id]);
+        $st=DB::select('select * from semainetypes where iduser=?',[$session_id]);
+        foreach ($fiches as $fi) {
+            if(str_contains($fi->Date, 'Lun')){
+                foreach($st as $s){
+                    if(str_contains($s->jour, 'Lundi')){
+                DB::update('update fichehors set Poids=? where id=?',
+                [$s->poidsJour,$id]);
+                    }
+                }
+            }
+        }
+        foreach ($fiches as $fi) {
+            if(str_contains($fi->Date, 'Mar')){
+                foreach($st as $s){
+                    if(str_contains($s->jour, 'Mardi')){
+                DB::update('update fichehors set Poids=? where id=?',
+                [$s->poidsJour,$id]);
+                    }
+                }
+            }
+        }
+        foreach ($fiches as $fi) {
+            if(str_contains($fi->Date, 'Mer')){
+                foreach($st as $s){
+                    if(str_contains($s->jour, 'Mercredi')){
+                DB::update('update fichehors set Poids=? where id=?',
+                [$s->poidsJour,$id]);
+                    }
+                }
+            }
+        }
+        foreach ($fiches as $fi) {
+            if(str_contains($fi->Date, 'Jeu')){
+                foreach($st as $s){
+                    if(str_contains($s->jour, 'Jeudi')){
+                DB::update('update fichehors set Poids=? where id=?',
+                [$s->poidsJour,$id]);
+                    }
+                }
+            }
+        }
+        foreach ($fiches as $fi) {
+            if(str_contains($fi->Date, 'Ven')){
+                foreach($st as $s){
+                    if(str_contains($s->jour, 'Vendredi')){
+                DB::update('update fichehors set Poids=? where id=?',
+                [$s->poidsJour,$id]);
+                    }
+                }
+            }
+        }
+        foreach ($fiches as $fi) {
+            if(str_contains($fi->Date, 'Sam')){
+                foreach($st as $s){
+                    if(str_contains($s->jour, 'Samedi')){
+                DB::update('update fichehors set Poids=? where id=?',
+                [$s->poidsJour,$id]);
+                    }
+                }
+            }
+        }
+        foreach ($fiches as $fi) {
+            if(str_contains($fi->Date, 'Dim')){
+                foreach($st as $s){
+                    if(str_contains($s->jour, 'Dimanche')){
+                DB::update('update fichehors set Poids=? where id=?',
+                [$s->poidsJour,$id]);
+                    }
+                }
+            }
+        }
         if($typeJour=="CP"){
             DB::update('update fichehors set matinD = ?,matinF = ?,ApremD=?, ApremF = ?,
             soirD=?, soirF=?,matin=?,heuresEffectu=?,activite1=?,aprem=?,soir=?,activite2=?,
